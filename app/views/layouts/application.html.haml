@@ -2,9 +2,23 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title MovingEstimator
+
+    / %title= full_title(yield(:title))
+
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+
+    = render 'layouts/shim'
+
   %body
-    = yield
+    = render 'layouts/header'
+
+    .container
+      = render 'layouts/flash_message'
+      = yield  # contents
+      = render 'layouts/footer'
+
+      - if Rails.env.development?
+        = debug(params)
+        = render 'layouts/screen_size'
