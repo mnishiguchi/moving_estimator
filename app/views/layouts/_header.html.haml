@@ -1,45 +1,43 @@
 -# To activate dropdown menu,
 -# add the Bootstrap JavaScript library to application.js.
-
 %header.navbar.navbar-fixed-top.navbar-inverse
   .container
     .navbar-header
-      = link_to "MN", "#", id: 'logo'
-
-      / User name
-      - if user_signed_in?
-        .navbar-text.label-lg.label-primary.hidden-xs
-          Logged in as
-          = link_to current_user.name, "#"
-
       / Hamburger button
       %button{ type: 'button', class: 'navbar-toggle collapsed',
         data: { toggle: 'collapse', target: '#hamburger-navigation' } }
         %span.sr-only Navigation toggle
         - 3.times do
           %span.icon-bar
+      = link_to "MN", root_path, id: 'logo', class: 'navbar-brand'
 
-    / Nav links
-    %nav.collapse.navbar-collapse#hamburger-navigation
+      / User name
+      - if user_signed_in?
+        .navbar-text.label-lg.label-primary.hidden-xs
+          Logged in as
+          = link_to current_user.name, edit_user_password_path
+
+    / Nav links for toggling
+    %nav.collapse.navbar-collapse#hamburger-navigation.navbar-left
       %ul{ class: 'nav navbar-nav navbar-right', role: 'menu' }
 
-        %li= link_to "Home", "#"
+        %li= link_to "Home", root_path
         %li= link_to "Contact", "#"
 
         -# Show different menu items depending on the login status.
         -if user_signed_in?
           %li= link_to "Users", "#"
+          %li= link_to "Users", "#"
 
+          %li.dropdown
+            %a{ class: 'dropdown-toggle', role:'button', data: { toggle: 'dropdown'} }
+              Account
+              %b.caret
 
-          / %li.dropdown
-          /   %a{ class: 'dropdown-toggle', role:'button', data: { toggle: 'dropdown'} }
-          /     Account
-          /     %b.caret
-
-          /   %ul.dropdown-menu
-          /     %li= link_to "Profile", current_user
-          /     %li= link_to "Settings", edit_user_path(current_user)
-          /     %li.divider
-          /     %li= link_to "Log out", logout_path, method: :delete
+            %ul.dropdown-menu
+              %li= link_to "Profile", current_user
+              %li= link_to "Settings", edit_user_path(current_user)
+              %li.divider
+              %li= link_to "Log out", sign_out_path, method: :delete
         -else
           %li= link_to "Log in", "#"
