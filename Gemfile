@@ -24,6 +24,7 @@ gem 'redcarpet',               '~> 3.2.2'   # For Markdown.
 gem 'ransack',                 '~> 1.6.6'   # For searching and sorting.
 # Others
 gem 'jquery-turbolinks',       '~> 0.2.1'   # For jQuery to work with turbolinks.
+gem 'devise',                  '~> 3.4.1'
 
 group :development, :test do
   gem "rspec-rails",        "~> 3.1.0"
