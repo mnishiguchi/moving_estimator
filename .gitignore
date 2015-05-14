@@ -18,6 +18,22 @@
 !/log/.keep
 /tmp
 
+# Ignore Spring files.
+/spring/*.pid
+
+# Ignore uploaded test images.
+/public/uploads
+
+# Ignore other unneeded files.
+database.yml
+doc/
+*.swp
+*~
+.project
+.DS_Store
+.idea
+.secret
+
 # various artifacts
 **.war
 *.rbc
