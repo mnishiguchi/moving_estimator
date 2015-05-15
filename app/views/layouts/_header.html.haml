@@ -14,7 +14,6 @@
       / Logged-in user's name
       - if user_signed_in?
         .navbar-text
-          Logged in as
           = link_to current_user.email, edit_user_registration_path
 
     / Nav links for toggling
@@ -31,7 +30,7 @@
               %b.caret
 
             %ul.dropdown-menu
-              %li= link_to "Link", "#"
+              %li= link_to "Account", edit_user_registration_path
               %li= link_to "Link", "#"
               %li.divider
               %li= link_to "Link", "#"
