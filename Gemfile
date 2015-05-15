@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 # ruby 2.2.1p85 (2015-02-26 revision 49769) [x86_64-darwin14]
-
 gem 'rails', '4.2.1'
-gem 'pg',             '~> 0.17.1'
+gem 'pg',    '~> 0.17.1'
 
-# Rails
+# Default
 gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -29,24 +28,24 @@ gem 'devise',                  '~> 3.4.1'
 group :development, :test do
   gem "rspec-rails",        "~> 3.1.0"
   gem "factory_girl_rails", "~> 4.4.1"
-  gem 'byebug',            '~> 3.4.0'  # For the byebug prompt in the terminal.
-  gem 'better_errors',     '~> 2.1.1'  # For an error page on the browser.
-  gem 'binding_of_caller', '~> 0.7.2'  # For the binding of a method's caller.
-  gem 'annotate',          '~> 2.6.8'  # Annotates models.
-  gem 'rails-erd',         '~> 1.3.1'  # For an entity-relationship diagram for models.
-  gem 'awesome_print',     '~> 1.6.1'  # Pretty-prints Ruby objects.
-  gem 'quiet_assets',      '~> 1.1.0'  # Turns off Rails asset pipeline log.
-  gem 'faker',             '~> 1.4.3'  # Generates sample users.
-  gem 'guard-livereload',  '~> 2.4.0'  # Reloads the browser when view files are modified.
-  gem 'spring',            '~> 1.1.3'
+  gem 'byebug',             '~> 3.4.0'  # For the byebug prompt in the terminal.
+  gem 'better_errors',      '~> 2.1.1'  # For an error page on the browser.
+  gem 'binding_of_caller',  '~> 0.7.2'  # For the binding of a method's caller.
+  gem 'annotate',           '~> 2.6.8'  # Annotates models.
+  gem 'rails-erd',          '~> 1.3.1'  # For an entity-relationship diagram for models.
+  gem 'awesome_print',      '~> 1.6.1'  # Pretty-prints Ruby objects.
+  gem 'quiet_assets',       '~> 1.1.0'  # Turns off Rails asset pipeline log.
+  gem 'faker',              '~> 1.4.3'  # Generates sample users.
+  gem 'guard-livereload',   '~> 2.4.0'  # Reloads the browser when view files are modified.
+  gem 'spring',             '~> 1.1.3'
 end
 
 group :test do
-  gem "capybara",         "~> 2.4.3"
-  gem "database_cleaner", "~> 1.3.0"
-  gem "launchy",          "~> 2.4.2"
+  gem "capybara",           "~> 2.4.3"
+  gem "database_cleaner",   "~> 1.3.0"
+  gem "launchy",            "~> 2.4.2"
   gem "selenium-webdriver", "~> 2.43.0"
-  gem 'guard-rspec',      '~> 4.5.0'  # Automates the running of the tests.
+  gem 'guard-rspec',        '~> 4.5.0'  # Automates the running of the tests.
 end
 
 group :production do

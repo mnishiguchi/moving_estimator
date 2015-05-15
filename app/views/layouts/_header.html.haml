@@ -4,8 +4,8 @@
   .container
     .navbar-header
       / Hamburger button
-      %button{ type: 'button', class: 'navbar-toggle collapsed',
-        data: { toggle: 'collapse', target: '#hamburger-navigation' } }
+      %button{type: 'button', class: 'navbar-toggle collapsed',
+        data: {toggle: 'collapse', target: '#hamburger-navigation'}}
         %span.sr-only Navigation toggle
         - 3.times do
           %span.icon-bar
@@ -13,31 +13,32 @@
 
       / User name
       - if user_signed_in?
-        .navbar-text.label-lg.label-primary.hidden-xs
+        .navbar-text
           Logged in as
-          = link_to current_user.name, edit_user_password_path
+          = link_to current_user.email, edit_user_password_path
 
     / Nav links for toggling
     %nav.collapse.navbar-collapse#hamburger-navigation.navbar-left
-      %ul{ class: 'nav navbar-nav navbar-right', role: 'menu' }
+      %ul{class: 'nav navbar-nav navbar-right', role: 'menu'}
 
         %li= link_to "Home", root_path
-        %li= link_to "Contact", "#"
+        %li= link_to "Link", "#"
 
         -# Show different menu items depending on the login status.
         -if user_signed_in?
-          %li= link_to "Users", "#"
-          %li= link_to "Users", "#"
+          %li= link_to "Link", "#"
+          %li= link_to "Link", "#"
 
           %li.dropdown
-            %a{ class: 'dropdown-toggle', role:'button', data: { toggle: 'dropdown'} }
+            %a{class: 'dropdown-toggle', role:'button', data: {toggle: 'dropdown'}}
               Account
               %b.caret
 
             %ul.dropdown-menu
-              %li= link_to "Profile", current_user
-              %li= link_to "Settings", edit_user_path(current_user)
+              %li= link_to "Profile", "#"
+              %li= link_to "Settings", "#"
               %li.divider
-              %li= link_to "Log out", sign_out_path, method: :delete
+              %li= link_to "Log out", destroy_user_session_path, method: :delete
         -else
-          %li= link_to "Log in", "#"
+          %li= link_to "Sign up", new_user_registration_path
+          %li= link_to "Log in", new_user_session_path
