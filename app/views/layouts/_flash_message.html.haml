@@ -1,10 +1,7 @@
-- if notice
-  .alert.alert-success
-    = notice
-- elsif alert
-  .alert.alert-danger
-    = alert
-- else
-  - flash.each do |message_type, message|
-    %div{ class:["alert", "alert-#{message_type}"] }
-      = message
+-# Devise-specific flash messages: notice, alert
+-# Bootstrap:                      success, info, warning, danger
+- flash.each do |type, message|
+  - type = :success if notice
+  - type = :danger  if alert
+  %div{ class:["alert", "alert-#{type}"] }
+    = message
