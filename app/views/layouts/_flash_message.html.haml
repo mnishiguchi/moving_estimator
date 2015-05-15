@@ -1,3 +1,10 @@
-- flash.each do |message_type, message|
-  %div{ class:["alert", "alert-#{message_type}"] }
-    = message
+- if notice
+  .alert.alert-success
+    = notice
+- elsif alert
+  .alert.alert-danger
+    = alert
+- else
+  - flash.each do |message_type, message|
+    %div{ class:["alert", "alert-#{message_type}"] }
+      = message

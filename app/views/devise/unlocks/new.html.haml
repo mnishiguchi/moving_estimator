@@ -1,10 +1,19 @@
-%h2 Resend unlock instructions
+- provide(:title, "Resend unlock instructions")
+
+%h2.page-header Resend unlock instructions
+
 = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+
   = devise_error_messages!
-  .field
+
+  .field.form-group
     = f.label :email
     %br/
-    = f.email_field :email, autofocus: true
+    = f.email_field :email, autofocus: true, class: 'form-control'
+
   .actions
-    = f.submit "Resend unlock instructions"
+    / = f.submit "Resend unlock instructions"
+    = f.button "Resend unlock instructions", class: "submit btn btn-success",
+    data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
+
 = render "devise/shared/links"
