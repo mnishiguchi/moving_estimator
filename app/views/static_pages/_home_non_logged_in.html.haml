@@ -5,25 +5,10 @@
     .small Moving estimator
     .small To-do list
 
-%a{ href: 'https://github.com/mnishiguchi', target: '_blank' }
-  = gravatar_for "nishiguchi.masa@gmail.com", size: 120
+.center
+  = link_to "Contact me", "#", class: "btn btn-lg btn-success"
 
-%ul.list-unstyled.list-inline.list-social-icons
-  %li#btn-facebook
-    %a{ href: "#" }
-      %i.fa.fa-facebook-square.fa-2x
-  %li
-    %a{ href: "https://www.linkedin.com/profile/view?id=101724080", target: '_blank' }
-      %i.fa.fa-linkedin-square.fa-2x
-  %li
-    %a{ href: "https://twitter.com/MNishiguchiDC", target: '_blank' }
-      %i.fa.fa-twitter-square.fa-2x
-  %li
-    %a{ href: 'https://github.com/mnishiguchi', target: '_blank' }
-      %i.fa.fa-github-square.fa-2x
-  %li
-    %a{ href: 'https://bitbucket.com/mnishiguchi', target: '_blank' }
-      %i.fa.fa-bitbucket-square.fa-2x
+= render "shared/about_author"
 
 -# Responds to clicking on unused social buttons.
 :coffee

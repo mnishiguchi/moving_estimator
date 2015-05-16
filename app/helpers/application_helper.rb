@@ -10,7 +10,7 @@ module ApplicationHelper
     end
   end
 
-  # return the Gravatar image tag for the given user
+  # return the Gravatar image tag for the given email
   def gravatar_for(email, options = { size: 80 })
     # standardize on all lower-case addresses
     gravatar_id = Digest::MD5::hexdigest(email.downcase)

@@ -1,0 +1,28 @@
+- provide(:title, "Contact")
+
+%h2.page-header
+  Contact me
+
+= form_for @contact do |f|
+  = render 'shared/error_messages', object: f.object
+
+  .col-xs-6.form-group
+    = f.label :first_name
+    = f.text_field :first_name, class: "form-control"
+  .col-xs-6.form-group
+    = f.label :last_name
+    = f.text_field :last_name, class: "form-control"
+
+  .col-xs-12.form-group
+    = f.label :email
+    = f.email_field :email, class: "form-control"
+
+  .col-xs-12.form-group
+    = f.label :message
+    = f.text_area :message, class: "form-control"
+
+  .col-xs-12.form-group
+    = f.button "Submit", class: "submit btn btn-success",
+      data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
+
+= render "shared/about_author"
