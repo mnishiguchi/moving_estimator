@@ -6,7 +6,7 @@
     .small To-do list
 
 %a{ href: 'https://github.com/mnishiguchi', target: '_blank' }
-  =image_tag "114x114_masa_chinatown.png", alt: "Masa"
+  = gravatar_for "nishiguchi.masa@gmail.com", size: 120
 
 %ul.list-unstyled.list-inline.list-social-icons
   %li#btn-facebook
@@ -18,15 +18,15 @@
   %li
     %a{ href: "https://twitter.com/MNishiguchiDC", target: '_blank' }
       %i.fa.fa-twitter-square.fa-2x
-  %li#btn-google
-    %a{ href: "#" }
-      %i.fa.fa-google-plus-square.fa-2x
+  %li
+    %a{ href: 'https://github.com/mnishiguchi', target: '_blank' }
+      %i.fa.fa-github-square.fa-2x
+  %li
+    %a{ href: 'https://bitbucket.com/mnishiguchi', target: '_blank' }
+      %i.fa.fa-bitbucket-square.fa-2x
 
 -# Responds to clicking on unused social buttons.
 :coffee
-  $('#btn-google').click ->
-    alert 'Sorry, I am not an active Google+ user.'
-    return
   $('#btn-facebook').click ->
     alert 'Sorry, I don\'t have a Facebook account.'
     return
