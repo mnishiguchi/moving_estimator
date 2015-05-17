@@ -16,7 +16,7 @@
     .container
       = render 'layouts/flash_message'
       = yield  # contents
-      = render 'layouts/footer'
+      / = render 'layouts/footer'
 
       - if Rails.env.development?
         = debug(params)
