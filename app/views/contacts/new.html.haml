@@ -3,7 +3,7 @@
 %h2.page-header
   Contact me
 
-= form_for @contact do |f|
+= form_for @contact, url: contact_path do |f|
   = render 'shared/error_messages', object: f.object
 
   .col-xs-6.form-group

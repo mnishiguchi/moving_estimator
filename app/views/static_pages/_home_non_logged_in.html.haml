@@ -1,12 +1,15 @@
 / Home non-logged-in
-.center.jumbotron
-  %h1
-    Masatoshi's App
-    .small Moving estimator
-    .small To-do list
+
+%h2.jumbotron.center
+  Welcome to Masatoshi's Lab
+
+.ul.center.list-group
+  .li.list-group-item Moving estimator
+  .li.list-group-item To-do list
+  .li.list-group-item Translator emailor
 
 .center
-  = link_to "Contact me", "#", class: "btn btn-lg btn-success"
+  = link_to "Contact me", contact_path, class: "btn btn-lg btn-success"
 
 = render "shared/about_author"
 
