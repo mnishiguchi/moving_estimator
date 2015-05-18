@@ -55,6 +55,17 @@ p {
 
 /* header */
 
+.navbar-inner {
+    min-height: 0px;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 60px;
+    height: 60px;
+    padding-top: 0;
+}
+
 #logo {
   float: left;
   margin-right: 10px;
