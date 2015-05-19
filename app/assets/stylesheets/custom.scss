@@ -10,7 +10,7 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 60px;
+  padding-top: 68px;
 }
 
 section {
@@ -43,18 +43,15 @@ h4 { font-size: 1.2em; }
 p {
   font-size: 1.1em;
 
-  &.gray-center {
-    line-height: 1.7em;
+  &.gray-narrow {
     letter-spacing: -1px;
-    margin-bottom: 30px;
-    text-align: center;
-    font-weight: normal;
     color: $gray-light;
   }
 }
 
 /* header */
 
+// Overrides default navbar
 .navbar-inner {
     min-height: 0px;
 }
