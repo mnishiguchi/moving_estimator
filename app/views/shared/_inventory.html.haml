@@ -1,0 +1,40 @@
+.row
+  .col-md-4
+    .panel.panel-default
+      .panel-heading
+        %h4
+          %i.fa.fa-fw.fa-check
+          Moving Estimator (Android)
+      .panel-body
+        %p
+          To estimate the volume of your stuff when you are moving.
+        %a{ href: "https://play.google.com/store/apps/details?id=com.mnishiguchi.android.movingestimator",
+          class: "btn btn-default" , target: '_blank' }
+          Learn More
+  .col-md-4
+    .panel.panel-default
+      .panel-heading
+        %h4
+          %i.fa.fa-fw.fa-check
+          Moving Estimator (Web)
+      .panel-body
+        %p
+          A web version of the Moving Estimator.
+        %a{ href: "#", class: "btn btn-default under-construction" }
+          Learn More
+  .col-md-4
+    .panel.panel-default
+      .panel-heading
+        %h4
+          %i.fa.fa-fw.fa-check
+          Translator Emailer
+      .panel-body
+        %p
+          For my American wife and Japanese mom to communicate each other :)
+        %a{ href: "#", class: "btn btn-default under-construction" }
+          Learn More
+
+:coffee
+  $('.under-construction').click ->
+    alert 'Under construction.'
+    return

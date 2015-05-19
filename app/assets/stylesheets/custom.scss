@@ -10,7 +10,7 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 60px;
+  padding-top: 68px;
 }
 
 section {
@@ -35,17 +35,33 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 html { font-size: 100%; }
-h1 { font-size: 2.5em; }
+h1 { font-size: 2.2em; }
 h2 { font-size: 1.8em; }
 h3 { font-size: 1.5em; }
 h4 { font-size: 1.2em; }
 .box { padding: 1.2em; }
 p {
   font-size: 1.1em;
-  line-height: 1.7em;
+
+  &.gray-narrow {
+    letter-spacing: -1px;
+    color: $gray-light;
+  }
 }
 
 /* header */
+
+// Overrides default navbar
+.navbar-inner {
+    min-height: 0px;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 60px;
+    height: 60px;
+    padding-top: 0;
+}
 
 #logo {
   float: left;

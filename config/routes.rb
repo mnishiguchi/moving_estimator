@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   post 'contact' => 'contacts#create'
 
   devise_for :users, controllers: { confirmations: 'confirmations' }
+  get  'about'   => 'static_pages#about'
   root 'static_pages#home'
 end

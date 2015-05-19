@@ -1,11 +1,13 @@
 / Home non-logged-in
+.jumbotron
+  %h1.center
+    Masatoshi's Lab
+  %p.gray-narrow.center
+    Hello, this is Masatoshi Nishiguchi.
+    %br
+    I am planning to add some useful applications here.
 
-%h2.jumbotron.center
-  Welcome to Masatoshi's Lab
-
-.p.center.box
-  Here I am planning to add some useful applications such as
-  a moving estimator with which you can estimate the volume of your stuff before moving.
+= render 'shared/inventory'
 
 .center
   = link_to "Contact me", contact_path, class: "btn btn-lg btn-success"
