@@ -13,7 +13,7 @@ describe ContactMailer do
     end
 
     it "renders the header" do
-      expect(mail.subject).to eq('A message from "Example User" <user@example.com>')
+      expect(mail.subject).to eq('A message from Example User <user@example.com>')
       expect(mail.to).to eq(["masatoshi.nishiguchi@udc.edu"])
       expect(mail.from).to eq([@user_input.email])
     end

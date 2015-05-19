@@ -13,7 +13,8 @@ class ContactMailer < ApplicationMailer
          subject: "A message from #{full_name_with_email(contact)}"
   end
 
+  # Returns a formatted email.
   def full_name_with_email(contact)
-    %Q("#{contact.first_name} #{contact.last_name}" <#{contact.email}>)
+    "#{contact.first_name} #{contact.last_name} <#{contact.email}>"
   end
 end

@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   # Returns the full title on a per-page basis.
   def full_title(page_title="")
     base_title = "MNISHIGUCHI"
@@ -10,9 +11,9 @@ module ApplicationHelper
     end
   end
 
-  # return the Gravatar image tag for the given email
+  # Returns the Gravatar image tag for the given email.
   def gravatar_for(email, options = { size: 80 })
-    # standardize on all lower-case addresses
+    # Standardizing on all lower-case addresses
     gravatar_id = Digest::MD5::hexdigest(email.downcase)
     size = options[:size]
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
