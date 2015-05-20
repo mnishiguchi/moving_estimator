@@ -18,6 +18,8 @@
 #  confirmation_token     :string
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  admin                  :boolean          default(FALSE)
+#  username               :string
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

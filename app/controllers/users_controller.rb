@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :ensure_admin!,     only: [:index, :destroy]
+  before_action :ensure_admin!,     except: :show
   before_action :authenticate_user! # all actions
 
   # A list of all users (for admin only)

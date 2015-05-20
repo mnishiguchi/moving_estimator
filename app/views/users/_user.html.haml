@@ -1,5 +1,5 @@
 %li
-  = user.email
+  = "#{user.username} <#{user.email}>"
   = "[admin]" if user.admin?
   / = link_to gravatar_for(user.email, size: 50), user
   / = link_to user.name, user
