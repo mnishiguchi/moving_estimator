@@ -51,11 +51,7 @@ p {
 
 /* header */
 
-// Overrides default navbar
-.navbar-inner {
-    min-height: 0px;
-}
-
+/* Navbar height */
 .navbar-brand,
 .navbar-nav li a {
     line-height: 60px;
@@ -63,16 +59,38 @@ p {
     padding-top: 0;
 }
 
+/* Navbar colors */
+.navbar-inverse {
+    background-color: #C90000;
+    border-color: #E7E7E7;
+}
+/* title */
+// .navbar-inverse .navbar-brand {
+//     color: #CDE;
+// }
+// .navbar-inverse .navbar-brand:hover,
+// .navbar-inverse .navbar-brand:focus {
+//     color: #FFF;
+// }
+/* navbar links */
+.navbar-inverse .navbar-nav > li > a {
+    color: #CDE;
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+    color: #FFF;
+}
+
 #logo {
   float: left;
   margin-right: 10px;
   font-size: 2.5em;
-  color: #cde;
+  color: #CDE;
   text-transform: uppercase;
   letter-spacing: -1px;
   font-weight: bold;
   &:hover {
-    color: white;
+    color: #FFF;
     text-decoration: none;
   }
 }
