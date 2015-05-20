@@ -18,11 +18,18 @@
 #  confirmation_token     :string
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  admin                  :boolean          default(FALSE)
+#  username               :string
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :user do
-  end
+
+  # Factory.define :user do |user|
+  #   user.username               "Example User"
+  #   user.email                  "user@example.com"
+  #   user.password               "password"
+  #   user.password_confirmation  "password"
+  # end
 end

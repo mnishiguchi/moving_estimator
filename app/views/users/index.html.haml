@@ -1,0 +1,17 @@
+- provide(:title, "All users")
+
+%h2.page-header All users
+
+/ %p.pull-right
+/   Download:
+/   = link_to "CSV", users_path(format: "csv")
+/   = "|"
+/   = link_to "Excel", "#"
+
+/ %section
+/   = render 'search_box'
+
+= will_paginate @users
+%ul.users
+  = render @users
+= will_paginate @users

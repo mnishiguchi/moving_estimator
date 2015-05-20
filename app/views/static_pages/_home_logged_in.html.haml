@@ -1,8 +1,12 @@
 / Home logged-in
+- provide(:title, "Dashboard")
+
 %h2.page-header
-  Currently under construction
-%p
-  I am planning to add moving estimator here.
+  Dashboard
+  .small
+    = current_user.email
+
+= render 'shared/inventory'
 
 .row
   / Left

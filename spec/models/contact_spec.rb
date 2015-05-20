@@ -9,9 +9,7 @@ describe Contact do
                 message:    "Lorem ipsum dolor sit amet.")
   end
 
-  it "should be valid" do
-    expect(contact).to be_valid
-  end
+  it { expect(contact).to be_valid }
 
   it "has non-blank first name" do
     contact.first_name = "  "

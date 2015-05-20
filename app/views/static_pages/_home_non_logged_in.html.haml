@@ -9,10 +9,11 @@
 
 = render 'shared/inventory'
 
-.center
-  = link_to "Contact me", contact_path, class: "btn btn-lg btn-success"
-
 = render "shared/about_author"
+
+.col-xs-12
+  .center
+    = link_to "Contact me", contact_path, class: "btn btn-lg btn-success"
 
 -# Responds to clicking on unused social buttons.
 :coffee

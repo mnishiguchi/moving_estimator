@@ -18,6 +18,8 @@
 #  confirmation_token     :string
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  admin                  :boolean          default(FALSE)
+#  username               :string
 #
 
 class User < ActiveRecord::Base
@@ -25,4 +27,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  # The username attribute was added via application controller.
+  # The admin attribute was added by migration.
 end

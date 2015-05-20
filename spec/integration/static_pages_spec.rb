@@ -6,22 +6,16 @@ describe "Static pages", type: :feature do
 
   let(:base_title) { "MNISHIGUCHI" }
 
-  shared_examples_for "all static pages" do
-    it { should have_title(full_title(page_title)) }
-  end
-
   describe "Home page" do
     before { visit root_path }
-    it { expect(page).to have_content('Moving Estimator') }
-    let(:page_title) { '' }
-    it_should_behave_like "all static pages"
+    it { expect(page).to have_content(/Moving Estimator/i) }
+    it { expect(page).to have_title(full_title("")) }
   end
 
   describe "About page" do
     before { visit about_path }
     it { expect(page).to have_content(/Masatoshi/i) }
-    let(:page_title) { 'About' }
-    it_should_behave_like "all static pages"
+    it { expect(page).to have_title(full_title("About")) }
   end
 
   describe "Navbar links" do

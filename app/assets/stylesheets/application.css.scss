@@ -1,22 +1,16 @@
-// See https://github.com/maxim/bootswatch-rails
-
-// Import bootstrap-sprockets
 @import "bootstrap-sprockets";
 
-// Import variables for the specific style
-/*@import "bootswatch/spacelab/variables";*/
+// @import "bootswatch/spacelab/variables";*/
 
-// Import bootstrap itself
 @import "bootstrap";
 
 // Bootstrap body padding for fixed navbar
-body { padding-top: 60px; }
+// body { padding-top: 60px; }
 
-// Import bootswatch style itself
-/*@import "bootswatch/spacelab/bootswatch";*/
+// @import "bootswatch/spacelab/bootswatch";
 
-// Font Awesome
 @import "font-awesome";
 
-// My custom.css.scss
+// My own custom styles
 @import "custom";
+@import "navbar"
