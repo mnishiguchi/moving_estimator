@@ -1,10 +1,10 @@
 %li
   = user.email
-  / = link_to gravatar_for(user, size: 50), user
+  = "[admin]" if user.admin?
+  / = link_to gravatar_for(user.email, size: 50), user
   / = link_to user.name, user
 
   -# The "delete" links will be displayed only if the current user is an admin.
   - if current_user.admin? && (current_user != user)
     = "|"
-    delete
-    / = link_to "delete", visitor_path(user), method: :delete, data: { confirm: "Are you sure?" }
+    = link_to "delete", user_path(user), method: :delete, data: { confirm: "Are you sure?" }
