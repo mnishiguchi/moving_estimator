@@ -17,7 +17,7 @@
 
         -# Show different menu items depending on the login status.
         -if user_signed_in?
-          %li= link_to "loggen in as #{current_user.email}", edit_user_registration_path
+          %li= link_to "#{current_user.email}", root_path
           %li= link_to "Account", edit_user_registration_path
           %li= link_to "Log out", destroy_user_session_path, method: :delete
 
