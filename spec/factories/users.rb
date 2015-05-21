@@ -25,11 +25,10 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-
-  # Factory.define :user do |user|
-  #   user.username               "Example User"
-  #   user.email                  "user@example.com"
-  #   user.password               "password"
-  #   user.password_confirmation  "password"
-  # end
+  factory :user do
+    username "Masatoshi Nishiguchi"
+    email    "mnishiguchi@example.com"
+    password "password"
+    password_confirmation "password"
+  end
 end
