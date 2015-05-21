@@ -12,7 +12,6 @@ describe "Users signup", type: :feature do
   end
 
   describe "signup" do
-
     before { visit "/users/sign_up" }
 
     let(:submit) { "Create my account" }
