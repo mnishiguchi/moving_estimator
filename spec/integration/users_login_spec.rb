@@ -18,15 +18,15 @@ describe "Users login", type: :feature do
       before { click_button "Log in" }
 
       it { should have_title(full_title("Log in")) }
-      it { should have_selector('div.alert.alert-danger') }
+      it { should have_error_message }
 
       describe "after visiting another page" do
         before { click_link "logo" }
-        it { should_not have_selector('div.alert.alert-danger') }
+        it { should_not have_error_message }
       end
 
       it { is_expected.to have_title('Log in') }
-      it { is_expected.to have_selector('div.alert.alert-danger') }
+      it { is_expected.to have_error_message }
     end
 
     describe "with valid information" do
@@ -43,6 +43,11 @@ describe "Users login", type: :feature do
       it { is_expected.to have_title(full_title("Dashboard")) }
       it { is_expected.to have_link('Log out',    href: destroy_user_session_path) }
       it { is_expected.to_not have_link('Log in', href: new_user_session_path) }
+
+      describe "followed by logout" do
+        before { click_link "Log out" }
+        it { should have_link('Log in') }
+      end
     end
   end
 end
