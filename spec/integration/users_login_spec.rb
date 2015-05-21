@@ -4,7 +4,7 @@ describe "Users login", type: :feature do
 
   subject { page }
 
-  describe "signup page" do
+  describe "login page" do
     before { visit '/users/sign_in' }
 
     it { is_expected.to have_content('Log in') }
