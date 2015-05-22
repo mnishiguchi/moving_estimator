@@ -1,6 +1,6 @@
 .row
   .col-md-4
-    .panel.panel-default
+    .panel.panel-default.inventory_panel
       .panel-heading
         %h4
           %i.fa.fa-fw.fa-check
@@ -12,7 +12,7 @@
           class: "btn btn-default" , target: '_blank' }
           Learn More
   .col-md-4
-    .panel.panel-default
+    .panel.panel-default.inventory_panel
       .panel-heading
         %h4
           %i.fa.fa-fw.fa-check
@@ -23,7 +23,7 @@
         %a{ href: "#", class: "btn btn-default under-construction" }
           Learn More
   .col-md-4
-    .panel.panel-default
+    .panel.panel-default.inventory_panel
       .panel-heading
         %h4
           %i.fa.fa-fw.fa-check
@@ -37,4 +37,16 @@
 :coffee
   $('.under-construction').click ->
     alert 'Under construction.'
+    return
+
+  # Matches the the panel heights to the highest one upon document ready.
+  $ ->
+    # Creating an array of all the panel heights
+    heights = $('.inventory_panel').map(->
+      $(this).height()
+    ).get()
+    # Finding the max height
+    maxHeight = Math.max.apply(null, heights)
+    # Setting the max height to all the panels
+    $('.inventory_panel').height maxHeight
     return

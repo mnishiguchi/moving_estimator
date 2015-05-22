@@ -49,34 +49,7 @@ p {
   }
 }
 
-/* footer */
-
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid $gray-medium-light;
-  color: $gray-light;
-  clear: both;
-  a {
-    color: $gray;
-    &:hover {
-      color: $gray-darker;
-    }
-  }
-  small {
-    float: left;
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 15px;
-    }
-  }
-}
-
-/* miscellaneous */
+/* Debug */
 
 .debug_dump {
   clear: both;
@@ -107,6 +80,8 @@ footer {
     color: $state-danger-text;
   }
 }
+
+/* miscellaneous */
 
 #author {
   margin-top: 25px;
