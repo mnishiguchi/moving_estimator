@@ -38,6 +38,7 @@ describe "Contact me", type: :feature do
 
       describe "after saving the user" do
         before { click_button submit }
+
         let(:user) { User.find_by(email: 'user@example.com') }
 
         it { is_expected.to have_title(full_title("")) }  # Root page

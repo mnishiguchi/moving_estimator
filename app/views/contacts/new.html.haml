@@ -8,11 +8,11 @@
 
   .form-group
     = f.label :username
-    = f.text_field :username, class: "form-control"
+    = f.text_field :username, class: "form-control", value: current_user.try(:username)
 
   .form-group
     = f.label :email
-    = f.email_field :email, class: "form-control"
+    = f.email_field :email, class: "form-control", value: current_user.try(:email)
 
   .form-group
     = f.label :message
