@@ -8,7 +8,7 @@
   .field.form-group
     = f.label :email
     %br/
-    = f.email_field :email, autofocus: true, class: 'form-control'
+    = f.email_field :email, autofocus: false, class: 'form-control'
 
   .actions
     /= f.submit "Resend confirmation instructions"
