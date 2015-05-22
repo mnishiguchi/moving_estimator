@@ -1,8 +1,6 @@
 class ContactsController < ApplicationController
   def new
     @contact = Contact.new
-    # @username = current_user.try(:username)
-    # @email = current_user.try(:email)
   end
 
   def create
@@ -15,6 +13,4 @@ class ContactsController < ApplicationController
       render 'new'
     end
   end
-
-  # TODO Write a contacts_controller_test.
 end
