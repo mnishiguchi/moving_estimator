@@ -12,8 +12,9 @@
     = render 'layouts/viewport'
     = render 'layouts/shim'
 
-  %body
-    = render 'layouts/header'
+  / The ID #wrapper must be wrap the entire page for the sidebar's scope to work.
+  %body#wrapper
+    = render 'layouts/header1'
 
     .container
       = render 'layouts/flash_message'

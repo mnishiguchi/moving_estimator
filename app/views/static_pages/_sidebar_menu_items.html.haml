@@ -1,0 +1,45 @@
+/ Sidebar Menu Items - These collapse to the responsive navigation menu on small screens
+.collapse.navbar-collapse.navbar-ex1-collapse
+  %ul.nav.navbar-nav.side-nav
+    %li.active
+      %a{:href => "#"}
+        %i.fa.fa-fw.fa-dashboard
+        Dashboard
+    %li
+      %a{:href => "#"}
+        %i.fa.fa-fw.fa-bar-chart-o
+        Charts
+    %li
+      %a{:href => "#"}
+        %i.fa.fa-fw.fa-table
+        Tables
+    %li
+      %a{:href => "#"}
+        %i.fa.fa-fw.fa-edit
+        Forms
+    %li
+      %a{:href => "#"}
+        %i.fa.fa-fw.fa-desktop
+        Bootstrap Elements
+    %li
+      %a{:href => "#"}
+        %i.fa.fa-fw.fa-wrench
+        Bootstrap Grid
+    %li
+      %a{"data-target" => "#demo", "data-toggle" => "collapse", :href => "javascript:;"}
+        %i.fa.fa-fw.fa-arrows-v
+        Dropdown
+        %i.fa.fa-fw.fa-caret-down
+      %ul#demo.collapse
+        %li
+          %a{:href => "#"} Dropdown Item
+        %li
+          %a{:href => "#"} Dropdown Item
+    %li
+      %a{:href => "#"}
+        %i.fa.fa-fw.fa-file
+        Blank Page
+    %li
+      %a{:href => "#"}
+        %i.fa.fa-fw.fa-dashboard
+        RTL Dashboard

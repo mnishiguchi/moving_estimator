@@ -1,0 +1,47 @@
+/ simple-sidebar (with a toggle button)
+
+- provide(:title, "Dashboard")
+
+/ Sidebar
+#sidebar-wrapper{ style: "background: #CDE;"}
+  %ul.sidebar-nav
+    / %li.sidebar-brand
+    /   %a{href: "#"}
+    /     Brand
+    %li
+      %a{href: "#"} Dashboard
+    %li
+      %a{href: "#"} Shortcuts
+    %li
+      %a{href: "#"} Overview
+    %li
+      %a{href: "#"} Events
+    %li
+      %a{href: "#"} About
+    %li
+      %a{href: "#"} Services
+    %li
+      %a{href: "#"} Contact
+
+/ Page Content
+#page-content-wrapper
+  .container-fluid
+    .row
+      .col-lg-12
+        %h2.page-header
+          Dashboard
+          .small
+            = current_user.email
+        %p This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.
+        %p
+          Make sure to keep all page content within the
+          = succeed "." do
+            %code #page-content-wrapper
+
+        %a#menu-toggle.btn.btn-default{href: "#menu-toggle"} Toggle Menu
+
+/ Menu Toggle Script
+:coffee
+  $('#menu-toggle').click (e) ->
+    e.preventDefault()
+    $('#wrapper').toggleClass 'toggled'
