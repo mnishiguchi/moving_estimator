@@ -42,9 +42,8 @@
   # Matches the the panel heights to the highest one upon document ready.
   $ ->
     # Creating an array of all the panel heights
-    heights = $('.inventory_panel').map(->
+    heights = $('.inventory_panel').map ->
       $(this).height()
-    ).get()
     # Finding the max height
     maxHeight = Math.max.apply(null, heights)
     # Setting the max height to all the panels
