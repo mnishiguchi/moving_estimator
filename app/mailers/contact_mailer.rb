@@ -10,11 +10,11 @@ class ContactMailer < ApplicationMailer
 
     mail to: "masatoshi.nishiguchi@udc.edu",
          from: contact.email,
-         subject: "A message from #{full_name_with_email(contact)}"
+         subject: "A message from #{formatted_email(contact)}"
   end
 
   # Returns a formatted email.
-  def full_name_with_email(contact)
-    "#{contact.first_name} #{contact.last_name} <#{contact.email}>"
+  def formatted_email(contact)
+    "#{contact.username} <#{contact.email}>"
   end
 end

@@ -18,27 +18,21 @@ describe "Users login", type: :feature do
       before { click_button "Log in" }
 
       it { should have_title(full_title("Log in")) }
-      it { should have_error_message }
+      it { should have_error_message('Invalid') }
 
       describe "after visiting another page" do
         before { click_link "logo" }
-        it { should_not have_error_message }
+        it { should_not have_error_message('Invalid') }
       end
 
       it { is_expected.to have_title('Log in') }
-      it { is_expected.to have_error_message }
+      it { is_expected.to have_error_message('Invalid') }
     end
 
     describe "with valid information" do
-      let(:user) do
-        FactoryGirl.create(:user)
-      end
+      let(:user) { FactoryGirl.create(:user) }
 
-      before do
-        fill_in "Email",    with: user.email.upcase
-        fill_in "Password", with: user.password
-        click_button "Log in"
-      end
+      before { valid_login(user) }
 
       it { is_expected.to have_title(full_title("Dashboard")) }
       it { is_expected.to have_link('Log out',    href: destroy_user_session_path) }

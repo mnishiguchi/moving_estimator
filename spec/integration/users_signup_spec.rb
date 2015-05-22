@@ -46,7 +46,7 @@ describe "Users signup", type: :feature do
         let(:user) { User.find_by(email: 'user@example.com') }
 
         it { is_expected.to have_title(full_title("")) }  # Root page
-        it { is_expected.to have_selector('div.alert.alert-success', text: 'confirmation link') }
+        it { is_expected.to have_success_message('confirmation link') }
       end
     end
   end

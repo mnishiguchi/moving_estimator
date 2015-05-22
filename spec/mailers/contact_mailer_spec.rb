@@ -5,10 +5,9 @@ describe ContactMailer do
   describe "Contact email from user" do
 
     let(:mail) do
-      @user_input = Contact.new(first_name: "Example",
-                                last_name:  "User",
-                                email:      "user@example.com",
-                                message:    "Lorem ipsum dolor sit amet.")
+      @user_input = Contact.new(username: "Example User",
+                                email:    "user@example.com",
+                                message:  "Lorem ipsum dolor sit amet.")
       ContactMailer.message_from_user(@user_input)
     end
 
