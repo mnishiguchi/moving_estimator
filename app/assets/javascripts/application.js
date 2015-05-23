@@ -16,3 +16,9 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+//
+// Vendor Files
+//= require dataTables.responsive.js
+//= require metisMenu.js
+//= require index.js
+//= require sb-admin-2.js

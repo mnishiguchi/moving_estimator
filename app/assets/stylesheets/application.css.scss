@@ -13,8 +13,11 @@
 
 // My own custom styles
 @import "custom";
-// @import "navbar";
+@import "navbar";
+// @import "colored_panels";
 
 // Vendor
 // @import "simple-sidebar";
-@import "sb-admin"
+@import "sb-admin-2";
+@import "metisMenu";
+@import "timeline"
