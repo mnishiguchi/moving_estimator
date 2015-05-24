@@ -3,5 +3,6 @@
 - flash.each do |type, message|
   - type = :success if notice
   - type = :danger  if alert
-  %div{ class:["alert", "alert-#{type}"] }
+  %div{ class: ["alert", "alert-#{type}"] }
     = message
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
