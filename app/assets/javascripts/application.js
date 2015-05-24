@@ -18,6 +18,6 @@
 //= require_tree .
 //
 // Vendor Files
-//= require dataTables.responsive
 //= require metisMenu
 //= require sb_admin_2
+//= require dataTables.responsive
