@@ -14,8 +14,5 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require bootstrap
-//= require metisMenu
-//= require sb_admin_2
-//= require dataTables.responsive
 //= require turbolinks
 //= require_tree .
