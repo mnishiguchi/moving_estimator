@@ -24,11 +24,11 @@ gem 'ransack',                 '~> 1.6.6'   # For searching and sorting.
 # Others
 gem 'jquery-turbolinks',       '~> 0.2.1'   # For jQuery to work with turbolinks.
 gem 'devise',                  '~> 3.4.1'   # Authentication
+gem 'faker',                   '~> 1.4.3'   # Generates sample users.
 
 group :development, :test do
   gem 'rspec-rails',        '~> 3.2.1'  # Testing
   gem 'factory_girl_rails', '~> 4.5.0'  # Alternative to Fixture.
-  gem 'faker',              '~> 1.4.3'  # Generates sample users.
   gem 'byebug',             '~> 3.4.0'  # For the byebug prompt in the terminal.
   gem 'better_errors',      '~> 2.1.1'  # For an error page on the browser.
   gem 'binding_of_caller',  '~> 0.7.2'  # For the binding of a method's caller.
