@@ -1,0 +1,29 @@
+%nav.navbar.navbar-default.navbar-static-top{role: "navigation", style: "margin-bottom: 0"}
+  .navbar-header
+    %button.navbar-toggle{ type: 'button',
+      data: { toggle: 'collapse', target: '.navbar-collapse' } }
+      %span.sr-only Navigation toggle
+      - 3.times do
+        %span.icon-bar
+    = link_to "西口", root_path, id: 'logo', class: 'navbar-brand'
+
+    %ul.nav.navbar-top-links.pull-right
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown",  href: "#" }
+          %i.fa.fa-user.fa-fw
+          = current_user.try(:username)
+          %i.fa.fa-caret-down
+        %ul.dropdown-menu.dropdown-user
+          %li
+            %a{ href: "/" }
+              %i.fa.fa-user.fa-fw
+              Dashboard
+          %li
+            %a{ href: "/users/edit" }
+              %i.fa.fa-gear.fa-fw
+              Settings
+          %li.divider
+          %li
+            %a{ href: "/users/sign_out", method: :delete }
+              %i.fa.fa-sign-out.fa-fw
+              Logout
