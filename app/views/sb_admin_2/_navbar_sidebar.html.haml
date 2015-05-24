@@ -1,87 +1,79 @@
 .navbar-default.sidebar{:role => "navigation"}
   .sidebar-nav.navbar-collapse
     %ul#side-menu.nav
+      / Search form
       %li.sidebar-search
         .input-group.custom-search-form
           %input.form-control{:placeholder => "Search...", :type => "text"}/
           %span.input-group-btn
             %button.btn.btn-default{:type => "button"}
               %i.fa.fa-search
-        / /input-group
+
       %li
-        %a{:href => "index.html"}
+        %a{ href: "#" }
           %i.fa.fa-dashboard.fa-fw
           Dashboard
       %li
-        %a{:href => "#"}
+        %a{ href: "#" }
           %i.fa.fa-bar-chart-o.fa-fw
           Charts
           %span.fa.arrow
         %ul.nav.nav-second-level
           %li
-            %a{:href => "flot.html"} Flot Charts
+            %a{ href: "#" } Flot Charts
           %li
-            %a{:href => "morris.html"} Morris.js Charts
-        / /.nav-second-level
+            %a{ href: "#" } Morris.js Charts
+
       %li
-        %a{:href => "tables.html"}
+        %a{ href: "#" }
           %i.fa.fa-table.fa-fw
           Tables
       %li
-        %a{:href => "forms.html"}
+        %a{ href: "#" }
           %i.fa.fa-edit.fa-fw
           Forms
       %li
-        %a{:href => "#"}
+        %a{ href: "#" }
           %i.fa.fa-wrench.fa-fw
           UI Elements
           %span.fa.arrow
         %ul.nav.nav-second-level
           %li
-            %a{:href => "panels-wells.html"} Panels and Wells
+            %a{ href: "#" } Item
           %li
-            %a{:href => "buttons.html"} Buttons
+            %a{ href: "#" } Item
           %li
-            %a{:href => "notifications.html"} Notifications
+            %a{ href: "#" } Item
           %li
-            %a{:href => "typography.html"} Typography
-          %li
-            %a{:href => "icons.html"} Icons
-          %li
-            %a{:href => "grid.html"} Grid
-        / /.nav-second-level
+            %a{ href: "#" } Item
+
       %li
-        %a{:href => "#"}
+        %a{ href: "#" }
           %i.fa.fa-sitemap.fa-fw
           Multi-Level Dropdown
           %span.fa.arrow
         %ul.nav.nav-second-level
           %li
-            %a{:href => "#"} Second Level Item
+            %a{ href: "#" } Second Level Item
           %li
-            %a{:href => "#"} Second Level Item
+            %a{ href: "#" } Second Level Item
           %li
-            %a{:href => "#"}
+            %a{ href: "#" }
               Third Level
               %span.fa.arrow
             %ul.nav.nav-third-level
               %li
-                %a{:href => "#"} Third Level Item
+                %a{ href: "#" } Third Level Item
               %li
-                %a{:href => "#"} Third Level Item
-              %li
-                %a{:href => "#"} Third Level Item
-              %li
-                %a{:href => "#"} Third Level Item
-            / /.nav-third-level
-        / /.nav-second-level
+                %a{ href: "#" } Third Level Item
+
       %li
-        %a{:href => "#"}
+        %a{ href: "#" }
           %i.fa.fa-files-o.fa-fw
           Sample Pages
           %span.fa.arrow
         %ul.nav.nav-second-level
           %li
-            %a{:href => "blank.html"} Blank Page
+            %a{ href: "#" } Blank Page
           %li
-            %a{:href => "login.html"} Login Page
+            %a{ href: "#" } Login Page
