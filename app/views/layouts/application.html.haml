@@ -1,8 +1,8 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
 
     %title= full_title(yield(:title))
 
@@ -25,10 +25,8 @@
       .container#main_container
         = render 'layouts/flash_message'
         = yield  # contents
-        / = render 'layouts/footer'
+        = render 'layouts/footer'
 
         - if Rails.env.development?
           = debug(params)
           = render 'layouts/screen_size'
-
-%script{:src => "//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.0.1/metisMenu.min.js"}
