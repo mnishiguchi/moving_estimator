@@ -10,18 +10,17 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// Gem js files
 //= require jquery
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require bootstrap
 //= require turbolinks
-//= require_tree .
 //
-// Vendor Files
+// Vendor js files
 //= require metisMenu
 //= require sb_admin_2
 //= require dataTables.responsive
-
-//= depend_on "metisMenu.js"
-//= depend_on "sb_admin_2.js"
-//= depend_on "dataTables.responsive.js"
+//
+// App js files
+//= require_tree .
