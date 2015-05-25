@@ -1,0 +1,12 @@
+- if Rails.env.development?
+  .container#debug_box
+    = debug(params)
+    .well.screen_size.hidden-print
+      .visible-lg
+        %strong Large
+      .visible-md
+        %strong Medium
+      .visible-sm
+        %strong Small
+      .visible-xs
+        %strong Extra Small

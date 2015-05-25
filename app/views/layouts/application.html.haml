@@ -15,18 +15,10 @@
     - if user_signed_in? && request.path == root_path
       -# for the dashboard
       = render 'sb_admin_2/sb_admin_2_index.html.haml'
-
-      - if Rails.env.development?
-        = debug(params)
-        = render 'layouts/screen_size'
-
     - else
       = render 'layouts/header'
       .container#main_container
         = render 'layouts/flash_message'
         = yield  # contents
         = render 'layouts/footer'
-
-        - if Rails.env.development?
-          = debug(params)
-          = render 'layouts/screen_size'
+    = render 'layouts/debug_box'
