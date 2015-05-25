@@ -18,6 +18,10 @@
 //= require_tree .
 //
 // Vendor Files
-//= depend_on "metisMenu.js"
-//= depend_on "sb_admin_2.js"
-//= depend_on "dataTables.responsive.js"
+//= require metisMenu
+//= require sb_admin_2
+//= require dataTables.responsive
+
+//= depend_on_asset "metisMenu.js"
+//= depend_on_asset "sb_admin_2.js"
+//= depend_on_asset "dataTables.responsive.js"
