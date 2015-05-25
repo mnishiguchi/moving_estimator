@@ -3,12 +3,12 @@ $gray-medium-light: #eaeaea;
 /* Header */
 
 /* Navbar height */
-.navbar-brand,
-.navbar-nav li a {
-    line-height: 60px;
-    height: 60px;
-    padding-top: 0;
-}
+// .navbar-brand,
+// .navbar-nav li a {
+//     line-height: 60px;
+//     height: 60px;
+//     padding-top: 0;
+// }
 
 /* Navbar colors */
 .navbar-inverse {
@@ -103,13 +103,13 @@ ul.alert-dropdown {
 #logo {
   float: left;
   margin-right: 10px;
-  font-size: 2.5em;
-  color: #CDE;
+  font-size: 2.0em;
+  //color: #CDE;
   text-transform: uppercase;
   letter-spacing: -1px;
   font-weight: bold;
   &:hover {
-    color: #FFF;
+    //color: #FFF;
     text-decoration: none;
   }
 }
