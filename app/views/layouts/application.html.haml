@@ -13,10 +13,11 @@
 
   %body
     - if user_signed_in? && request.path == root_path
-      -# for the dashboard
-      = render 'sb_admin_2/sb_admin_2_index.html.haml'
+      / the dashboard
+      = render 'sb_admin_2/wrapper'
     - else
-      = render 'layouts/header'
+      / Static pages
+      = render 'sb_admin_2/navbar_header'
       .container#main_container
         = render 'layouts/flash_message'
         = yield  # contents

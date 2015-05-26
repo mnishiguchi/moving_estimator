@@ -9,8 +9,11 @@ $gray-medium-light: #eaeaea;
 
 /* universal */
 
-#main_container {
-  padding-top: 60px;
+// #main_container {
+//   padding-top: 60px;
+// }
+#main_container .alert {
+  margin-top: 15px;
 }
 
 .center {
