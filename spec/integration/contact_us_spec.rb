@@ -2,13 +2,11 @@ require 'rails_helper'
 
 describe "Contact us", type: :feature do
 
-  subject { page }
-
   describe "contact page" do
     before { visit contact_path }
 
-    it { is_expected.to have_content('Contact') }
-    it { is_expected.to have_title(full_title('Contact')) }
+    it { expect(page).to have_content('Contact') }
+    it { expect(page).to have_title(full_title('Contact')) }
   end
 
   describe "contact form" do
@@ -17,13 +15,13 @@ describe "Contact us", type: :feature do
     let(:submit) { "Submit" }
 
     describe "with invalid information" do
-      it { is_expected.to_not send_email_by_click }
+      it { expect(page).to_not send_email_by_click }
 
       describe "after submission" do
         before { click_button submit }
 
-        it { is_expected.to have_title('Contact') }
-        it { is_expected.to have_content('error') }
+        it { expect(page).to have_title('Contact') }
+        it { expect(page).to have_content('error') }
       end
     end
 
@@ -34,15 +32,15 @@ describe "Contact us", type: :feature do
         fill_in "Message",  with: "Lorem ipsum dolor sit amet, consectetur adipisicing elit"
       end
 
-      it { is_expected.to send_email_by_click }
+      it { expect(page).to send_email_by_click }
 
       describe "after saving the user" do
         before { click_button submit }
 
         let(:user) { User.find_by(email: 'user@example.com') }
 
-        it { is_expected.to have_title(full_title("")) }  # Root page
-        it { is_expected.to have_info_message('Thank you') }
+        it { expect(page).to have_title(full_title("")) }  # Root page
+        it { expect(page).to have_info_message('Thank you') }
       end
     end
   end

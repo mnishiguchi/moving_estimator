@@ -2,13 +2,11 @@ require 'rails_helper'
 
 describe "Users signup", type: :feature do
 
-  subject { page }
-
   describe "signup page" do
     before { visit new_user_registration_path }
 
-    it { is_expected.to have_content('Sign up') }
-    it { is_expected.to have_title(full_title('Sign up')) }
+    it { expect(page).to have_content('Sign up') }
+    it { expect(page).to have_title(full_title('Sign up')) }
   end
 
   describe "signup" do
@@ -24,8 +22,8 @@ describe "Users signup", type: :feature do
       describe "after submission" do
         before { click_button submit }
 
-        it { is_expected.to have_title('Sign up') }
-        it { is_expected.to have_content('error') }
+        it { expect(page).to have_title('Sign up') }
+        it { expect(page).to have_content('error') }
       end
     end
 
@@ -45,8 +43,8 @@ describe "Users signup", type: :feature do
         before { click_button submit }
         let(:user) { User.find_by(email: 'user@example.com') }
 
-        it { is_expected.to have_title(full_title("")) }  # Root page
-        it { is_expected.to have_success_message('confirmation link') }
+        it { expect(page).to have_title(full_title("")) }  # Root page
+        it { expect(page).to have_success_message('confirmation link') }
       end
     end
   end

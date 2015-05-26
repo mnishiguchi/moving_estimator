@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe "Users edit", type: :feature do
 
-  subject { page }
-
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
     before do
@@ -12,15 +10,15 @@ describe "Users edit", type: :feature do
     end
 
     describe "page" do
-      it { is_expected.to have_title("Edit User") }
-      it { is_expected.to have_content("Update my account") }
-      it { is_expected.to have_content("Cancel my account") }
+      it { expect(page).to have_title("Edit User") }
+      it { expect(page).to have_content("Update my account") }
+      it { expect(page).to have_content("Cancel my account") }
     end
 
     describe "with invalid information" do
       before { click_button "Update" }
 
-      it { is_expected.to have_content('error') }
+      it { expect(page).to have_content('error') }
     end
 
     describe "with valid information" do
@@ -33,10 +31,10 @@ describe "Users edit", type: :feature do
         click_button "Update"
       end
 
-      it { should have_link(new_name) }
-      it { should have_selector('div.alert.alert-success') }
-      it { should have_link('Log out', href: destroy_user_session_path) }
-      specify { expect(user.reload.username).to  eq new_name }
+      it { expect(page).to have_link(new_name) }
+      it { expect(page).to have_selector('div.alert.alert-success') }
+      it { expect(page).to have_link('Log out', href: destroy_user_session_path) }
+      specify { expect(user.reload.username).to eq new_name }
       specify { expect(user.reload.email).to eq new_email }
     end
   end
