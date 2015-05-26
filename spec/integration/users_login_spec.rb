@@ -22,7 +22,7 @@ describe "Users login", type: :feature do
 
       describe "after visiting another page" do
         before { click_link "logo" }
-        it { should_not have_error_message('Invalid') }
+        it { is_expected.to_not have_error_message('Invalid') }
       end
     end
 
@@ -49,7 +49,7 @@ describe "Users login", type: :feature do
           click_link "Log out"
         end
 
-        it { should have_link('Log in') }
+        it { is_expected.to have_link('Log in') }
       end
     end
   end
