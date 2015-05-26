@@ -49,6 +49,6 @@ group :test do
 end
 
 group :production do
-  gem 'rails_12factor', '~> 0.0.3'   # For postgres
+  gem 'rails_12factor', '~> 0.0.3'   # Enables serving assets in production.
   gem 'puma',           '~> 2.11.2'  # A production webserver
 end

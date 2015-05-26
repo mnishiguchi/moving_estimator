@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Contact me", type: :feature do
+describe "Contact us", type: :feature do
 
   subject { page }
 
