@@ -5,14 +5,14 @@ describe "Users signup", type: :feature do
   subject { page }
 
   describe "signup page" do
-    before { visit "/users/sign_up" }
+    before { visit new_user_registration_path }
 
     it { is_expected.to have_content('Sign up') }
     it { is_expected.to have_title(full_title('Sign up')) }
   end
 
   describe "signup" do
-    before { visit "/users/sign_up" }
+    before { visit new_user_registration_path }
 
     let(:submit) { "Create my account" }
 

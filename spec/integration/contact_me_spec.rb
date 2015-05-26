@@ -5,14 +5,14 @@ describe "Contact me", type: :feature do
   subject { page }
 
   describe "contact page" do
-    before { visit "/contact" }
+    before { visit contact_path }
 
     it { is_expected.to have_content('Contact') }
     it { is_expected.to have_title(full_title('Contact')) }
   end
 
   describe "contact form" do
-    before { visit "/contact" }
+    before { visit contact_path }
 
     let(:submit) { "Submit" }
 
