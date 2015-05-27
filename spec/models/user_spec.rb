@@ -30,21 +30,18 @@ require 'rails_helper'
 
 describe User do
 
-  before do
-    @user = User.new(username: "Example User", email: "user@example.com",
-                    password: "password", password_confirmation: "password")
-  end
+  let(:user) { FactoryGirl.create(:user) }
 
-  it { expect(@user).to be_valid }
-  it { expect(@user).to respond_to(:admin) }
-  it { expect(@user).to_not be_admin }
+  it { expect(user).to be_valid }
+  it { expect(user).to respond_to(:admin) }
+  it { expect(user).to_not be_admin }
 
   describe "with admin attribute set to 'true'" do
     before do
-      @user.save!
-      @user.toggle!(:admin)
+      user.save!
+      user.toggle!(:admin)
     end
 
-    it { expect(@user).to be_admin }
+    it { expect(user).to be_admin }
   end
 end
