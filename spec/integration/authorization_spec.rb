@@ -2,9 +2,10 @@ require 'rails_helper'
 
 describe "Authorization", type: :feature do
 
-  describe "for non-logged-in users" do
-    let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:admin) { FactoryGirl.create(:admin) }
 
+  describe "for non-logged-in users" do
     describe "protected links" do
       before { visit root_path }
       it { expect(page).not_to have_link "Admin" }
@@ -61,11 +62,11 @@ describe "Authorization", type: :feature do
 
         context "after loggin in as admin" do
           before do
-            user.update_attribute(:admin, true)
-            log_in_as(user)
+            log_in_as(admin)
             click_link "Admin"
             click_link "Users"
           end
+
           it { expect(page).to have_title('All users') }
           it { expect(page).to have_content('All users') }
           it { expect(current_path).to eq users_path }
@@ -81,9 +82,29 @@ describe "Authorization", type: :feature do
                 expect(page).to have_selector('li', text: user.username)
               end
             end
+
+            describe "delete links" do
+
+              it "should not have delete link on admin" do
+                expect(page).to_not have_link('delete', href: user_path(admin))
+              end
+              it "should have delete link on users" do
+                expect(page).to have_link('delete', href: user_path(User.first))
+              end
+              it "should be able to delete a user" do
+                expect{
+                  click_link('delete', match: :first)
+                }.to change(User, :count).by(-1)
+              end
+            end
           end
         end
       end
+    end
+
+    describe "submitting a DELETE request to the Users#destroy action", type: :request do
+      before { delete user_path(user) }
+      specify { expect(response).to redirect_to(root_url) }
     end
   end
 end
