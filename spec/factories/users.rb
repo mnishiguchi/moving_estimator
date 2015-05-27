@@ -24,16 +24,6 @@
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-# FactoryGirl.define do
-#   factory :user do
-#     username     "Masatoshi Nishiguchi"
-#     email        "mnishiguchi@example.com"
-#     password     "password"
-#     admin        false
-#     confirmed_at Time.now
-#   end
-# end
-
 FactoryGirl.define do
   factory :user do
     sequence(:username) { |n| "Person #{n}" }
@@ -41,5 +31,9 @@ FactoryGirl.define do
     password     "password"
     admin        false
     confirmed_at Time.now
+
+    factory :admin do
+      admin true
+    end
   end
 end

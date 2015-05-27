@@ -27,7 +27,7 @@ describe "Users login", type: :feature do
     describe "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
 
-      before { valid_login(user) }
+      before { log_in_as(user) }
 
       it { expect(page).to have_title(full_title("Dashboard")) }
       it { expect(page).to_not have_link('Log in', href: new_user_session_path) }

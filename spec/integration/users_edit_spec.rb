@@ -5,7 +5,7 @@ describe "Users edit", type: :feature do
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
     before do
-      valid_login(user)
+      log_in_as(user)
       visit edit_user_registration_path
     end
 
