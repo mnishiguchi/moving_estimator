@@ -6,6 +6,13 @@ class UsersController < ApplicationController
   # A list of all users (for admin only)
   def index
     @users = User.all.paginate(page: params[:page])
+
+    # For exporting csv
+    respond_to do |format|
+      format.html
+      format.csv { send_data @users.to_csv,
+                             filename: "users-#{Date.today}.csv" }
+    end
   end
 
   # Each user's dashboard
