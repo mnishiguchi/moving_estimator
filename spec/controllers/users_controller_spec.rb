@@ -35,10 +35,7 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "logged-in user" do
-    before do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      sign_in FactoryGirl.create(:user)
-    end
+    before { log_in_as FactoryGirl.create(:user), no_capybara: :true }
 
     describe 'GET #index' do
       it "redirects to root page" do
@@ -70,10 +67,7 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "admin user" do
-    before do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
-      sign_in FactoryGirl.create(:admin)
-    end
+    before { log_in_as FactoryGirl.create(:admin), no_capybara: :true }
 
     describe 'GET #index' do
       it "renders the index page" do
