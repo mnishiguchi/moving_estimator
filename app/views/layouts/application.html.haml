@@ -12,12 +12,16 @@
     = render 'layouts/shim'
 
   %body
-    - if user_signed_in? && request.path == root_path
-      / the dashboard
-      = render 'sb_admin_2/wrapper'
+    - if request.path =~ /dashboard/
+      / Dashboard
+      #wrapper
+        / Navigation
+        = render 'layouts/navbar_header'
+        = render 'dashboard/navbar_sidebar'
+        = yield  # contents
     - else
       / Static pages
-      = render 'sb_admin_2/navbar_header'
+      = render 'layouts/navbar_header'
       .container#main_container
         = render 'layouts/flash_message'
         = yield  # contents
