@@ -12,7 +12,7 @@
     = render 'layouts/shim'
 
   %body
-    - if request.path =~ /dashboard/
+    - if request.path =~ /dashboard/ or request.path == user_path(current_user)
       / Dashboard
       #wrapper
         / Navigation
