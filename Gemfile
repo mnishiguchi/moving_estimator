@@ -15,12 +15,9 @@ gem 'sdoc',         '~> 0.4.0', group: :doc
 gem 'will_paginate',           '~> 3.0.7'   # For pagination.
 gem 'bootstrap-will_paginate', '~> 0.0.10'  # Converts pagination to bootstrap style.
 gem 'bootstrap-sass',          '~> 3.2.0.0' # Converts Less to Sass.
-gem 'bootswatch-rails',        '~> 3.2.4'   # For custom bootswatch themes.
 gem 'font-awesome-rails',      '~> 4.3.0.0' # For icons.
 # Views
 gem 'haml-rails',              '~> 0.9.0'   # For HAML.
-gem 'redcarpet',               '~> 3.2.2'   # For Markdown.
-gem 'ransack',                 '~> 1.6.6'   # For searching and sorting.
 # Others
 gem 'jquery-turbolinks',       '~> 0.2.1'   # For jQuery to work with turbolinks.
 gem 'devise',                  '~> 3.4.1'   # Authentication
@@ -36,7 +33,6 @@ group :development, :test do
   gem 'rails-erd',          '~> 1.3.1'  # For an entity-relationship diagram for models.
   gem 'awesome_print',      '~> 1.6.1'  # Pretty-prints Ruby objects.
   gem 'quiet_assets',       '~> 1.1.0'  # Turns off Rails asset pipeline log.
-  gem 'guard-livereload',   '~> 2.4.0'  # Reloads the browser when view files are modified.
   gem 'spring',             '~> 1.1.3'
 end
 

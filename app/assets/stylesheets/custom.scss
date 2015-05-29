@@ -18,7 +18,10 @@ $gray-medium-light: #eaeaea;
 
 .center {
   text-align: center;
+}
+.jumbotron {
   h1 {
+    font-size: 3.0em;
     margin-bottom: 30px;
   }
   h2 {
@@ -68,5 +71,4 @@ $gray-medium-light: #eaeaea;
 #author {
   margin-top: 25px;
   padding-top: 10px;
-  @include box_sizing;
 }

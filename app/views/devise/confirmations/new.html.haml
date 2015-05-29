@@ -1,18 +1,21 @@
 - provide(:title, "Resend confirmation instructions")
 
-%h2.page-header Resend confirmation instructions
+.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
+  %h2.page-header.center
+    Resend confirmation instructions
 
-= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = devise_error_messages!
+  = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+    = devise_error_messages!
 
-  .field.form-group
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: false, class: 'form-control'
+    .field.form-group
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: false, class: 'form-control'
 
-  .actions
-    /= f.submit "Resend confirmation instructions"
-    = f.button "Resend confirmation instructions", class: "submit btn btn-success",
-      data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
+    .actions
+      /= f.submit "Resend confirmation instructions"
+      = f.button "Resend confirmation instructions", class: "submit btn btn-success",
+        data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
 
-= render "devise/shared/links"
+  = render "devise/shared/links"
+  = render 'layouts/footer'

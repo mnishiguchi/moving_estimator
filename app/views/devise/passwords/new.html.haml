@@ -1,19 +1,22 @@
 - provide(:title, "Forgot your password?")
 
-%h2.page-header Forgot your password?
+.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
+  %h2.page-header.center
+    Forgot your password?
 
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
 
-  = devise_error_messages!
+    = devise_error_messages!
 
-  .field.form-group
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: false, class: 'form-control'
+    .field.form-group
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: false, class: 'form-control'
 
-  .actions
-    / = f.submit "Send me reset password instructions"
-    = f.button "Send me reset password instructions", class: "submit btn btn-success",
-    data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
+    .actions
+      / = f.submit "Send me reset password instructions"
+      = f.button "Send me reset password instructions", class: "submit btn btn-success",
+      data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
 
-= render "devise/shared/links"
+  = render "devise/shared/links"
+  = render 'layouts/footer'
