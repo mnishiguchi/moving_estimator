@@ -23,7 +23,7 @@ gem 'devise',                  '~> 3.4.1'   # Authentication
 gem 'faker',                   '~> 1.4.3'   # Generates sample users.
 
 group :development do
-  gem 'dotenv',             '~> 2.0.1'
+  gem 'dotenv-rails',       '~> 2.0.1'  # Autoloads dotenv in Rails.
   gem 'rails-erd',          '~> 1.3.1'  # For an entity-relationship diagram for models.
 end
 
