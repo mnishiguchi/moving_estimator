@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     # For exporting csv
     respond_to do |format|
       format.html
-      format.csv { send_data @users.to_csv,
+      format.csv { send_data @users.unscoped.to_csv,
                              filename: "users-#{Date.today}.csv" }
     end
   end
