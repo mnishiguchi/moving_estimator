@@ -13,26 +13,27 @@ gem 'jbuilder',     '~> 2.0'
 gem 'sdoc',         '~> 0.4.0', group: :doc
 # Views/Styles
 gem 'will_paginate',           '~> 3.0.7'   # For pagination.
-gem 'bootstrap-will_paginate', '~> 0.0.10'  # Converts pagination to bootstrap style.
+gem 'bootstrap-will_paginate', '~> 0.0.10'  # For bootstrap pagination style.
 gem 'bootstrap-sass',          '~> 3.2.0.0' # Converts Less to Sass.
 gem 'font-awesome-rails',      '~> 4.3.0.0' # For icons.
 gem 'haml-rails',              '~> 0.9.0'   # For HAML.
 # Others
 gem 'jquery-turbolinks',       '~> 0.2.1'   # For jQuery to work with turbolinks.
 gem 'devise',                  '~> 3.4.1'   # Authentication
+gem 'gibbon',                  '~> 1.1.5'   # A wrapper for MailChimp API 2.0 and Export API 1.0
 gem 'faker',                   '~> 1.4.3'   # Generates sample users.
 
 group :development do
   gem 'dotenv-rails',       '~> 2.0.1'  # Autoloads dotenv in Rails.
-  gem 'rails-erd',          '~> 1.3.1'  # For an entity-relationship diagram for models.
+  gem 'rails-erd',          '~> 1.3.1'  # For printing an entity-relationship diagram for models.
 end
 
 group :development, :test do
   gem 'rspec-rails',        '~> 3.2.1'  # Testing
   gem 'guard-rspec',        '~> 4.5.0'  # Automates the running of the tests.
   gem 'factory_girl_rails', '~> 4.5.0'  # Alternative to Fixture.
-  gem 'byebug',             '~> 3.4.0'  # For the byebug prompt in the terminal.
-  gem 'better_errors',      '~> 2.1.1'  # For an error page on the browser.
+  gem 'byebug',             '~> 3.4.0'  # The byebug prompt in the terminal.
+  gem 'better_errors',      '~> 2.1.1'  # An error page on the browser.
   gem 'binding_of_caller',  '~> 0.7.2'  # For the binding of a method's caller.
   gem 'annotate',           '~> 2.6.8'  # Annotates models.
   gem 'awesome_print',      '~> 1.6.1'  # Pretty-prints Ruby objects.
@@ -45,7 +46,7 @@ group :test do
   gem 'capybara',           '~> 2.4.4'
   gem 'database_cleaner',   '~> 1.4.1'
   gem 'launchy',            '~> 2.4.3'
-  gem 'growl',              '~> 1.0.3'  # growlnotify bindings
+  gem 'growl',              '~> 1.0.3'  # Growlnotifies bindings
 end
 
 group :production do
