@@ -32,7 +32,7 @@ describe "Users edit", type: :feature do
       end
 
       it { expect(page).to have_link(new_name) }
-      it { expect(page).to have_selector('div.alert.alert-success') }
+      it { expect(page).to have_success_message }
       it { expect(page).to have_link('Log out', href: destroy_user_session_path) }
       specify { expect(user.reload.username).to eq new_name }
       specify { expect(user.reload.email).to eq new_email }
