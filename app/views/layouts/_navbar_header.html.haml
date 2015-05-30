@@ -25,3 +25,7 @@
       # For SB-admin pages
       # Removes navbar container.
       $('#navbar_container').replaceWith($('#navbar_container').html())
+
+  # Ensures that navbar is closed on page-change.
+  $(document).on "page:change", ->
+    $(".sidebar-nav.navbar-collapse").addClass('collapse')
