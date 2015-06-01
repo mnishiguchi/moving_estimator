@@ -3,25 +3,25 @@
     %a{ href: 'http://masatoshinishiguchi.blogspot.com/', target: '_blank' }
       = gravatar_for "nishiguchi.masa@gmail.com", size: 120
     %p
-      %i.fa.fa-envelope-o
+      = fa_icon "envelope-o"
       %a{ href: "mailto:masatoshi.nishiguchi@udc.edu"} masatoshi.nishiguchi@udc.edu
 
     %ul.list-unstyled.list-inline.list-social-icons
       %li#btn-facebook
         %a{ href: "#" }
-          %i.fa.fa-facebook-square.fa-2x
+          = fa_icon "2x facebook-square"
       %li
         %a{ href: "https://www.linkedin.com/profile/view?id=101724080", target: '_blank' }
-          %i.fa.fa-linkedin-square.fa-2x
+          = fa_icon "2x linkedin-square"
       %li
         %a{ href: "https://twitter.com/MNishiguchiDC", target: '_blank' }
-          %i.fa.fa-twitter-square.fa-2x
+          = fa_icon "2x twitter-square"
       %li
         %a{ href: 'https://github.com/mnishiguchi', target: '_blank' }
-          %i.fa.fa-github-square.fa-2x
+          = fa_icon "2x github-square"
       %li
         %a{ href: 'http://stackoverflow.com/users/3837223/mnishiguchi', target: '_blank' }
-          %i.fa.fa-stack-overflow.fa-2x
+          = fa_icon "2x stack-overflow"
 
 -# Responds to clicking on unused social buttons.
 :coffee
