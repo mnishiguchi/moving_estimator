@@ -18,9 +18,13 @@
 //= require turbolinks
 //
 // Vendor js files
-//= require metisMenu
 //= require sb_admin_2
-//= require dataTables.responsive
+//
+// Bower files
+//= require fluxxor
+//= require metisMenu
+//= require datatables
+//= require datatables-responsive
 //
 // App js files
 //= require_tree .

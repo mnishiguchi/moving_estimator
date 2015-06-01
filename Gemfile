@@ -1,7 +1,16 @@
 source 'https://rubygems.org'
 # ruby 2.2.1p85 (2015-02-26 revision 49769) [x86_64-darwin14]
-gem 'rails', '4.2.1'
-gem 'pg',    '~> 0.17.1'
+gem 'rails',       '4.2.1'
+gem 'pg',          '~> 0.17.1'
+
+# Assets
+gem 'bower-rails', '~> 0.9.2'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-fluxxor'
+  gem 'rails-assets-metisMenu'
+  gem 'rails-assets-datatables'
+  gem 'rails-assets-datatables-responsive'
+end
 
 # Default
 gem 'sass-rails',   '~> 5.0'
@@ -17,11 +26,13 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'  # For bootstrap pagination style.
 gem 'bootstrap-sass',          '~> 3.2.0.0' # Converts Less to Sass.
 gem 'font-awesome-rails',      '~> 4.3.0.0' # For icons.
 gem 'haml-rails',              '~> 0.9.0'   # For HAML.
+gem 'react-rails',             '~> 1.0.0'   # Compiles JSX.
 # Others
 gem 'jquery-turbolinks',       '~> 0.2.1'   # For jQuery to work with turbolinks.
 gem 'devise',                  '~> 3.4.1'   # Authentication
 gem 'gibbon',                  '~> 1.1.5'   # A wrapper for MailChimp API 2.0 and Export API 1.0
 gem 'faker',                   '~> 1.4.3'   # Generates sample users.
+gem 'growl',                   '~> 1.0.3'   # Growlnotifies bindings.
 
 group :development do
   gem 'dotenv-rails',       '~> 2.0.1'  # Autoloads dotenv in Rails.
@@ -46,7 +57,6 @@ group :test do
   gem 'capybara',           '~> 2.4.4'
   gem 'database_cleaner',   '~> 1.4.1'
   gem 'launchy',            '~> 2.4.3'
-  gem 'growl',              '~> 1.0.3'  # Growlnotifies bindings
 end
 
 group :production do

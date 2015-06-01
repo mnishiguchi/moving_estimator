@@ -1,0 +1,9 @@
+{
+  "name": "dsl-generated dependencies",
+  "dependencies": {
+    "fluxxor": "latest",
+    "metisMenu": "latest",
+    "DataTables": "latest",
+    "datatables-responsive": "latest"
+  }
+}

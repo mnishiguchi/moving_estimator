@@ -36,3 +36,4 @@ module MovingEstimator
     end
   end
 end
+

@@ -1,7 +1,7 @@
 .row
   .col-md-4
     .panel.panel-default.inventory_panel
-      .panel-heading
+      .panel-heading.inventory_heading
         %h4
           %i.fa.fa-fw.fa-check
           Moving Estimator (Android)
@@ -13,7 +13,7 @@
           Learn More
   .col-md-4
     .panel.panel-default.inventory_panel
-      .panel-heading
+      .panel-heading.inventory_heading
         %h4
           %i.fa.fa-fw.fa-check
           Moving Estimator (Web)
@@ -24,7 +24,7 @@
           Learn More
   .col-md-4
     .panel.panel-default.inventory_panel
-      .panel-heading
+      .panel-heading.inventory_heading
         %h4
           %i.fa.fa-fw.fa-check
           Translator Emailer
@@ -36,6 +36,15 @@
 
 :coffee
   $('.under-construction').click -> alert 'Under construction.'
+
+  # Matches the the panel heading heights to the highest one upon document ready.
+  jQuery ->
+    # Creating an array of all the panel heading heights
+    heights = $('.inventory_heading').map -> $(@).height()
+    # Finding the max height
+    maxHeight = Math.max.apply(null, heights)
+    # Setting the max height to all the panels
+    $('.inventory_heading').height maxHeight
 
   # Matches the the panel heights to the highest one upon document ready.
   jQuery ->
