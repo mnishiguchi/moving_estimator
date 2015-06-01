@@ -37,20 +37,15 @@
 :coffee
   $('.under-construction').click -> alert 'Under construction.'
 
-  # Matches the the panel heading heights to the highest one upon document ready.
   jQuery ->
-    # Creating an array of all the panel heading heights
-    heights = $('.inventory_heading').map -> $(@).height()
-    # Finding the max height
-    maxHeight = Math.max.apply(null, heights)
-    # Setting the max height to all the panels
-    $('.inventory_heading').height maxHeight
+    do evenHeight('.inventory_heading')
+    do evenHeight('.inventory_panel')
 
-  # Matches the the panel heights to the highest one upon document ready.
-  jQuery ->
-    # Creating an array of all the panel heights
-    heights = $('.inventory_panel').map -> $(@).height()
+  # Matches the panel heights to the highest.
+  evenHeight = (element) ->
+    # Creating an array of all the heights
+    heights = $(element).map -> $(@).height()
     # Finding the max height
     maxHeight = Math.max.apply(null, heights)
-    # Setting the max height to all the panels
-    $('.inventory_panel').height maxHeight
+    # Setting all the heights to the highest
+    $(element).height maxHeight

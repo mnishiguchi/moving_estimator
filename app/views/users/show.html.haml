@@ -1,4 +1,22 @@
 - provide(:title, "Dashboard")
 
 / get  'dashboard' => 'users#show'
-= render 'sb_admin_2/page_contents'  # placeholer
+#page-wrapper
+  .container-fluid
+    / Page Heading
+    .row
+      .col-lg-12
+        %h1.page-header
+          Dashboard
+          %small Statistics Overview
+    .row
+      .col-lg-12
+        = render 'layouts/flash_message'
+
+    = render 'sb_admin_2/colorful_panels'
+
+    .row
+      .col-lg-6
+        = render 'sb_admin_2/tasks_panel'
+      .col-lg-6
+        = render 'sb_admin_2/transactions_panel'
