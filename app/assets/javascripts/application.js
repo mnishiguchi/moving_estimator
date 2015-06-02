@@ -16,6 +16,9 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require turbolinks
+//= require react
+//= require react_ujs
+//= require components
 //
 // Vendor js files
 //= require sb_admin_2

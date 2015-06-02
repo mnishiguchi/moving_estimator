@@ -27,6 +27,7 @@ gem 'bootstrap-sass',          '~> 3.2.0.0' # Converts Less to Sass.
 gem 'font-awesome-rails',      '~> 4.3.0.0' # For icons.
 gem 'haml-rails',              '~> 0.9.0'   # For HAML.
 gem 'react-rails',             '~> 1.0.0'   # Compiles JSX.
+gem 'sprockets-coffee-react',  '~> 3.0.1'   # Preprocessor for Coffeescript with React JSX (CJSX).
 # Others
 gem 'jquery-turbolinks',       '~> 0.2.1'   # For jQuery to work with turbolinks.
 gem 'devise',                  '~> 3.4.1'   # Authentication
