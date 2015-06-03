@@ -83,7 +83,7 @@ Application = React.createClass
   render: ->
     todos = @state.todos
     <div>
-      <form onSubmit={@onSubmitForm} className="form-inline">
+      <form onSubmit={@onSubmitForm}>
         <div className="form-group">
           <input type="text" placeholder="New Todo"
                  value={@state.newTodoText}
@@ -120,7 +120,7 @@ TodoItem = React.createClass
     <span style={style} onClick={@onClick}>{@props.todo.text}</span>
 
   onClick: ->
-    @getFlux().actions.toggleTodo @props.todo
+    @getFlux().actions.toggleTodo @props.todo.id
 
 # Render the component.
 document.addEventListener 'DOMContentLoaded', (e) ->

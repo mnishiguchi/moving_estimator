@@ -25,7 +25,7 @@ module MovingEstimator
     config.active_record.raise_in_transactional_callbacks = true
 
     # React config
-    # config.react.addons = true
+    config.react.addons = true
 
     # RSpec config
     config.generators do |g|
