@@ -38,8 +38,8 @@
   $('.under-construction').click -> alert 'Under construction.'
 
   jQuery ->
-    do evenHeight('.inventory_heading')
-    do evenHeight('.inventory_panel')
+    evenHeight('.inventory_heading')
+    evenHeight('.inventory_panel')
 
   # Matches the panel heights to the highest.
   evenHeight = (element) ->

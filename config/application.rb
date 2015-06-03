@@ -24,6 +24,10 @@ module MovingEstimator
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    # React config
+    # config.react.addons = true
+
+    # RSpec config
     config.generators do |g|
       g.test_framework :rspec,
         fixtures:         true,

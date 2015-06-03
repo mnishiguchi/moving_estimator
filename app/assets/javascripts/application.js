@@ -16,15 +16,15 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require turbolinks
+//
+// React
 //= require react
 //= require react_ujs
-//= require components
-//
-// Vendor js files
-//= require sb_admin_2
-//
-// Bower files
 //= require fluxxor
+//= require_tree ./react_components
+//
+// Other Vendor js files
+//= require sb_admin_2
 //= require metisMenu
 //= require datatables
 //= require datatables-responsive

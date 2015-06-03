@@ -20,6 +20,9 @@ Rails.application.configure do
   # The location of the mailer previews directory (default: test/mailers/previews)
   config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
 
+  # React
+  config.react.variant = :development
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
