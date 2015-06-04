@@ -16,12 +16,11 @@ TodoStore = Fluxxor.createStore
                  constants.CLEAR_TODOS, @onClearTodos)
 
   onAddTodo: (payload) ->
-    id = @_nextTodoId()
+    id = @_nextTodoId
     todo =
       id:       id
       text:     payload.text
       complete: false
-
     @todos[id] = todo
     @emit 'change'
 
@@ -33,13 +32,14 @@ TodoStore = Fluxxor.createStore
   onClearTodos: ->
     todos = @todos
     Object.keys(todos).forEach (key) ->
-      if todos[key].complete
-        delete todos[key]
+      delete todos[key] if todos[key].complete
     @emit 'change'
 
-  getState:    -> todos: @todos
+  getState: ->
+    todos: @todos
 
-  _nextTodoId: -> @todoId += 1
+  _nextTodoId: ->
+    @todoId += 1
 
 # Semantic actions
 
@@ -48,9 +48,13 @@ actions =
   toggleTodo: (id) -> @dispatch constants.TOGGLE_TODO, id:   id
   clearTodos:      -> @dispatch constants.CLEAR_TODOS
 
-# Creation of a Flux instance
+# Instantiating our stores
 
-stores = { TodoStore: new TodoStore }
+stores =
+  TodoStore: new TodoStore
+
+# Creating a Flux instance with our stores and actions
+
 flux = new Fluxxor.Flux(stores, actions)
 
 # Logging upon the "dispatch" event
@@ -70,46 +74,54 @@ Application = React.createClass
     newTodoText: ""
 
   getStateFromFlux: ->
-    flux = @getFlux()
-    flux.store('TodoStore').getState()
+    flux = @getFlux
+    flux.store('TodoStore').getState
 
   handleTodoTextChange: (e) ->
-    @setState { newTodoText: e.target.value }
+    @setState(newTodoText: e.target.value)
 
   onSubmitForm: (e) ->
-    e.preventDefault()
-    if @state.newTodoText.trim()
-      @getFlux().actions.addTodo @state.newTodoText
-      @setState { newTodoText: "" }
+    e.preventDefault
+    if @state.newTodoText.trim
+      @getFlux.actions.addTodo(@state.newTodoText)
+      @setState(newTodoText: "")
 
   clearCompletedTodos: (e) ->
-    @getFlux().actions.clearTodos()
+    @getFlux.actions.clearTodos
 
   render: ->
     todos = @state.todos
     <div>
       <form onSubmit={@onSubmitForm}>
         <div className="form-group">
-          <input type="text" placeholder="New Todo"
+          <input type="text"
+                 placeholder="New Todo"
                  value={@state.newTodoText}
                  onChange={@handleTodoTextChange}
                  className="form-control" />
         </div>
         <div className="form-group">
-          <input type="submit" value="Add Todo" className="btn btn-success"/>
-          <button onClick={@clearCompletedTodos} className="btn btn-default">Clear Completed</button>
+          <input type="submit"
+                 value="Add Todo"
+                 className="btn btn-success"/>
+          <button onClick={@clearCompletedTodos}
+                  className="btn btn-default">
+            Clear Completed
+          </button>
         </div>
       </form>
 
       <ul>
         {
           Object.keys(todos).map (id) ->
-            <li key={id}><TodoItem todo={todos[id]} /></li>;
+            <li key={id}>
+              <TodoItem todo={todos[id]} />
+            </li>
         }
       </ul>
     </div>
 
-# The React component (<TodoItem/>)
+# Defining a sub-component (<TodoItem/>)
 
 TodoItem = React.createClass
   mixins: [FluxMixin]
@@ -119,16 +131,27 @@ TodoItem = React.createClass
 
   # Its style will be determined based on the completion state.
   render: ->
-    style =
-      textDecoration: if @props.todo.complete then "line-through" else ""
+    # style =
+    #   textDecoration:
+    #     if @props.todo.complete then "line-through" else ""
+    value =
+      if @props.todo.complete then "1" else "0"
 
-    <span style={style} onClick={@onClick}>{@props.todo.text}</span>
+    <input type="checkbox"
+           value={value}
+           id="todo_completed"/>
+    <label htmlFor=“todo_completed”>
+      <span style={style} onClick={@onClick}>
+        {@props.todo.text}
+      </span>
+    </label>
+
 
   # Clicking on a todo item will toggle the completion state.
   onClick: ->
-    @getFlux().actions.toggleTodo @props.todo.id
+    @getFlux.actions.toggleTodo(@props.todo.id)
 
-# Render the component.
+# Rendering the whole component
 document.addEventListener 'DOMContentLoaded', (e) ->
-  React.render <Application flux={flux} />,
-                document.getElementById 'react_mountPoint'
+  React.render <Application flux={flux}/>,
+                document.getElementById('react_mountPoint')
