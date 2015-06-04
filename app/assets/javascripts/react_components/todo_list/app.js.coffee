@@ -50,10 +50,13 @@ actions =
   toggleTodo: (id)   -> @dispatch constants.TOGGLE_TODO, id:   id
   clearTodos:        -> @dispatch constants.CLEAR_TODOS
 
-# Creation of a Flux instance
+# instantiating our stores
 
 stores =
   TodoStore: new TodoStore
+
+# Creating a Flux instance with our stores and actions that are defined above
+
 flux = new Fluxxor.Flux(stores, actions)
 
 # Logging upon the "dispatch" event
