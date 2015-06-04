@@ -16,11 +16,12 @@ TodoStore = Fluxxor.createStore
                  constants.CLEAR_TODOS, @onClearTodos)
 
   onAddTodo: (payload) ->
-    id = @_nextTodoId
+    id = @_nextTodoId()
     todo =
       id:       id
       text:     payload.text
       complete: false
+
     @todos[id] = todo
     @emit 'change'
 
@@ -32,7 +33,8 @@ TodoStore = Fluxxor.createStore
   onClearTodos: ->
     todos = @todos
     Object.keys(todos).forEach (key) ->
-      delete todos[key] if todos[key].complete
+      if todos[key].complete
+        delete todos[key]
     @emit 'change'
 
   getState: ->
@@ -44,17 +46,14 @@ TodoStore = Fluxxor.createStore
 # Semantic actions
 
 actions =
-  addTodo:  (text) -> @dispatch constants.ADD_TODO,    text: text
-  toggleTodo: (id) -> @dispatch constants.TOGGLE_TODO, id:   id
-  clearTodos:      -> @dispatch constants.CLEAR_TODOS
+  addTodo:    (text) -> @dispatch constants.ADD_TODO,    text: text
+  toggleTodo: (id)   -> @dispatch constants.TOGGLE_TODO, id:   id
+  clearTodos:        -> @dispatch constants.CLEAR_TODOS
 
-# Instantiating our stores
+# Creation of a Flux instance
 
 stores =
   TodoStore: new TodoStore
-
-# Creating a Flux instance with our stores and actions
-
 flux = new Fluxxor.Flux(stores, actions)
 
 # Logging upon the "dispatch" event
@@ -74,20 +73,20 @@ Application = React.createClass
     newTodoText: ""
 
   getStateFromFlux: ->
-    flux = @getFlux
-    flux.store('TodoStore').getState
+    flux = @getFlux()
+    flux.store('TodoStore').getState()
 
   handleTodoTextChange: (e) ->
     @setState(newTodoText: e.target.value)
 
   onSubmitForm: (e) ->
-    e.preventDefault
-    if @state.newTodoText.trim
-      @getFlux.actions.addTodo(@state.newTodoText)
+    e.preventDefault()
+    if @state.newTodoText.trim()
+      @getFlux().actions.addTodo(@state.newTodoText)
       @setState(newTodoText: "")
 
   clearCompletedTodos: (e) ->
-    @getFlux.actions.clearTodos
+    @getFlux().actions.clearTodos()
 
   render: ->
     todos = @state.todos
@@ -111,7 +110,7 @@ Application = React.createClass
         </div>
       </form>
 
-      <ul>
+      <ul className="list-unstyled list-inline">
         {
           Object.keys(todos).map (id) ->
             <li key={id}>
@@ -121,7 +120,7 @@ Application = React.createClass
       </ul>
     </div>
 
-# Defining a sub-component (<TodoItem/>)
+# A sub-component (<TodoItem/>)
 
 TodoItem = React.createClass
   mixins: [FluxMixin]
@@ -131,27 +130,18 @@ TodoItem = React.createClass
 
   # Its style will be determined based on the completion state.
   render: ->
-    # style =
-    #   textDecoration:
-    #     if @props.todo.complete then "line-through" else ""
-    value =
-      if @props.todo.complete then "1" else "0"
-
-    <input type="checkbox"
-           value={value}
-           id="todo_completed"/>
-    <label htmlFor=“todo_completed”>
-      <span style={style} onClick={@onClick}>
-        {@props.todo.text}
-      </span>
+    <label>
+      <input onClick={@onClick}
+             type="checkbox"
+             checked={if @props.todo.complete then "checked" else ""}/>
+      {@props.todo.text}
     </label>
-
 
   # Clicking on a todo item will toggle the completion state.
   onClick: ->
-    @getFlux.actions.toggleTodo(@props.todo.id)
+    @getFlux().actions.toggleTodo(@props.todo.id)
 
 # Rendering the whole component
 document.addEventListener 'DOMContentLoaded', (e) ->
-  React.render <Application flux={flux}/>,
-                document.getElementById('react_mountPoint')
+  React.render <Application flux={flux} />,
+                document.getElementById 'react_mountPoint'
