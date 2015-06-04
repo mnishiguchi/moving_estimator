@@ -53,7 +53,7 @@ actions =
 stores =
   TodoStore: new TodoStore
 
-# Creation of a Flux instance
+# Creating a Flux instance with our stores and actions
 
 flux = new Fluxxor.Flux(stores, actions)
 
