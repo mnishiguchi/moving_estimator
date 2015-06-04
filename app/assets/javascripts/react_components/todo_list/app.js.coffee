@@ -21,21 +21,20 @@ TodoStore = Fluxxor.createStore
       id:       id
       text:     payload.text
       complete: false
-
     @todos[id] = todo
-    @emit 'change'
+    @emit('change')
 
   onToggleTodo: (payload) ->
     id = payload.id
     @todos[id].complete = not @todos[id].complete
-    @emit 'change'
+    @emit('change')
 
   onClearTodos: ->
     todos = @todos
     Object.keys(todos).forEach (key) ->
       if todos[key].complete
-        delete todos[key]
-    @emit 'change'
+        delete(todos[key])
+    @emit('change')
 
   getState: ->
     todos: @todos
@@ -43,14 +42,14 @@ TodoStore = Fluxxor.createStore
   _nextTodoId: ->
     @todoId += 1
 
-# Semantic actions
+# Registering our semantic actions
 
 actions =
-  addTodo:    (text) -> @dispatch constants.ADD_TODO,    text: text
-  toggleTodo: (id)   -> @dispatch constants.TOGGLE_TODO, id:   id
-  clearTodos:        -> @dispatch constants.CLEAR_TODOS
+  addTodo:    (text) -> @dispatch(constants.ADD_TODO,    text: text)
+  toggleTodo: (id)   -> @dispatch(constants.TOGGLE_TODO, id:   id)
+  clearTodos:        -> @dispatch(constants.CLEAR_TODOS)
 
-# instantiating our stores
+# Instantiating our stores
 
 stores =
   TodoStore: new TodoStore
@@ -133,12 +132,11 @@ TodoItem = React.createClass
 
   # Its style will be determined based on the completion state.
   render: ->
-    <label>
-      <input onClick={@onClick}
-             type="checkbox"
-             checked={if @props.todo.complete then "checked" else ""}/>
+    checkbox = if @props.todo.complete then "fa fa-check-square-o" else "fa fa-square-o"
+    <div onClick={@onClick}>
+      <i className={checkbox}></i>
       {@props.todo.text}
-    </label>
+    </div>
 
   # Clicking on a todo item will toggle the completion state.
   onClick: ->
@@ -147,4 +145,4 @@ TodoItem = React.createClass
 # Rendering the whole component
 document.addEventListener 'DOMContentLoaded', (e) ->
   React.render <Application flux={flux} />,
-                document.getElementById 'react_mountPoint'
+                document.getElementById("react_mountPoint")
