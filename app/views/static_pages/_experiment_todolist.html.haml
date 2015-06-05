@@ -1,0 +1,25 @@
+.panel.panel-default
+  .panel-heading
+    Todo list
+  .panel-body
+    .todolist_component
+      %form
+        .form-group
+          %input.form-control{type:"text", placeholder:"New Todo"}
+        .form-group
+          %input.btn.btn-success{type:"submit", value:"Add Todo"}
+          %button.btn.btn-default
+            Clear Completed
+        %ul.list-unstyled.list-inline
+          %li
+            .todoitem
+              %i.fa.fa-check-square-o
+              Asa gohan
+          %li
+            .todoitem
+              %i.fa.fa-check-square-o
+              Hiru gohan
+          %li
+            .todoitem
+              %i.fa.fa-check-square-o
+              Yuu gohan

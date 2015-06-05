@@ -119,35 +119,8 @@ Application = React.createClass
         </div>
       </form>
 
-      <ul className="list-unstyled list-inline">
-        {
-          Object.keys(todos).map (id) ->
-            <li key={id}>
-              <TodoItem todo={todos[id]} />
-            </li>
-        }
-      </ul>
+      <TodoItemsList todos={todos}/>
     </div>
-
-# A sub-component (<TodoItem/>)
-
-TodoItem = React.createClass
-  mixins: [FluxMixin]
-
-  propTypes:
-    todo: React.PropTypes.object.isRequired
-
-  # Its style will be determined based on the completion state.
-  render: ->
-    checkbox = if @props.todo.complete then "fa fa-check-square-o" else "fa fa-square-o"
-    <div onClick={@onClick}>
-      <i className={checkbox}></i>
-      {@props.todo.text}
-    </div>
-
-  # Clicking on a todo item will toggle the completion state.
-  onClick: ->
-    @getFlux().actions.toggleTodo(@props.todo.id)
 
 # Rendering the whole component upon page-change
 $(document).on "page:change", ->
