@@ -1,10 +1,12 @@
 - provide(:title, "All users")
 
-%h2.page-header All users
-
-%p.pull-right
+%h2.page-header
+  All users
+%p
   Download:
   = link_to "CSV", users_path(format: "csv")
+
+= render 'experiment_people_component'
 
 = will_paginate @users
 %ul.users

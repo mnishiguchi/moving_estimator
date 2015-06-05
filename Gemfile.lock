@@ -205,11 +205,6 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.1)
       sprockets-rails
-    rails-assets-datatables (1.10.7)
-      rails-assets-jquery (>= 1.7.0)
-    rails-assets-datatables-responsive (1.0.6)
-      rails-assets-datatables (>= 1.10.1)
-      rails-assets-jquery (>= 1.7.0)
     rails-assets-fluxxor (1.5.4)
     rails-assets-jquery (2.1.4)
     rails-assets-metisMenu (2.0.2)
@@ -357,8 +352,6 @@ DEPENDENCIES
   puma (~> 2.11.2)
   quiet_assets (~> 1.1.0)
   rails (= 4.2.1)
-  rails-assets-datatables!
-  rails-assets-datatables-responsive!
   rails-assets-fluxxor!
   rails-assets-metisMenu!
   rails-erd (~> 1.3.1)

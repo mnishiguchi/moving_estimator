@@ -25,8 +25,6 @@
 // Other Vendor js files
 //= require sb_admin_2
 //= require metisMenu
-//= require datatables
-//= require datatables-responsive
 //
 // App js files
 //= require_tree .

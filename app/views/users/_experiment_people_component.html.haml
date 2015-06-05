@@ -1,0 +1,38 @@
+#PeopleSection.well
+  #PeopleSearch
+    .filter-wrapper.panel.panel-default
+      .panel-body
+        .form-wrapper
+          %form
+            #ResetButton
+            %input{type: "text", placeholder: "people search"}
+
+  .PaginatorSection
+
+  .cards-wrapper
+    #cardsNode
+      .panel.panel-green
+        .panel-heading
+          .media
+            .media-left.media-middle.pull-left
+              = gravatar_for("nishiguchi.masa@gmail.com")
+            .media-body
+              %h4.media-heading
+                Masatoshi Nishiguchi
+              %ul.list-unstyled
+                %li
+                  %i.fa.fa-map-marker
+                  Washington, DC
+                %li
+                  %i.fa.fa-birthday-cake
+                  = Faker::Time.between(2.days.ago, Time.now, :day).strftime('%b %d, %Y')
+        .panel-body
+          %i
+            = Faker::Lorem.sentence(3)
+        .panel-footer
+          %ul.list-unstyled
+            %li
+              %i.fa.fa-envelope
+              = Faker::Internet.free_email
+
+  .PaginatorSection
