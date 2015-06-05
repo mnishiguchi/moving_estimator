@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-// Gem js files
 //= require jquery
 //= require jquery_ujs
 //= require jquery.turbolinks
@@ -21,7 +20,7 @@
 //= require react
 //= require react_ujs
 //= require fluxxor
-//= require_tree ./react_components
+//= require components
 //
 // Other Vendor js files
 //= require sb_admin_2

@@ -92,6 +92,13 @@ Application = React.createClass
 
   render: ->
     todos = @state.todos
+
+    anyCompletion = false
+    for id, item of todos
+      if item.complete
+        anyCompletion = true
+    clearButton = if anyCompletion then "btn btn-warning" else "btn btn-default"
+
     <div>
       <form onSubmit={@onSubmitForm}>
         <div className="form-group">
@@ -106,7 +113,7 @@ Application = React.createClass
                  value="Add Todo"
                  className="btn btn-success"/>
           <button onClick={@clearCompletedTodos}
-                  className="btn btn-default">
+                  className={clearButton}>
             Clear Completed
           </button>
         </div>
