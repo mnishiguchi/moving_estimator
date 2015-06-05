@@ -142,7 +142,7 @@ TodoItem = React.createClass
   onClick: ->
     @getFlux().actions.toggleTodo(@props.todo.id)
 
-# Rendering the whole component
-document.addEventListener 'DOMContentLoaded', (e) ->
+# Rendering the whole component upon page-change
+$(document).on "page:change", ->
   React.render <Application flux={flux} />,
                 document.getElementById("react_mountPoint")
