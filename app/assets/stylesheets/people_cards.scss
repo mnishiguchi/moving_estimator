@@ -1,5 +1,17 @@
 .person_sentence {
-  overflow: hidden
+  height: 48px;
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filter-wrapper {
+  padding: 5px;
+}
+
+.form-wrapper {
+  width: 280px;
 }
 
 // Note: We use the ID masonry-container in order to ensure against conflicts with other "plugins".
@@ -34,16 +46,3 @@
 // .col3 img { max-width: 280px; }
 // .col4 img { max-width: 380px; }
 // .col5 img { max-width: 480px; }
-
-// // isotope
-
-// .grid-item {
-//   float: left;
-//   width: 250px;
-//   height: 250px;
-//   background: #e6e5e4;
-//   border: 2px solid #b6b5b4;
-// }
-
-// .grid-item--width2 { width: 100px; }
-// .grid-item--height2 { height: 100px; }
