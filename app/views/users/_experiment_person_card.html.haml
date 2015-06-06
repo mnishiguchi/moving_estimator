@@ -1,9 +1,9 @@
 .panel.panel-green.box.col4
   .panel-heading
     .media
-      .media-left.media-middle.pull-left
+      .avatar-wrapper.media-left.media-middle.pull-left
         = gravatar_for("nishiguchi.masa@gmail.com")
-      .media-body
+      .info-wrapper.media-body
         %h4.media-heading
           Masatoshi Nishiguchi
         %ul.list-unstyled
@@ -13,10 +13,10 @@
           %li
             %i.fa.fa-birthday-cake
             = Faker::Time.between(2.days.ago, Time.now, :day).strftime('%b %d, %Y')
-  .panel-body.person_sentence
+  .person_sentence.panel-body
     %i
       = Faker::Lorem.sentence(3)
-  .panel-footer
+  .contact-info.panel-footer
     %ul.list-unstyled
       %li
         %i.fa.fa-envelope
