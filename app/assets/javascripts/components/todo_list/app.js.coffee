@@ -123,6 +123,7 @@ Application = React.createClass
     </div>
 
 # Rendering the whole component upon page-change
+
 $(document).on "page:change", ->
   React.render <Application flux={flux} />,
                 document.getElementById("react_mountPoint")

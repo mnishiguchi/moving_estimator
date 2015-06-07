@@ -1,18 +1,23 @@
+@mixin truncate_text($width) {
+  width: $width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #masonry-container-people li {
   font-size: 1.2em;
 }
 
 .info-wrapper h4 {
   font-size: 1.8em;
+  @include truncate_text(160px);
 }
 
 .person_sentence {
   font-size: 1.2em;
   height: 48px;
-  width: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @include truncate_text(250px);
 }
 
 .filter-wrapper {

@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
   # The username attribute was added via application controller.
   # The admin attribute was added by migration.
 
+  scope :sorted, ->{ order(username: :asc) }
+
   # For exporting csv
   def self.to_csv(options = {})  # e.g., headers
     attributes = %w(id username sign_in_count created_at confirmed_at updated_at)

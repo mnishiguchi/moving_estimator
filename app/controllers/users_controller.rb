@@ -2,14 +2,16 @@ class UsersController < ApplicationController
 
   before_action :ensure_admin!,     except: :show
   before_action :authenticate_user! # all actions
+  before_action :search_users,      only: :index
 
   # A list of all users (for admin only)
   def index
-    @users = User.all.paginate(page: params[:page])
+    # @users = User.all.paginate(page: params[:page])
 
     # For exporting csv
     respond_to do |format|
       format.html
+      format.json
       format.csv { send_data @users.unscoped.to_csv,
                              filename: "users-#{Date.today}.csv" }
     end
@@ -35,4 +37,12 @@ class UsersController < ApplicationController
         return false
       end
     end
+
+    def search_users
+      @users =  if params[:search].present?
+        User.search(params[:search])
+      else
+        User.all
+      end.sorted.paginate(page: params[:page])
+  end
 end

@@ -7,11 +7,13 @@
           %input.form-control{type: "text", placeholder: "people search"}
 
   .PaginatorSection
+    = will_paginate @users
 
   .cards-wrapper
     #cardsNode
       #masonry-container-people.transitions-enabled.centered.clearfix.masonry.masonry-brick
-        - 9.times do
-          = render 'experiment_person_card'
+        - @users.each do |user|
+          = render 'user', user: user
 
   .PaginatorSection
+    = will_paginate @users
