@@ -5,27 +5,41 @@
   text-overflow: ellipsis;
 }
 
-#masonry-container-people li {
-  font-size: 1.2em;
-}
+#PeopleSection {
+  #masonry-container-people li {
+    font-size: 1.2em;
+  }
 
-.info-wrapper h4 {
-  font-size: 1.8em;
-  @include truncate_text(160px);
-}
+  .info-wrapper h4 {
+    font-size: 1.8em;
+    @include truncate_text(160px);
+  }
 
-.person_sentence {
-  font-size: 1.2em;
-  height: 48px;
-  @include truncate_text(250px);
-}
+  .person_sentence {
+    font-size: 1.2em;
+    height: 48px;
+    @include truncate_text(250px);
+  }
 
-.filter-wrapper {
-  padding: 5px;
-}
+  .filter-wrapper {
+    padding: 5px;
+  }
 
-.form-wrapper {
-  width: 280px;
+  .form-wrapper {
+    width: 280px;
+  }
+
+  .filter-wrapper {
+    margin-bottom: 20px;
+  }
+
+  .PaginatorSection {
+    margin-left: 5px;
+    .pagination {
+      height: 36px;
+      margin: 0px;
+    }
+  }
 }
 
 // Note: We use the ID masonry-container in order to ensure against conflicts with other "plugins".

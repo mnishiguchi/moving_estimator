@@ -13,18 +13,21 @@
           %li
             = fa_icon 'star', text: "Since:"
             = user.created_at.strftime("%B %Y")
+
   .person_sentence.panel-body
     %i
       = Faker::Lorem.sentence(3)
+
   .contact-info.panel-footer
     %ul.list-unstyled.list-inline
       %li
         = fa_icon 'envelope'
         = user.email
-        = "[admin]" if user.admin?
+        - if user.admin?
+          %span.badge Admin
 
-      -# The "delete" links will be displayed only if the current user is an admin.
-      - if current_user.admin? && (current_user != user)
-        %li.delete{style: "color:white;"}
+        -# The "delete" links will be displayed only if the current user is an admin.
+        - if current_user.admin? && (current_user != user)
+          = "|"
           = link_to "delete", user_path(user), method: :delete, data: { confirm: "Are you sure?" }
 

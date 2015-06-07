@@ -1,10 +1,10 @@
 #PeopleSection.well
+
   #PeopleSearch
     .filter-wrapper
-      .form-wrapper
-        %form
-          #ResetButton
-          %input.form-control{type: "text", placeholder: "people search"}
+      = form_tag(users_path, method: "get") do
+        = text_field_tag :search, nil, placeholder: "people search", class: "form-control"
+        = submit_tag "", style: "display: none;"
 
   .PaginatorSection
     = will_paginate @users
