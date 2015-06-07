@@ -78,7 +78,7 @@ Application = React.createClass
     flux = @getFlux()
     flux.store('TodoStore').getState()
 
-  handleTodoTextChange: (e) ->
+  onChangeTodoText: (e) ->
     @setState(newTodoText: e.target.value)
 
   onSubmitForm: (e) ->
@@ -87,7 +87,7 @@ Application = React.createClass
       @getFlux().actions.addTodo(@state.newTodoText)
       @setState(newTodoText: "")
 
-  clearCompletedTodos: (e) ->
+  onClickClearButton: (e) ->
     @getFlux().actions.clearTodos()
 
   render: ->
@@ -105,14 +105,14 @@ Application = React.createClass
           <input type="text"
                  placeholder="New Todo"
                  value={@state.newTodoText}
-                 onChange={@handleTodoTextChange}
+                 onChange={@onChangeTodoText}
                  className="form-control" />
         </div>
         <div className="form-group">
           <input type="submit"
                  value="Add Todo"
                  className="btn btn-success"/>
-          <button onClick={@clearCompletedTodos}
+          <button onClick={@onClickClearButton}
                   className={clearButton}>
             Clear Completed
           </button>
