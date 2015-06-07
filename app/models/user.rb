@@ -23,6 +23,8 @@
 #
 
 class User < ActiveRecord::Base
+  include PgSearch
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -32,6 +34,18 @@ class User < ActiveRecord::Base
   # The admin attribute was added by migration.
 
   scope :sorted, ->{ order(username: :asc) }
+
+  pg_search_scope :search,
+                  against: [
+                    :username,
+                    :email
+                  ],
+                  using: {
+                    tsearch: {
+                      prefix: true,
+                      normalization: 2
+                    }
+                  }
 
   # For exporting csv
   def self.to_csv(options = {})  # e.g., headers

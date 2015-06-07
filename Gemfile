@@ -33,6 +33,7 @@ gem 'devise',                  '~> 3.4.1'   # Authentication
 gem 'gibbon',                  '~> 1.1.5'   # A wrapper for MailChimp API 2.0 and Export API 1.0
 gem 'faker',                   '~> 1.4.3'   # Generates sample users.
 gem 'growl',                   '~> 1.0.3'   # Growlnotifies bindings.
+gem 'pg_search',               '~> 1.0.3'   # Named scopes that take advantage of PostgreSQL's full text search
 
 group :development do
   gem 'dotenv-rails',       '~> 2.0.1'  # Autoloads dotenv in Rails.
