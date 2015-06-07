@@ -30,7 +30,7 @@
   }
 
   .filter-wrapper {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .PaginatorSection {
@@ -38,6 +38,14 @@
     .pagination {
       height: 36px;
       margin: 0px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+  }
+
+  .contact-info {
+    li {
+      margin-top: 10px;
     }
   }
 }

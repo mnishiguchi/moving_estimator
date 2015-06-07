@@ -72,14 +72,17 @@ describe "Authorization", type: :feature do
           it { expect(current_path).to eq users_path }
 
           describe "pagination" do
-            before(:all) { 30.times { FactoryGirl.create(:user) } }
+            before(:all) do
+              30.times {FactoryGirl.create(:user)}
+              @users_of_first_page = User.all.sorted.paginate(page: 1)
+            end
             after(:all)  { User.delete_all }
 
             it { expect(page).to have_selector('div.pagination') }
 
             it "should list each user" do
-              User.paginate(page: 1).each do |user|
-                expect(page).to have_selector('li', text: user.username)
+              @users_of_first_page.each do |user|
+                expect(page).to have_content(user.username)
               end
             end
 
@@ -89,7 +92,8 @@ describe "Authorization", type: :feature do
                 expect(page).to_not have_link('delete', href: user_path(admin))
               end
               it "should have delete link on users" do
-                expect(page).to have_link('delete', href: user_path(User.first))
+                user = @users_of_first_page[0]
+                expect(page).to have_link('delete', href: user_path(user))
               end
               it "should be able to delete a user" do
                 expect{

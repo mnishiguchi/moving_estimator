@@ -40,9 +40,8 @@ class UsersController < ApplicationController
 
     def search_users
       @users =  if params[:search].present?
-        User.search(params[:search])
-      else
-        User.all
-      end.sorted.paginate(page: params[:page])
-  end
+                then User.search(params[:search])
+                else User.all
+                end.sorted.paginate(page: params[:page])
+    end
 end
