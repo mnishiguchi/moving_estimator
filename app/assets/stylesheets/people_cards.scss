@@ -8,7 +8,17 @@
 #PeopleSection {
 
   .filter-wrapper {
-    padding: 5px;
+    padding: 5px 15px;
+  }
+
+  .PaginatorSection {
+    margin-left: 15px;
+    .pagination {
+      height: 36px;
+      margin: 0px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
   }
 
   .cards-wrapper {
@@ -41,16 +51,6 @@
   .contact-info {
     li {
       margin-top: 10px;
-    }
-  }
-
-  .PaginatorSection {
-    margin-left: 5px;
-    .pagination {
-      height: 36px;
-      margin: 0px;
-      margin-top: 10px;
-      margin-bottom: 5px;
     }
   }
 }

@@ -3,7 +3,7 @@
   #PeopleSearch
     .filter-wrapper
       = form_tag(users_path, method: "get") do
-        = text_field_tag :search, nil, placeholder: "people search", class: "form-control"
+        = text_field_tag :search, nil, placeholder: "Search users ...", class: "form-control"
         = submit_tag "", style: "display: none;"
 
   .PaginatorSection
