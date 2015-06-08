@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources  :ingredient_suggestions, only: [:index, :update, :destroy]
+
   devise_for :users, controllers: { confirmations: 'confirmations' }
   resources  :users, only: [:index, :show, :destroy]
   get  'dashboard' => 'users#show'

@@ -23,3 +23,8 @@ User.create!(username:     "Example User",
                confirmed_at: Time.zone.now
               )
 end
+
+99.times do |n|
+  name  = Faker::Commerce.product_name
+  IngredientSuggestion.create!(name: name)
+end
