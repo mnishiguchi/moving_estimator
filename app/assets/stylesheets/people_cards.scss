@@ -1,36 +1,47 @@
-@mixin truncate_text($width) {
-  width: $width;
-  white-space: nowrap;
+@mixin text-overflow($maxwidth) {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: $maxwidth;
 }
 
 #PeopleSection {
-  #masonry-container-people li {
-    font-size: 1.2em;
-  }
-
-  .info-wrapper h4 {
-    font-size: 1.8em;
-    @include truncate_text(160px);
-  }
-
-  .person_sentence {
-    font-size: 1.2em;
-    height: 48px;
-    @include truncate_text(250px);
-  }
 
   .filter-wrapper {
     padding: 5px;
   }
 
-  .form-wrapper {
-    width: 280px;
+  .cards-wrapper {
+    margin-top: 10px;
   }
 
-  .filter-wrapper {
-    margin-bottom: 10px;
+  .person_card {
+    li {
+      font-size: 1.0em;
+    }
+  }
+
+  h4 {
+    font-size: 1.5em;
+    display: inline-block;
+    @media(min-width:768px) {@include text-overflow(260px);}  // sm
+    @media(min-width:992px) {@include text-overflow(350px);}  // md
+    @media(min-width:1200px) {@include text-overflow(260px);} // lg
+  }
+
+  .person_sentence {
+    font-size: 1.1em;
+    height: 48px;
+    display: inline-block;
+    @media(min-width:768px) {@include text-overflow(650px);}  // sm
+    @media(min-width:992px) {@include text-overflow(420px);}  // md
+    @media(min-width:1200px) {@include text-overflow(330px);} // lg
+  }
+
+  .contact-info {
+    li {
+      margin-top: 10px;
+    }
   }
 
   .PaginatorSection {
@@ -40,12 +51,6 @@
       margin: 0px;
       margin-top: 10px;
       margin-bottom: 5px;
-    }
-  }
-
-  .contact-info {
-    li {
-      margin-top: 10px;
     }
   }
 }

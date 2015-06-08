@@ -10,10 +10,15 @@
     = will_paginate @users
 
   .cards-wrapper
-    #cardsNode
-      #masonry-container-people.transitions-enabled.centered.clearfix.masonry.masonry-brick
-        - @users.each do |user|
-          = render 'user', user: user
+    #ms-container.transitions-enabled.centered.clearfix.masonry.masonry-brick
+      - @users.each do |user|
+        = render 'user', user: user
 
   .PaginatorSection
     = will_paginate @users
+
+:coffee
+  # To use Masonry with Bootstrap grids
+  container = document.querySelector('#ms-container')
+  msnry = new Masonry container, itemSelector: '.ms-item',
+                                 columnWidth:  '.ms-item'

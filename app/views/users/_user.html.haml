@@ -1,33 +1,38 @@
-.panel.panel-primary.box.col3
-  .panel-heading
-    .media
-      .avatar-wrapper.media-left.media-middle.pull-left
-        = gravatar_for(user.email, size: 50)
-      .info-wrapper.media-body
-        %h4.media-heading
-          = user.username
-        %ul.list-unstyled
-          %li
-            = fa_icon 'star', text: "Log in count:"
-            = user.sign_in_count
-          %li
-            = fa_icon 'star', text: "Since:"
-            = user.created_at.strftime("%B %Y")
+.ms-item.col-lg-4.col-md-6.col-sm-12
+  .person_card.panel.panel-primary
+    .panel-heading
+      .media
+        .media-left.media-middle.pull-left
+          .avatar-wrapper
+            = gravatar_for(user.email, size: 50)
 
-  .person_sentence.panel-body
-    %i
-      = Faker::Lorem.sentence(3)
+            - if user.admin?
+              .center
+                %span.badge Admin
+            -# Show the "delete" links only if the current user is an admin.
+            - if current_user.admin? && (current_user != user)
+              .center
+                = link_to "delete", user_path(user), method: :delete,
+                  data: { confirm: "Are you sure?" }, style: "color: white;"
 
-  .contact-info.panel-footer
-    %ul.list-unstyled.list-inline
-      %li
-        = fa_icon 'envelope'
-        = user.email
-        - if user.admin?
-          %span.badge Admin
+        .info-wrapper.media-body
+          %h4.media-heading
+            = user.username
 
-        -# The "delete" links will be displayed only if the current user is an admin.
-        - if current_user.admin? && (current_user != user)
-          = "|"
-          = link_to "delete", user_path(user), method: :delete, data: { confirm: "Are you sure?" }
+          %ul.list-unstyled
+            %li
+              = fa_icon 'star', text: "Log in count:"
+              = user.sign_in_count
+            %li
+              = fa_icon 'star', text: "Since:"
+              = user.created_at.strftime("%B %Y")
 
+    .person_sentence.panel-body
+      %i
+        = Faker::Lorem.sentence(3)
+
+    .contact-info.panel-footer
+      %ul.list-unstyled.list-inline
+        %li
+          = fa_icon 'envelope'
+          = user.email
