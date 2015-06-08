@@ -1,5 +1,5 @@
 .ms-item.col-lg-4.col-md-6.col-sm-12
-  .person_card.panel.panel-primary
+  .person_card.panel{ class: if user.admin then "panel-red" else "panel-primary" end }
     .panel-heading
       .media
         .media-left.media-middle.pull-left
@@ -13,9 +13,9 @@
             - if current_user.admin? && (current_user != user)
               .center
                 = link_to "delete", user_path(user), method: :delete,
-                  data: { confirm: "Are you sure?" }, style: "color: white;"
+                                    data: { confirm: "Are you sure?" }, class: "delete"
 
-        .info-wrapper.media-body
+        .info_wrapper.media-body
           %h4.media-heading
             = user.username
 
@@ -31,7 +31,7 @@
       %i
         = Faker::Lorem.sentence(3)
 
-    .contact-info.panel-footer
+    .contact_info.panel-footer
       %ul.list-unstyled.list-inline
         %li
           = fa_icon 'envelope'

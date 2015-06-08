@@ -1,23 +1,25 @@
-@PeopleSearch = React.createClass
-  displayName: 'PeopleSearch'
+# FluxMixin = Fluxxor.FluxMixin(React)
 
-  # Submit handler
-  _handleOnSubmit: (e) ->
-    e.preventDefault()
+# @PeopleSearch = React.createClass
+#   mixins: [FluxMixin]
 
-    # the value of the search box input
-    searchValue = @refs.search.getDOMNode().value.trim()
+#   onSubmitSearch: (e) ->
+#     e.preventDefault()
 
-    # triggers it's custom onFormSubmit event passing searchValue
-    @props.onFormSubmit(searchValue)
+#     # Triggers an onFormSubmit event passing the user's input in the search box
+#     searchValue = @refs.search.getDOMNode().value.trim()
+#     @props.onFormSubmit(searchValue)
 
-  render: ->
-    <div className="filter-wrapper">
-      <div className="form-wrapper">
-        <form onSubmit={@_handleOnSubmit}>
-          # ref attribute is used to reference elements in the
-          # component by @refs
-          <input ref="search" placeholder="Search people..." type="search"/>
-        </form>
-      </div>
-    </div>
+#   render: ->
+
+#     <div className="filter-wrapper">
+#       <div className="form-wrapper">
+#         <form onSubmit={@onSubmitSearch}>
+#           # The ref attribute can be referenced through @refs
+#           <input ref="search"
+#                  placeholder="Search people..."
+#                  type="search"
+#                  className="form-control"/>
+#         </form>
+#       </div>
+#     </div>

@@ -5,30 +5,32 @@
   max-width: $maxwidth;
 }
 
-#PeopleSection {
+#people_cards {
 
-  .filter-wrapper {
+  .filter_wrapper {
     padding: 5px 15px;
+    margin-bottom: 20px;
   }
 
-  .PaginatorSection {
-    margin-left: 15px;
-    .pagination {
-      height: 36px;
-      margin: 0px;
-      margin-top: 10px;
-      margin-bottom: 5px;
-    }
+  .pagination {
+    height: 36px;
+    margin: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 7px;
   }
 
-  .cards-wrapper {
+  .cards_wrapper {
     margin-top: 10px;
   }
 
   .person_card {
-    li {
-      font-size: 1.0em;
-    }
+    li { font-size: 1.0em; }
+  }
+
+  .avatar-wrapper{
+    .center { margin-top: 5px;}
+    .delete { color: white; }
   }
 
   h4 {
@@ -48,7 +50,7 @@
     @media(min-width:1200px) {@include text-overflow(330px);} // lg
   }
 
-  .contact-info {
+  .contact_info {
     li {
       margin-top: 10px;
     }
