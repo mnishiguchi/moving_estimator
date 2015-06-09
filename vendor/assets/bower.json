@@ -2,6 +2,7 @@
   "name": "dsl-generated dependencies",
   "dependencies": {
     "fluxxor": "latest",
-    "metisMenu": "latest"
+    "metisMenu": "latest",
+    "messenger": "latest"
   }
 }

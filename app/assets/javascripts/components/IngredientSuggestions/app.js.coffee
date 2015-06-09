@@ -40,24 +40,24 @@ window.loadIngredientSuggestionsEditor = (options) ->
         url: "/ingredient_suggestions/" + ingredient.id
         data:
           name: new_name
-      .done ->
-        $.growl.notice
-          title: "Ingredient suggestion updated"
-      .fail ->
-        $.growl.error
-          title: "Error updating ingredient suggestion"
+
+      .done (data, textStatus, jqXHR) ->
+        $('div#message-container').messenger().post "Ingredient suggestion updated"
+      .fail (jqXHR, textStatus, errorThrown) =>
+        console.error textStatus, errorThrown.toString()
+        $('div#message-container').messenger().post "Error updating ingredient suggestion"
 
     deleteIngredient: (ingredient) ->
       @dispatch(constants.DELETE_INGREDIENT, ingredient: ingredient)
       $.ajax
         method: "DELETE"
         url: "/ingredient_suggestions/" + ingredient.id
-      .done ->
-        $.growl.notice
-          title: "Ingredient suggestion deleted"
-      .fail ->
-        $.growl.error
-          title: "Error deleting ingredient suggestion"
+
+      .done (data, extStatus, jqXHR) ->
+        $('div#message-container').messenger().post "Ingredient suggestion deleted"
+      .fail (jqXHR, textStatus, errorThrown) =>
+        console.error textStatus, errorThrown.toString()
+        $('div#message-container').messenger().post "Error deleting ingredient suggestion"
 
   # Instantiating our stores
 
@@ -132,18 +132,18 @@ window.loadIngredientSuggestionsEditor = (options) ->
       then @setState(changed: true)
       else @setState(changed: false)
 
-    handleUpdate: ->
+    handleUpdate: (e) ->
       e.preventDefault()
       input = $(@refs.ingredient.getDOMNode()).val()
       @getFlux().actions.updateIngredient(@props.ingredient, input)
       @setState(changed: false, updated: true)
 
-    handleDelete: ->
+    handleDelete: (e) ->
       e.preventDefault()
       if confirm("Delete " + @props.ingredient.name + "?")
         @getFlux().actions.deleteIngredient(@props.ingredient)
 
-    handleCancelChange: ->
+    handleCancelChange: (e) ->
       e.preventDefault()
       $(@refs.ingredient.getDOMNode()).val(@props.ingredient.name)  # Restore the original value
       @setState(changed: false)

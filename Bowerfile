@@ -3,3 +3,4 @@
 # Puts to ./vendor/assets/bower_components
 asset 'fluxxor'
 asset 'metisMenu'
+asset 'messenger'
