@@ -70,3 +70,13 @@ $gray-medium-light: #eaeaea;
   margin-top: 10px;
   padding-top: 25px;
 }
+
+.todo_panel {
+  .panel-body {
+    padding-bottom: 0;
+  }
+  .todo_display {
+    padding-top: 15px;
+    padding-bottom: 5px;
+  }
+}

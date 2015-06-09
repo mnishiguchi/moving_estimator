@@ -124,7 +124,9 @@ window.loadTodoList = ->
           </div>
         </form>
 
-        <TodoItemsList todos={todos}/>
+        <div className="todo_display well">
+          <TodoItemsList todos={todos}/>
+        </div>
       </div>
 
   # Rendering the whole component to the target element
