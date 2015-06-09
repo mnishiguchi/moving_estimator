@@ -10,8 +10,13 @@
 .panel.panel-green
   .panel-heading Todo list
   .panel-body
-    #react_mountPoint
+    #react_todolist
 
 = render 'shared/inventory'
 
 = render "shared/about_author"
+
+:coffee
+
+  $(document).on "page:change", ->
+    window.loadTodoList()

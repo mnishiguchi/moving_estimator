@@ -1,5 +1,7 @@
 window.loadIngredientSuggestionsEditor = (options) ->
+
   console.log options
+
   # Constants (Action types)
 
   constants =
@@ -37,7 +39,6 @@ window.loadIngredientSuggestionsEditor = (options) ->
       $.ajax
         method: "PATCH"
         url: "/ingredient_suggestions/" + ingredient.id
-        dataType: 'json'
         data:
           name: new_name
       .done ->
@@ -73,6 +74,7 @@ window.loadIngredientSuggestionsEditor = (options) ->
   flux.on 'dispatch', (type, payload) ->
     console.log "[Dispatch]", type, payload if console?.log?
 
+
   # The main React component (<IngredientSuggestionsEditor/>)
 
   FluxMixin = Fluxxor.FluxMixin(React)
@@ -91,10 +93,11 @@ window.loadIngredientSuggestionsEditor = (options) ->
       ingredients = @state.ingredients.map (ingredient) ->
         <IngredientSuggestion ingredient={ingredient}
                               key={ingredient.id}
-                              flux={flux} />
+                              flux={@props.flux} />
       <div>
         {ingredients}
       </div>
+
 
   # The sub-component <IngredientSuggestion/>
 
@@ -146,7 +149,10 @@ window.loadIngredientSuggestionsEditor = (options) ->
       $(@refs.ingredient.getDOMNode()).val(@props.ingredient.name)  # Restore the original value
       @setState(changed: false)
 
-  # Rendering the whole component upon page-change
-  # $(document).on "page:change", ->
-  React.render <IngredientSuggestionsEditor flux={flux}/>,
-                  document.getElementById("IngredientSuggestionsEditor")
+  # Rendering the whole component to the target element
+
+  target = document.getElementById("IngredientSuggestionsEditor")
+  if target
+  then React.render <IngredientSuggestionsEditor flux={flux}/>, target
+  else console.log("Couldn't find the target element")
+
