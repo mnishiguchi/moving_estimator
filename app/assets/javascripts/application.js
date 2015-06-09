@@ -16,7 +16,6 @@
 //= require bootstrap
 //= require turbolinks
 //= require masonry/jquery.masonry
-//= require isotope/jquery.isotope
 //
 // React
 //= require react
@@ -27,7 +26,7 @@
 // Other Vendor js files
 //= require sb_admin_2
 //= require metisMenu
-//= require messenger
+//= require jquery-growl
 //
 // App js files
 //= require_tree .

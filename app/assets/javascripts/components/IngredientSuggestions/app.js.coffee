@@ -42,10 +42,11 @@ window.loadIngredientSuggestionsEditor = (options) ->
           name: new_name
 
       .done (data, textStatus, jqXHR) ->
-        $('div#message-container').messenger().post "Ingredient suggestion updated"
+        $.growl.notice title: "", message: "Ingredient suggestion updated"
+
       .fail (jqXHR, textStatus, errorThrown) =>
+        $.growl.error title: "", message: "Error updating ingredient suggestion"
         console.error textStatus, errorThrown.toString()
-        $('div#message-container').messenger().post "Error updating ingredient suggestion"
 
     deleteIngredient: (ingredient) ->
       @dispatch(constants.DELETE_INGREDIENT, ingredient: ingredient)
@@ -54,10 +55,11 @@ window.loadIngredientSuggestionsEditor = (options) ->
         url: "/ingredient_suggestions/" + ingredient.id
 
       .done (data, extStatus, jqXHR) ->
-        $('div#message-container').messenger().post "Ingredient suggestion deleted"
+        $.growl.notice title: "", message: "Ingredient suggestion deleted"
       .fail (jqXHR, textStatus, errorThrown) =>
+        $.growl.error title: "", message: "Error deleting ingredient suggestion"
         console.error textStatus, errorThrown.toString()
-        $('div#message-container').messenger().post "Error deleting ingredient suggestion"
+
 
   # Instantiating our stores
 

@@ -3,6 +3,6 @@
   "dependencies": {
     "fluxxor": "latest",
     "metisMenu": "latest",
-    "messenger": "latest"
+    "growl": "latest"
   }
 }
