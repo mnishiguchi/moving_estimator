@@ -10,10 +10,7 @@ window.loadIngredientSuggestionsEditor = (options) ->
 
   IngredientSuggestionsStore = Fluxxor.createStore
     initialize: ->
-
       @ingredients = options || []
-      # console.log @ingredients  # Debug
-
       @bindActions(constants.UPDATE_INGREDIENT, @onUpdateIngredient,
                    constants.DELETE_INGREDIENT, @onDeleteIngredient)
 
@@ -43,7 +40,6 @@ window.loadIngredientSuggestionsEditor = (options) ->
 
       .done (data, textStatus, jqXHR) ->
         $.growl.notice title: "", message: "Ingredient suggestion updated"
-
       .fail (jqXHR, textStatus, errorThrown) =>
         $.growl.error title: "", message: "Error updating ingredient suggestion"
         console.error textStatus, errorThrown.toString()
@@ -60,7 +56,6 @@ window.loadIngredientSuggestionsEditor = (options) ->
         $.growl.error title: "", message: "Error deleting ingredient suggestion"
         console.error textStatus, errorThrown.toString()
 
-
   # Instantiating our stores
 
   stores =
@@ -75,16 +70,13 @@ window.loadIngredientSuggestionsEditor = (options) ->
   flux.on 'dispatch', (type, payload) ->
     console.log "[Dispatch]", type, payload if console?.log?
 
-
   # The main React component (<IngredientSuggestionsEditor/>)
 
-  FluxMixin = Fluxxor.FluxMixin(React)
-  StoreWatchMixin = Fluxxor.StoreWatchMixin
-
   @IngredientSuggestionsEditor = React.createClass
-    mixins: [FluxMixin, StoreWatchMixin("IngredientSuggestionsStore")]
+    mixins: [Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin("IngredientSuggestionsStore")]
 
-    # getInitialState: ->
+    # getInitialState: -> # none
+
     getStateFromFlux: ->
       flux = @getFlux()
       flux.store('IngredientSuggestionsStore').getState()
@@ -99,61 +91,9 @@ window.loadIngredientSuggestionsEditor = (options) ->
         {ingredients}
       </div>
 
-
-  # The sub-component <IngredientSuggestion/>
-
-  IngredientSuggestion = React.createClass
-    mixins: [FluxMixin]
-
-    getInitialState: ->
-      changed: false
-      updated: false
-
-    render: ->
-
-      buttons =
-        <span>
-          <a href="#" onClick={@handleUpdate}>Update</a>
-          <a href="#" onClick={@handleCancelChange}>Cancel</a>
-        </span>
-
-      <div>
-        <a href="#" onClick={@handleDelete}>
-          <i className="fa fa-times"></i>
-        </a>
-        <input onChange={@handleChange}
-               ref="ingredient"
-               defaultValue={@props.ingredient.name}/>
-
-        { buttons if @state.changed? }
-      </div>
-
-    handleChange: ->
-      input = $(@refs.ingredient.getDOMNode()).val()
-      if input isnt @props.ingredient.name
-      then @setState(changed: true)
-      else @setState(changed: false)
-
-    handleUpdate: (e) ->
-      e.preventDefault()
-      input = $(@refs.ingredient.getDOMNode()).val()
-      @getFlux().actions.updateIngredient(@props.ingredient, input)
-      @setState(changed: false, updated: true)
-
-    handleDelete: (e) ->
-      e.preventDefault()
-      if confirm("Delete " + @props.ingredient.name + "?")
-        @getFlux().actions.deleteIngredient(@props.ingredient)
-
-    handleCancelChange: (e) ->
-      e.preventDefault()
-      $(@refs.ingredient.getDOMNode()).val(@props.ingredient.name)  # Restore the original value
-      @setState(changed: false)
-
   # Rendering the whole component to the target element
 
   target = document.getElementById("IngredientSuggestionsEditor")
   if target
   then React.render <IngredientSuggestionsEditor flux={flux}/>, target
   else console.log("Couldn't find the target element")
-
