@@ -1,7 +1,5 @@
 window.loadIngredientSuggestionsEditor = (options) ->
 
-  console.log options
-
   # Constants (Action types)
 
   constants =
@@ -11,9 +9,10 @@ window.loadIngredientSuggestionsEditor = (options) ->
   # Stores
 
   IngredientSuggestionsStore = Fluxxor.createStore
-    initialize: (options) ->
+    initialize: ->
 
-      @ingredients = options.ingredients || []
+      @ingredients = options || []
+      # console.log @ingredients  # Debug
 
       @bindActions(constants.UPDATE_INGREDIENT, @onUpdateIngredient,
                    constants.DELETE_INGREDIENT, @onDeleteIngredient)
@@ -93,7 +92,7 @@ window.loadIngredientSuggestionsEditor = (options) ->
       ingredients = @state.ingredients.map (ingredient) ->
         <IngredientSuggestion ingredient={ingredient}
                               key={ingredient.id}
-                              flux={@props.flux} />
+                              flux={flux} />
       <div>
         {ingredients}
       </div>
