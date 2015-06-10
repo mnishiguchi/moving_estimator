@@ -26,7 +26,7 @@
 // Other Vendor js files
 //= require sb_admin_2
 //= require metisMenu
-//= require jquery-growl
+//= require growl
 //
 // App js files
 //= require_tree .
