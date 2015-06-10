@@ -133,5 +133,4 @@ window.loadTodoList = ->
 
   target = document.getElementById("react_todolist")
   if target
-  then React.render <Application flux={flux} />, target
-  else console.log("Couldn't find the target element")
+    React.render <Application flux={flux} />, target

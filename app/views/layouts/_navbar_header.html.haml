@@ -18,12 +18,10 @@
 :coffee
   jQuery ->
     if $('#side-menu').length == 0
-      # For Static pages
-      # Removes toggle button.
+      # For Static pages, removes toggle button.
       $('#hamburger').remove()
     else
-      # For SB-admin pages
-      # Removes navbar container.
+      # For SB-admin pages, removes navbar container.
       $('#navbar_container').replaceWith($('#navbar_container').html())
 
   # Ensures that navbar is closed on page-change.

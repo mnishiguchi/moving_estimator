@@ -95,5 +95,4 @@ window.loadIngredientSuggestionsEditor = (options) ->
 
   target = document.getElementById("IngredientSuggestionsEditor")
   if target
-  then React.render <IngredientSuggestionsEditor flux={flux}/>, target
-  else console.error("Couldn't find the target element")
+    React.render <IngredientSuggestionsEditor flux={flux}/>, target

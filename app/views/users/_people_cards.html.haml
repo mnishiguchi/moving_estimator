@@ -8,13 +8,7 @@
 
   = will_paginate @users
   .cards_wrapper
-    #ms-container.transitions-enabled.centered.clearfix.masonry.masonry-brick
-      - @users.each do |user|
-        = render 'user', user: user
+    - @users.each do |user|
+      = render 'user', user: user
   = will_paginate @users
 
-:coffee
-  # To use Masonry with Bootstrap grids
-  container = document.querySelector('#ms-container')
-  msnry = new Masonry container, itemSelector: '.ms-item',
-                                 columnWidth:  '.ms-item'
