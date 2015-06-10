@@ -1,13 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
-@import 'masonry/basic';
-@import 'masonry/centered';
-@import 'masonry/fluid';
-@import 'masonry/gutters';
-@import 'masonry/infinitescroll';
-@import 'masonry/right-to-left';
-@import 'masonry/transitions';
 
 // Vendor
 @import "sb_admin_2";
@@ -19,3 +12,4 @@
 @import "custom";
 @import "navbar";
 @import "people_cards";
+@import "ingredient_suggestions"

@@ -83,16 +83,16 @@ window.loadIngredientSuggestionsEditor = (options) ->
 
     render: ->
 
-      ingredients = @state.ingredients.map (ingredient) ->
-        <IngredientSuggestion ingredient={ingredient}
-                              key={ingredient.id}
-                              flux={flux} />
       <div>
-        {ingredients}
+        {
+          ingredients = @state.ingredients.map (ingredient) ->
+            <IngredientSuggestion ingredient={ingredient}
+                                  key={ingredient.id}
+                                  flux={flux} />
+        }
       </div>
 
   # Rendering the whole component to the target element
 
-  target = document.getElementById("IngredientSuggestionsEditor")
-  if target
+  if (target = document.getElementById("IngredientSuggestionsEditor"))
     React.render <IngredientSuggestionsEditor flux={flux}/>, target

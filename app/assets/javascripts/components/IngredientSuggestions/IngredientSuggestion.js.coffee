@@ -24,7 +24,7 @@
 
   handleDelete: (e) ->
     e.preventDefault()
-    if confirm("Delete " + @props.ingredient.name + "?")
+    if confirm("Delete " + @state.saved_value + "?")
       @getFlux().actions.deleteIngredient(@props.ingredient)
 
   handleCancelChange: (e) ->
@@ -47,6 +47,11 @@
         <a onClick={@handleCancelChange}>Cancel</a>
       </div>
 
+    type = if @state.changed
+             'warning'
+           else if @state.updated
+             'success'
+
     <form>
       <Input type='text'
              onChange={@handleChange}
@@ -54,5 +59,5 @@
              value={@state.value}
              buttonBefore={ delete_button }
              addonAfter={update_button if @state.changed}
-             bsStyle={'success' if @state.updated} />
+             bsStyle={type}/>
     </form>
