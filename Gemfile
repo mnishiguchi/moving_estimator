@@ -9,6 +9,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-fluxxor'
   gem 'rails-assets-metisMenu'
   gem 'rails-assets-growl'
+  gem 'rails-assets-react-bootstrap'
 end
 
 # Default

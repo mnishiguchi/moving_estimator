@@ -4,46 +4,20 @@
   mixins: [Fluxxor.FluxMixin(React)]
 
   getInitialState: ->
+    value:   @props.ingredient.name
     changed: false
     updated: false
 
-  render: ->
-
-    delete_button =
-      <a href="#" onClick={@handleDelete}>
-        <i className="fa fa-times"></i>
-      </a>
-
-    update_button =
-      <span>
-        <a href="#" onClick={@handleUpdate}
-                    className="btn btn-primary btn-xs">
-          Update
-        </a>
-        <a href="#" onClick={@handleCancelChange}
-                    className="btn btn-default btn-xs">
-          Cancel
-        </a>
-      </span>
-
-    <div>
-      { delete_button }
-      <input onChange={@handleChange}
-             ref="ingredient"
-             defaultValue={@props.ingredient.name}/>
-      { update_button if @state.changed }
-    </div>
-
   handleChange: ->
-    input = $(@refs.ingredient.getDOMNode()).val()
+    input = @refs.input.getValue()
     original_name = @props.ingredient.name
     if input is original_name
     then @setState(changed: false)
-    else @setState(changed: true)
+    else @setState(changed: true, value: input)
 
   handleUpdate: (e) ->
     e.preventDefault()
-    input = $(@refs.ingredient.getDOMNode()).val()
+    input = @refs.input.getValue()
     @getFlux().actions.updateIngredient(@props.ingredient, input)
     @setState(changed: false, updated: true)
 
@@ -54,5 +28,31 @@
 
   handleCancelChange: (e) ->
     e.preventDefault()
-    $(@refs.ingredient.getDOMNode()).val(@props.ingredient.name)  # Restore the original value
-    @setState(changed: false)
+    original_name = @props.ingredient.name
+    @setState(changed: false, value: original_name)
+
+  render: ->
+    ButtonToolbar = ReactBootstrap.ButtonToolbar
+    Button = ReactBootstrap.Button
+    Input = ReactBootstrap.Input
+
+    delete_button =
+      <Button onClick={@handleDelete}>
+        <i className="fa fa-times"></i>
+      </Button>
+
+    update_button =
+      <div>
+        <a onClick={@handleUpdate}       >Update</a>
+        &nbsp; | &nbsp;
+        <a onClick={@handleCancelChange} >Cancel</a>
+      </div>
+
+    <form>
+      <Input type='text'
+             onChange={@handleChange}
+             ref='input'
+             value={@state.value}
+             buttonBefore={ delete_button }
+             addonAfter={update_button if @state.changed}/>
+    </form>

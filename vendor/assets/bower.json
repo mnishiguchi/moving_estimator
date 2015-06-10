@@ -3,6 +3,7 @@
   "dependencies": {
     "fluxxor": "latest",
     "metisMenu": "latest",
-    "growl": "latest"
+    "growl": "latest",
+    "react-bootstrap": "latest"
   }
 }

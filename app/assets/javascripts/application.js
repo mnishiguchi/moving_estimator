@@ -20,6 +20,7 @@
 // React
 //= require react
 //= require react_ujs
+//= require react-bootstrap
 //= require fluxxor
 //= require components
 //
