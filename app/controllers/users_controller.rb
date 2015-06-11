@@ -29,15 +29,6 @@ class UsersController < ApplicationController
 
   private
 
-    # Returns true if current user is admin, else redirects to root.
-    def ensure_admin!
-      unless current_user.try(:admin?)
-        sign_out current_user
-        redirect_to root_path
-        return false
-      end
-    end
-
     def search_users
       @users =  if params[:search].present?
                 then User.search(params[:search])
