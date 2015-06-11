@@ -6,7 +6,9 @@
     .container-fluid
       .navbar-header
         %a.navbar-brand Todos
-        %p.navbar-text 1 item left
+        %p.navbar-text
+          = pluralize(current_user.todos.count, "item")
+          left
       .navbar-left
         .btn-group.navbar-btn{ role:"group" }
           %button.btn.btn-default{ type:"button" } All

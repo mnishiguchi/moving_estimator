@@ -25,7 +25,7 @@
 class User < ActiveRecord::Base
   include PgSearch
 
-  has_many :todos
+  has_many :todos, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
