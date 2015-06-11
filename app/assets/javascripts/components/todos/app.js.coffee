@@ -1,3 +1,5 @@
+# Better todo list
+
 window.loadTodoList = ->
 
   # Constants (Action types)
@@ -125,12 +127,34 @@ window.loadTodoList = ->
         </form>
 
         <div className="todo_display well">
-          <TodoItemsList todos={todos}/>
+          <TodoItems todos={todos}/>
         </div>
       </div>
 
   # Rendering the whole component to the target element
 
-  target = document.getElementById("react_todolist")
-  if target
+  if (target = document.getElementById("react_todolist"))
     React.render <Application flux={flux} />, target
+  else
+    console.error "Error loading react_todolist"
+
+
+# / .todolist.well
+# /   %nav.navbar.navbar-default
+# /     .container-fluid
+# /       .navbar-header
+# /         %a.navbar-brand Todos
+# /         %p.navbar-text
+# /           = pluralize(current_user.todos.count, "item")
+# /           left
+# /       .navbar-left
+# /         .btn-group.navbar-btn{ role:"group" }
+# /           %button.btn.btn-default{ type:"button" } All
+# /           %button.btn.btn-default{ type:"button" } Active
+# /           %button.btn.btn-default{ type:"button" } Completed
+# /       .navbar-right
+# /         .btn-group.navbar-btn{ role:"group" }
+# /           %button.btn.btn-default{ type:"button" } Clear completed
+
+# /   - @todos.each do |todo|
+# /     = render 'todo', todo: todo

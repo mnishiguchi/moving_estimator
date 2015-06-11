@@ -10,7 +10,7 @@
 .todo_panel.panel.panel-green
   .panel-heading Todo list
   .panel-body
-    #react_todolist
+    #react_todolist_basic
 
 = render 'shared/inventory'
 
@@ -19,4 +19,4 @@
 :coffee
 
   $(document).on "page:change", ->
-    window.loadTodoList()
+    window.loadTodoListBasic()
