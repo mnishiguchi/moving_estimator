@@ -1,20 +1,22 @@
-# Defining a todo item
+# The sub-component <Navigation />
 
-@Navigation = React.createClass
+@TodoNavigation = React.createClass
   mixins: [Fluxxor.FluxMixin(React)]
 
-  # /   %nav.navbar.navbar-default
-  # /     .container-fluid
-  # /       .navbar-header
-  # /         %a.navbar-brand Todos
-  # /         %p.navbar-text
-  # /           = pluralize(current_user.todos.count, "item")
-  # /           left
-  # /       .navbar-left
-  # /         .btn-group.navbar-btn{ role:"group" }
-  # /           %button.btn.btn-default{ type:"button" } All
-  # /           %button.btn.btn-default{ type:"button" } Active
-  # /           %button.btn.btn-default{ type:"button" } Completed
-  # /       .navbar-right
-  # /         .btn-group.navbar-btn{ role:"group" }
-  # /           %button.btn.btn-default{ type:"button" } Clear completed
+  render: ->
+    Navbar  = ReactBootstrap.Navbar
+    Nav     = ReactBootstrap.Nav
+    NavItem = ReactBootstrap.NavItem
+    ButtonToolbar = ReactBootstrap.ButtonToolbar
+    ButtonGroup = ReactBootstrap.ButtonGroup
+    Button = ReactBootstrap.Button
+
+    <Navbar>
+      1 item left
+      <ButtonGroup>
+        <Button>Left</Button>
+        <Button>Middle</Button>
+        <Button>Right</Button>
+      </ButtonGroup>
+      <Button>Clear completed</Button>
+    </Navbar>

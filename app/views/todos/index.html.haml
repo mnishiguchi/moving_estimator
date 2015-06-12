@@ -9,24 +9,4 @@
 :coffee
 
   $(document).on "page:change", ->
-    window.loadTodoList()
-
-/ .todolist.well
-/   %nav.navbar.navbar-default
-/     .container-fluid
-/       .navbar-header
-/         %a.navbar-brand Todos
-/         %p.navbar-text
-/           = pluralize(current_user.todos.count, "item")
-/           left
-/       .navbar-left
-/         .btn-group.navbar-btn{ role:"group" }
-/           %button.btn.btn-default{ type:"button" } All
-/           %button.btn.btn-default{ type:"button" } Active
-/           %button.btn.btn-default{ type:"button" } Completed
-/       .navbar-right
-/         .btn-group.navbar-btn{ role:"group" }
-/           %button.btn.btn-default{ type:"button" } Clear completed
-
-/   - @todos.each do |todo|
-/     = render 'todo', todo: todo
+    window.loadTodoList(#{@todos})

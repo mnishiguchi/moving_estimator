@@ -13,6 +13,7 @@ window.loadTodoList = (options) ->
   TodoStore = Fluxxor.createStore
     initialize: ->
       @todos = options || []
+      # console.log @todos  # debug
       @bindActions(constants.ADD_TODO,    @onAddTodo,
                    constants.TOGGLE_TODO, @onToggleTodo,
                    constants.UPDATE_TODO, @onUpdateTodo,
@@ -124,46 +125,33 @@ window.loadTodoList = (options) ->
   flux.on 'dispatch', (type, payload) ->
     console.log "[Dispatch]", type, payload if console?.log?
 
-  # The main React component (<Application/>)
+  # The main React component (<TodoList/>)
 
-  Application = React.createClass
+  @TodoList = React.createClass
     mixins: [Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin("TodoStore")]
 
-    getInitialState: ->
-      new_todo_text: ""
+    # getInitialState: ->
+    #   new_todo_text: ""
 
     getStateFromFlux: ->
       flux = @getFlux()
       flux.store('TodoStore').getState()
 
-    onChangeTodoText: (e) ->
-      @setState(newTodoText: e.target.value)
-
-    onSubmitForm: (e) ->
-      e.preventDefault()
-      if @state.newTodoText.trim()
-        @getFlux().actions.addTodo(@state.newTodoText)
-        @setState(newTodoText: "")
-
-    onClickClearButton: (e) ->
-      @getFlux().actions.clearTodos()
-
     render: ->
       todos = @state.todos
 
-      return
-        <div className="well">
-          {
-            <Navigation />
-
-            for todo in @state.todos
-              <TodoItem todo={todo}
-                        key={todo.id}
+      <div className="well">
+        <TodoNavigation todo={todos}
                         flux={flux} />
-          }
-        </div>
+        {
+          for todo in todos
+            <Todo todo={todo}
+                  key={todo.id}
+                  flux={flux} />
+        }
+      </div>
 
   # Rendering the whole component to the target element
 
   if (target = document.getElementById("react_todolist"))
-    React.render <Application flux={flux} />, target
+    React.render <TodoList flux={flux} />, target

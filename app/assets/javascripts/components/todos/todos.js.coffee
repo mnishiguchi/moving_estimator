@@ -1,22 +1,64 @@
-# Defining a navigation bar
+# The sub-component <TodoItem />
 
-@TodoItem = React.createClass
+@Todo = React.createClass
   mixins: [Fluxxor.FluxMixin(React)]
+
+  getInitialState: ->
+    saved_value: @props.todo.content
+    value:       @props.todo.content
+    changed:     false
+    updated:     false
+
+  handleChange: ->
+    input = @refs.input.getValue()
+    if input is @state.saved_value
+      @setState(value: input, changed: false, updated: false)
+    else
+      @setState(value: input, changed: true, updated: false)
+
+  handleUpdate: (e) ->
+    e.preventDefault()
+    input = @refs.input.getValue()
+    @getFlux().actions.updateTodo(@props.todo, input)
+    @setState(changed: false, updated: true, saved_value: input)
+
+    # handleDelete: (e) ->
+    #   e.preventDefault()
+    #   if confirm("Delete " + @state.saved_value + "?")
+    #     @getFlux().actions.deleteTodo(@props.todo)
+
+  handleCancelChange: (e) ->
+    e.preventDefault()
+    @setState(value: @state.saved_value, changed: false)
 
   # Its style will be determined based on the item's completion state.
   render: ->
-    todo = @props.todo
+    Button = ReactBootstrap.Button
+    Input  = ReactBootstrap.Input
 
-    # / .input-group
-    # /   %span.input-group-addon
-    # /     %input{ type: "checkbox" }
-    # /   %input.form-control{ type: 'text', value: todo.content }
-    # /   %span.input-group-addon
-    # /     %div
-    # /       %a Update
-    # /       &nbsp; | &nbsp;
-    # /       %a Cancel
+    delete_button =
+      <Button>
+        <i className="fa fa-times"></i>
+      </Button>
 
-  # Clicking on a todo item will toggle the item's completion state.
-  onClick: ->
-    @getFlux().actions.toggleTodo(@props.todo.id)
+    update_button =
+      <div>
+        <a onClick={@handleUpdate}      >Update</a>
+        &nbsp; | &nbsp;
+        <a onClick={@handleCancelChange}>Cancel</a>
+      </div>
+
+    type = if @state.changed
+             'warning'
+           else if @state.updated
+             'success'
+
+    <form>
+      <Input type='text'
+             onChange={@handleChange}
+             ref='input'
+             value={@state.value}
+             buttonBefore={ delete_button }
+             addonAfter={update_button if @state.changed}
+             bsStyle={type}/>
+    </form>
