@@ -26,8 +26,6 @@ window.loadTodoList = (options) ->
       @emit('change')
 
     onToggleTodo: (payload) ->
-      todo = payload.todo
-      todo.completed = not todo.completed
       @emit('change')
 
     onUpdateTodo: (payload) ->
@@ -52,24 +50,26 @@ window.loadTodoList = (options) ->
       .done (data, textStatus, jqXHR) ->
         $.growl.notice title: "", message: "Todo added"
       .fail (jqXHR, textStatus, errorThrown) ->
-        $.growl.error title: "", message: "Error adding todo"
+        $.growl.error title: "Error", message: "Error adding todo"
         console.error textStatus, errorThrown.toString()
 
-    toggleTodo: (todo, completion)   ->
-      @dispatch(constants.TOGGLE_TODO, todo: todo)
+    toggleTodo: (todo, toggled_completion)   ->
+      @dispatch(constants.TOGGLE_TODO, todo: todo,
+                                       toggled_completion: toggled_completion)
 
       params = todo:
                  id:        todo.id
-                 completed: todo.completed
+                 completed: toggled_completion
       $.ajax
         method: "PATCH"
         url: "/todos/" + todo.id
         data: params
 
       .done (data, textStatus, jqXHR) ->
-        $.growl.notice title: "", message: "Todo status toggled"
+        message = if params.todo.completed then "Completed" else "Not completed"
+        $.growl.notice title: "", message: message
       .fail (jqXHR, textStatus, errorThrown) ->
-        $.growl.error title: "", message: "Error toggleing todo status"
+        $.growl.error title: "Error", message: "Error toggleing todo completion"
         console.error textStatus, errorThrown.toString()
 
     updateTodo: (todo, new_content) ->
@@ -88,7 +88,7 @@ window.loadTodoList = (options) ->
       .done (data, textStatus, jqXHR) ->
         $.growl.notice title: "", message: "Todo updated"
       .fail (jqXHR, textStatus, errorThrown) ->
-        $.growl.error title: "", message: "Error updating todo"
+        $.growl.error title: "Error", message: "Error updating todo"
         console.error textStatus, errorThrown.toString()
 
     clearTodos: (completed_todos) ->
@@ -104,9 +104,9 @@ window.loadTodoList = (options) ->
           data: params
 
         .done (data, extStatus, jqXHR) ->
-          $.growl.notice title: "", message: "Deleted: " + todo.content
+          $.growl.notice title: "Deleted", message: todo.content
         .fail (jqXHR, textStatus, errorThrown) ->
-          $.growl.error title: "", message: "Error deleting todos"
+          $.growl.error title: "Error", message: "Error deleting todos"
           console.error textStatus, errorThrown.toString()
 
   # Instantiating our stores
