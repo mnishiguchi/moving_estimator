@@ -22,14 +22,21 @@
     @getFlux().actions.updateTodo(@props.todo, input)
     @setState(changed: false, updated: true, saved_value: input)
 
-    # handleDelete: (e) ->
+  handleCancelChange: (e) ->
+    e.preventDefault()
+    @setState(value: @state.saved_value, changed: false)
+
+    # handleToggleComplete: (e) ->
+    #   e.preventDefault()
+    #   input = @refs.input.getValue()
+    #   @getFlux().actions.updateTodo(@props.todo, input)
+    #   @setState(changed: false, updated: true, saved_value: input)
+
+    # handleClearCompleted: (e) ->
     #   e.preventDefault()
     #   if confirm("Delete " + @state.saved_value + "?")
     #     @getFlux().actions.deleteTodo(@props.todo)
 
-  handleCancelChange: (e) ->
-    e.preventDefault()
-    @setState(value: @state.saved_value, changed: false)
 
   # Its style will be determined based on the item's completion state.
   render: ->

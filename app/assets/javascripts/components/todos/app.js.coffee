@@ -81,6 +81,7 @@ window.loadTodoList = (options) ->
 
       params = todo:
                  id:        todo.id
+                 content:   new_content
                  completed: todo.completed
       $.ajax
         method: "PATCH"
