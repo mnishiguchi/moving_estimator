@@ -1,4 +1,4 @@
-window.loadTodoList = (options) ->
+@loadTodoList = (options) ->
 
   # Constants (Action types)
 
@@ -136,17 +136,16 @@ window.loadTodoList = (options) ->
       flux.store('TodoStore').getState()
 
     render: ->
-      todos = @state.todos
+
+      todos = for todo in @state.todos
+                <Todo todo={todo}
+                      key={todo.id}
+                      flux={flux} />
 
       <div className="well">
         <TodoNavigation todo={todos}
                         flux={flux} />
-        {
-          for todo in todos
-            <Todo todo={todo}
-                  key={todo.id}
-                  flux={flux} />
-        }
+        { todos }
       </div>
 
   # Rendering the whole component to the target element

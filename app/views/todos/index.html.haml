@@ -1,7 +1,7 @@
 - provide(:title, "Todos")
 
-%h2.page-header.center Todos
-%p Find me in app/views/todos/index.html.haml
+%h2.page-header.center
+  Todos
 
 .well
   #react_todolist
@@ -9,4 +9,4 @@
 :coffee
 
   $(document).on "page:change", ->
-    window.loadTodoList(#{@todos})
+    loadTodoList(#{@todos})

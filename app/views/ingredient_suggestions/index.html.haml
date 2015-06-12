@@ -1,6 +1,6 @@
 - provide(:title, "Ingredients editor")
 
-%h2.page-header.center Ingredients editor
+%h2.page-header.center
   Edit ingredient suggestions
 
 .well
@@ -9,4 +9,4 @@
 :coffee
 
   $(document).on "page:change", ->
-    window.loadIngredientSuggestionsEditor(#{@ingredients})
+    loadIngredientSuggestionsEditor(#{@ingredients})

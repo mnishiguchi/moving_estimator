@@ -1,135 +1,135 @@
-# window.loadTodoListBasic = ->
+@loadTodoListBasic = ->
 
-#   # Constants (Action types)
+  # Constants (Action types)
 
-#   constants =
-#     ADD_TODO:    'ADD_TODO'
-#     TOGGLE_TODO: 'TOGGLE_TODO'
-#     CLEAR_TODOS: 'CLEAR_TODOS'
+  constants =
+    ADD_TODO:    'ADD_TODO'
+    TOGGLE_TODO: 'TOGGLE_TODO'
+    CLEAR_TODOS: 'CLEAR_TODOS'
 
-#   # Stores
+  # Stores
 
-#   TodoStore = Fluxxor.createStore
-#     initialize: ->
-#       @todoId = 0
-#       @todos = {}
-#       @bindActions(constants.ADD_TODO,    @onAddTodo,
-#                    constants.TOGGLE_TODO, @onToggleTodo,
-#                    constants.CLEAR_TODOS, @onClearTodos)
+  TodoStore = Fluxxor.createStore
+    initialize: ->
+      @todoId = 0
+      @todos = {}
+      @bindActions(constants.ADD_TODO,    @onAddTodo,
+                   constants.TOGGLE_TODO, @onToggleTodo,
+                   constants.CLEAR_TODOS, @onClearTodos)
 
-#     onAddTodo: (payload) ->
-#       id = @_nextTodoId()
-#       todo =
-#         id:       id
-#         text:     payload.text
-#         complete: false
-#       @todos[id] = todo
-#       @emit('change')
+    onAddTodo: (payload) ->
+      id = @_nextTodoId()
+      todo =
+        id:       id
+        text:     payload.text
+        complete: false
+      @todos[id] = todo
+      @emit('change')
 
-#     onToggleTodo: (payload) ->
-#       id = payload.id
-#       @todos[id].complete = not @todos[id].complete
-#       @emit('change')
+    onToggleTodo: (payload) ->
+      id = payload.id
+      @todos[id].complete = not @todos[id].complete
+      @emit('change')
 
-#     onClearTodos: ->
-#       todos = @todos
-#       Object.keys(todos).forEach (key) ->
-#         if todos[key].complete
-#           delete(todos[key])
-#       @emit('change')
+    onClearTodos: ->
+      todos = @todos
+      Object.keys(todos).forEach (key) ->
+        if todos[key].complete
+          delete(todos[key])
+      @emit('change')
 
-#     getState: ->
-#       todos: @todos
+    getState: ->
+      todos: @todos
 
-#     _nextTodoId: ->
-#       @todoId += 1
+    _nextTodoId: ->
+      @todoId += 1
 
-#   # Registering our semantic actions
+  # Registering our semantic actions
 
-#   actions =
-#     addTodo:    (text) ->
-#       @dispatch(constants.ADD_TODO,    text: text)
-#     toggleTodo: (id)   ->
-#       @dispatch(constants.TOGGLE_TODO, id:   id)
-#     clearTodos:        ->
-#       @dispatch(constants.CLEAR_TODOS)
+  actions =
+    addTodo:    (text) ->
+      @dispatch(constants.ADD_TODO,    text: text)
+    toggleTodo: (id)   ->
+      @dispatch(constants.TOGGLE_TODO, id:   id)
+    clearTodos:        ->
+      @dispatch(constants.CLEAR_TODOS)
 
-#   # Instantiating our stores
+  # Instantiating our stores
 
-#   stores =
-#     TodoStore: new TodoStore
+  stores =
+    TodoStore: new TodoStore
 
-#   # Creating a Flux instance with our stores and actions that are defined above
+  # Creating a Flux instance with our stores and actions that are defined above
 
-#   flux = new Fluxxor.Flux(stores, actions)
+  flux = new Fluxxor.Flux(stores, actions)
 
-#   # Logging upon the "dispatch" event
+  # Logging upon the "dispatch" event
 
-#   flux.on 'dispatch', (type, payload) ->
-#     console.log "[Dispatch]", type, payload if console?.log?
+  flux.on 'dispatch', (type, payload) ->
+    console.log "[Dispatch]", type, payload if console?.log?
 
-#   # The main React component (<Application/>)
+  # The main React component (<Application/>)
 
-#   FluxMixin = Fluxxor.FluxMixin(React)
-#   StoreWatchMixin = Fluxxor.StoreWatchMixin
+  FluxMixin = Fluxxor.FluxMixin(React)
+  StoreWatchMixin = Fluxxor.StoreWatchMixin
 
-#   Application = React.createClass
-#     mixins: [FluxMixin, StoreWatchMixin("TodoStore")]
+  Application = React.createClass
+    mixins: [FluxMixin, StoreWatchMixin("TodoStore")]
 
-#     getInitialState: ->
-#       newTodoText: ""
+    getInitialState: ->
+      newTodoText: ""
 
-#     getStateFromFlux: ->
-#       flux = @getFlux()
-#       flux.store('TodoStore').getState()
+    getStateFromFlux: ->
+      flux = @getFlux()
+      flux.store('TodoStore').getState()
 
-#     onChangeTodoText: (e) ->
-#       @setState(newTodoText: e.target.value)
+    onChangeTodoText: (e) ->
+      @setState(newTodoText: e.target.value)
 
-#     onSubmitForm: (e) ->
-#       e.preventDefault()
-#       if @state.newTodoText.trim()
-#         @getFlux().actions.addTodo(@state.newTodoText)
-#         @setState(newTodoText: "")
+    onSubmitForm: (e) ->
+      e.preventDefault()
+      if @state.newTodoText.trim()
+        @getFlux().actions.addTodo(@state.newTodoText)
+        @setState(newTodoText: "")
 
-#     onClickClearButton: (e) ->
-#       @getFlux().actions.clearTodos()
+    onClickClearButton: (e) ->
+      @getFlux().actions.clearTodos()
 
-#     render: ->
-#       todos = @state.todos
+    render: ->
+      todos = @state.todos
 
-#       anyCompletion = false
-#       for id, item of todos
-#         if item.complete
-#           anyCompletion = true
-#       clearButton = if anyCompletion then "btn btn-warning" else "btn btn-default"
+      anyCompletion = false
+      for id, item of todos
+        if item.complete
+          anyCompletion = true
+      clearButton = if anyCompletion then "btn btn-warning" else "btn btn-default"
 
-#       <div>
-#         <form onSubmit={@onSubmitForm}>
-#           <div className="form-group">
-#             <input type="text"
-#                    placeholder="New Todo"
-#                    value={@state.newTodoText}
-#                    onChange={@onChangeTodoText}
-#                    className="form-control" />
-#           </div>
-#           <div className="form-group">
-#             <input type="submit"
-#                    value="Add Todo"
-#                    className="btn btn-success"/>
-#             <button onClick={@onClickClearButton}
-#                     className={clearButton}>
-#               Clear Completed
-#             </button>
-#           </div>
-#         </form>
+      <div>
+        <form onSubmit={@onSubmitForm}>
+          <div className="form-group">
+            <input type="text"
+                   placeholder="New Todo"
+                   value={@state.newTodoText}
+                   onChange={@onChangeTodoText}
+                   className="form-control" />
+          </div>
+          <div className="form-group">
+            <input type="submit"
+                   value="Add Todo"
+                   className="btn btn-success"/>
+            <button onClick={@onClickClearButton}
+                    className={clearButton}>
+              Clear Completed
+            </button>
+          </div>
+        </form>
 
-#         <div className="todo_display well">
-#           <TodoItemsList todos={todos}/>
-#         </div>
-#       </div>
+        <div className="todo_display well">
+          <TodoItemsList todos={todos}/>
+        </div>
+      </div>
 
-#   # Rendering the whole component to the target element
+  # Rendering the whole component to the target element
 
-#   if (target = document.getElementById("react_todolist_basic"))
-#     React.render <Application flux={flux} />, target
+  if (target = document.getElementById("react_todolist_basic"))
+    React.render <Application flux={flux} />, target

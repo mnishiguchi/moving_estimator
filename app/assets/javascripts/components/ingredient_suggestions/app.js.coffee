@@ -1,4 +1,4 @@
-window.loadIngredientSuggestionsEditor = (options) ->
+@loadIngredientSuggestionsEditor = (options) ->
 
   # Constants (Action types)
 
