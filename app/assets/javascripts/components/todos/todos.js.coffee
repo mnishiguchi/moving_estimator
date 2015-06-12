@@ -6,6 +6,7 @@
   getInitialState: ->
     saved_value: @props.todo.content
     value:       @props.todo.content
+    completed:   @props.todo.completed
     changed:     false
     updated:     false
 
@@ -26,11 +27,9 @@
     e.preventDefault()
     @setState(value: @state.saved_value, changed: false)
 
-    # handleToggleComplete: (e) ->
-    #   e.preventDefault()
-    #   input = @refs.input.getValue()
-    #   @getFlux().actions.updateTodo(@props.todo, input)
-    #   @setState(changed: false, updated: true, saved_value: input)
+  handleToggleCompleted: (e) ->
+    e.preventDefault()
+    @getFlux().actions.toggleTodo(@props.todo)
 
     # handleClearCompleted: (e) ->
     #   e.preventDefault()
@@ -42,11 +41,11 @@
   render: ->
     Button = ReactBootstrap.Button
     Input  = ReactBootstrap.Input
+    is_checked = if @props.todo.completed then "fa fa-check-square-o" else "fa fa-square-o"
 
-    delete_button =
-      <Button>
-        <i className="fa fa-times"></i>
-      </Button>
+    checkbox =
+        <i className={is_checked}
+            onClick={@handleToggleCompleted}></i>
 
     update_button =
       <div>
@@ -65,7 +64,7 @@
              onChange={@handleChange}
              ref='input'
              value={@state.value}
-             buttonBefore={ delete_button }
+             addonBefore={checkbox}
              addonAfter={update_button if @state.changed}
              bsStyle={type}/>
     </form>

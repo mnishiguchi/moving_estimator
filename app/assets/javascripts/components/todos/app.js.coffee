@@ -13,7 +13,7 @@ window.loadTodoList = (options) ->
   TodoStore = Fluxxor.createStore
     initialize: ->
       @todos = options || []
-      # console.log @todos  # debug
+      console.log @todos  # debug
       @bindActions(constants.ADD_TODO,    @onAddTodo,
                    constants.TOGGLE_TODO, @onToggleTodo,
                    constants.UPDATE_TODO, @onUpdateTodo,
@@ -23,17 +23,14 @@ window.loadTodoList = (options) ->
       todos: @todos
 
     onAddTodo: (payload) ->
-      todo =
-        content:   payload.content
-        completed: false
       @emit('change')
 
     onToggleTodo: (payload) ->
-      id = payload.id
+      todo = payload.todo
+      todo.completed = not todo.completed
       @emit('change')
 
     onUpdateTodo: (payload) ->
-      payload.todo.content = payload.new_content
       @emit('change')
 
     onClearTodos: (payload) ->
@@ -58,7 +55,7 @@ window.loadTodoList = (options) ->
         $.growl.error title: "", message: "Error adding todo"
         console.error textStatus, errorThrown.toString()
 
-    toggleTodo: (todo)   ->
+    toggleTodo: (todo, completion)   ->
       @dispatch(constants.TOGGLE_TODO, todo: todo)
 
       params = todo:
