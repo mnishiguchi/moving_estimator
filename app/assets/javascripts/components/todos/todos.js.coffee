@@ -12,9 +12,10 @@
 
   handleToggleCompleted: (e) ->
     e.preventDefault()
-    toggled_completion = not @state.completed
-    @getFlux().actions.toggleTodo(@props.todo, toggled_completion)
-    @setState(completed: toggled_completion)
+    # todos_wrapper = @props.flux.store('TodoStore').getState().todos
+    id = @props.todo.id
+    @getFlux().actions.toggleTodo(id, not @state.completed)
+    @setState(completed: not @state.completed)
 
   handleChange: ->
     input = @refs.input.getValue()
