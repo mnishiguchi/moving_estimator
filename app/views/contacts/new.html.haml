@@ -8,15 +8,15 @@
     = render 'shared/error_messages', object: f.object
 
     .form-group
-      = f.label :your_name
+      = f.label :username, "Your name"
       = f.text_field :username, class: "form-control", value: current_user.try(:username)
 
     .form-group
-      = f.label :your_email
+      = f.label :email, "Your email"
       = f.email_field :email, class: "form-control", value: current_user.try(:email)
 
     .form-group
-      = f.label :message_to_me
+      = f.label :message, "Messsage to me"
       = f.text_area :message, class: "form-control"
 
     .form-group

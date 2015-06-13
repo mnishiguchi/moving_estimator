@@ -1,7 +1,7 @@
-FactoryGirl.define do
-  factory :todo do
-    content "MyText"
-user nil
-  end
+# FactoryGirl.define do
+#   factory :todo do
+#     content "MyText"
+# user nil
+#   end
 
-end
+# end

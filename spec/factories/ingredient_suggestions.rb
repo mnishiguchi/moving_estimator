@@ -8,9 +8,9 @@
 #  updated_at :datetime         not null
 #
 
-FactoryGirl.define do
-  factory :ingredient_suggestion do
-    name "MyString"
-  end
+# FactoryGirl.define do
+#   factory :ingredient_suggestion do
+#     name "MyString"
+#   end
 
-end
+# end

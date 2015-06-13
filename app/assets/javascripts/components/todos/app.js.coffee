@@ -1,4 +1,8 @@
+# Invoked in a Rails template with JSON data passed in.
+# Initializes the todolist component with the provided options.
+
 @initTodoList = (options) ->
+
   flux = Fluxxor.initTodosFlux(options)
 
   # The main React component (<TodoList/>)
@@ -14,10 +18,10 @@
       flux = @getFlux()
       flux.store('TodoStore').getState()
 
-    onChangeAddTodoText: (e) ->
+    handleChangeAddTodoText: (e) ->
       @setState(newTodoText: e.target.value)
 
-    onSubmitForm: (e) ->
+    handleSubmitForm: (e) ->
       e.preventDefault()
       if @state.newTodoText.trim()
         @getFlux().actions.addTodo(@state.newTodoText)
@@ -44,9 +48,9 @@
                 Add Todo</Button>
 
       add_form =
-        <form onSubmit={ @onSubmitForm }>
+        <form onSubmit={ @handleSubmitForm }>
           <Input type='text'
-                 onChange={ @onChangeAddTodoText }
+                 onChange={ @handleChangeAddTodoText }
                  placeholder="New Todo"
                  ref='input'
                  value={ @state.newTodoText }

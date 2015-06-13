@@ -1,3 +1,5 @@
+# Initializes the Flux
+
 Fluxxor.initTodosFlux = (options) ->
 
   # Constants (Action types)
@@ -104,7 +106,7 @@ Fluxxor.initTodosFlux = (options) ->
     addTodo:    (content) ->
       @dispatch(constants.ADD_TODO, content: content)
 
-    toggleTodo: (id, completed)   ->
+    toggleTodo: (id, completed) ->
       @dispatch(constants.TOGGLE_TODO, id: id, completed: completed)
 
     updateTodo: (id, new_content) ->

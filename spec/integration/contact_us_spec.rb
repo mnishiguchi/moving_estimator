@@ -27,9 +27,12 @@ describe "Contact us", type: :feature do
 
     describe "with valid information" do
       before do
-        fill_in "Username", with: "Example User"
-        fill_in "Email",    with: "user@example.com"
-        fill_in "Message",  with: "Lorem ipsum dolor sit amet, consectetur adipisicing elit"
+        find("#contact_username").set "Example User"
+        find("#contact_email").set "user@example.com"
+        find("#contact_message").set "Lorem ipsum dolor sit amet, consectetur adipisicing elit"
+        # fill_in "Username", with: "Example User"
+        # fill_in "Email",    with: "user@example.com"
+        # fill_in "Message",  with: "Lorem ipsum dolor sit amet, consectetur adipisicing elit"
       end
 
       it { expect(page).to send_email_by_click }
