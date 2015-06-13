@@ -1,4 +1,4 @@
-Fluxxor.todosFlux = (options) ->
+Fluxxor.initTodosFlux = (options) ->
 
   # Constants (Action types)
 
@@ -26,7 +26,6 @@ Fluxxor.todosFlux = (options) ->
       todos: @todos
 
     onAddTodo: (payload) ->
-
       params = todo:
                  content: payload.content
       $.ajax
@@ -41,12 +40,11 @@ Fluxxor.todosFlux = (options) ->
         @todos[data.id] = todo
         @emit('change')
         $.growl.notice title: "", message: "Todo added"
-      .fail (jqXHR, textStatus, errorThrown) ->
+      .fail (jqXHR, textStatus, errorThrown) =>
         $.growl.error title: "Error", message: "Error adding todo"
         console.error textStatus, errorThrown.toString()
 
     onToggleTodo: (payload) ->
-
       params = todo:
                  completed: payload.completed
       $.ajax
@@ -55,7 +53,6 @@ Fluxxor.todosFlux = (options) ->
         data: params
       .done (data, textStatus, jqXHR) =>
         title = if params.todo.completed then "Completed" else "Not completed"
-        console.log data
         todo =
           id:        data.id
           content:   data.content
@@ -68,12 +65,37 @@ Fluxxor.todosFlux = (options) ->
         console.error textStatus, errorThrown.toString()
 
     onUpdateTodo: (payload) ->
-      @emit('change')
+      params = todo:
+                 content: payload.new_content
+      $.ajax
+        method: "PATCH"
+        url: "/todos/" + payload.id
+        data: params
+      .done (data, textStatus, jqXHR) =>
+        todo =
+          id:        data.id
+          content:   data.content
+          completed: data.completed
+        @todos[data.id] = todo
+        @emit('change')
+        $.growl.notice title: "", message: "Todo updated"
+      .fail (jqXHR, textStatus, errorThrown) =>
+        $.growl.error title: "Error", message: "Error updating todo"
+        console.error textStatus, errorThrown.toString()
 
     onDeleteTodo: (payload) ->
-      id = payload.todo.id
-      delete @todos[id]
-      @emit('change')
+      id = payload.id
+      $.ajax
+        method: "DELETE"
+        url: "/todos/" + id
+      .done (data, textStatus, jqXHR) =>
+        message = @todos[id].content
+        delete @todos[id]
+        @emit('change')
+        $.growl.notice title: "Deleted", message: message
+      .fail (jqXHR, textStatus, errorThrown) =>
+        $.growl.error title: "Error", message: "Error deleting todos"
+        console.error textStatus, errorThrown.toString()
 
   # Registering our semantic actions
 
@@ -85,38 +107,11 @@ Fluxxor.todosFlux = (options) ->
     toggleTodo: (id, completed)   ->
       @dispatch(constants.TOGGLE_TODO, id: id, completed: completed)
 
-    updateTodo: (todo, new_content) ->
-      @dispatch(constants.UPDATE_TODO, todo:        todo,
-                                       new_content: new_content)
+    updateTodo: (id, new_content) ->
+      @dispatch(constants.UPDATE_TODO, id: id, new_content: new_content)
 
-      params = todo:
-                 id:        todo.id
-                 content:   new_content
-                 completed: todo.completed
-      $.ajax
-        method: "PATCH"
-        url: "/todos/" + todo.id
-        data: params
-      .done (data, textStatus, jqXHR) ->
-        $.growl.notice title: "", message: "Todo updated"
-      .fail (jqXHR, textStatus, errorThrown) ->
-        $.growl.error title: "Error", message: "Error updating todo"
-        console.error textStatus, errorThrown.toString()
-
-    deleteTodo: (todo) ->
-      @dispatch(constants.DELETE_TODO, todo: todo)
-
-      params = todo:
-                 id: todo.id
-      $.ajax
-        method: "DELETE"
-        url: "/todos/" + todo.id
-        data: params
-      .done (data, textStatus, jqXHR) ->
-        $.growl.notice title: "Deleted", message: todo.content
-      .fail (jqXHR, textStatus, errorThrown) ->
-        $.growl.error title: "Error", message: "Error deleting todos"
-        console.error textStatus, errorThrown.toString()
+    deleteTodo: (id) ->
+      @dispatch(constants.DELETE_TODO, id: id)
 
   # Instantiating our stores
 

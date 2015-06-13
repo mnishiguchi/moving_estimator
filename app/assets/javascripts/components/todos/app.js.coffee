@@ -1,10 +1,11 @@
 @initTodoList = (options) ->
-  flux = Fluxxor.todosFlux(options)
+  flux = Fluxxor.initTodosFlux(options)
 
   # The main React component (<TodoList/>)
 
   @TodoList = React.createClass
-    mixins: [Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin("TodoStore")]
+    mixins: [ Fluxxor.FluxMixin(React),
+              Fluxxor.StoreWatchMixin("TodoStore") ]
 
     getInitialState: ->
       new_todo_text: ""

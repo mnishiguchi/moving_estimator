@@ -6,11 +6,9 @@
   handleClearCompleted: (e) ->
     e.preventDefault()
     todos_wrapper = @props.flux.store('TodoStore').getState().todos
-
     if confirm("Clear all the completed items?")
       for id, todo of todos_wrapper
-        console.log todo
-        @getFlux().actions.deleteTodo(todo) if todo.completed
+        @getFlux().actions.deleteTodo(id) if todo.completed
 
   render: ->
     Navbar  = ReactBootstrap.Navbar
