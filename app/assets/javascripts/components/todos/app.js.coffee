@@ -26,12 +26,12 @@
     render: ->
 
       form =
-        <form onSubmit={@onSubmitForm}>
+        <form onSubmit={ @onSubmitForm }>
           <div className="form-group">
             <input type="text"
                    placeholder="New Todo"
-                   value={@state.newTodoText}
-                   onChange={@onChangeAddTodoText}
+                   value={ @state.newTodoText }
+                   onChange={ @onChangeAddTodoText }
                    className="form-control" />
           </div>
           <div className="form-group">
@@ -42,9 +42,9 @@
         </form>
 
       todos = for id, todo of @state.todos
-                <Todo todo={todo}
-                      key={id}
-                      flux={flux} />
+                <Todo todo={ todo }
+                      key={ id }
+                      flux={ flux } />
 
       <div className="well">
         { form }

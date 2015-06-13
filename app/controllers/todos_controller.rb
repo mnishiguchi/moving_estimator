@@ -12,9 +12,9 @@ class TodosController < ApplicationController
   end
 
   def update
-    todo = Todo.find(params[:id])
-    todo.update_attributes(todo_params)
-    render nothing: true, status:  200
+    @todo = Todo.find(params[:id])
+    @todo.update_attributes(todo_params)
+    render json: @todo
   end
 
   def destroy

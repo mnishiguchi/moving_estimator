@@ -46,9 +46,26 @@ Fluxxor.todosFlux = (options) ->
         console.error textStatus, errorThrown.toString()
 
     onToggleTodo: (payload) ->
-      id = payload.id
-      @todos[id].completed = not @todos[id].completed
-      @emit('change')
+
+      params = todo:
+                 completed: payload.completed
+      $.ajax
+        method: "PATCH"
+        url: "/todos/" + payload.id
+        data: params
+      .done (data, textStatus, jqXHR) =>
+        title = if params.todo.completed then "Completed" else "Not completed"
+        console.log data
+        todo =
+          id:        data.id
+          content:   data.content
+          completed: data.completed
+        @todos[data.id] = todo
+        @emit('change')
+        $.growl.notice title: title, message: data.content
+      .fail (jqXHR, textStatus, errorThrown) =>
+        $.growl.error title: "Error", message: "Error toggleing todo completion"
+        console.error textStatus, errorThrown.toString()
 
     onUpdateTodo: (payload) ->
       @emit('change')
@@ -65,23 +82,8 @@ Fluxxor.todosFlux = (options) ->
     addTodo:    (content) ->
       @dispatch(constants.ADD_TODO, content: content)
 
-
     toggleTodo: (id, completed)   ->
       @dispatch(constants.TOGGLE_TODO, id: id, completed: completed)
-
-      params = todo:
-                 id:        id
-                 completed: completed
-      $.ajax
-        method: "PATCH"
-        url: "/todos/" + id
-        data: params
-      .done (data, textStatus, jqXHR) ->
-        message = if params.todo.completed then "Completed" else "Not completed"
-        $.growl.notice title: "", message: message
-      .fail (jqXHR, textStatus, errorThrown) ->
-        $.growl.error title: "Error", message: "Error toggleing todo completion"
-        console.error textStatus, errorThrown.toString()
 
     updateTodo: (todo, new_content) ->
       @dispatch(constants.UPDATE_TODO, todo:        todo,
