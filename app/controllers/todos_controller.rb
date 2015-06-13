@@ -8,7 +8,7 @@ class TodosController < ApplicationController
 
   def create
     @todo = current_user.todos.create!(todo_params)
-    render nothing: true, status:  200
+    render json: @todo
   end
 
   def update

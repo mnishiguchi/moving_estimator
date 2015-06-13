@@ -20,7 +20,7 @@
       e.preventDefault()
       if @state.newTodoText.trim()
         @getFlux().actions.addTodo(@state.newTodoText)
-        @getFlux().actions.fetchTodos({})
+        # @getFlux().actions.fetchTodos({})
         @setState(newTodoText: "")
 
     render: ->

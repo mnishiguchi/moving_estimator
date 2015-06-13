@@ -3,7 +3,6 @@ Fluxxor.todosFlux = (options) ->
   # Constants (Action types)
 
   constants =
-    FETCH_TODOS: 'FETCH_TODOS'
     ADD_TODO:    'ADD_TODO'
     TOGGLE_TODO: 'TOGGLE_TODO'
     UPDATE_TODO: 'UPDATE_TODO'
@@ -18,8 +17,7 @@ Fluxxor.todosFlux = (options) ->
         for todo in options["todos"]
           @todos[todo.id] = todo
 
-      @bindActions(constants.FETCH_TODOS, @onFetchTodos,
-                   constants.ADD_TODO,    @onAddTodo,
+      @bindActions(constants.ADD_TODO,    @onAddTodo,
                    constants.TOGGLE_TODO, @onToggleTodo,
                    constants.UPDATE_TODO, @onUpdateTodo,
                    constants.DELETE_TODO, @onDeleteTodo)
@@ -27,17 +25,25 @@ Fluxxor.todosFlux = (options) ->
     getState: ->
       todos: @todos
 
-    onFetchTodos: (payload) ->
-      @emit('change')
-
     onAddTodo: (payload) ->
-      #       id = @_nextTodoId()
-      # todo =
-      #   id:       id
-      #   text:     payload.text
-      #   complete: false
-      # @todos[id] = todo
-      @emit('change')
+
+      params = todo:
+                 content: payload.content
+      $.ajax
+        method: "POST"
+        url: "/todos/"
+        data: params
+      .done (data, textStatus, jqXHR) =>
+        todo =
+          id:        data.id
+          content:   data.content
+          completed: data.completed
+        @todos[data.id] = todo
+        @emit('change')
+        $.growl.notice title: "", message: "Todo added"
+      .fail (jqXHR, textStatus, errorThrown) ->
+        $.growl.error title: "Error", message: "Error adding todo"
+        console.error textStatus, errorThrown.toString()
 
     onToggleTodo: (payload) ->
       id = payload.id
@@ -49,42 +55,16 @@ Fluxxor.todosFlux = (options) ->
 
     onDeleteTodo: (payload) ->
       id = payload.todo.id
-      @todos.remove(id)
+      delete @todos[id]
       @emit('change')
 
   # Registering our semantic actions
 
   actions =
-    fetchTodos: (data)->
-      @dispatch(constants.FETCH_TODOS, data: data)
-      console.log "[fetchTodos: (data)]"
-      $.ajax
-        url: "/todos/"
-        dataType: 'json'
-        data: data
-      .done (data, textStatus, jqXHR) ->
-        console.log data
-        @setState
-          todos: data
-        $.growl.notice title: "", message: "Todos reloaded"
-      .fail (jqXHR, textStatus, errorThrown) ->
-        $.growl.error title: "Error", message: "Error fetching todos"
-        console.error textStatus, errorThrown.toString()
 
     addTodo:    (content) ->
       @dispatch(constants.ADD_TODO, content: content)
 
-      params = todo:
-                 content: content
-      $.ajax
-        method: "POST"
-        url: "/todos/"
-        data: params
-      .done (data, textStatus, jqXHR) ->
-        $.growl.notice title: "", message: "Todo added"
-      .fail (jqXHR, textStatus, errorThrown) ->
-        $.growl.error title: "Error", message: "Error adding todo"
-        console.error textStatus, errorThrown.toString()
 
     toggleTodo: (id, completed)   ->
       @dispatch(constants.TOGGLE_TODO, id: id, completed: completed)
