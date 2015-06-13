@@ -1,5 +1,5 @@
 @initTodoList = (options) ->
-  flux = Fluxxor.getTodosFlux(options)
+  flux = Fluxxor.todosFlux(options)
 
   # The main React component (<TodoList/>)
 
@@ -15,18 +15,18 @@
 
     render: ->
 
-      todos = for todo in @state.todos
+      todos = for id, todo of @state.todos
                 <Todo todo={todo}
-                      key={todo.id}
+                      key={id}
                       flux={flux} />
 
       <div className="well">
-        <TodoNavigation todo={todos}
-                        flux={flux} />
+        <TodoNavigation todo={ todos }
+                        flux={ flux } />
         { todos }
       </div>
 
   # Rendering the whole component to the mount node
 
   if (mountNode = document.getElementById("react_todolist"))
-    React.render <TodoList flux={flux} />, mountNode
+    React.render <TodoList flux={ flux } />, mountNode

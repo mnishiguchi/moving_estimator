@@ -1,4 +1,4 @@
-Fluxxor.getTodosFlux = (options)->
+Fluxxor.todosFlux = (options) ->
 
   # Constants (Action types)
 
@@ -6,18 +6,21 @@ Fluxxor.getTodosFlux = (options)->
     ADD_TODO:    'ADD_TODO'
     TOGGLE_TODO: 'TOGGLE_TODO'
     UPDATE_TODO: 'UPDATE_TODO'
-    CLEAR_TODOS: 'CLEAR_TODOS'
+    DELETE_TODO: 'DELETE_TODO'
 
   # Stores
 
   TodoStore = Fluxxor.createStore
     initialize: ->
-      @todos = options['todos'] || []
-      console.log @todos  # debug
+      @todos = {}
+      if options.hasOwnProperty("todos")
+        for todo in options["todos"]
+          @todos[todo.id] = todo
+
       @bindActions(constants.ADD_TODO,    @onAddTodo,
                    constants.TOGGLE_TODO, @onToggleTodo,
                    constants.UPDATE_TODO, @onUpdateTodo,
-                   constants.CLEAR_TODOS, @onClearTodos)
+                   constants.DELETE_TODO, @onDeleteTodo)
 
     getState: ->
       todos: @todos
@@ -31,7 +34,7 @@ Fluxxor.getTodosFlux = (options)->
     onUpdateTodo: (payload) ->
       @emit('change')
 
-    onClearTodos: (payload) ->
+    onDeleteTodo: (payload) ->
       @emit('change')
 
   # Registering our semantic actions
@@ -88,22 +91,20 @@ Fluxxor.getTodosFlux = (options)->
         $.growl.error title: "Error", message: "Error updating todo"
         console.error textStatus, errorThrown.toString()
 
-    clearTodos: (completed_todos) ->
-      @dispatch(constants.CLEAR_TODOS)
+    deleteTodo: (todo) ->
+      @dispatch(constants.DELETE_TODO, todo: todo)
 
-      # Deleting each after double-checking the completion status.
-      for todo in completed_todos when todo.completed
-        params = todo:
-                   id: todo.id
-        $.ajax
-          method: "DELETE"
-          url: "/ingredient_suggestions/" + todo.id
-          data: params
-        .done (data, extStatus, jqXHR) ->
-          $.growl.notice title: "Deleted", message: todo.content
-        .fail (jqXHR, textStatus, errorThrown) ->
-          $.growl.error title: "Error", message: "Error deleting todos"
-          console.error textStatus, errorThrown.toString()
+      params = todo:
+                 id: todo.id
+      $.ajax
+        method: "DELETE"
+        url: "/todos/" + todo.id
+        data: params
+      .done (data, textStatus, jqXHR) ->
+        $.growl.notice title: "Deleted", message: todo.content
+      .fail (jqXHR, textStatus, errorThrown) ->
+        $.growl.error title: "Error", message: "Error deleting todos"
+        console.error textStatus, errorThrown.toString()
 
   # Instantiating our stores
 

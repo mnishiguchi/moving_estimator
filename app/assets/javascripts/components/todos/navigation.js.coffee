@@ -3,6 +3,14 @@
 @TodoNavigation = React.createClass
   mixins: [Fluxxor.FluxMixin(React)]
 
+  handleClearCompleted: (e) ->
+    e.preventDefault()
+    todos = @props.flux.store('TodoStore').getState().todos
+    if confirm("Clear all the completed items?")
+      completed_todos = todos.filter (todo) -> todo.completed
+      for t in completed_todos
+        @getFlux().actions.deleteTodo(t)
+
   render: ->
     Navbar  = ReactBootstrap.Navbar
     Nav     = ReactBootstrap.Nav
@@ -18,5 +26,5 @@
         <Button>Middle</Button>
         <Button>Right</Button>
       </ButtonGroup>
-      <Button>Clear completed</Button>
+      <Button onClick={ @handleClearCompleted }>Clear completed</Button>
     </Navbar>
