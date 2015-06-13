@@ -24,6 +24,13 @@
         # @getFlux().actions.fetchTodos({})
         @setState(newTodoText: "")
 
+    handleClearCompleted: (e) ->
+      e.preventDefault()
+      todos_wrapper = @props.flux.store('TodoStore').getState().todos
+      if confirm("Clear all the completed items?")
+        for id, todo of todos_wrapper
+          @getFlux().actions.deleteTodo(id) if todo.completed
+
     render: ->
 
       form =
@@ -42,6 +49,24 @@
           </div>
         </form>
 
+      Navbar  = ReactBootstrap.Navbar
+      Nav     = ReactBootstrap.Nav
+      NavItem = ReactBootstrap.NavItem
+      ButtonToolbar = ReactBootstrap.ButtonToolbar
+      ButtonGroup = ReactBootstrap.ButtonGroup
+      Button = ReactBootstrap.Button
+
+      navigation =
+        <Navbar>
+          1 item left
+          <ButtonGroup>
+            <Button>Left</Button>
+            <Button>Middle</Button>
+            <Button>Right</Button>
+          </ButtonGroup>
+          <Button onClick={ @handleClearCompleted }>Clear completed</Button>
+        </Navbar>
+
       todos = for id, todo of @state.todos
                 <Todo todo={ todo }
                       key={ id }
@@ -50,8 +75,8 @@
       <div className="well">
         { form }
 
-        <TodoNavigation todo={ todos }
-                        flux={ flux } />
+        { navigation }
+
         { todos }
       </div>
 
