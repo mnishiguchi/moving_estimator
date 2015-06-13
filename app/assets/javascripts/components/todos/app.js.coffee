@@ -8,7 +8,7 @@
               Fluxxor.StoreWatchMixin("TodoStore") ]
 
     getInitialState: ->
-      new_todo_text: ""
+      newTodoText: ""
 
     getStateFromFlux: ->
       flux = @getFlux()
@@ -21,32 +21,36 @@
       e.preventDefault()
       if @state.newTodoText.trim()
         @getFlux().actions.addTodo(@state.newTodoText)
-        # @getFlux().actions.fetchTodos({})
         @setState(newTodoText: "")
 
     handleClearCompleted: (e) ->
       e.preventDefault()
-      todos_wrapper = @props.flux.store('TodoStore').getState().todos
+      todos_wrapper = @getStateFromFlux().todos
       if confirm("Clear all the completed items?")
         for id, todo of todos_wrapper
           @getFlux().actions.deleteTodo(id) if todo.completed
 
+    handleSelectTodoNav: (e) ->
+      # TODO
+
     render: ->
 
-      form =
+      Button = ReactBootstrap.Button
+      Input  = ReactBootstrap.Input
+
+      add_button =
+        <Button type="submit"
+                bsStyle="primary">
+                Add Todo</Button>
+
+      add_form =
         <form onSubmit={ @onSubmitForm }>
-          <div className="form-group">
-            <input type="text"
-                   placeholder="New Todo"
-                   value={ @state.newTodoText }
-                   onChange={ @onChangeAddTodoText }
-                   className="form-control" />
-          </div>
-          <div className="form-group">
-            <input type="submit"
-                   value="Add Todo"
-                   className="btn btn-success"/>
-          </div>
+          <Input type='text'
+                 onChange={ @onChangeAddTodoText }
+                 placeholder="New Todo"
+                 ref='input'
+                 value={ @state.newTodoText }
+                 buttonAfter={ add_button } />
         </form>
 
       Navbar  = ReactBootstrap.Navbar
@@ -57,27 +61,26 @@
       Button = ReactBootstrap.Button
 
       navigation =
-        <Navbar>
-          1 item left
-          <ButtonGroup>
-            <Button>Left</Button>
-            <Button>Middle</Button>
-            <Button>Right</Button>
+        <nav className="todo_navbar" >
+          <ButtonGroup onSelect={ @handleSelectTodoNav }>
+            <Button eventKey={1}>All</Button>
+            <Button eventKey={2}>Active</Button>
+            <Button eventKey={3}>Completed</Button>
           </ButtonGroup>
-          <Button onClick={ @handleClearCompleted }>Clear completed</Button>
-        </Navbar>
+          <Button onClick={ @handleClearCompleted } className="pull-right">Clear completed</Button>
+        </nav>
 
       todos = for id, todo of @state.todos
                 <Todo todo={ todo }
                       key={ id }
                       flux={ flux } />
 
-      <div className="well">
-        { form }
-
+      <div id="todolist_wrapper">
+        { add_form }
         { navigation }
-
-        { todos }
+        <section className="todos">
+          { todos }
+        </section>
       </div>
 
   # Rendering the whole component to the mount node

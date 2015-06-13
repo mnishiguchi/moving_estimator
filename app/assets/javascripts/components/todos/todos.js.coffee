@@ -56,7 +56,7 @@
            else if @state.updated
              'success'
 
-    <form>
+    <form className="todo_item">
       <Input type='text'
              onChange={ @handleChange }
              ref='input'
