@@ -28,32 +28,20 @@ Fluxxor.initTodosFlux = (options) ->
       todos: @todos
 
     onAddTodo: (payload) ->
+      # Update UI
       new_todo = payload.new_todo
       @todos[new_todo.id] = new_todo
       @emit('change')
 
     onToggleTodo: (payload) ->
+      # Update UI
       @todos[payload.id].completed = payload.completed
       @emit('change')
 
     onUpdateTodo: (payload) ->
-      params = todo:
-                 content: payload.new_content
-      $.ajax
-        method: "PATCH"
-        url: "/todos/" + payload.id
-        data: params
-      .done (data, textStatus, jqXHR) =>
-        todo =
-          id:        data.id
-          content:   data.content
-          completed: data.completed
-        @todos[data.id] = todo
-        @emit('change')
-        $.growl.notice title: "", message: "Todo updated"
-      .fail (jqXHR, textStatus, errorThrown) =>
-        $.growl.error title: "Error", message: "Error updating todo"
-        console.error textStatus, errorThrown.toString()
+      # Update UI
+      @todos[payload.id].content = payload.new_content
+      @emit('change')
 
     onDeleteTodo: (payload) ->
       id = payload.id
@@ -73,7 +61,7 @@ Fluxxor.initTodosFlux = (options) ->
 
   actions =
 
-    # Creates a new todo to database, and updates UI on success.
+    # Creates a new todo to database. Dispatches ADD_TODO on successful Ajax.
     addTodo:    (content) ->
       params = todo:
                  content: content
@@ -92,6 +80,7 @@ Fluxxor.initTodosFlux = (options) ->
         $.growl.error title: "Error", message: "Error adding todo"
         console.error textStatus, errorThrown.toString()
 
+    # Saves a new completion status to database. Dispatches TOGGLE_TODO on successful Ajax.
     toggleTodo: (id, completed) ->
       params = todo:
                  completed: completed
@@ -107,9 +96,22 @@ Fluxxor.initTodosFlux = (options) ->
         $.growl.error title: "Error", message: "Error toggleing todo completion"
         console.error textStatus, errorThrown.toString()
 
+    # Saves a new content to database. Dispatches UPDATE_TODO on successful Ajax.
     updateTodo: (id, new_content) ->
-      @dispatch(constants.UPDATE_TODO, id: id, new_content: new_content)
+      params = todo:
+                 content: new_content
+      $.ajax
+        method: "PATCH"
+        url: "/todos/" + id
+        data: params
+      .done (data, textStatus, jqXHR) =>
+        @dispatch(constants.UPDATE_TODO, id: data.id, new_content: data.content)
+        $.growl.notice title: "", message: "Todo updated"
+      .fail (jqXHR, textStatus, errorThrown) =>
+        $.growl.error title: "Error", message: "Error updating todo"
+        console.error textStatus, errorThrown.toString()
 
+    # Deletes a todo to database. Dispatches DELETE_TODO on successful Ajax.
     deleteTodo: (id) ->
       @dispatch(constants.DELETE_TODO, id: id)
 
