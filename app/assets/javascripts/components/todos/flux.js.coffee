@@ -44,18 +44,9 @@ Fluxxor.initTodosFlux = (options) ->
       @emit('change')
 
     onDeleteTodo: (payload) ->
-      id = payload.id
-      $.ajax
-        method: "DELETE"
-        url: "/todos/" + id
-      .done (data, textStatus, jqXHR) =>
-        message = @todos[id].content
-        delete @todos[id]
-        @emit('change')
-        $.growl.notice title: "Deleted", message: message
-      .fail (jqXHR, textStatus, errorThrown) =>
-        $.growl.error title: "Error", message: "Error deleting todos"
-        console.error textStatus, errorThrown.toString()
+      # Update UI
+      delete @todos[payload.id]
+      @emit('change')
 
   # Registering our semantic actions
 
@@ -113,7 +104,15 @@ Fluxxor.initTodosFlux = (options) ->
 
     # Deletes a todo to database. Dispatches DELETE_TODO on successful Ajax.
     deleteTodo: (id) ->
-      @dispatch(constants.DELETE_TODO, id: id)
+      $.ajax
+        method: "DELETE"
+        url: "/todos/" + id
+      .done (data, textStatus, jqXHR) =>
+        @dispatch(constants.DELETE_TODO, id: data.id)
+        $.growl.notice title: "Deleted", message: data.content
+      .fail (jqXHR, textStatus, errorThrown) =>
+        $.growl.error title: "Error", message: "Error deleting todos"
+        console.error textStatus, errorThrown.toString()
 
   # Instantiating our stores
 
