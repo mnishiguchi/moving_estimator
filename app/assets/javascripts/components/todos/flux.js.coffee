@@ -28,23 +28,9 @@ Fluxxor.initTodosFlux = (options) ->
       todos: @todos
 
     onAddTodo: (payload) ->
-      params = todo:
-                 content: payload.content
-      $.ajax
-        method: "POST"
-        url: "/todos/"
-        data: params
-      .done (data, textStatus, jqXHR) =>
-        todo =
-          id:        data.id
-          content:   data.content
-          completed: data.completed
-        @todos[data.id] = todo
-        @emit('change')
-        $.growl.notice title: "", message: "Todo added"
-      .fail (jqXHR, textStatus, errorThrown) =>
-        $.growl.error title: "Error", message: "Error adding todo"
-        console.error textStatus, errorThrown.toString()
+      new_todo = payload.new_todo
+      @todos[new_todo.id] = new_todo
+      @emit('change')
 
     onToggleTodo: (payload) ->
       params = todo:
@@ -104,7 +90,22 @@ Fluxxor.initTodosFlux = (options) ->
   actions =
 
     addTodo:    (content) ->
-      @dispatch(constants.ADD_TODO, content: content)
+      params = todo:
+                 content: content
+      $.ajax
+        method: "POST"
+        url: "/todos/"
+        data: params
+      .done (data, textStatus, jqXHR) =>
+        new_todo =
+          id:        data.id
+          content:   data.content
+          completed: data.completed
+        @dispatch(constants.ADD_TODO, new_todo: new_todo)
+        $.growl.notice title: "", message: "Todo added"
+      .fail (jqXHR, textStatus, errorThrown) =>
+        $.growl.error title: "Error", message: "Error adding todo"
+        console.error textStatus, errorThrown.toString()
 
     toggleTodo: (id, completed) ->
       @dispatch(constants.TOGGLE_TODO, id: id, completed: completed)
