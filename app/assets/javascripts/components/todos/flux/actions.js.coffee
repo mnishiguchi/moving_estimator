@@ -1,56 +1,8 @@
-@todolistFlux = {}
-
-# Constants (Action types)
-
-todolistFlux["constants"] =
-  ADD_TODO:    'ADD_TODO'
-  TOGGLE_TODO: 'TOGGLE_TODO'
-  UPDATE_TODO: 'UPDATE_TODO'
-  DELETE_TODO: 'DELETE_TODO'
-
-# Stores
-
-todolistFlux["stores"] =
-
-  TodoStore: Fluxxor.createStore
-    initialize: (todos) ->
-      @todos = {}
-      if todos
-        for todo in todos
-          @todos[todo.id] = todo
-
-      @bindActions(todolistFlux.constants.ADD_TODO,    @onAddTodo,
-                   todolistFlux.constants.TOGGLE_TODO, @onToggleTodo,
-                   todolistFlux.constants.UPDATE_TODO, @onUpdateTodo,
-                   todolistFlux.constants.DELETE_TODO, @onDeleteTodo)
-
-    getState: ->
-      todos: @todos
-
-    onAddTodo: (payload) ->
-      # Update UI
-      new_todo = payload.new_todo
-      @todos[new_todo.id] = new_todo
-      @emit('change')
-
-    onToggleTodo: (payload) ->
-      # Update UI
-      @todos[payload.id].completed = payload.completed
-      @emit('change')
-
-    onUpdateTodo: (payload) ->
-      # Update UI
-      @todos[payload.id].content = payload.new_content
-      @emit('change')
-
-    onDeleteTodo: (payload) ->
-      # Update UI
-      delete @todos[payload.id]
-      @emit('change')
+@todolistFlux ||= {}
 
 # Semantic actions
 
-todolistFlux["actions"] =
+@todolistFlux["actions"] =
 
   # Creates a new todo to database. Dispatches ADD_TODO on successful Ajax.
   addTodo:    (content) ->
@@ -113,20 +65,3 @@ todolistFlux["actions"] =
     .fail (jqXHR, textStatus, errorThrown) =>
       $.growl.error title: "Error", message: "Error deleting todos"
       console.error textStatus, errorThrown.toString()
-
-# Initializer
-
-todolistFlux["init"] = (options) ->
-
-  # Instantiates the stores
-  stores =
-    TodoStore: new todolistFlux.stores.TodoStore(options["todos"])
-
-  # Instantiates the flux with the stores and actions
-  flux = new Fluxxor.Flux(stores, todolistFlux.actions)
-
-  # Logging for the "dispatch" event
-  flux.on 'dispatch', (type, payload) ->
-    console.log "[Dispatch]", type, payload if console?.log?
-
-  return flux
