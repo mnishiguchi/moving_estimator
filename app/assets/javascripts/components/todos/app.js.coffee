@@ -5,8 +5,8 @@
 
   # Instantiates the flux.
 
-  flux = Fluxxor.initTodosFlux(options)
-  Fluxxor["todosFlux"] = flux  # Makes this flux object globally accessible.
+  flux = todolistFlux["init"](options)
+  constants = todolistFlux["constants"]
 
   # The main React component (<TodoList/>)
 
