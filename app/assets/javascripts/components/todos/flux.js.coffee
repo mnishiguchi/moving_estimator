@@ -33,24 +33,8 @@ Fluxxor.initTodosFlux = (options) ->
       @emit('change')
 
     onToggleTodo: (payload) ->
-      params = todo:
-                 completed: payload.completed
-      $.ajax
-        method: "PATCH"
-        url: "/todos/" + payload.id
-        data: params
-      .done (data, textStatus, jqXHR) =>
-        title = if params.todo.completed then "Completed" else "Not completed"
-        todo =
-          id:        data.id
-          content:   data.content
-          completed: data.completed
-        @todos[data.id] = todo
-        @emit('change')
-        $.growl.notice title: title, message: data.content
-      .fail (jqXHR, textStatus, errorThrown) =>
-        $.growl.error title: "Error", message: "Error toggleing todo completion"
-        console.error textStatus, errorThrown.toString()
+      @todos[payload.id].completed = payload.completed
+      @emit('change')
 
     onUpdateTodo: (payload) ->
       params = todo:
@@ -89,6 +73,7 @@ Fluxxor.initTodosFlux = (options) ->
 
   actions =
 
+    # Creates a new todo to database, and updates UI on success.
     addTodo:    (content) ->
       params = todo:
                  content: content
@@ -108,7 +93,19 @@ Fluxxor.initTodosFlux = (options) ->
         console.error textStatus, errorThrown.toString()
 
     toggleTodo: (id, completed) ->
-      @dispatch(constants.TOGGLE_TODO, id: id, completed: completed)
+      params = todo:
+                 completed: completed
+      $.ajax
+        method: "PATCH"
+        url: "/todos/" + id
+        data: params
+      .done (data, textStatus, jqXHR) =>
+        title = if data.completed then "Completed" else "Not completed"
+        @dispatch(constants.TOGGLE_TODO, id: data.id, completed: data.completed)
+        $.growl.notice title: title, message: data.content
+      .fail (jqXHR, textStatus, errorThrown) =>
+        $.growl.error title: "Error", message: "Error toggleing todo completion"
+        console.error textStatus, errorThrown.toString()
 
     updateTodo: (id, new_content) ->
       @dispatch(constants.UPDATE_TODO, id: id, new_content: new_content)
