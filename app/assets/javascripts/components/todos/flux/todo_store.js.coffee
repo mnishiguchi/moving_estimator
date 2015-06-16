@@ -7,11 +7,12 @@
   TodoStore: Fluxxor.createStore
     initialize: (todos) ->
       @todos = {}
-      @completedItems = []
+      @idsCompleted = []
+      @idsNotDone = []
       if todos
         for todo in todos
           @todos[todo.id] = todo
-          @completedItems.push(todo.id) if todo.completed
+          # if todo.completed then @idsCompleted.push(todo.id) else @idsNotDone.push(todo.id)
 
       @bindActions(todolistFlux.constants.ADD_TODO,    @onAddTodo,
                    todolistFlux.constants.TOGGLE_TODO, @onToggleTodo,
@@ -34,6 +35,10 @@
       # Update UI
       @todos[payload.id].completed = payload.completed
       @emit('change')
+      for todo in @allTodos
+        @idsCompleted = []
+        @idsNotDone = []
+        if todo.completed then @idsCompleted.push(todo.id) else @idsNotDone.push(todo.id)
 
     onUpdateTodo: (payload) ->
       # Update UI
@@ -45,14 +50,19 @@
       delete @todos[payload.id]
       @emit('change')
 
-    onFilterAll: (payload) ->
+    onFilterAll: ->
       # Update UI
-      @emit('change')
+      # @todos = @allTodos
+      # @emit('change')
 
-    onFilterCompleted: (payload) ->
+    onFilterCompleted: ->
       # Update UI
-      @emit('change')
+      # @todos = {}
+      # @todos[id] = @allTodos[id] for id in @idsCompleted
+      # @emit('change')
 
-    onFilterNotDone: (payload) ->
+    onFilterNotDone: ->
       # Update UI
-      @emit('change')
+      # @todos = {}
+      # @todos[id] = @allTodos[id] for id in @idsNotDone
+      # @emit('change')
