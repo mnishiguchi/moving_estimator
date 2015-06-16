@@ -16,6 +16,7 @@
 
     getInitialState: ->
       newTodoText: ""
+      filterMode: "all"
 
     getStateFromFlux: ->
       flux = @getFlux()
