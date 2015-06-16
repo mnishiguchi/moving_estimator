@@ -1,6 +1,6 @@
 # The sub-component <TodoItem />
 
-@Todo = React.createClass
+@TodoItem = React.createClass
   mixins: [Fluxxor.FluxMixin(React)]
 
   getInitialState: ->

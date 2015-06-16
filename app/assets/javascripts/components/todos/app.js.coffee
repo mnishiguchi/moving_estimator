@@ -5,8 +5,8 @@
 
   # Instantiates the flux.
 
-  flux = todolistFlux["init"](options)
-  constants = todolistFlux["constants"]
+  flux = todolistFlux.init(options)
+  constants = todolistFlux.constants
 
   # The main React component (<TodoList/>)
 
@@ -73,7 +73,7 @@
 
       createTodoItems = (todos) ->
         for id, todo of todos
-          <Todo todo={ todo } key={ id } />
+          <TodoItem todo={ todo } key={ id } />
 
       <div id="todolist_wrapper">
         { add_form }
