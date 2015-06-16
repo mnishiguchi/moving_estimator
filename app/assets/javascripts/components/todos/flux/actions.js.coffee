@@ -65,12 +65,3 @@
     .fail (jqXHR, textStatus, errorThrown) =>
       $.growl.error title: "Error", message: "Error deleting todos"
       console.error textStatus, errorThrown.toString()
-
-  filterAll: ->
-    @dispatch(todolistFlux.constants.FILTER_ALL)
-
-  filterCompleted: ->
-    @dispatch(todolistFlux.constants.FILTER_COMPLETED)
-
-  filterNotDone: ->
-    @dispatch(todolistFlux.constants.FILTER_NOT_DONE)

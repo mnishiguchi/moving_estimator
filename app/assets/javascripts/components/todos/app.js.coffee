@@ -39,16 +39,20 @@
           @getFlux().actions.deleteTodo(id) if todo.completed
 
     handleSelectTodoNav: (selectedKey) ->
-      console.log "selectedKey: " + selectedKey
       if selectedKey is 1
-        @getFlux().actions.filterAll()
         @setState(filterMode: 1)
       else if selectedKey is 2
-        @getFlux().actions.filterNotDone()
         @setState(filterMode: 2)
       else if selectedKey is 3
-        @getFlux().actions.filterCompleted()
         @setState(filterMode: 3)
+
+    todoFilter: (todo) ->
+      if @state.filterMode is 1
+        true
+      else if @state.filterMode is 2
+        if todo.completed then false else true
+      else if @state.filterMode is 3
+        if todo.completed then true else false
 
     render: ->
 
@@ -82,9 +86,9 @@
           </Nav>
         </nav>
 
-      createTodoItems = (todos) ->
-        for id, todo of todos
-          <TodoItem todo={ todo } key={ id } />
+      createTodoItems = (todos) =>
+        for id, todo of todos when @todoFilter(todo)
+            <TodoItem key={ id } todo={ todo } />
 
       <div id="todolist_wrapper">
         { add_form }
