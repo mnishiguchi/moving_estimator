@@ -1,23 +1,26 @@
 {
-  "name":        "moving_estimator",
-  "version":     "1.0.0",
+  "name": "moving_estimator",
+  "version": "1.0.0",
   "description": "== README",
-  "main":        "index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author":   "Masatoshi Nishiguchi",
+  "author": "Masatoshi Nishiguchi",
   "homepage": "https://bitbucket.org/mnishiguchi/moving_estimator#readme",
   "repository": {
     "type": "git",
-    "url":  "git+ssh://git@bitbucket.org/mnishiguchi/moving_estimator.git"
+    "url": "git+ssh://git@bitbucket.org/mnishiguchi/moving_estimator.git"
   },
-  "license":      "MIT",
+  "license": "MIT",
   "dependencies": {
     "browserify": "~> 6.3",
-    "coffeeify":  "^1.1.0"
+    "coffeeify": "~> 0.6"
   },
   "devDependencies": {
+    "browserify": "^6.3.4",
+    "browserify-incremental": "^3.0.1",
+    "coffeeify": "^0.6.0"
   },
   "engines": {
     "node": ">= 0.10"
