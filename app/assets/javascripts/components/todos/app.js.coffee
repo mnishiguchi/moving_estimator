@@ -1,11 +1,32 @@
+TodoStore   = require('./stores/todo_store')
+TodoActions = require('./actions/todo_actions')
+
+initTodoFlux = (options) ->
+
+  # Instantiates the stores
+  stores =
+    TodoStore: new TodoStore(options["todos"])
+
+  # Actions
+  actions = TodoActions
+
+  # Instantiates the flux with the stores and actions
+  flux = new Fluxxor.Flux(stores, actions)
+
+  # Logging for the "dispatch" event
+  flux.on 'dispatch', (type, payload) ->
+    console.log "[Dispatch]", type, payload if console?.log?
+
+  return flux
+
 # Invoked in a Rails template with JSON data passed in.
 # Initializes the todolist component with the provided options.
 
-@initTodoList = (options) ->
+React._initTodoApp = (options) ->
 
   # Instantiates the flux.
 
-  flux = todolistFlux.init(options)
+  flux = initTodoFlux(options)
 
   # The controller(main) component (<TodoList/>)
 
