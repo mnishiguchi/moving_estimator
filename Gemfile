@@ -36,6 +36,7 @@ gem 'gibbon',                  '~> 1.1.5'   # A wrapper for MailChimp API 2.0 an
 gem 'faker',                   '~> 1.4.3'   # Generates sample users.
 gem 'growl',                   '~> 1.0.3'   # Growlnotifies bindings.
 gem 'pg_search',               '~> 1.0.3'   # Named scopes that take advantage of PostgreSQL's full text search
+gem 'browserify-rails',        '~> 1.0.1'   # Adds CommonJS module support to Sprockets (via Browserify)
 
 group :development do
   gem 'dotenv-rails',       '~> 2.0.1'  # Autoloads dotenv in Rails.
