@@ -2,7 +2,7 @@ constants = require('../constants/todo_constants')
 
 # Semantic actions
 
-module.exports =
+TodoActions =
 
   # Creates a new todo to database. Dispatches ADD_TODO on successful Ajax.
   addTodo:    (content) ->
@@ -65,3 +65,5 @@ module.exports =
     .fail (jqXHR, textStatus, errorThrown) =>
       $.growl.error title: "Error", message: "Error deleting todos"
       console.error textStatus, errorThrown.toString()
+
+module.exports = TodoActions

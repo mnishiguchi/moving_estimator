@@ -18,10 +18,8 @@
     "coffeeify":  "^1.1.0"
   },
   "devDependencies": {
-    "browserify-incremental": "^1.4.0"
   },
   "engines": {
     "node": ">= 0.10"
   }
 }
-

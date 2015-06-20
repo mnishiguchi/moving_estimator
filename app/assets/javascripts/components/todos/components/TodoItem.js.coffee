@@ -1,5 +1,6 @@
-# The sub-component <TodoItem />
+# <TodoItem />
 
+# module.exports = React.createClass
 @TodoItem = React.createClass
   mixins: [Fluxxor.FluxMixin(React)]
 
@@ -38,6 +39,7 @@
 
     Button = ReactBootstrap.Button
     Input  = ReactBootstrap.Input
+
     isChecked = if @state.completed then "fa fa-check-square-o" else "fa fa-square-o"
 
     checkbox =
@@ -64,5 +66,3 @@
              addonAfter={ update_button if @state.changed }
              bsStyle={ type } />
     </form>
-
-# module.exports = TodoItem

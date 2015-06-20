@@ -1,8 +1,6 @@
-constants = require '../constants/todo_constants'
+constants = require('../constants/todo_constants')
 
-# Todo store
-
-module.exports = Fluxxor.createStore
+TodoStore = Fluxxor.createStore
 
   initialize: (todos) ->
     @todos = {}
@@ -38,3 +36,5 @@ module.exports = Fluxxor.createStore
     # Update UI
     delete @todos[payload.id]
     @emit('change')
+
+module.exports = TodoStore
