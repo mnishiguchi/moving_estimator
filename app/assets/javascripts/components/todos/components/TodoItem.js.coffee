@@ -1,7 +1,6 @@
 # <TodoItem />
 
-# module.exports = React.createClass
-@TodoItem = React.createClass
+module.exports = React.createClass
   mixins: [Fluxxor.FluxMixin(React)]
 
   getInitialState: ->

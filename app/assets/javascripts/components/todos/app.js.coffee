@@ -1,6 +1,6 @@
 TodoStore   = require('./stores/todo_store')
 TodoActions = require('./actions/todo_actions')
-# TodoApp     = require('./components/TodoApp')
+TodoApp     = require('./components/TodoApp')
 
 # Instantiates the flux with data passed in from Rails.
 

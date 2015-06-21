@@ -12,4 +12,4 @@ Rails.application.config.assets.version = '1.0'
 
 # Command line options used when running browserify
 Rails.application.config.browserify_rails.commandline_options =
-  "-t coffee-reactify --extension=\".coffee\""
+  "-t coffee-reactify --extension=\".js.coffee\""
