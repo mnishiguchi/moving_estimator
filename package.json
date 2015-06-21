@@ -14,13 +14,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "browserify": "~> 6.3",
-    "coffeeify": "~> 0.6"
   },
   "devDependencies": {
     "browserify": "^6.3.4",
     "browserify-incremental": "^3.0.1",
-    "coffeeify": "^0.6.0"
+    "coffee-reactify": "^3.0.0"
   },
   "engines": {
     "node": ">= 0.10"
