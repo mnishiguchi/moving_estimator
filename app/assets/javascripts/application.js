@@ -15,6 +15,3 @@
 //= require sb_admin_2
 //= require metisMenu
 //= require growl
-//
-// App js files
-//= require_tree .
