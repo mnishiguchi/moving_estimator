@@ -13,12 +13,12 @@
     "url": "git+ssh://git@bitbucket.org/mnishiguchi/moving_estimator.git"
   },
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "browserify": "^6.3.4",
     "browserify-incremental": "^3.0.1",
-    "coffee-reactify": "^3.0.0"
+    "coffee-reactify": "^3.0.0",
+    "coffeeify": "^1.1.0"
   },
   "engines": {
     "node": ">= 0.10"
