@@ -3,7 +3,10 @@ constants = require('../constants/ingredient_constants')
 IngredientStore = Fluxxor.createStore
 
   initialize: (ingredients) ->
-    @ingredients = ingredients || []
+    @ingredients = {}
+    if ingredients
+      for ingredient in ingredients
+        @ingredients[ingredient.id] = ingredient
     @bindActions(constants.UPDATE_INGREDIENT, @onUpdateIngredient,
                  constants.DELETE_INGREDIENT, @onDeleteIngredient)
 
@@ -11,12 +14,11 @@ IngredientStore = Fluxxor.createStore
     ingredients: @ingredients
 
   onUpdateIngredient: (payload) ->
-    payload.ingredient.name = payload.new_name
+    @ingredients[payload.id].new_name = payload.new_name
     @emit('change')
 
   onDeleteIngredient: (payload) ->
-    @ingredients = @ingredients.filter (ingredient) ->
-      ingredient.id isnt payload.ingredient.id
+    delete @ingredients[payload.id]
     @emit('change')
 
 module.exports = IngredientStore

@@ -1,6 +1,6 @@
 # <IngredientSuggestion/>
 
-module.exports =  React.createClass
+IngredientSuggestion =  React.createClass
   mixins: [Fluxxor.FluxMixin(React)]
 
   getInitialState: ->
@@ -19,13 +19,13 @@ module.exports =  React.createClass
   handleUpdate: (e) ->
     e.preventDefault()
     input = @refs.input.getValue()
-    @getFlux().actions.updateIngredient(@props.ingredient, input)
+    @getFlux().actions.updateIngredient(@props.ingredient.id, input)
     @setState(changed: false, updated: true, saved_value: input)
 
   handleDelete: (e) ->
     e.preventDefault()
     if confirm("Delete " + @state.saved_value + "?")
-      @getFlux().actions.deleteIngredient(@props.ingredient)
+      @getFlux().actions.deleteIngredient(@props.ingredient.id)
 
   handleCancelChange: (e) ->
     e.preventDefault()
@@ -61,3 +61,5 @@ module.exports =  React.createClass
              addonAfter={update_button if @state.changed}
              bsStyle={type}/>
     </form>
+
+module.exports = IngredientSuggestion

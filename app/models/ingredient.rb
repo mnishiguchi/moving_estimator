@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: ingredient_suggestions
+# Table name: ingredients
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -8,6 +8,6 @@
 #  updated_at :datetime         not null
 #
 
-class IngredientSuggestion < ActiveRecord::Base
+class Ingredient < ActiveRecord::Base
   scope :sorted, ->{ order(name: :asc) }
 end
