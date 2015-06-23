@@ -4,9 +4,9 @@
   Edit ingredient suggestions
 
 .well
-  #IngredientSuggestionsEditor
+  #react_ingredient_editor
 
 :coffee
 
   $(document).on "page:change", ->
-    loadIngredientSuggestionsEditor(#{@ingredients})
+    React._initIngredientEditorApp(ingredients: #{@ingredients})

@@ -1,6 +1,6 @@
-# The sub-component <IngredientSuggestion/>
+# <IngredientSuggestion/>
 
-@IngredientSuggestion = React.createClass
+module.exports =  React.createClass
   mixins: [Fluxxor.FluxMixin(React)]
 
   getInitialState: ->
