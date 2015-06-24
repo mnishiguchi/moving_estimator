@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: ingredient_suggestions
+# Table name: ingredients
 #
 #  id         :integer          not null, primary key
 #  name       :string

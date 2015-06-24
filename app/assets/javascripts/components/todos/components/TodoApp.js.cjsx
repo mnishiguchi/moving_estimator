@@ -1,6 +1,6 @@
 TodoItem       = require('./TodoItem')
 
-# <TodoApp /> - The controller component
+# <TodoApp /> The controller component
 
 TodoApp = React.createClass
   mixins: [ Fluxxor.FluxMixin(React),

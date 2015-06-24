@@ -2,6 +2,8 @@ class TodosController < ApplicationController
 
   before_action :authenticate_user! # all actions
 
+  # TODO - structure JSON so it won't dump all data (jbuilder etc)
+
   # The todo list page. Provides the todo list component with JSON data.
   def index
     @todos = current_user.todos.select(:id, :content, :completed).to_json

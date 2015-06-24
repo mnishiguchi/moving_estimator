@@ -26,5 +26,5 @@ end
 
 99.times do |n|
   name  = Faker::Commerce.product_name
-  IngredientSuggestion.create!(name: name)
+  Ingredient.create!(name: name)
 end
