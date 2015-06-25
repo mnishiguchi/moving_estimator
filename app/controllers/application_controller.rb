@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    # Makes current_user accessible in User model
+    # Makes current_user accessible in User model.
     def set_current_user
       User.current_user = current_user
     end

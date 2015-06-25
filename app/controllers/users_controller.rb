@@ -17,7 +17,6 @@ class UsersController < ApplicationController
 
   # Each user's dashboard
   def show
-    # Todo app's initial data
     @todos = Todo.getInitialData
   end
 

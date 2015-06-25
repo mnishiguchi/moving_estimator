@@ -4,7 +4,7 @@ class TodosController < ApplicationController
 
   # Initializes the todo app with initial JSON data.
   def index
-    @todos = current_user.todos.select(:id, :content, :completed, :created_at).to_json
+    @todos = Todo.getInitialData
   end
 
   # Creates a new todo item via Ajax.
