@@ -6,8 +6,6 @@ class UsersController < ApplicationController
 
   # A list of all users (for admin only)
   def index
-    # @users = User.all.paginate(page: params[:page])
-
     # For exporting csv
     respond_to do |format|
       format.html
@@ -19,6 +17,8 @@ class UsersController < ApplicationController
 
   # Each user's dashboard
   def show
+    # Todo app's initial data
+    @todos = Todo.getInitialData
   end
 
   def destroy

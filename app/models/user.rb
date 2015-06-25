@@ -49,16 +49,29 @@ class User < ActiveRecord::Base
                     }
                   }
 
-  # For exporting csv
-  def self.to_csv(options = {})  # e.g., headers
-    attributes = %w(id username sign_in_count created_at confirmed_at updated_at)
+  class << self
 
-    CSV.generate(options) do |csv|
-      csv << attributes
+    # For exporting csv
+    def to_csv(options = {})  # e.g., headers
+      attributes = %w(id username sign_in_count created_at confirmed_at updated_at)
 
-      all.each do |user|
-        csv << attributes.map{ |attr| user.send(attr) }
+      CSV.generate(options) do |csv|
+        csv << attributes
+
+        all.each do |user|
+          csv << attributes.map{ |attr| user.send(attr) }
+        end
       end
+    end
+
+    # Sets current user in Thread.
+    def current_user=(user)
+      Thread.current[:current_user] = user
+    end
+
+    # Gets current user from Thread.
+    def current_user
+      Thread.current[:current_user]
     end
   end
 end

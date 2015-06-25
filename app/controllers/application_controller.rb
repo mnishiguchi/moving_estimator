@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_current_user
 
   protected
 
@@ -23,5 +24,10 @@ class ApplicationController < ActionController::Base
         redirect_to root_path
         return false
       end
+    end
+
+    # Makes current_user accessible in User model
+    def set_current_user
+      User.current_user = current_user
     end
 end

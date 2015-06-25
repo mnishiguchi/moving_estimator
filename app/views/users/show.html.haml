@@ -13,6 +13,7 @@
       .col-lg-12
         = render 'layouts/flash_message'
 
+    #react_todolist
     = render 'sb_admin_2/colorful_panels'
 
     .row
@@ -20,3 +21,8 @@
         = render 'sb_admin_2/tasks_panel'
       .col-lg-6
         = render 'sb_admin_2/transactions_panel'
+
+:coffee
+
+  $(document).on "page:change", ->
+    React._initTodoApp(todos: #{ @todos })
