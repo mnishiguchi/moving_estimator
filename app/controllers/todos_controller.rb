@@ -3,6 +3,7 @@ class TodosController < ApplicationController
   before_action :authenticate_user! # all actions
 
   # TODO - structure JSON so it won't dump all data (jbuilder etc)
+  # TODO - make TodosController be purely API without view
 
   # The todo list page. Provides the todo list component with JSON data.
   def index
