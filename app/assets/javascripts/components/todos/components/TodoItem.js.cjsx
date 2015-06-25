@@ -45,7 +45,7 @@ TodoItem = React.createClass
     checkbox =
       <i className={ isChecked } onClick={ @handleToggleCompleted }></i>
 
-    update_button =
+    updateButton =
       <div>
         <a onClick={ @handleUpdate }>Update</a>
         &nbsp; | &nbsp;
@@ -63,7 +63,7 @@ TodoItem = React.createClass
              ref='input'
              value={ @state.value }
              addonBefore={ checkbox }
-             addonAfter={ update_button if @state.changed }
+             addonAfter={ updateButton if @state.changed }
              bsStyle={ type } />
     </form>
 

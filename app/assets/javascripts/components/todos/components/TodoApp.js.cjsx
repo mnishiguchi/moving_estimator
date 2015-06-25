@@ -1,4 +1,4 @@
-TodoItem       = require('./TodoItem')
+TodoItem = require('./TodoItem')
 
 # <TodoApp /> The controller component
 
@@ -52,17 +52,17 @@ TodoApp = React.createClass
     Button      = ReactBootstrap.Button
     Input       = ReactBootstrap.Input
 
-    add_button =
+    addButton =
       <Button type="submit" bsStyle="primary">Add Todo</Button>
 
-    add_form =
+    addForm =
       <form onSubmit={ @handleSubmitForm } id="add_form">
         <Input type='text'
                onChange={ @handleChangeAddTodoText }
                placeholder="New Todo"
                ref='input'
                value={ @state.newTodoText }
-               buttonAfter={ add_button } />
+               buttonAfter={ addButton } />
       </form>
 
     navigation =
@@ -80,7 +80,7 @@ TodoApp = React.createClass
         <TodoItem key={ id } todo={ todo } />
 
     <div id="todolist_wrapper">
-      { add_form }
+      { addForm }
       { navigation }
       <div id="todo_items_wrapper">
         { createTodoItems(@state.todos) }
