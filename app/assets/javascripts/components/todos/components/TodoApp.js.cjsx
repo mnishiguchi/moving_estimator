@@ -25,12 +25,11 @@ TodoApp = React.createClass
 
   handleClearCompleted: (e) ->
     e.preventDefault()
-    todos_wrapper = @getStateFromFlux().todos
     if confirm("Clear all the completed items?")
-      for id, todo of todos_wrapper
+      for id, todo of @getStateFromFlux().todos
         @getFlux().actions.deleteTodo(id) if todo.completed
 
-  handleSelectTodoNav: (selectedKey) ->
+  handleSelectFilter: (selectedKey) ->
     switch selectedKey
       when 1 then @setState(filterMode: 1)
       when 2 then @setState(filterMode: 2)
@@ -69,7 +68,7 @@ TodoApp = React.createClass
     navigation =
       <nav id="todo_navbar" >
         <Button onClick={ @handleClearCompleted } className="pull-right">Clear completed</Button>
-        <Nav bsStyle='pills' activeKey={ @state.filterMode } onSelect={ @handleSelectTodoNav }>
+        <Nav bsStyle='pills' activeKey={ @state.filterMode } onSelect={ @handleSelectFilter }>
           <NavItem eventKey={1}>All</NavItem>
           <NavItem eventKey={2}>Active</NavItem>
           <NavItem eventKey={3}>Completed</NavItem>
