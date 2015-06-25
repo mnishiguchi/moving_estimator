@@ -77,7 +77,7 @@ TodoApp = React.createClass
 
     createTodoItems = (todos) =>
       for id, todo of todos when @todoFilter(todo)
-          <TodoItem key={ id } todo={ todo } />
+        <TodoItem key={ id } todo={ todo } />
 
     <div id="todolist_wrapper">
       { add_form }
