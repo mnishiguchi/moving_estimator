@@ -2,31 +2,25 @@ class TodosController < ApplicationController
 
   before_action :authenticate_user! # all actions
 
-  # TODO - structure JSON so it won't dump all data (jbuilder etc)
-  # TODO - make TodosController be purely API without view
-
-  # The todo list page. Provides the todo list component with JSON data.
+  # Initializes the todo app with initial JSON data.
   def index
-    @todos = current_user.todos.select(:id, :content, :completed).to_json
+    @todos = current_user.todos.select(:id, :content, :completed, :created_at).to_json
   end
 
   # Creates a new todo item via Ajax.
   def create
     @todo = current_user.todos.create!(todo_params)
-    render json: @todo
   end
 
   # Updates a todo item via Ajax.
   def update
     @todo = Todo.find(params[:id])
     @todo.update_attributes(todo_params)
-    render json: @todo
   end
 
   # Destroys a todo item specified by id via Ajax.
   def destroy
     @todo = Todo.find(params[:id]).destroy
-    render json: @todo
   end
 
   private

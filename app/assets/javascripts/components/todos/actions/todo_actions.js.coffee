@@ -12,12 +12,13 @@ TodoActions =
       data:   todo:
                 content: content
     .done (data, textStatus, jqXHR) =>
+      console.log data
       new_todo =
-        id:        data.id
-        content:   data.content
-        completed: data.completed
+        id:        data.todo.id
+        content:   data.todo.content
+        completed: data.todo.completed
       @dispatch(constants.ADD_TODO, new_todo: new_todo)
-      $.growl.notice title: "Todo added", message: data.content
+      $.growl.notice title: "Todo added", message: data.todo.content
     .fail (jqXHR, textStatus, errorThrown) =>
       $.growl.error title: "Error", message: "Error adding todo"
       console.error textStatus, errorThrown.toString()
@@ -31,8 +32,8 @@ TodoActions =
       data:   todo:
                 completed: completed
     .done (data, textStatus, jqXHR) =>
-      title = if data.completed then "Completed" else "Not completed"
-      $.growl.notice title: title, message: data.content
+      title = if data.todo.completed then "Completed" else "Not completed"
+      $.growl.notice title: title, message: data.todo.content
     .fail (jqXHR, textStatus, errorThrown) =>
       $.growl.error title: "Error", message: "Error toggleing todo completion"
       console.error textStatus, errorThrown.toString()
@@ -58,7 +59,7 @@ TodoActions =
       method: "DELETE"
       url:    "/todos/" + id
     .done (data, textStatus, jqXHR) =>
-      $.growl.notice title: "Deleted", message: data.content
+      $.growl.notice title: "Deleted", message: data.todo.content
     .fail (jqXHR, textStatus, errorThrown) =>
       $.growl.error title: "Error", message: "Error deleting todos"
       console.error textStatus, errorThrown.toString()
