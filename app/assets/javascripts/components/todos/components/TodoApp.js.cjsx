@@ -31,20 +31,18 @@ TodoApp = React.createClass
         @getFlux().actions.deleteTodo(id) if todo.completed
 
   handleSelectTodoNav: (selectedKey) ->
-    if selectedKey is 1
-      @setState(filterMode: 1)
-    else if selectedKey is 2
-      @setState(filterMode: 2)
-    else if selectedKey is 3
-      @setState(filterMode: 3)
+    switch selectedKey
+      when 1 then @setState(filterMode: 1)
+      when 2 then @setState(filterMode: 2)
+      when 3 then @setState(filterMode: 3)
 
   todoFilter: (todo) ->
-    if @state.filterMode is 1
-      true
-    else if @state.filterMode is 2
-      if todo.completed then false else true
-    else if @state.filterMode is 3
-      if todo.completed then true else false
+    switch @state.filterMode
+      when 1 then true
+      when 2
+        if todo.completed then false else true
+      when 3
+        if todo.completed then true else false
 
   render: ->
 
