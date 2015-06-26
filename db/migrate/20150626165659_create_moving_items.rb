@@ -3,7 +3,7 @@ class CreateMovingItems < ActiveRecord::Migration
     create_table :moving_items do |t|
       t.references :moving, index: true, foreign_key: true
       t.string :name
-      t.float :vol
+      t.float :volume
       t.integer :quantity
       t.text :description
       t.text :room
