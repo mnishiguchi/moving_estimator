@@ -28,7 +28,6 @@ gem 'font-awesome-rails',      '~> 4.3.0.0' # For icons.
 gem 'haml-rails',              '~> 0.9.0'   # For HAML.
 gem 'react-rails',             '~> 1.0.0'   # Compiles JSX.
 gem 'sprockets-coffee-react',  '~> 3.0.1'   # Preprocessor for Coffeescript with React JSX (CJSX).
-gem 'masonry-rails',           '~> 0.2.4'   # Grid layouts
 # Others
 gem 'jquery-turbolinks',       '~> 0.2.1'   # For jQuery to work with turbolinks.
 gem 'devise',                  '~> 3.4.1'   # Authentication
@@ -40,7 +39,7 @@ gem 'browserify-rails',        '~> 1.0.1'   # Adds CommonJS module support to Sp
 
 group :development do
   gem 'dotenv-rails',       '~> 2.0.1'  # Autoloads dotenv in Rails.
-  gem 'rails-erd',          '~> 1.3.1'  # For printing an entity-relationship diagram for models.
+  gem 'rails-erd',          '~> 1.3.1'  # Run bundle exec erd to print an entity-relationship diagram.
 end
 
 group :development, :test do
