@@ -2,10 +2,6 @@ $gray-medium-light: #eaeaea;
 
 /* universal */
 
-// #main_container {
-//   padding-top: 60px;
-// }
-
 .container {
   max-width: 1200px;
 }
@@ -19,6 +15,7 @@ $gray-medium-light: #eaeaea;
 }
 .jumbotron {
   h1 {
+    font-family: 'Tangerine', serif;
     margin-bottom: 30px;
   }
   h2 {
@@ -67,14 +64,4 @@ $gray-medium-light: #eaeaea;
 #author {
   margin-top: 10px;
   padding-top: 25px;
-}
-
-.todo_panel {
-  .panel-body {
-    padding-bottom: 0;
-  }
-  .todo_display {
-    padding-top: 15px;
-    padding-bottom: 5px;
-  }
 }
