@@ -28,3 +28,11 @@ end
   name  = Faker::Commerce.product_name
   Ingredient.create!(name: name)
 end
+
+m = Moving.create!(user_id: 1, title: "My first moving", description: "It's gonnabe fun!",
+  categories: ["ocean", "air", "disposal"], rooms: %w[entrance living dining kitchen bathroom bedroom])
+
+10.times do |n|
+  MovingItem.create!(moving_id: 1, name: "Medium box", volume: 3.2, quantity: 3, description: "",
+    category: "ocean", room: "kitchen")
+end

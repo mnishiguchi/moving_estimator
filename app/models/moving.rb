@@ -14,4 +14,7 @@
 
 class Moving < ActiveRecord::Base
   belongs_to :user
+  has_many :moving_items, dependent: :destroy
+
+  # TODO - validation
 end

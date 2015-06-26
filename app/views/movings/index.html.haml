@@ -1,0 +1,9 @@
+%h1 My movings
+
+%ol.breadcrumb
+  %li= link_to "Dashboard", root_path
+  %li.active My movings
+
+%ul#selector
+  - @movings.each do |m|
+    %li= link_to m.title, moving_path(m)

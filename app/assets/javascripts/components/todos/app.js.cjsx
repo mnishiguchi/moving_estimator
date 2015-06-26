@@ -6,6 +6,11 @@ TodoApp     = require('./components/TodoApp')
 
 React._initTodoApp = (options) ->
 
+  # Logging for the current path
+  path = window.location.pathname
+  page = path.split("/").pop()
+  console.log( page )
+
   # Instantiates the stores
   stores =
     TodoStore: new TodoStore(options["todos"] if options)
@@ -23,3 +28,4 @@ React._initTodoApp = (options) ->
   # Rendering the whole component to the mount node
   if (mountNode = document.getElementById("react_todolist"))
     React.render <TodoApp flux={ flux } />, mountNode
+

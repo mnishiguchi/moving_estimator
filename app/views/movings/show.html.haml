@@ -1,0 +1,17 @@
+%h1= @moving.title
+
+%ol.breadcrumb
+  %li= link_to "Dashboard", root_path
+  %li= link_to "My movings", movings_path
+  %li.active= @moving.title
+
+%ul#selector
+  - @moving_items.each do |mi|
+    %li
+      = mi.moving_id
+      = mi.name
+      = mi.volume
+      = mi.quantity
+      = mi.description
+      = mi.room
+      = mi.category

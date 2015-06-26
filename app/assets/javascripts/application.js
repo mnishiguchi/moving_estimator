@@ -2,7 +2,7 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require bootstrap
-//= require turbolinks
+//  require turbolinks  <= disabled
 //
 // React
 //= require react

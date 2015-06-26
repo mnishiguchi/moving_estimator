@@ -8,5 +8,5 @@
 
 :coffee
 
-  $(document).on "page:change", ->
+  document.addEventListener "DOMContentLoaded", (_e) ->
     React._initIngredientEditorApp(ingredients: #{@ingredients})
