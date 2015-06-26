@@ -7,9 +7,9 @@ TodoApp     = require('./components/TodoApp')
 React._initTodoApp = (options) ->
 
   # Logging for the current path
-  path = window.location.pathname
-  page = path.split("/").pop()
-  console.log( page )
+  # path = window.location.pathname
+  # page = path.split("/").pop()
+  # console.log( page )
 
   # Instantiates the stores
   stores =
