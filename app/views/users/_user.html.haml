@@ -1,5 +1,7 @@
+- panel_color = if user.admin then "panel-red" else "panel-blue" end
+
 .col-lg-4.col-md-6.col-sm-6
-  .person_card.panel{ class: if user.admin then "panel-red" else "panel-blue" end }
+  .person_card.panel{ class: panel_color }
     .panel-heading
       .media
         .media-left.media-middle.pull-left
