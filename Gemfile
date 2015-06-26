@@ -17,7 +17,8 @@ gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '~> 2.7.1'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails', '~> 4.0.3'
-# gem 'turbolinks',   '~> 2.5.3'
+# gem 'turbolinks',        '~> 2.5.3'
+# gem 'jquery-turbolinks', '~> 0.2.1'   # For jQuery to work with turbolinks.
 gem 'jbuilder',     '~> 2.0'
 gem 'sdoc',         '~> 0.4.0', group: :doc
 # Views/Styles
@@ -29,7 +30,6 @@ gem 'haml-rails',              '~> 0.9.0'   # For HAML.
 gem 'react-rails',             '~> 1.0.0'   # Compiles JSX.
 gem 'sprockets-coffee-react',  '~> 3.0.1'   # Preprocessor for Coffeescript with React JSX (CJSX).
 # Others
-# gem 'jquery-turbolinks',       '~> 0.2.1'   # For jQuery to work with turbolinks.
 gem 'devise',                  '~> 3.4.1'   # Authentication
 gem 'gibbon',                  '~> 1.1.5'   # A wrapper for MailChimp API 2.0 and Export API 1.0
 gem 'faker',                   '~> 1.4.3'   # Generates sample users.

@@ -1,8 +1,8 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery.turbolinks
+//  require jquery.turbolinks   <= disabled
 //= require bootstrap
-//  require turbolinks  <= disabled
+//  require turbolinks          <= disabled
 //
 // React
 //= require react
