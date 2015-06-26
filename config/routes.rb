@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :movings
   resources :todos, except: [:show]
   resources  :ingredients, only: [:index, :update, :destroy]
 
