@@ -12,7 +12,6 @@ TodoActions =
       data:   todo:
                 content: content
     .done (data, textStatus, jqXHR) =>
-      console.log data
       new_todo =
         id:        data.todo.id
         content:   data.todo.content

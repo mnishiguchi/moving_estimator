@@ -1,22 +1,20 @@
 - provide(:title, "Dashboard")
 
 / get  'dashboard' => 'users#show'
-#page-wrapper.dashboard
-  .container-fluid
-    / Page Heading
-    .row
-      .col-lg-12
-        %h1.page-header
-          Dashboard
-          %small
-            = current_user.email
-    .row
-      .col-lg-12
-        = render 'layouts/flash_message'
 
-    .row
-      .col-lg-12
-        #react_todolist
+.row
+  .col-lg-12
+    %h1.page-header
+      Dashboard
+      %small
+        = current_user.email
+.row
+  .col-lg-12
+    = render 'layouts/flash_message'
+
+.row
+  .col-lg-12
+    #react_todolist
 
 :coffee
 

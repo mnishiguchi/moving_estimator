@@ -12,8 +12,9 @@
 
 class Todo < ActiveRecord::Base
   belongs_to :user
+  validates  :content, presence: true, uniqueness: false, length: { maximum: 50 }
 
-  def Todo.getInitialData
+  def self.getInitialData
     User.current_user.todos.select(:id, :content, :completed, :created_at).to_json
   end
 end

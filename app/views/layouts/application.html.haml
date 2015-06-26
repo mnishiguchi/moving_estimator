@@ -12,18 +12,8 @@
     = render 'layouts/shim'
 
   %body
-    - if request.path =~ /dashboard/
-      / Dashboard
-      #wrapper
-        / Navigation
-        = render 'layouts/navbar_header'
-        = render 'layouts/navbar_sidebar'
-        = yield  # contents
-    - else
-      / Static pages
-      = render 'layouts/navbar_header'
-      .container#main_container
-        = render 'layouts/flash_message'
-        = yield  # contents
-
+    = render 'layouts/navbar_header'
+    .container#main_container
+      = render 'layouts/flash_message'
+      = yield  # contents
     = render 'layouts/debug_box'

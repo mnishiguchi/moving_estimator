@@ -1,12 +1,7 @@
-%nav.navbar.navbar-inverse.navbar-static-top{role: "navigation", style: "margin-bottom: 0"}
-  .container#navbar_container
+%nav.navbar.navbar-inverse.navbar-static-top
+  .container
     = link_to "西口", root_path, id: 'logo', class: 'navbar-brand'
     .navbar-header
-      %button.navbar-toggle#hamburger{ type: 'button', data: { toggle: 'collapse', target: '.navbar-collapse' } }
-        %span.sr-only Navigation toggle
-        - 3.times do
-          %span.icon-bar
-
       -if user_signed_in?
         = render 'layouts/dropdown_logged_in'
       - else
@@ -14,16 +9,3 @@
           %li= link_to "Sign up", new_user_registration_path
           %li= link_to "Log in", new_user_session_path
           %li= link_to "Contact", contact_path
-
-:coffee
-  jQuery ->
-    if $('#side-menu').length == 0
-      # For Static pages, removes toggle button.
-      $('#hamburger').remove()
-    else
-      # For SB-admin pages, removes navbar container.
-      $('#navbar_container').replaceWith($('#navbar_container').html())
-
-  # Ensures that navbar is closed on page-change.
-  $(document).on "page:change", ->
-    $(".sidebar-nav.navbar-collapse").addClass('collapse')
