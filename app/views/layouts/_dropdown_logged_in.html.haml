@@ -1,7 +1,7 @@
 %ul.nav.top-links.pull-right
   / Links for logged-in users
   %li.dropdown
-    %a.dropdown-toggle{ "data-toggle" => "dropdown",  href: "#" }
+    %a.dropdown-toggle{ "data-toggle" => "dropdown", href: "#" }
       = fa_icon "fw user", text: current_user.try(:username)
       = fa_icon "caret-down"
     %ul.dropdown-menu
