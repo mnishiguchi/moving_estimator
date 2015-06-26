@@ -41,15 +41,6 @@
     @media(min-width:1200px) {@include text-overflow(260px);} // lg
   }
 
-  .person_sentence {
-    font-size: 1.1em;
-    height: 48px;
-    display: inline-block;
-    @media(min-width:768px) {@include text-overflow(650px);}  // sm
-    @media(min-width:992px) {@include text-overflow(420px);}  // md
-    @media(min-width:1200px) {@include text-overflow(330px);} // lg
-  }
-
   .contact_info {
     li {
       margin-top: 10px;

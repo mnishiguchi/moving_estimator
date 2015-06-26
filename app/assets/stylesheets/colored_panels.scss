@@ -1,10 +1,31 @@
-/* Custom Colored Panels */
-// Adopted from sb-admin theme
+/**
+ * To customize BS panels
+ */
 
 .huge {
     font-size: 40px;
 }
 
+// Blue
+.panel-blue {
+    border-color: #1da9da;
+}
+
+.panel-blue > .panel-heading {
+    border-color: #1da9da;
+    color: #fff;
+    background-color: #1da9da;
+}
+
+.panel-blue > a {
+    color: #1da9da;
+}
+
+.panel-blue > a:hover {
+    color: #0099cc;
+}
+
+// Green
 .panel-green {
     border-color: #5cb85c;
 }
@@ -23,24 +44,26 @@
     color: #3d8b3d;
 }
 
+// Red
 .panel-red {
-    border-color: #d9534f;
+    border-color: #db1313;
 }
 
 .panel-red > .panel-heading {
-    border-color: #d9534f;
+    border-color: #db1313;
     color: #fff;
-    background-color: #d9534f;
+    background-color: #db1313;
 }
 
 .panel-red > a {
-    color: #d9534f;
+    color: #db1313;
 }
 
 .panel-red > a:hover {
     color: #b52b27;
 }
 
+// Yellow
 .panel-yellow {
     border-color: #f0ad4e;
 }
