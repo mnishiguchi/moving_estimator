@@ -1,17 +1,11 @@
 {
   "name": "moving_estimator",
-  "version": "1.0.0",
-  "description": "== README",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Masatoshi Nishiguchi",
-  "homepage": "https://bitbucket.org/mnishiguchi/moving_estimator#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/mnishiguchi/moving_estimator.git"
-  },
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
