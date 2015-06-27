@@ -5,8 +5,8 @@
       = fa_icon "fw user", text: current_user.try(:username)
       = fa_icon "caret-down"
     %ul.dropdown-menu
-      %li= link_to fa_icon("fw dashboard", text: "Dashboard"),root_path
-      %li= link_to fa_icon("fw list", text: "Todos"), todos_path
+      %li= link_to fa_icon("fw dashboard", text: "Dashboard"),root_path, :"data-no-turbolink" => true
+      %li= link_to fa_icon("fw list", text: "Todos"), todos_path, :"data-no-turbolink" => true
       %li= link_to fa_icon("fw gear", text: "Settings"), edit_user_registration_path
       %li= link_to fa_icon("fw envelope", text: "Contact"), contact_path
       %li.divider
@@ -20,4 +20,4 @@
         = fa_icon "caret-down"
       %ul.dropdown-menu
         %li= link_to fa_icon("fw users", text: "Users"), users_path
-        %li= link_to fa_icon("fw table", text: "Ingredients"), ingredients_path
+        %li= link_to fa_icon("fw table", text: "Ingredients"), ingredients_path, :"data-no-turbolink" => true
