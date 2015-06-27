@@ -22,6 +22,16 @@ class MovingsController < ApplicationController
 
   # Creates a new moving based on the form.
   def create
+    @moving = Moving.new(moving_params)
+    @moving.categories = params[:moving][:categories].split(//)
+    @moving.rooms      = params[:moving][:rooms].split(//)
+
+    if @moving.save
+      flash[:success] = @moving.title + "was successfully created"
+      redirect_to moving_url(@moving)
+    else
+      render 'new'
+    end
   end
 
   # Shows a add-item form.
