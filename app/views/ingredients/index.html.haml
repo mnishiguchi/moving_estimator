@@ -4,9 +4,10 @@
   Edit ingredients
 
 .well
+
   #react_ingredient_editor
 
 :coffee
 
-  document.addEventListener "DOMContentLoaded", (_e) ->
+  document.addEventListener "DOMContentLoaded", () ->
     React._initIngredientEditorApp(ingredients: #{ @ingredients })

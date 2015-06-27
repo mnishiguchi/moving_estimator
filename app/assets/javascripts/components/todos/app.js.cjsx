@@ -4,12 +4,7 @@ TodoApp     = require('./components/TodoApp')
 
 # Invoked in a Rails template with JSON data passed in.
 
-React._initTodoApp = (options) ->
-
-  # Logging for the current path
-  # path = window.location.pathname
-  # page = path.split("/").pop()
-  # console.log( page )
+React._initTodoApp = (mountNode, options) ->
 
   # Instantiates the stores
   stores =
@@ -26,6 +21,4 @@ React._initTodoApp = (options) ->
     console.log "[Dispatch]", type, payload if console?.log?
 
   # Rendering the whole component to the mount node
-  if (mountNode = document.getElementById("react_todolist"))
-    React.render <TodoApp flux={ flux } />, mountNode
-
+  React.render(<TodoApp flux={ flux } />, document.getElementById(mountNode))

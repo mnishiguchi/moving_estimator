@@ -71,7 +71,7 @@ TodoApp = React.createClass
         <Nav bsStyle='pills' activeKey={ @state.filterMode } onSelect={ @handleSelectFilter }>
           <NavItem eventKey={1}>All</NavItem>
           <NavItem eventKey={2}>Active</NavItem>
-          <NavItem eventKey={3}>Completed</NavItem>
+          <NavItem eventKey={3}>Done</NavItem>
         </Nav>
       </nav>
 

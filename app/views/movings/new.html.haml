@@ -1,7 +1,6 @@
 - provide(:title, "New moving")
 
-%h1.page-header
-  New moving
+%h1.page-header New moving
 
 .row
   .col-sm-3#dashboard_menus
@@ -12,3 +11,32 @@
       %li= link_to "Todo list", todos_path
 
   .col-sm-9#dashboard_body
+    = form_for(@moving) do |f|
+
+      = render 'shared/error_messages', object: f.object
+
+      / #  user_id     :integer
+      / #  title       :string
+      / #  description :text
+      / #  categories  :text             default([]), is an Array
+      / #  rooms       :text             default([]), is an Array
+      .form-group
+        = f.hidden_field :user_id, value: @moving.user_id
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
+      .form-group
+        = f.label :description
+        = f.text_area :description, class: 'form-control',
+          placeholder: "Write description"
+      .form-group
+        = f.label :categories
+        = f.text_area :categories, class: 'form-control',
+          placeholder: "Input categories separated by white spaces (e.g. ocean air local)"
+      .form-group
+        = f.label :rooms
+        = f.text_area :rooms, class: 'form-control',
+          placeholder: "Input rooms separated by white spaces (e.g. kitchen dinig_room)"
+      .form-group
+        = f.button "Create my account", class: "submit btn btn-success",
+          data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }

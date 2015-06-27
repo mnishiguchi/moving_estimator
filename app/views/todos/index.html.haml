@@ -1,7 +1,6 @@
 - provide(:title, "Todos")
 
-%h1.page-header
-  Todos
+%h1.page-header Todos
 
 .row
   .col-sm-3#dashboard_menus
@@ -12,9 +11,10 @@
       %li.active= link_to "Todo list", "#"
 
   .col-sm-9#dashboard_body
+
     #react_todolist
 
 :coffee
 
-  document.addEventListener "DOMContentLoaded", (_e) ->
-    React._initTodoApp(todos: #{ @todos })
+  document.addEventListener "DOMContentLoaded", () ->
+    React._initTodoApp("react_todolist", todos: #{ @todos })
