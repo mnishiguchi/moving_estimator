@@ -16,8 +16,6 @@ class MovingsController < ApplicationController
   # Shows a form to create a new moving.
   def new
     @moving = Moving.new
-    # @moving.categories = nil
-    # @moving.rooms = nil
   end
 
   # Creates a new moving based on the form.
