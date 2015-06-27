@@ -1,9 +1,7 @@
 - provide(:title, "Dashboard")
 
-%h1.page-header
-  Dashboard
-  %small
-    = current_user.email
+%h1.page-header Dashboard
+  %small= current_user.email
 
 .row
   .col-sm-3#dashboard_menus
@@ -11,7 +9,7 @@
       %li.active= link_to "Dashboard", "#"
       %li= link_to "New moving", new_moving_path
       %li= link_to "My movings", movings_path
-      %li= link_to "Todo list", todos_path
+      %li= link_to "Todo list", todos_path, :"data-no-turbolink" => true
 
   .col-sm-9#dashboard_body
 
@@ -19,5 +17,5 @@
 
 :coffee
 
-  document.addEventListener "DOMContentLoaded", () ->
+  $(document).ready ->
     React._initTodoApp("react_todolist", todos: #{ @todos })

@@ -1,7 +1,6 @@
 - provide(:title, "Ingredients editor")
 
-%h1.page-header
-  Edit ingredients
+%h1.page-header Edit ingredients
 
 .well
 
@@ -9,5 +8,5 @@
 
 :coffee
 
-  document.addEventListener "DOMContentLoaded", () ->
+  $(document).ready ->
     React._initIngredientEditorApp(ingredients: #{ @ingredients })
