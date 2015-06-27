@@ -1,9 +1,17 @@
-%h1 My movings
+- provide(:title, "My movings")
 
-%ol.breadcrumb
-  %li= link_to "Dashboard", root_path
-  %li.active My movings
+%h1.page-header
+  My movings
 
-%ul#selector
-  - @movings.each do |m|
-    %li= link_to m.title, moving_path(m)
+.row
+  .col-sm-3#dashboard_menus
+    %ul.nav.nav-pills.nav-stacked
+      %li= link_to "Dashboard", root_path
+      %li= link_to "New moving", new_moving_path
+      %li.active= link_to "My movings", "#"
+      %li= link_to "Todo list", todos_path
+
+  .col-sm-9#dashboard_body
+    %ul#selector
+    - @movings.each do |m|
+      %li= link_to m.title, moving_path(m)
