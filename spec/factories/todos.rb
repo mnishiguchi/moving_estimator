@@ -10,10 +10,10 @@
 #  completed  :boolean          default(FALSE)
 #
 
-# FactoryGirl.define do
-#   factory :todo do
-#     content "MyText"
-# user nil
-#   end
+FactoryGirl.define do
+  factory :todo do
+    content "Pick up my wife from the train station"
+    user nil
+  end
 
-# end
+end

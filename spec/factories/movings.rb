@@ -14,11 +14,11 @@
 
 FactoryGirl.define do
   factory :moving do
-    user nil
-    title "MyString"
-    description "MyText"
-    categories "MyString"
-    rooms "MyString"
+    user_id     nil
+    title       "title"
+    description "description"
+    categories  ["ocean", "air"]
+    rooms       ["kitchen", "living"]
   end
 
 end
