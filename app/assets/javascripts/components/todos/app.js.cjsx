@@ -6,19 +6,21 @@ TodoApp     = require('./components/TodoApp')
 
 React._initTodoApp = (mountNode, options) ->
 
-  # Instantiates the stores
+  # Instantiating the stores.
   stores =
     TodoStore: new TodoStore(options["todos"] if options)
 
   # Actions
   actions = TodoActions
 
-  # Instantiates the flux with the stores and actions
+  # Instantiating the flux with the stores and actions.
   flux = new Fluxxor.Flux(stores, actions)
 
-  # Logging for the "dispatch" event
+  # Logging for the "dispatch" event.
   flux.on 'dispatch', (type, payload) ->
     console.log "[Dispatch]", type, payload if console?.log?
 
-  # Rendering the whole component to the mount node
-  React.render(<TodoApp flux={ flux } />, document.getElementById(mountNode))
+  # Rendering the whole component to the mount node.
+  # Checking if mount node exists to suppress error caused by loading irrelevant pages.
+  if(m = document.getElementById(mountNode))
+    React.render(<TodoApp flux={ flux } />, m)

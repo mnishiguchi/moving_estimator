@@ -2,13 +2,13 @@ IngredientStore     = require('./stores/ingredient_store')
 IngredientActions   = require('./actions/ingredient_actions')
 IngredientEditorApp = require('./components/IngredientEditorApp')
 
-# Instantiates the flux with data passed in from Rails.
+# Invoked in a Rails template with JSON data passed in.
 
-instantiateFlux = (options) ->
+React._initIngredientEditorApp = (mountNode, options) ->
 
   # Instantiates the stores
   stores =
-    IngredientStore: new IngredientStore(options["ingredients"])
+    IngredientStore: new IngredientStore(options["ingredients"] if options)
 
   # Actions
   actions = IngredientActions
@@ -20,15 +20,7 @@ instantiateFlux = (options) ->
   flux.on 'dispatch', (type, payload) ->
     console.log "[Dispatch]", type, payload if console?.log?
 
-  return flux
-
-# Invoked in a Rails template with JSON data passed in.
-
-React._initIngredientEditorApp = (options) ->
-
-  # Instantiates the flux.
-  flux = instantiateFlux(options)
-
-  # Rendering the whole component to the mount node
-  if (mountNode = document.getElementById("react_ingredient_editor"))
-    React.render <IngredientEditorApp flux={ flux } />, mountNode
+  # Renders the whole component to the mount node.
+  # Checks if mount node exists to suppress error caused by loading irrelevant pages.
+  if(m = document.getElementById(mountNode))
+    React.render(<IngredientEditorApp flux={ flux } />, m)

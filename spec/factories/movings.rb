@@ -15,10 +15,10 @@
 FactoryGirl.define do
   factory :moving do
     user nil
-title "MyString"
-description "MyText"
-categories "MyString"
-rooms "MyString"
+    title "MyString"
+    description "MyText"
+    categories "MyString"
+    rooms "MyString"
   end
 
 end
