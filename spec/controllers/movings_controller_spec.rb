@@ -30,9 +30,7 @@ RSpec.describe MovingsController, type: :controller do
       expect{
         post :create, moving: { user_id:     user.id,
                                 title:       "title",
-                                description: "description",
-                                categories:  ["ocean", "air"],
-                                rooms:       ["kitchen", "living"] }
+                                description: "description" }
       }.to change(Moving, :count).by(1)
       expect(response).to redirect_to(assigns(:moving))
     end

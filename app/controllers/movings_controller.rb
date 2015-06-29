@@ -8,9 +8,11 @@ class MovingsController < ApplicationController
   end
 
   # Shows an individual item.
+  # Shows the add form.
   def show
     @moving = Moving.find(params[:id])
     @moving_items = @moving.moving_items
+    @new_item = @moving.moving_items.build
   end
 
   # Shows a form to create a new moving.
@@ -21,8 +23,6 @@ class MovingsController < ApplicationController
   # Creates a new moving based on the form.
   def create
     @moving = Moving.new(moving_params)
-    @moving.categories = params[:moving][:categories].split(/\s/)
-    @moving.rooms      = params[:moving][:rooms].split(/\s/)
 
     if @moving.save
       flash[:success] = "Moving created"
@@ -47,6 +47,6 @@ class MovingsController < ApplicationController
   private
 
     def moving_params
-      params.require(:moving).permit(:user_id, :title, :description, :categories, :rooms)
+      params.require(:moving).permit(:user_id, :title, :description)
     end
 end

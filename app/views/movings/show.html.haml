@@ -3,9 +3,11 @@
 %h1.page-header
   = @moving.title
 
+= link_to "Add new item", new_moving_item_path
 .row
   .col-sm-12
     %ul#selector
+
       - @moving_items.each do |mi|
         %li
           = mi.moving_id

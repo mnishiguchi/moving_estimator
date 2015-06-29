@@ -6,8 +6,6 @@
 #  user_id     :integer
 #  title       :string
 #  description :text
-#  categories  :text             default([]), is an Array
-#  rooms       :text             default([]), is an Array
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

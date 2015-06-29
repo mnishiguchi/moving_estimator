@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626165659) do
+ActiveRecord::Schema.define(version: 20150628230140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,10 +40,8 @@ ActiveRecord::Schema.define(version: 20150626165659) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "description"
-    t.text     "categories",  default: [],              array: true
-    t.text     "rooms",       default: [],              array: true
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "movings", ["user_id"], name: "index_movings_on_user_id", using: :btree
