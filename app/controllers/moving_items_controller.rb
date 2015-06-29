@@ -2,7 +2,7 @@ class MovingItemsController < ApplicationController
 
   # Shows a form to create a new item.
   def new
-    # @moving_id = # TODO - get moving_id
+    @moving_id = params[:moving_id]  # Passed in through link_to helper.
     @new_item = MovingItem.new
   end
 

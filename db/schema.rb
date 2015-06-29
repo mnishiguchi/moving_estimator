@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150628230140) do
   create_table "moving_items", force: :cascade do |t|
     t.integer  "moving_id"
     t.string   "name"
-    t.float    "volume"
+    t.float    "vol"
     t.integer  "quantity"
     t.text     "description"
     t.text     "room"

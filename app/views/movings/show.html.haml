@@ -3,7 +3,7 @@
 %h1.page-header
   = @moving.title
 
-= link_to "Add new item", new_moving_item_path
+= link_to "Add new item", { controller: :moving_items, action: :new, moving_id: @moving.id }
 .row
   .col-sm-12
     %ul#selector

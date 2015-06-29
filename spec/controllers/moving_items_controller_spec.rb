@@ -2,25 +2,22 @@ require 'rails_helper'
 
 RSpec.describe MovingItemsController, type: :controller do
 
+  # let(:user) { FactoryGirl.create(:user) }
+
+  # before do
+  #   log_in_as user, no_capybara: :true
+  # end
+
   describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
-    end
+    pending
   end
 
-  describe "GET #update" do
-    it "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
-    end
+  describe "updating an item" do
+    pending
   end
 
-  describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
-    end
+  describe "deleting an item" do
+    pending
   end
 
 end

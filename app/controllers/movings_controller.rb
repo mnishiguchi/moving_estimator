@@ -8,11 +8,9 @@ class MovingsController < ApplicationController
   end
 
   # Shows an individual item.
-  # Shows the add form.
   def show
     @moving = Moving.find(params[:id])
     @moving_items = @moving.moving_items
-    @new_item = @moving.moving_items.build
   end
 
   # Shows a form to create a new moving.
