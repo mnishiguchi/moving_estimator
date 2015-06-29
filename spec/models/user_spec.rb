@@ -46,7 +46,7 @@ describe User do
   end
 
   describe "CSV export" do
-    before { FactoryGirl.create(:user) }
+    before(:all) { FactoryGirl.create(:user) }
 
     %w(id username sign_in_count created_at confirmed_at updated_at).each do |attr|
       it { expect(User.to_csv).to include(attr) }

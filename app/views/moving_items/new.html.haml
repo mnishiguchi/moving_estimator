@@ -1,4 +1,44 @@
-%h1 MovingItems#update
-%p Find me in app/views/moving_items/update.html.haml
+.row
+  .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
 
-= render 'add_form'
+    %h1.page-header MovingItems#new
+
+    = form_for(MovingItem.new) do |f|
+
+      = render 'shared/error_messages', object: f.object
+
+      = f.hidden_field :moving_id, value: @moving_id
+
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: 'form-control',
+        placeholder: "Input item name"
+
+      .form-group
+        = f.label :volume
+        = f.text_field :volume, class: 'form-control',
+        placeholder: "Input volume"
+
+      .form-group
+        = f.label :quantity
+        = f.text_field :quantity, class: 'form-control',
+        placeholder: "Input quantity"
+
+      .form-group
+        = f.label :description
+        = f.text_area :description, class: 'form-control',
+          placeholder: "Write description"
+
+      .form-group
+        = f.label :category
+        = f.text_field :category, class: 'form-control',
+        placeholder: "Input category"
+
+      .form-group
+        = f.label :room
+        = f.text_field :room, class: 'form-control',
+        placeholder: "Input room"
+
+      .form-group
+        = f.button "Add item", class: "submit btn btn-success",
+          data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }

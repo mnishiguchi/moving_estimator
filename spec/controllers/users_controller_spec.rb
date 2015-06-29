@@ -19,7 +19,8 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     describe 'DELETE #destroy' do
-      before { @user = FactoryGirl.create(:user) }
+      before { FactoryGirl.create(:user) }  # Creating a user in database.
+      let(:user) { User.first }             # Getting one from datatase as needed.
 
       it "redirects to root page" do
         delete :destroy, id: FactoryGirl.create(:user)
@@ -28,7 +29,7 @@ RSpec.describe UsersController, :type => :controller do
 
       it "does not delete a user" do
         expect{
-          delete :destroy, id: @user
+          delete :destroy, id: user.id
         }.to_not change(User,:count)
       end
     end
@@ -84,11 +85,12 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     describe 'DELETE #destroy' do
-      before { @user = FactoryGirl.create(:user) }
+      before { FactoryGirl.create(:user) }  # Creating a user in database.
+      let(:user) { User.first }             # Getting one from datatase as needed.
 
       it "deletes a user" do
         expect{
-          delete :destroy, id: @user
+          delete :destroy, id: user.id
         }.to change(User,:count).by(-1)
       end
     end

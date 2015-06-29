@@ -8,16 +8,16 @@ RSpec.describe MovingItemsController, type: :controller do
   #   log_in_as user, no_capybara: :true
   # end
 
-  describe "GET #create" do
-    pending
+  xdescribe "GET #create" do
+
   end
 
-  describe "updating an item" do
-    pending
+  xdescribe "updating an item" do
+
   end
 
-  describe "deleting an item" do
-    pending
+  xdescribe "deleting an item" do
+
   end
 
 end

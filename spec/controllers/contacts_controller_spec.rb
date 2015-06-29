@@ -9,10 +9,12 @@ RSpec.describe ContactsController, :type => :controller do
     end
   end
 
-  describe "GET create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
+  describe "creating a message" do
+    it "redirects to root path" do
+      post :create, contact: { username: "Example User",
+                               email:    "user@example.com",
+                               message:  "Hello world!" }
+      expect(response).to redirect_to root_path
     end
   end
 

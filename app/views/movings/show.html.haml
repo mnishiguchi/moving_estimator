@@ -1,9 +1,11 @@
 - provide(:title, @moving.title)
 
 %h1.page-header
-  = @moving.title
+  = @moving.try(:title)
 
-= link_to "Add new item", { controller: :moving_items, action: :new, moving_id: @moving.id }
+= link_to "Add new item", { controller: :moving_items, action: :new, moving_id: @moving.id },
+  class: "btn btn-primary", style: "margin-bottom: 20px;"
+
 .row
   .col-sm-12
 
@@ -20,9 +22,9 @@
                 %th Name
                 %th Volume
                 %th Quantity
-                %th Description
                 %th Room
                 %th Category
+                %th Description
             %tbody
               - @moving_items.each do |mi|
                 %tr
@@ -30,6 +32,6 @@
                   %td= mi.name
                   %td= mi.volume
                   %td= mi.quantity
-                  %td= mi.description
                   %td= mi.room
                   %td= mi.category
+                  %td= mi.description

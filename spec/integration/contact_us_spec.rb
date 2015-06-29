@@ -5,8 +5,10 @@ describe "Contact us", type: :feature do
   describe "contact page" do
     before { visit contact_path }
 
-    it { expect(page).to have_content('Contact') }
-    it { expect(page).to have_title(full_title('Contact')) }
+    it "has correct title and content" do
+      expect(page).to have_content('Contact')
+      expect(page).to have_title(full_title('Contact'))
+    end
   end
 
   describe "contact form" do
@@ -20,8 +22,10 @@ describe "Contact us", type: :feature do
       describe "after submission" do
         before { click_button submit }
 
-        it { expect(page).to have_title('Contact') }
-        it { expect(page).to have_content('error') }
+        it "re-renders the Contact page with error message" do
+          expect(page).to have_title('Contact')
+          expect(page).to have_content('error')
+        end
       end
     end
 
@@ -30,20 +34,12 @@ describe "Contact us", type: :feature do
         find("#contact_username").set "Example User"
         find("#contact_email").set "user@example.com"
         find("#contact_message").set "Lorem ipsum dolor sit amet, consectetur adipisicing elit"
-        # fill_in "Username", with: "Example User"
-        # fill_in "Email",    with: "user@example.com"
-        # fill_in "Message",  with: "Lorem ipsum dolor sit amet, consectetur adipisicing elit"
       end
 
-      it { expect(page).to send_email_by_click }
-
-      describe "after saving the user" do
-        before { click_button submit }
-
-        let(:user) { User.find_by(email: 'user@example.com') }
-
-        it { expect(page).to have_title(full_title("")) }  # Root page
-        it { expect(page).to have_info_message('Thank you') }
+      it "sends email, then redirects to the root page with thank you message" do
+        expect(page).to send_email_by_click
+        expect(page).to have_title(full_title(""))  # Root page
+        expect(page).to have_info_message('Thank you')
       end
     end
   end

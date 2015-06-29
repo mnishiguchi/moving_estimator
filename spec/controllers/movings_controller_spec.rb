@@ -36,16 +36,16 @@ RSpec.describe MovingsController, type: :controller do
     end
   end
 
-  describe "editing a moving" do
-    pending
+  xdescribe "editing a moving" do
+
   end
 
-  describe "updating a moving" do
-    pending
+  xdescribe "updating a moving" do
+
   end
 
-  describe "destroying a moving" do
-    pending
+  xdescribe "destroying a moving" do
+
   end
 
 end

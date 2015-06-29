@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe "Static pages", type: :feature do
 
-  subject { page }
-
   let(:base_title) { "MNISHIGUCHI" }
 
   describe "Home page" do

@@ -3,7 +3,6 @@ class MovingItemsController < ApplicationController
   # Shows a form to create a new item.
   def new
     @moving_id = params[:moving_id]  # Passed in through link_to helper.
-    @new_item = MovingItem.new
   end
 
   def create
@@ -14,7 +13,7 @@ class MovingItemsController < ApplicationController
       flash[:success] = "Moving item created"
       redirect_to moving_url(moving)
     else
-      render 'movings/show'
+      render 'new'
     end
   end
 
