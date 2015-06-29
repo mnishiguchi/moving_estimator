@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Contact do
+describe Contact, type: :model do
 
   let(:contact) do
     Contact.new(username: "Masatoshi Nishiguchi",
