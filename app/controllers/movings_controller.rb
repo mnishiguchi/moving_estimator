@@ -35,7 +35,7 @@ class MovingsController < ApplicationController
     end
   end
 
-  # Shows a add-item form.
+  # Shows an edit-item form.
   def edit
   end
 
@@ -45,6 +45,9 @@ class MovingsController < ApplicationController
 
   # Delete the moving record.
   def destroy
+    Moving.find(params[:id]).destroy
+    flash[:success] = "Moving deleted"
+    redirect_to movings_url
   end
 
   private

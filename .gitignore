@@ -12,6 +12,9 @@
 /vendor/bundle/
 /vendor/ruby/
 
+# Ignore rspec logs
+spec/examples.txt
+
 # Ignore bower-rails files
 /vendor/assets/bower_components
 *.bowerrc

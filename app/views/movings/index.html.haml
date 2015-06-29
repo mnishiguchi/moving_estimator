@@ -11,6 +11,9 @@
       %li= link_to "Todo list", todos_path, :"data-no-turbolink" => true
 
   .col-sm-9#dashboard_body
-    %ul#selector
+    .list-group
     - @movings.each do |m|
-      %li= link_to m.title, moving_path(m)
+      .list-group-item
+        = link_to m.title, moving_path(m)
+        = link_to "delete", moving_path(m), method: :delete,
+                            data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger pull-right"

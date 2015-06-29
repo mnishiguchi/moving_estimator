@@ -43,7 +43,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails',        '~> 3.2.1'  # Testing
+  gem 'rspec-rails',        '~> 3.3.2'
   gem 'guard-rspec',        '~> 4.5.0'  # Automates the running of the tests.
   gem 'factory_girl_rails', '~> 4.5.0'  # Alternative to Fixture.
   gem 'byebug',             '~> 3.4.0'  # The byebug prompt in the terminal.

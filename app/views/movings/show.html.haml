@@ -1,7 +1,8 @@
 - provide(:title, @moving.title)
 
 %h1.page-header
-  = @moving.try(:title)
+  = @moving.title
+  %small= @moving.description
 
 = link_to "Add new item", { controller: :moving_items, action: :new },
   class: "btn btn-primary", style: "margin-bottom: 20px;"
