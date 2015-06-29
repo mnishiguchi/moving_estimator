@@ -1,13 +1,13 @@
+- provide(:title, "Add new item")
+
 .row
   .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
 
     %h1.page-header MovingItems#new
 
-    = form_for(@new_item) do |f|
+    = form_for(@moving_item) do |f|
 
       = render 'shared/error_messages', object: f.object
-
-      / = f.hidden_field :moving_id, value: @moving_id
 
       .form-group
         = f.label :name
@@ -25,11 +25,6 @@
         placeholder: "Input quantity"
 
       .form-group
-        = f.label :description
-        = f.text_area :description, class: 'form-control',
-          placeholder: "Write description"
-
-      .form-group
         = f.label :category
         = f.text_field :category, class: 'form-control',
         placeholder: "Input category"
@@ -38,6 +33,11 @@
         = f.label :room
         = f.text_field :room, class: 'form-control',
         placeholder: "Input room"
+
+      .form-group
+        = f.label :description
+        = f.text_area :description, class: 'form-control',
+          placeholder: "Write description"
 
       .form-group
         = f.button "Add item", class: "submit btn btn-success",

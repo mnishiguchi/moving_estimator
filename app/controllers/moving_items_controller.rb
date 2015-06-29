@@ -4,15 +4,15 @@ class MovingItemsController < ApplicationController
 
   # Shows a form to create a new item.
   def new
-    @new_item = MovingItem.new
+    @moving_item = MovingItem.new
     @moving_id = current_moving
   end
 
   def create
-    moving_item = MovingItem.new(moving_item_params.
-                                 merge(moving_id: current_moving))
+    @moving_item = MovingItem.new(moving_item_params.
+                                  merge(moving_id: current_moving))
 
-    if moving_item.save
+    if @moving_item.save
       flash[:success] = "Moving item created"
       moving = Moving.find(current_moving)
       redirect_to moving_url(moving)

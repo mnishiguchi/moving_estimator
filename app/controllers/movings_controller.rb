@@ -24,7 +24,8 @@ class MovingsController < ApplicationController
 
   # Creates a new moving based on the form.
   def create
-    @moving = Moving.new(moving_params)
+    @moving = Moving.new(moving_params.
+                         merge(user_id: current_user.id))
 
     if @moving.save
       flash[:success] = "Moving created"
@@ -49,6 +50,6 @@ class MovingsController < ApplicationController
   private
 
     def moving_params
-      params.require(:moving).permit(:user_id, :title, :description)
+      params.require(:moving).permit(:title, :description)
     end
 end
