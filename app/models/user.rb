@@ -25,6 +25,8 @@
 class User < ActiveRecord::Base
   include PgSearch
 
+  attr_accessor :current_moving
+
   has_many :todos,   dependent: :destroy
   has_many :movings, dependent: :destroy
   has_many :moving_items, through: :movings
@@ -50,6 +52,14 @@ class User < ActiveRecord::Base
                       normalization: 2
                     }
                   }
+
+  def remember_moving(moving)
+    current_moving = moving
+  end
+
+  def forget_moving
+    current_moving = nil
+  end
 
   class << self
 

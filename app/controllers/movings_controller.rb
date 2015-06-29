@@ -1,5 +1,7 @@
 class MovingsController < ApplicationController
 
+  include MovingsHelper
+
   before_action :authenticate_user! # all actions
 
   # Lists all the movings.
@@ -9,8 +11,10 @@ class MovingsController < ApplicationController
 
   # Shows an individual item.
   def show
-    @moving = Moving.find(params[:id])
+    id = params[:id] || Moving.current_moving
+    @moving = Moving.find(id)
     @moving_items = @moving.moving_items
+    remember_moving @moving  # Remember moving id for later use.
   end
 
   # Shows a form to create a new moving.
