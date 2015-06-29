@@ -37,6 +37,7 @@ class MovingsController < ApplicationController
 
   # Shows an edit-item form.
   def edit
+    @moving = Moving.find(params[:id])
   end
 
   # Updates the moving to database.

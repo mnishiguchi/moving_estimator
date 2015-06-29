@@ -26,6 +26,7 @@
                 %th Room
                 %th Category
                 %th Description
+                %th
             %tbody
               - @moving_items.each do |mi|
                 %tr
@@ -36,3 +37,7 @@
                   %td= mi.room
                   %td= mi.category
                   %td= mi.description
+                  %td
+                    = link_to "edit", edit_moving_item_path(mi)
+                    = link_to "delete", moving_item_path(mi), method: :delete,
+                              data: { confirm: "Are you sure?" }

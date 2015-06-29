@@ -2,6 +2,8 @@ class MovingItemsController < ApplicationController
 
   include MovingsHelper
 
+  # A list of items is displayed in Movings#show page instead of MovingItems#index.
+
   # Shows a form to create a new item.
   def new
     @moving_item = MovingItem.new
@@ -21,10 +23,19 @@ class MovingItemsController < ApplicationController
     end
   end
 
+  def edit
+    @moving_item = MovingItem.find(params[:id])
+  end
+
   def update
   end
 
+  # Delete the moving item record.
   def destroy
+    MovingItem.find(params[:id]).destroy
+    flash[:success] = "Item deleted"
+    moving = Moving.find(current_moving)
+    redirect_to moving_url(moving)
   end
 
   private
