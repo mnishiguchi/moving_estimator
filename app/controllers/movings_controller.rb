@@ -11,7 +11,7 @@ class MovingsController < ApplicationController
 
   # Shows an individual item.
   def show
-    id = params[:id] || Moving.current_moving
+    id = params[:id] || current_moving
     @moving = Moving.find(id)
     @moving_items = @moving.moving_items
     remember_moving @moving  # Remember moving id for later use.

@@ -3,11 +3,11 @@
 
     %h1.page-header MovingItems#new
 
-    = form_for(MovingItem.new) do |f|
+    = form_for(@new_item) do |f|
 
       = render 'shared/error_messages', object: f.object
 
-      = f.hidden_field :moving_id, value: @moving_id
+      / = f.hidden_field :moving_id, value: @moving_id
 
       .form-group
         = f.label :name

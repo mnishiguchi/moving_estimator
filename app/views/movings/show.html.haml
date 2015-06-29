@@ -3,7 +3,7 @@
 %h1.page-header
   = @moving.try(:title)
 
-= link_to "Add new item", { controller: :moving_items, action: :new, moving_id: @moving.id },
+= link_to "Add new item", { controller: :moving_items, action: :new },
   class: "btn btn-primary", style: "margin-bottom: 20px;"
 
 .row
