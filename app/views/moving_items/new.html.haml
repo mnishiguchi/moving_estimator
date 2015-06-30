@@ -1,49 +1,21 @@
-- provide(:title, "Add new item")
+- provide(:title, "Add item")
+
+%h1.page-header Add item to "#{@moving.title}"
+
+%ol.breadcrumb
+  %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
+  %li= link_to "My movings", movings_path
+  %li= link_to @moving.title, moving_path(@moving)
+  %li.active Add item
 
 .row
   .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
-
-    %h1.page-header Add new item
-
-    %ol.breadcrumb
-      %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
-      %li= link_to "Mymovings", movings_path
-      %li= link_to @moving_item.name, moving_path(current_moving)
-      %li.active Add new item
 
     = form_for(@moving_item) do |f|
 
       = render 'shared/error_messages', object: f.object
 
-      .form-group
-        = f.label :name
-        = f.text_field :name, class: 'form-control',
-        placeholder: "Input item name"
-
-      .form-group
-        = f.label :volume
-        = f.text_field :volume, class: 'form-control',
-        placeholder: "Input volume"
-
-      .form-group
-        = f.label :quantity
-        = f.text_field :quantity, class: 'form-control',
-        placeholder: "Input quantity"
-
-      .form-group
-        = f.label :category
-        = f.text_field :category, class: 'form-control',
-        placeholder: "Input category"
-
-      .form-group
-        = f.label :room
-        = f.text_field :room, class: 'form-control',
-        placeholder: "Input room"
-
-      .form-group
-        = f.label :description
-        = f.text_area :description, class: 'form-control',
-          placeholder: "Write description"
+      = render 'fields', f: f
 
       .form-group
         = f.button "Add item", class: "submit btn btn-success",
