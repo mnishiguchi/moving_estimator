@@ -12,43 +12,27 @@
   %li= link_to "My movings", movings_path
   %li.active= @moving.title
 
-= link_to "Add new item", { controller: :moving_items, action: :new },
-  class: "btn btn-primary", style: "margin-bottom: 20px;"
+/ = link_to "Add new item", { controller: :moving_items, action: :new },
+/   class: "btn btn-primary", style: "margin-bottom: 20px;"
 
-= render 'moving_items/add_form'
+/ Tabs
+%ul{ class: "nav nav-tabs", role: 'tablist' }
+  %li.active
+    %a{ href: "#tabs_table_all_items", role: "tab", data: { toggle: "tab" } }
+      All items
+  %li
+    %a{ href: "#tabs_add_form", role: "tab", data: { toggle: "tab" } }
+      Add item
 
-.row
-  .col-sm-12
+/ Tab Content
+-# .fade : enables animation.
+-# .in   : ensures it's shown when the page is loaded.
+.tab-content
+  .tab-pane.fade.in.active#tabs_table_all_items
+    - if @moving_items.count > 0
+      = render 'moving_items/table_moving_items'
+    - else
+      %p{ style: "margin: 16px;" } No item found
+  .tab-pane.fade#tabs_add_form{ style: "padding-top: 16px" }
+    = render 'moving_items/add_form'
 
-    .panel.panel-default
-      .panel-heading
-        %h3.panel-title
-          All items
-      .panel-body
-        .table-responsive
-          %table.table.table-bordered.table-hover.table-striped
-            %thead
-              %tr
-                %th
-                %th Name
-                %th Vol
-                %th Qty
-                %th Room
-                %th Category
-                %th Description
-                %th
-            %tbody
-              - @moving_items.each do |item|
-                %tr
-                  %td= item.moving_id
-                  %td= item.name
-                  %td= item.volume
-                  %td= item.quantity
-                  %td= item.room
-                  %td= item.category
-                  %td= item.description
-                  %td
-                    = link_to "edit", edit_moving_item_path(item)
-                    = "|"
-                    = link_to "delete", moving_item_path(item), method: :delete,
-                              data: { confirm: "Are you sure?" }
