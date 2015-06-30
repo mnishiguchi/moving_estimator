@@ -2,7 +2,7 @@ class MovingItemsController < ApplicationController
 
   include MovingsHelper
 
-  # A list of items is displayed in Movings#show page instead of MovingItems#index.
+  # Note: A list of items is displayed in Movings#show page instead of MovingItems#index.
 
   # Shows a form to create a new item.
   def new
@@ -23,11 +23,17 @@ class MovingItemsController < ApplicationController
     end
   end
 
+  # Shows an edit form.
   def edit
     @moving_item = MovingItem.find(params[:id])
   end
 
+  # Updates the item to database.
   def update
+    @moving_item = MovingItem.find(params[:id])
+    @moving_item.update_columns(moving_item_params)
+    flash[:success] = "Item updated"
+    redirect_to moving_url(current_moving)
   end
 
   # Delete the moving item record.

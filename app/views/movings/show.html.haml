@@ -2,7 +2,15 @@
 
 %h1.page-header
   = @moving.title
+  = link_to "Edit", edit_moving_path(@moving), class: "btn btn-primary btn-sm pull-right"
+  %br/
   %small= @moving.description
+
+
+%ol.breadcrumb
+  %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
+  %li= link_to "My movings", movings_path
+  %li.active= @moving.title
 
 = link_to "Add new item", { controller: :moving_items, action: :new },
   class: "btn btn-primary", style: "margin-bottom: 20px;"

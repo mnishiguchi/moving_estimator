@@ -2,7 +2,7 @@
 
 .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
   %h1.page-header
-    Contact
+    Contact developer
 
   = form_for @contact, url: contact_path do |f|
     = render 'shared/error_messages', object: f.object
@@ -16,11 +16,11 @@
       = f.email_field :email, class: "form-control", value: current_user.try(:email)
 
     .form-group
-      = f.label :message, "Messsage to me"
+      = f.label :message, "Messsage"
       = f.text_area :message, class: "form-control"
 
     .form-group
-      = f.button "Submit", class: "submit btn btn-success",
+      = f.button "Send", class: "submit btn btn-success",
         data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
 
   = render "shared/about_author"

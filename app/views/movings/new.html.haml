@@ -2,29 +2,24 @@
 
 %h1.page-header New moving
 
-.row
-  .col-sm-3#dashboard_menus
-    %ul.nav.nav-pills.nav-stacked
-      %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
-      %li.active= link_to "New moving", "#"
-      %li= link_to "My movings", movings_path
-      %li= link_to "Todo list", todos_path, :"data-no-turbolink" => true
+%ol.breadcrumb
+  %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
+  %li.active New moving
 
-  .col-sm-9#dashboard_body
-    = form_for(@moving) do |f|
+= form_for(@moving) do |f|
 
-      = render 'shared/error_messages', object: f.object
+  = render 'shared/error_messages', object: f.object
 
-      .form-group
-        = f.label :title
-        = f.text_field :title, class: 'form-control',
-        placeholder: "Name this moving"
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control',
+    placeholder: "Name this moving"
 
-      .form-group
-        = f.label :description
-        = f.text_area :description, class: 'form-control',
-          placeholder: "Write description"
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: 'form-control',
+      placeholder: "Write description"
 
-      .form-group
-        = f.button "Create my moving", class: "submit btn btn-success",
-          data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
+  .form-group
+    = f.button "Create moving", class: "submit btn btn-success",
+      data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }

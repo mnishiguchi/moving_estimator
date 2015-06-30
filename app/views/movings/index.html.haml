@@ -2,18 +2,13 @@
 
 %h1.page-header My movings
 
-.row
-  .col-sm-3#dashboard_menus
-    %ul.nav.nav-pills.nav-stacked
-      %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
-      %li= link_to "New moving", new_moving_path
-      %li.active= link_to "My movings", "#"
-      %li= link_to "Todo list", todos_path, :"data-no-turbolink" => true
+%ol.breadcrumb
+  %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
+  %li.active My movings
 
-  .col-sm-9#dashboard_body
-    .list-group
-    - @movings.each do |m|
-      .list-group-item
-        = link_to m.title, moving_path(m)
-        = link_to "delete", moving_path(m), method: :delete,
+.list-group
+- @movings.each do |m|
+  .list-group-item
+    = link_to m.title, moving_path(m)
+    = link_to "delete", moving_path(m), method: :delete,
                             data: { confirm: "Are you sure?" }, class: "btn btn-xs btn-danger pull-right"

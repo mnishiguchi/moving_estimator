@@ -2,17 +2,11 @@
 
 %h1.page-header Todos
 
-.row
-  .col-sm-3#dashboard_menus
-    %ul.nav.nav-pills.nav-stacked
-      %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
-      %li= link_to "New moving", new_moving_path
-      %li= link_to "My movings", movings_path
-      %li.active= link_to "Todo list", "#"
+%ol.breadcrumb
+  %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
+  %li.active Todo list
 
-  .col-sm-9#dashboard_body
-
-    #react_todolist
+#react_todolist
 
 :coffee
 

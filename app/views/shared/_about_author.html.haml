@@ -7,9 +7,9 @@
       %a{ href: "mailto:masatoshi.nishiguchi@udc.edu"} masatoshi.nishiguchi@udc.edu
 
     %ul.list-unstyled.list-inline.list-social-icons
-      %li#btn-facebook
-        %a{ href: "#" }
-          = fa_icon "2x facebook-square"
+      / %li#btn-facebook
+      /   %a{ href: "#" }
+      /     = fa_icon "2x facebook-square"
       %li
         %a{ href: "https://www.linkedin.com/profile/view?id=101724080", target: '_blank' }
           = fa_icon "2x linkedin-square"
@@ -19,11 +19,6 @@
       %li
         %a{ href: 'https://github.com/mnishiguchi', target: '_blank' }
           = fa_icon "2x github-square"
-      %li
-        %a{ href: 'http://stackoverflow.com/users/3837223/mnishiguchi', target: '_blank' }
-          = fa_icon "2x stack-overflow"
-
--# Responds to clicking on unused social buttons.
-:coffee
-  $('#btn-facebook').click -> alert "Sorry, I don't have a Facebook account."
-
+      / %li
+      /   %a{ href: 'http://stackoverflow.com/users/3837223/mnishiguchi', target: '_blank' }
+      /     = fa_icon "2x stack-overflow"
