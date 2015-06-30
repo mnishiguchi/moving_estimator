@@ -5,7 +5,7 @@ class MovingItemsController < ApplicationController
   before_action :authenticate_user! # all actions
   before_action :ensure_moving!     # all actions
 
-  # Note: A list of items is displayed in Movings#show page instead of MovingItems#index.
+  # Note: A list of items is displayed in Movings#show page.
 
   # Shows a form to create a new item.
   def new
