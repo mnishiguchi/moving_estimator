@@ -1,0 +1,12 @@
+-if user_signed_in?
+  %li.dropdown
+    %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+      New
+      %span.caret
+    %ul.dropdown-menu
+      %li= link_to "Moving", new_moving_path
+  %li= link_to "My movings", movings_path
+- else
+  %li= link_to "Sign up", new_user_registration_path
+  %li= link_to "Log in", new_user_session_path
+  %li= link_to "Contact", contact_path

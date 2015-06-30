@@ -41,14 +41,21 @@ $gray-medium-light:  #eaeaea;
 }
 
 /* navbar links */
-.nav.navbar-nav.navbar-left li.dropdown a,
-.nav.navbar-nav.navbar-right li.dropdown a,
+
 .navbar-inverse .navbar-nav > li > a {
     color: $header-link-color;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
     color: $header-hover-color;
+}
+
+// for size xm only
+@media (max-width: 768px) {
+  .nav.navbar-nav.navbar-left li.dropdown a,
+  .nav.navbar-nav.navbar-right li.dropdown a {
+    color: $header-link-color;
+  }
 }
 
 #logo {
