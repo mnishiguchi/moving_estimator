@@ -2,8 +2,10 @@
  * To override BS navbar's CSS
  */
 
-$gray-medium-light: #eaeaea;
-$header-color: #113366;
+$header-color:       #113366;
+$header-link-color:  #CDE;
+$header-hover-color: #FFF;
+$gray-medium-light:  #eaeaea;
 
 /* Header */
 
@@ -30,101 +32,36 @@ $header-color: #113366;
 
 /* title */
 .navbar-inverse .navbar-brand {
-    color: #CDE;
+    color: $header-link-color;
 }
 
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-    color: #FFF;
+    color: $header-hover-color;
 }
+
 /* navbar links */
+.nav.navbar-nav.navbar-left li.dropdown a,
+.nav.navbar-nav.navbar-right li.dropdown a,
 .navbar-inverse .navbar-nav > li > a {
-    color: #CDE;
+    color: $header-link-color;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-    color: #FFF;
+    color: $header-hover-color;
 }
 
 #logo {
   float: left;
   // margin-right: 10px;
   font-size: 2.0em;
-  color: #CDE;
+  color: $header-link-color;
   letter-spacing: -1px;
   font-weight: bold;
   &:hover {
-    color: #FFF;
+    color: $header-hover-color;
     text-decoration: none;
   }
-}
-
-/* Top Navigation */
-
-.top-links {
-    padding: 0 15px;
-}
-
-.top-links>li {
-    display: inline-block;
-    float: left;
-}
-
-.top-links>li>a {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    line-height: 20px;
-    color: #999;
-}
-
-.top-links>li>a:hover,
-.top-links>li>a:focus,
-.top-links>.open>a,
-.top-links>.open>a:hover,
-.top-links>.open>a:focus {
-    color: #fff;
-    background-color: $header-color;
-}
-
-.top-links>.open>.dropdown-menu {
-    float: left;
-    position: absolute;
-    margin-top: 0;
-    border: 1px solid rgba(0,0,0,.15);
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    background-color: #fff;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-
-.top-links>.open>.dropdown-menu>li>a {
-    white-space: normal;
-}
-
-ul.message-dropdown {
-    padding: 0;
-    max-height: 250px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-li.message-preview {
-    width: 275px;
-    border-bottom: 1px solid rgba(0,0,0,.15);
-}
-
-li.message-preview>a {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-li.message-footer {
-    margin: 5px 0;
-}
-
-ul.alert-dropdown {
-    width: 200px;
 }
 
 /* footer */
