@@ -38,6 +38,6 @@ RSpec::Matchers.define :send_email_by_click do
   match do |page|
     # To prevent code from breaking in case any other tests deliver email.
     ActionMailer::Base.deliveries.clear
-    expect { click_button submit }.to change(ActionMailer::Base.deliveries, :count).by(1)
+    expect { click_button "Send" }.to change(ActionMailer::Base.deliveries, :count).by(1)
   end
 end

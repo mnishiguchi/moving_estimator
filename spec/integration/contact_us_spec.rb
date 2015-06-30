@@ -14,7 +14,7 @@ describe "Contact us", type: :feature do
   describe "contact form" do
     before { visit contact_path }
 
-    let(:submit) { "Submit" }
+    let(:submit) { "Send" }
 
     describe "with invalid information" do
       it { expect(page).to_not send_email_by_click }
