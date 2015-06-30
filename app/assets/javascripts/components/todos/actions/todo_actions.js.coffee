@@ -11,16 +11,16 @@ TodoActions =
       url:    "/todos/"
       data:   todo:
                 content: content
-    .done (data, textStatus, jqXHR) =>
+    .done (data, textStatus, XHR) =>
       new_todo =
         id:        data.todo.id
         content:   data.todo.content
         completed: data.todo.completed
       @dispatch(constants.ADD_TODO, new_todo: new_todo)
       $.growl.notice title: "Todo added", message: data.todo.content
-    .fail (jqXHR, textStatus, errorThrown) =>
+    .fail (XHR, textStatus, errorThrown) =>
       $.growl.error title: "Error", message: "Error adding todo"
-      console.error textStatus, errorThrown.toString()
+      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
   # Saves a new completion status to database.
   toggleTodo: (id, completed) ->
@@ -30,12 +30,12 @@ TodoActions =
       url:    "/todos/" + id
       data:   todo:
                 completed: completed
-    .done (data, textStatus, jqXHR) =>
+    .done (data, textStatus, XHR) =>
       title = if data.todo.completed then "Completed" else "Not completed"
       $.growl.notice title: title, message: data.todo.content
-    .fail (jqXHR, textStatus, errorThrown) =>
+    .fail (XHR, textStatus, errorThrown) =>
       $.growl.error title: "Error", message: "Error toggleing todo completion"
-      console.error textStatus, errorThrown.toString()
+      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
   # Saves a new content to database.
   updateTodo: (id, new_content) ->
@@ -45,11 +45,11 @@ TodoActions =
       url:    "/todos/" + id
       data:   todo:
                 content: new_content
-    .done (data, textStatus, jqXHR) =>
+    .done (data, textStatus, XHR) =>
       $.growl.notice title: "Todo updated", message: ""
-    .fail (jqXHR, textStatus, errorThrown) =>
+    .fail (XHR, textStatus, errorThrown) =>
       $.growl.error title: "Error", message: "Error updating todo"
-      console.error textStatus, errorThrown.toString()
+      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
   # Deletes a todo to database.
   deleteTodo: (id) ->
@@ -57,10 +57,10 @@ TodoActions =
     $.ajax
       method: "DELETE"
       url:    "/todos/" + id
-    .done (data, textStatus, jqXHR) =>
+    .done (data, textStatus, XHR) =>
       $.growl.notice title: "Deleted", message: data.todo.content
-    .fail (jqXHR, textStatus, errorThrown) =>
+    .fail (XHR, textStatus, errorThrown) =>
       $.growl.error title: "Error", message: "Error deleting todos"
-      console.error textStatus, errorThrown.toString()
+      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
 module.exports = TodoActions
