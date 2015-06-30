@@ -6,33 +6,48 @@
   %br/
   %small= @moving.description
 
-
 %ol.breadcrumb
   %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
   %li= link_to "My movings", movings_path
   %li.active= @moving.title
 
-/ = link_to "Add new item", { controller: :moving_items, action: :new },
-/   class: "btn btn-primary", style: "margin-bottom: 20px;"
+-# By default, #tabs_table_all_items is active.
+-# Exceptionally, when the page is re-rendered by MovingItemsController, #tabs_add_form is activated.
+
+-# classes for tabs
+- tab_active   = "active"
+- tab_default  = ""
+- content_default = %w[tab-pane fade]
+- content_active  = %w[tab-pane fade active in]
+
+- if params[:controller] == 'moving_items'
+  - tab_add_form           = tab_active
+  - tab_table_all_item     = tab_default
+  - content_add_form       = content_active
+  - content_table_all_item = content_default
+- else
+  - tab_add_form           = tab_default
+  - tab_table_all_item     = tab_active
+  - content_add_form       = content_default
+  - content_table_all_item = content_active
 
 / Tabs
 %ul{ class: "nav nav-tabs", role: 'tablist' }
-  %li.active
+  %li{ class: tab_table_all_item }
     %a{ href: "#tabs_table_all_items", role: "tab", data: { toggle: "tab" } }
       All items
-  %li
+  %li{ class: tab_add_form }
     %a{ href: "#tabs_add_form", role: "tab", data: { toggle: "tab" } }
       Add item
 
 / Tab Content
--# .fade : enables animation.
--# .in   : ensures it's shown when the page is loaded.
+/   .fade : enables animation.
+/   .in   : ensures it's shown when the page is loaded.
 .tab-content
-  .tab-pane.fade.in.active#tabs_table_all_items
+  #tabs_table_all_items{ class: content_table_all_item }
     - if @moving_items.count > 0
       = render 'moving_items/table_moving_items'
     - else
       %p{ style: "margin: 16px;" } No item found
-  .tab-pane.fade#tabs_add_form{ style: "padding-top: 16px" }
+  #tabs_add_form{ class: content_add_form }
     = render 'moving_items/add_form'
-

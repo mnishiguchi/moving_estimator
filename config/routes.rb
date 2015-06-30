@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :movings
-  resources :moving_items, only: [:new, :create, :edit, :update, :destroy]
+  resources :moving_items, except: [:index, :show]
 
   resources :todos, except: [:show]
   resources :ingredients, only: [:index, :update, :destroy]

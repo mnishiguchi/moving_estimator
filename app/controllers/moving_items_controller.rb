@@ -21,7 +21,9 @@ class MovingItemsController < ApplicationController
       moving = Moving.find(current_moving)
       redirect_to moving_url(moving)
     else
-      render 'new'
+      @movings = current_user.movings
+      @moving_items = @moving.moving_items
+      render 'movings/show'
     end
   end
 
