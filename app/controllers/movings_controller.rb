@@ -3,8 +3,8 @@ class MovingsController < ApplicationController
   include MovingsHelper
 
   before_action :authenticate_user! # all actions
-  before_action :set_moving, only: [:show, :edit, :update]
-  before_action :set_volume_data, only: :show
+  before_action :set_moving,        only: [:show, :edit, :update]
+  before_action :set_volume_data,   only: :show
 
   # Lists all the movings.
   def index
@@ -13,11 +13,9 @@ class MovingsController < ApplicationController
 
   # Shows an individual item.
   def show
-    # id = params[:id] || current_moving
-    # @moving = Moving.find(id)
     @moving_items = @moving.moving_items
     @moving_item = MovingItem.new  # For new form
-    remember_moving @moving          # Remember moving id for later use.
+    remember_moving @moving        # Remember moving id for later use.
   end
 
   # Shows a form to create a new moving.
@@ -40,12 +38,10 @@ class MovingsController < ApplicationController
 
   # Shows an edit-item form.
   def edit
-    # @moving = Moving.find(params[:id])
   end
 
   # Updates the moving to database.
   def update
-    # @moving = Moving.find(params[:id])
     @moving.update_columns(moving_params)
     flash[:success] = "Moving updated"
     redirect_to moving_url(@moving)
@@ -54,7 +50,7 @@ class MovingsController < ApplicationController
   # Delete the moving record.
   def destroy
     Moving.find(params[:id]).destroy
-    forget_moving
+    forget_moving  # Forget current moving
     flash[:success] = "Moving deleted"
     redirect_to movings_url
   end

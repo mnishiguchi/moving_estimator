@@ -10,11 +10,12 @@
 #  updated_at  :datetime         not null
 #
 
+# http://www.rubydoc.info/gems/factory_girl/file/GETTING_STARTED.md#Associations
+
 FactoryGirl.define do
   factory :moving do
-    user_id     nil
+    user
     title       "title"
     description "description"
   end
-
 end

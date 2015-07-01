@@ -26,8 +26,10 @@ RSpec.describe TodosController, type: :controller do
   end
 
   describe "destroying a todo with Ajax" do
-    before { FactoryGirl.create(:todo) }  # Creating a todo in database.
-    let(:todo) { Todo.first }             # Getting one from datatase as needed.
+    let!(:todo) do
+      FactoryGirl.create(:todo)  # Creating a todo in database.
+      Todo.first                 # Getting one from datatase.
+    end
 
     it "decrements the todo count, then returns http success" do
       expect{
