@@ -11,6 +11,12 @@
   %li= link_to "My movings", movings_path
   %li.active= @moving.title
 
+.row
+  .col-sm-6
+    = render 'table_vol_by_category'
+  .col-sm-6
+    = render 'table_vol_by_room'
+
 -# By default, #tabs_table_all_items is active.
 -# Exceptionally, when the page is re-rendered by MovingItemsController, #tabs_add_form is activated.
 

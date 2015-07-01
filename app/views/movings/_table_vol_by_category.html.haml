@@ -1,0 +1,11 @@
+.table-responsive
+  %table.table.table-bordered.table-hover.table-striped
+    %thead
+      %tr
+      %th category
+      %th volume
+    %tbody
+      - @vol_by_category.each do |category, volume|
+        %tr
+          %td= category
+          %td= volume
