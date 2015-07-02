@@ -13,9 +13,9 @@
 
 .row
   .col-sm-6
-    = render 'movings/table_vol_by_category'
+    = kv_table_for %w(category volume), @moving.moving_items.group(:category).sum(:volume)
   .col-sm-6
-    = render 'movings/table_vol_by_room'
+    = kv_table_for %w(room volume), @moving.moving_items.group(:room).sum(:volume)
 
 -# By default, #tabs_table_all_items is active.
 -# Exceptionally, when the page is re-rendered by MovingItemsController, #tabs_add_form is activated.
