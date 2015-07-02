@@ -1,3 +1,5 @@
+- vol_by_room     = @moving.moving_items.group(:room).sum(:volume)
+
 .table-responsive
   %table.table.table-bordered.table-hover.table-striped
     %thead
@@ -5,7 +7,7 @@
         %th.text-center room
         %th.text-center volume
     %tbody
-      - @vol_by_room.each do |room, volume|
+      - vol_by_room.each do |room, volume|
         %tr.text-center
           %td= room
           %td= volume

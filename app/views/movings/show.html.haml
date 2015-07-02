@@ -13,36 +13,36 @@
 
 .row
   .col-sm-6
-    = render 'table_vol_by_category'
+    = render 'movings/table_vol_by_category'
   .col-sm-6
-    = render 'table_vol_by_room'
+    = render 'movings/table_vol_by_room'
 
 -# By default, #tabs_table_all_items is active.
 -# Exceptionally, when the page is re-rendered by MovingItemsController, #tabs_add_form is activated.
 
 -# classes for tabs
-- tab_active   = "active"
-- tab_default  = ""
-- content_default = %w[tab-pane fade]
-- content_active  = %w[tab-pane fade active in]
+- active_tab      = "active"
+- active_content  = %w[tab-pane fade active in]
+- default_tab     = ""
+- default_content = %w[tab-pane fade]
 
 - if params[:controller] == 'moving_items'
-  - tab_add_form           = tab_active
-  - tab_table_all_item     = tab_default
-  - content_add_form       = content_active
-  - content_table_all_item = content_default
+  - table_tab        = default_tab
+  - table_content    = default_content
+  - add_form_tab     = active_tab
+  - add_form_content = active_content
 - else
-  - tab_add_form           = tab_default
-  - tab_table_all_item     = tab_active
-  - content_add_form       = content_default
-  - content_table_all_item = content_active
+  - table_tab        = active_tab
+  - table_content    = active_content
+  - add_form_tab     = default_tab
+  - add_form_content = default_content
 
 / Tabs
 %ul{ class: "nav nav-tabs", role: 'tablist' }
-  %li{ class: tab_table_all_item }
+  %li{ class: table_tab }
     %a{ href: "#tabs_table_all_items", role: "tab", data: { toggle: "tab" } }
       All items
-  %li{ class: tab_add_form }
+  %li{ class: add_form_tab }
     %a{ href: "#tabs_add_form", role: "tab", data: { toggle: "tab" } }
       Add item
 
@@ -50,10 +50,10 @@
 /   .fade : enables animation.
 /   .in   : ensures it's shown when the page is loaded.
 .tab-content
-  #tabs_table_all_items{ class: content_table_all_item }
+  #tabs_table_all_items{ class: table_content }
     - if @moving_items.count > 0
       = render 'moving_items/table_moving_items'
     - else
       %p{ style: "margin: 16px;" } No item found
-  #tabs_add_form{ class: content_add_form }
+  #tabs_add_form{ class: add_form_content }
     = render 'moving_items/add_form'

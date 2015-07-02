@@ -4,7 +4,6 @@ class MovingsController < ApplicationController
 
   before_action :authenticate_user! # all actions
   before_action :set_moving,        only: [:show, :edit, :update]
-  before_action :set_volume_data,   only: :show
 
   # Lists all the movings.
   def index
@@ -66,8 +65,8 @@ class MovingsController < ApplicationController
       @moving = Moving.find(id)
     end
 
-    def set_volume_data
-      @vol_by_category = @moving.moving_items.group(:category).sum(:volume)
-      @vol_by_room     = @moving.moving_items.group(:room).sum(:volume)
-    end
+    # def set_volume_data
+    #   @vol_by_category = @moving.moving_items.group(:category).sum(:volume)
+    #   @vol_by_room     = @moving.moving_items.group(:room).sum(:volume)
+    # end
 end
