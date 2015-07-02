@@ -1,27 +1,34 @@
-.form-group
-  = f.label :name
-  = f.text_field :name, class: 'form-control'
+.form-group.col-sm-6
+  = f.label :name,      class: "col-sm-4"
+  = f.text_field :name, class: "form-control col-sm-8"
 
-.form-group
-  = f.label :volume
+.form-group.col-sm-6
+  = f.label :category,      class: "col-sm-4"
+  = f.text_field :category, class: 'form-control col-sm-8'
+
+.clearfix
+
+.form-group.col-sm-6
+  = f.label :volume, class: "form-group col-sm-4"
   = f.number_field :volume, in: 0..200, step: 0.5, id: "slider_value"
-  = f.range_field :volume, in: 0..200, step: 0.5, id: "slider"
+  = f.range_field :volume,  in: 0..200, step: 0.5, id: "slider"
 
-.form-group
-  = f.label :quantity
-  = f.number_field :quantity, in: 0..999, step: 1
+.form-group.col-sm-6
+  = f.label :quantity,                             class: "col-sm-4"
+  = f.number_field :quantity, in: 0..999, step: 1, class: "form-control col-sm-8"
 
-.form-group
-  = f.label :category
-  = f.text_field :category, class: 'form-control'
+.clearfix
 
-.form-group
-  = f.label :room
-  = f.text_field :room, class: 'form-control'
+.form-group.col-sm-6
+  = f.label :room,      class: "col-sm-4"
+  = f.text_field :room, class: 'form-control col-sm-8'
 
-.form-group
-  = f.label :description
-  = f.text_area :description, class: 'form-control', placeholder: "Write description"
+.form-group.col-sm-6
+  = f.label :description,     class: "col-sm-4"
+  = f.text_area :description, class: 'form-control col-sm-8',
+    placeholder: "Write description"
+
+.clearfix
 
 :coffee
 
@@ -33,3 +40,9 @@
     setSliderVal()
     document.getElementById('slider').addEventListener 'change', ->
       setSliderVal()
+
+:css
+
+  #add_moving_item .form-group {
+    margin-bottom: 20px;
+  }
