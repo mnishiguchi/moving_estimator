@@ -20,7 +20,7 @@
           %td= item.name
           %td= item.volume
           %td= item.quantity
-          %td= item.volume * item.quantity
+          %td= number_with_precision(item.volume * item.quantity, precision: 1)
           %td= item.room
           %td= item.category
           %td= item.description
@@ -35,8 +35,8 @@
         %th.text-center Total volume
         %th.text-center
         %th.text-center
-        %th.text-center= total_vol.to_i.to_s + " cu.ft"
-        %th.text-center= (total_vol/35.314).to_i.to_s + " m^3"
+        %th.text-center= sprintf "%.1f cu.ft", total_vol
+        %th.text-center= sprintf "( %.1f m3 )", (total_vol/35.314)
         %th.text-center
         %th.text-center
         %th.text-center
