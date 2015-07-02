@@ -11,6 +11,7 @@ module ApplicationHelper
     end
   end
 
+  # A list for all the items of the specified attribute of the object.
   # collection: an array of objects
   # prop:       attribute
   def list_for(collection, prop)
@@ -21,26 +22,26 @@ module ApplicationHelper
     end
   end
 
-  # A table for key-value pairs
-  # columns:    an array of header strings
+  # A table for key-value pairs.
+  # kv_names:   an array of header strings
   # collection: a hash
-  def kv_table_for(columns=[], collection={})
+  def kv_table_for(kv_names=[], collection={})
     thead = content_tag(:thead) do
       content_tag(:tr) do
         # generating <th>table headers</th>
-        tags = columns.map { |column| content_tag(:th, column, class: "text-center") }
+        tags = kv_names.map { |column| content_tag(:th, column, class: "text-center") }
         safe_join tags
       end
     end
 
     tbody = content_tag(:tbody) do
       # generating <td>table data</td>
-      tags = collection.map { |k, v|
+      tags = collection.map do |k, v|
         content_tag(:tr, class: "text-center") do
-          content_tag(:td, k) +
-          content_tag(:td, v)
+          concat content_tag(:td, k)
+          concat content_tag(:td, v)
         end
-      }
+      end
       safe_join tags
     end
 

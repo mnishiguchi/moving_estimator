@@ -1,22 +1,26 @@
 .table-responsive
-  %table.table.table-bordered.table-hover.table-striped
+  %table.table.table-bordered.table-hover.table-striped.table-condensed
     %thead
       %tr
         %th.text-center
         %th.text-center Name
         %th.text-center Vol
         %th.text-center Qty
+        %th.text-center Subtotal
         %th.text-center Room
         %th.text-center Category
         %th.text-center Description
         %th.text-center
     %tbody
+      - total_vol = 0
       - @moving_items.each do |item|
+        - total_vol += (item.volume * item.quantity)
         %tr.text-center
           %td= item.moving_id
           %td= item.name
           %td= item.volume
           %td= item.quantity
+          %td= item.volume * item.quantity
           %td= item.room
           %td= item.category
           %td= item.description
@@ -25,3 +29,18 @@
             = "|"
             = link_to "delete", moving_item_path(item), method: :delete,
                       data: { confirm: "Are you sure?" }
+    %tfoot
+      %tr
+        %th.text-center
+        %th.text-center Total volume
+        %th.text-center
+        %th.text-center
+        %th.text-center= total_vol.to_i.to_s + " cu.ft"
+        %th.text-center= (total_vol/35.314).to_i.to_s + " m^3"
+        %th.text-center
+        %th.text-center
+        %th.text-center
+:css
+  tfoot {
+    background-color: #ccc
+  }

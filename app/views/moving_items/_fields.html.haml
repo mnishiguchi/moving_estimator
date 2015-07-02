@@ -10,8 +10,8 @@
 
 .form-group.col-sm-6
   = f.label :volume, class: "form-group col-sm-4"
-  = f.number_field :volume, in: 0..200, step: 0.5, id: "slider_value"
-  = f.range_field :volume,  in: 0..200, step: 0.5, id: "slider"
+  = f.number_field :volume, in: 0..200, step: 0.5, id: "slider_value", value: 3
+  = f.range_field :volume,  in: 0..200, step: 0.5, id: "slider", value: 3
 
 .form-group.col-sm-6
   = f.label :quantity,                             class: "col-sm-4"
