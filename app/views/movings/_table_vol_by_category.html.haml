@@ -2,10 +2,10 @@
   %table.table.table-bordered.table-hover.table-striped
     %thead
       %tr
-      %th category
-      %th volume
+        %th.text-center category
+        %th.text-center volume
     %tbody
       - @vol_by_category.each do |category, volume|
-        %tr
+        %tr.text-center
           %td= category
           %td= volume

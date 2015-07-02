@@ -1,29 +1,35 @@
 .form-group
   = f.label :name
-  = f.text_field :name, class: 'form-control',
-  placeholder: "Input item name"
+  = f.text_field :name, class: 'form-control'
 
 .form-group
   = f.label :volume
-  = f.text_field :volume, class: 'form-control',
-  placeholder: "Input volume in cubic feet"
+  = f.number_field :volume, in: 0..200, step: 0.5, id: "slider_value"
+  = f.range_field :volume, in: 0..200, step: 0.5, id: "slider"
 
 .form-group
   = f.label :quantity
-  = f.text_field :quantity, class: 'form-control',
-  placeholder: "How many?"
+  = f.number_field :quantity, in: 0..999, step: 1
 
 .form-group
   = f.label :category
-  = f.text_field :category, class: 'form-control',
-  placeholder: "Input category"
+  = f.text_field :category, class: 'form-control'
 
 .form-group
   = f.label :room
-  = f.text_field :room, class: 'form-control',
-  placeholder: "Input room"
+  = f.text_field :room, class: 'form-control'
 
 .form-group
   = f.label :description
-  = f.text_area :description, class: 'form-control',
-    placeholder: "Write description"
+  = f.text_area :description, class: 'form-control', placeholder: "Write description"
+
+:coffee
+
+  setSliderVal = ->
+    sliderVal = document.getElementById('slider').value
+    $("#slider_value").val(sliderVal)
+
+  jQuery ->
+    setSliderVal()
+    document.getElementById('slider').addEventListener 'change', ->
+      setSliderVal()
