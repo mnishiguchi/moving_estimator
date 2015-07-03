@@ -3,7 +3,8 @@ class MovingsController < ApplicationController
   include MovingsHelper
 
   before_action :authenticate_user! # all actions
-  before_action :set_moving,        only: [:show, :edit, :update]
+  before_action :correct_user!,     only: [:show, :edit, :update]
+  # before_action :set_moving,        only: [:show, :edit, :update]
 
   # Lists all the movings.
   def index
@@ -60,13 +61,16 @@ class MovingsController < ApplicationController
       params.require(:moving).permit(:title, :description)
     end
 
-    def set_moving
-      id = params[:id] || current_moving
-      @moving = Moving.find(id)
-    end
-
-    # def set_volume_data
-    #   @vol_by_category = @moving.moving_items.group(:category).sum(:volume)
-    #   @vol_by_room     = @moving.moving_items.group(:room).sum(:volume)
+    # def set_moving
+    #   id = params[:id] || current_moving
+    #   @moving = Moving.find(id)
     # end
+
+    # Rejects if a user tries to access another user’s moving.
+    def correct_user!
+      id = params[:id] || current_moving
+      @moving = current_user.movings.try { find_by(id: id) }
+      flash[:danger] = "invalid access"
+      redirect_to root_url if @moving.nil?
+    end
 end

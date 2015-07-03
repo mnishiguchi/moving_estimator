@@ -2,8 +2,9 @@ class MovingItemsController < ApplicationController
 
   include MovingsHelper
 
-  before_action :authenticate_user! # all actions
-  before_action :ensure_moving!     # all actions
+  before_action :authenticate_user!  # all actions
+  before_action :correct_user!       # TODO
+  before_action :set_current_moving!
 
   # Note: A list of items is displayed in Movings#show page.
 
@@ -55,8 +56,12 @@ class MovingItemsController < ApplicationController
                                           :description, :room, :category)
     end
 
+    def correct_user!
+      # TODO
+    end
+
     # Ensures that current moving actually exists in database.
-    def ensure_moving!
+    def set_current_moving!
       @moving = Moving.find(current_moving)
     end
 end
