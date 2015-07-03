@@ -26,19 +26,12 @@
 - default_tab     = ""
 - default_content = %w[tab-pane fade]
 
-- if params[:controller] == 'moving_items'
-  - tab1, content1 = default_tab, default_content
-  - tab2, content2 = active_tab, active_content   #<= ACTIVE
-- else
-  - tab1, content1 = active_tab, active_content   #<= ACTIVE
-  - tab2, content2 = default_tab, default_content
-
 / Tabs
-%ul{ class: "nav nav-tabs", role: 'tablist' }
-  %li{ class: tab1 }
+%ul{ class: "nav nav-tabs", role: 'tablist', id: "tabs_movings" }
+  %li{ class: active_tab }
     %a{ href: "#tabs_1", role: "tab", data: { toggle: "tab" } }
       All items
-  %li{ class: tab2 }
+  %li{ class: default_tab }
     %a{ href: "#tabs_2", role: "tab", data: { toggle: "tab" } }
       Add item
 
@@ -46,13 +39,18 @@
 /   .fade : enables animation.
 /   .in   : ensures it's shown when the page is loaded.
 .tab-content
-  #tabs_1{ class: content1 }
+  #tabs_1{ class: active_content }
     - if @moving_items.count > 0
       = render 'moving_items/table_moving_items'
     - else
       %p{ style: "margin: 16px;" } No item found
-  #tabs_2{ class: content2 }
+  #tabs_2{ class: default_content }
     = render 'moving_items/add_form'
+
+:coffee
+
+  jQuery ->
+    $('#tabs_movings li:eq(1) a').tab('show') if #{params[:controller] == 'moving_items'}
 
 :css
 
