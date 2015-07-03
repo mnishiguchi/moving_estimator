@@ -4,7 +4,7 @@
 
 %ol.breadcrumb
   %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
-  %li= link_to "Mymovings", movings_path
+  %li= link_to "My movings", movings_path
   %li= link_to @moving.title, moving_path(@moving)
   %li.active Edit item
 
@@ -14,6 +14,6 @@
 
   = render 'fields', f: f
 
-  .form-group
-    = f.button "Edit item", class: "submit btn btn-success",
+  .form-group{ style: "width: 100%" }
+    = f.button "Edit item", class: "submit btn btn-success btn-lg btn-block",
       data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }

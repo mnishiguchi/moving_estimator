@@ -23,6 +23,6 @@
         = f.text_area :description, class: 'form-control',
           placeholder: "Write description"
 
-      .form-group
-        = f.button "Create moving", class: "submit btn btn-success",
+      .form-group{ style: "width: 100%" }
+        = f.button "Create moving", class: "submit btn btn-success btn-lg btn-block",
           data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
