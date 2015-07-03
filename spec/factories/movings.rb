@@ -14,8 +14,9 @@
 
 FactoryGirl.define do
   factory :moving do
-    user
     title       "title"
     description "description"
+
+    association :user, factory: :user
   end
 end
