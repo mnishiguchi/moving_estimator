@@ -27,33 +27,29 @@
 - default_content = %w[tab-pane fade]
 
 - if params[:controller] == 'moving_items'
-  - table_tab        = default_tab
-  - table_content    = default_content
-  - add_form_tab     = active_tab
-  - add_form_content = active_content
+  - tab1, content1 = default_tab, default_content
+  - tab2, content2 = active_tab, active_content   #<= ACTIVE
 - else
-  - table_tab        = active_tab
-  - table_content    = active_content
-  - add_form_tab     = default_tab
-  - add_form_content = default_content
+  - tab1, content1 = active_tab, active_content   #<= ACTIVE
+  - tab2, content2 = default_tab, default_content
 
 / Tabs
 %ul{ class: "nav nav-tabs", role: 'tablist' }
-  %li{ class: table_tab }
-    %a{ href: "#tabs_table_all_items", role: "tab", data: { toggle: "tab" } }
+  %li{ class: tab1 }
+    %a{ href: "#tabs_1", role: "tab", data: { toggle: "tab" } }
       All items
-  %li{ class: add_form_tab }
-    %a{ href: "#tabs_add_form", role: "tab", data: { toggle: "tab" } }
+  %li{ class: tab2 }
+    %a{ href: "#tabs_2", role: "tab", data: { toggle: "tab" } }
       Add item
 
-/ Tab Content
+/ Tab Contents
 /   .fade : enables animation.
 /   .in   : ensures it's shown when the page is loaded.
 .tab-content
-  #tabs_table_all_items{ class: table_content }
+  #tabs_1{ class: content1 }
     - if @moving_items.count > 0
       = render 'moving_items/table_moving_items'
     - else
       %p{ style: "margin: 16px;" } No item found
-  #tabs_add_form{ class: add_form_content }
+  #tabs_2{ class: content2 }
     = render 'moving_items/add_form'
