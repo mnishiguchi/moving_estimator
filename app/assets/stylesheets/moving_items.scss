@@ -2,3 +2,11 @@
 #add_moving_item .form-group {
   margin-bottom: 15px;
 }
+
+#slider {
+  height: 30px;
+  width:  50%;
+  @media(max-width:768px) {  // xm only
+    width: 100%;
+  }
+}
