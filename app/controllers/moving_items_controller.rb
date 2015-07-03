@@ -3,8 +3,8 @@ class MovingItemsController < ApplicationController
   include MovingsHelper
 
   before_action :authenticate_user!  # all actions
-  before_action :correct_user!       # TODO
-  before_action :set_current_moving!
+  before_action :current_moving!     # all actions
+  before_action :correct_user!, only: [:edit, :update, :destroy]
 
   # Note: A list of items is displayed in Movings#show page.
 
@@ -30,12 +30,10 @@ class MovingItemsController < ApplicationController
 
   # Shows an edit form.
   def edit
-    @moving_item = MovingItem.find(params[:id])
   end
 
   # Updates the item to database.
   def update
-    @moving_item = MovingItem.find(params[:id])
     @moving_item.update_columns(moving_item_params)
     flash[:success] = "Item updated"
     redirect_to moving_url(@moving)
@@ -43,7 +41,8 @@ class MovingItemsController < ApplicationController
 
   # Delete the moving item record.
   def destroy
-    MovingItem.find(params[:id]).destroy
+    # MovingItem.find(params[:id]).destroy
+    @moving_item.destroy
     flash[:success] = "Item deleted"
     moving = Moving.find(current_moving)
     redirect_to moving_url(moving)
@@ -56,12 +55,18 @@ class MovingItemsController < ApplicationController
                                           :description, :room, :category)
     end
 
-    def correct_user!
-      # TODO
+    # Ensures that current moving is set. If true, fetches data from database.
+    # Note: current_moving is stored in the sessison variable.
+    def current_moving!
+      @moving = Moving.find_by(id: current_moving) if try(:current_moving)
+      redirect_to root_url if @moving.nil?
     end
 
-    # Ensures that current moving actually exists in database.
-    def set_current_moving!
-      @moving = Moving.find(current_moving)
+    # Rejects if a user tries to access another user’s moving_items.
+    # Note: params[:id] is required.
+    def correct_user!
+      id = params[:id]
+      @moving_item = current_user.moving_items.try { find_by(id: id) }
+      redirect_to root_url if @moving_item.nil?
     end
 end

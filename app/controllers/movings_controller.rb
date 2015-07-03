@@ -4,11 +4,11 @@ class MovingsController < ApplicationController
 
   before_action :authenticate_user! # all actions
   before_action :correct_user!,     only: [:show, :edit, :update]
-  # before_action :set_moving,        only: [:show, :edit, :update]
+  # before_action :set_moving,      only: [:show, :edit, :update]
 
   # Lists all the movings.
   def index
-    @movings = Moving.all
+    @movings = current_user.movings
   end
 
   # Shows an individual item.
@@ -49,7 +49,7 @@ class MovingsController < ApplicationController
 
   # Delete the moving record.
   def destroy
-    Moving.find(params[:id]).destroy
+    @moving.destroy
     forget_moving  # Forget current moving
     flash[:success] = "Moving deleted"
     redirect_to movings_url
@@ -70,7 +70,6 @@ class MovingsController < ApplicationController
     def correct_user!
       id = params[:id] || current_moving
       @moving = current_user.movings.try { find_by(id: id) }
-      flash[:danger] = "invalid access"
       redirect_to root_url if @moving.nil?
     end
 end
