@@ -14,15 +14,14 @@
 #  updated_at  :datetime         not null
 #
 
-# FactoryGirl.define do
-#   factory :moving_item do
-#     moving nil
-# name "MyString"
-# vol 1.5
-# quantity 1
-# description "MyText"
-# room "MyText"
-# category "MyText"
-#   end
-
-# end
+FactoryGirl.define do
+  factory :moving_item do
+    moving
+    name        "macbook"
+    volume      3.0
+    quantity    1
+    description "high value"
+    room        "living_room"
+    category    "local"
+  end
+end

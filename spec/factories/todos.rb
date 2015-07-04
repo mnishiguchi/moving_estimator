@@ -13,7 +13,7 @@
 FactoryGirl.define do
   factory :todo do
     content "Pick up my wife from the train station"
-    user nil
+    user
   end
 
 end

@@ -1,10 +1,19 @@
 require 'rails_helper'
 
+#     movings GET    /movings(.:format)                movings#index
+#             POST   /movings(.:format)                movings#create
+#  new_moving GET    /movings/new(.:format)            movings#new
+# edit_moving GET    /movings/:id/edit(.:format)       movings#edit
+#      moving GET    /movings/:id(.:format)            movings#show
+#             PATCH  /movings/:id(.:format)            movings#update
+#             PUT    /movings/:id(.:format)            movings#update
+#             DELETE /movings/:id(.:format)            movings#destroy
+
 RSpec.describe MovingsController, type: :controller do
 
   let(:user)   { FactoryGirl.create(:user) }  # A current user
-  let(:moving_params) { FactoryGirl.attributes_for(:moving) }
   let(:moving) { user.movings.create(moving_params) }
+  let(:moving_params) { FactoryGirl.attributes_for(:moving) }
 
   let(:masa)   { FactoryGirl.create(:user) }  # A random person
 
@@ -142,7 +151,9 @@ RSpec.describe MovingsController, type: :controller do
                                                description: new_description }
         end
 
-        it { expect(response).to redirect_to assigns(:moving) }
+        it "redirects to the moving url" do
+          expect(response).to redirect_to assigns(:moving)
+        end
         specify { expect(moving.reload.title).to eq new_title }
         specify { expect(moving.reload.description).to eq new_description }
       end
