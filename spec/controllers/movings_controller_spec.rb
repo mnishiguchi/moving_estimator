@@ -9,22 +9,29 @@ RSpec.describe MovingsController, type: :controller do
   let(:masa)   { FactoryGirl.create(:user) }  # A random person
 
   describe "non-logged-in user" do
-    describe "#index" do
+    describe "GET #index" do
       it "redirects to the login page" do
         get :index
         expect(response).to redirect_to "/users/sign_in"
       end
     end
 
-    describe "#new" do
+    describe "GET #show" do
+      it "redirects to the login page" do
+        get :show, id: moving.id
+        expect(response).to redirect_to "/users/sign_in"
+      end
+    end
+
+    describe "GET #new" do
       it "redirects to the login page" do
         get :new
         expect(response).to redirect_to "/users/sign_in"
       end
     end
 
-    describe "#create" do
-      it "does not increment the Moving count, redirecting to the login page" do
+    describe "POST #create" do
+      it "does not change the Moving count, redirecting to the login page" do
         expect{
           post :create, moving: moving_params
         }.not_to change(Moving, :count)
@@ -32,21 +39,21 @@ RSpec.describe MovingsController, type: :controller do
       end
     end
 
-    describe "#edit" do
+    describe "GET #edit" do
       it "redirects to the login page" do
         get :edit, id: moving.id
         expect(response).to redirect_to "/users/sign_in"
       end
     end
 
-    describe "#update" do
+    describe "PATCH #update" do
       it "redirects to the login page" do
         patch :update, id: moving.id, moving: moving_params
         expect(response).to redirect_to "/users/sign_in"
       end
     end
 
-    describe "#destroy" do
+    describe "DELETE #destroy" do
       it "redirects to the login page" do
         delete :destroy, id: moving.id
         expect(response).to redirect_to "/users/sign_in"
@@ -61,21 +68,36 @@ RSpec.describe MovingsController, type: :controller do
 
     let(:random_moving) { masa.movings.create(moving_params) }
 
-    describe "#index" do
-      it "returns http success" do
-        get :index
-        expect(response).to have_http_status(:success)
+    describe "GET #index" do
+      subject { get :index }
+
+      it { is_expected.to have_http_status(:success) }
+      it { is_expected.to render_template(:index) }
+    end
+
+    describe "GET #show" do
+      subject { get :show, id: id }
+
+      describe "for another user's moving" do
+        let(:id) { random_moving.id }
+        it { is_expected.to redirect_to "/" }
+      end
+
+      describe "for the current user's own moving" do
+        let(:id) { moving.id }
+        it { is_expected.to have_http_status(:success) }
+        it { is_expected.to render_template :show }
       end
     end
 
-    describe "#new" do
-      it "returns http success" do
-        get :new
-        expect(response).to have_http_status(:success)
-      end
+    describe "GET #new" do
+      subject { get :new }
+
+      it { is_expected.to have_http_status(:success) }
+      it { is_expected.to render_template(:new) }
     end
 
-    describe "#create" do
+    describe "POST #create" do
       it "increments the Moving count, then redirects to the show page" do
         expect{
           post :create, moving: moving_params
@@ -84,32 +106,34 @@ RSpec.describe MovingsController, type: :controller do
       end
     end
 
-    describe "#edit" do
+    describe "GET #edit" do
+      subject { get :edit, id: id }
+
       describe "for another user's moving" do
-        it "redirects to the root page" do
-          get :edit, id: random_moving.id
-          expect(response).to redirect_to root_url
-        end
+        let(:id) { random_moving.id }
+        it { is_expected.to redirect_to "/" }
       end
 
       describe "for the current user's own moving" do
-        it "returns http success" do
-          get :edit, id: moving.id
-          expect(response).to have_http_status(:success)
-        end
+        let(:id) { moving.id }
+        it { is_expected.to have_http_status(:success) }
+        it { is_expected.to render_template :edit }
       end
     end
 
-    describe "#update" do
+    describe "PATCH #update" do
       let(:new_title) { "new title" }
       let(:new_description) { "new description" }
 
       describe "for another user's moving" do
-        it "redirects to the root page" do
-          patch :update, id: random_moving.id, moving: { title: new_title,
-                                                 description: new_description }
-          expect(response).to redirect_to root_url
+        before do
+          patch :update, id: random_moving, moving: { title:       new_title,
+                                               description: new_description }
         end
+
+        it { expect(response).to redirect_to "/" }
+        specify { expect(moving.reload.title).not_to eq new_title }
+        specify { expect(moving.reload.description).not_to eq new_description }
       end
 
       describe "for the current user's own moving" do
@@ -124,20 +148,21 @@ RSpec.describe MovingsController, type: :controller do
       end
     end
 
-    describe "#destroy" do
-      let!(:moving) { user.movings.create(moving_params) }
-      let!(:random_moving) { masa.movings.create(moving_params) }
-
+    describe "DELETE #destroy" do
       describe "for another user's moving" do
-        it "does not decrement the moving count, redirecting to the root page" do
+        let!(:random_moving) { masa.movings.create(moving_params) }
+
+        it "does not change the moving count, redirecting to the root url" do
           expect{
             delete :destroy, id: random_moving.id
           }.not_to change(Moving, :count)
-          expect(response).to redirect_to root_url
+          expect(response).to redirect_to "/"
         end
       end
 
       describe "for the current user's own moving" do
+        let!(:moving) { user.movings.create(moving_params) }
+
         it "decrements the moving count, then redirects to the movings page" do
           expect{
             delete :destroy, id: moving.id
