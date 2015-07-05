@@ -18,7 +18,6 @@ gem 'uglifier',     '~> 2.7.1'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails', '~> 4.0.3'
 gem 'turbolinks',        '~> 2.5.3'
-gem 'jquery-turbolinks', '~> 2.1.0'   # For jQuery to work with turbolinks.
 gem 'jbuilder',     '~> 2.0'
 gem 'sdoc',         '~> 0.4.0', group: :doc
 # Views/Styles
@@ -27,15 +26,17 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'  # For bootstrap pagination style.
 gem 'bootstrap-sass',          '~> 3.2.0.0' # Converts Less to Sass.
 gem 'font-awesome-rails',      '~> 4.3.0.0' # For icons.
 gem 'haml-rails',              '~> 0.9.0'   # For HAML.
+# React
 gem 'react-rails',             '~> 1.0.0'   # Compiles JSX.
 gem 'sprockets-coffee-react',  '~> 3.0.1'   # Preprocessor for Coffeescript with React JSX (CJSX).
+gem 'browserify-rails',        '~> 1.0.1'   # Adds CommonJS module support to Sprockets (via Browserify)
 # Others
+gem 'jquery-turbolinks',       '~> 2.1.0'   # For jQuery to work with turbolinks.
 gem 'devise',                  '~> 3.4.1'   # Authentication
 gem 'gibbon',                  '~> 1.1.5'   # A wrapper for MailChimp API 2.0 and Export API 1.0
 gem 'faker',                   '~> 1.4.3'   # Generates sample users.
 gem 'growl',                   '~> 1.0.3'   # Growlnotifies bindings.
 gem 'pg_search',               '~> 1.0.3'   # Named scopes that take advantage of PostgreSQL's full text search
-gem 'browserify-rails',        '~> 1.0.1'   # Adds CommonJS module support to Sprockets (via Browserify)
 
 group :development do
   gem 'dotenv-rails',       '~> 2.0.1'  # Autoloads dotenv in Rails.
@@ -60,6 +61,8 @@ group :test do
   gem 'capybara',           '~> 2.4.4'
   gem 'database_cleaner',   '~> 1.4.1'
   gem 'launchy',            '~> 2.4.3'
+  gem 'shoulda-matchers',   '~> 2.8.0'
+  gem 'json_spec',          '~> 1.1.4'
 end
 
 group :production do
