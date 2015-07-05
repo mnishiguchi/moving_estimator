@@ -15,5 +15,4 @@ FactoryGirl.define do
     content "Pick up my wife from the train station"
     user
   end
-
 end
