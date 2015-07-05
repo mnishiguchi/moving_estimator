@@ -19,7 +19,7 @@ RSpec.describe MovingItemsController, type: :controller do
   let(:masa) { FactoryGirl.create(:user) }
   let(:random_moving_item) do
     m = masa.movings.create(FactoryGirl.attributes_for(:moving))
-    m.moving_item.create(moving_item_params)
+    m.moving_items.create(moving_item_params)
   end
 
   describe "non-logged-in user" do
@@ -108,7 +108,7 @@ RSpec.describe MovingItemsController, type: :controller do
           p[:name] = "new name"
         end
 
-        describe "trying to edit another user's moving item" do
+        describe "for another user's moving item" do
           before do
             patch :update, id: moving_item, moving: new_params
           end
@@ -129,13 +129,87 @@ RSpec.describe MovingItemsController, type: :controller do
       end
     end
 
-    xdescribe "after selecting a moving" do
-      xdescribe "another user's item" do
+    describe "after selecting a moving" do
+      before { remember_moving(moving) }
 
+      describe "GET #new" do
+        subject { get :new }
+
+        it { is_expected.to have_http_status(:success) }
+        it { is_expected.to render_template(:new) }
       end
 
-      xdescribe "current user's own item" do
+      describe "POST #create" do
+        it "increments the MovingItem count, then redirects to the movings/show page" do
+          expect{
+            post :create, moving_item: moving_item_params
+          }.to change(MovingItem, :count).by(1)
+          expect(response).to redirect_to moving_url(moving_item.moving_id)
+        end
+      end
 
+      describe "GET #edit" do
+        subject { get :edit, id: id }
+
+        describe "another user's item" do
+          let(:id) { random_moving_item.id }
+          it { is_expected.to redirect_to "/" }
+        end
+
+        describe "current user's own item" do
+          let(:id) { moving_item.id }
+          it { is_expected.to have_http_status(:success) }
+          it { is_expected.to render_template :edit }
+        end
+      end
+
+      describe "PATCH #update" do
+        let(:new_name) { "new name" }
+        let(:new_description) { "new description" }
+
+        describe "for another user's moving item" do
+          before do
+            patch :update, id: random_moving_item,
+                  moving_item: { name: new_name, description: new_description }
+          end
+
+          it { expect(response).to redirect_to "/" }
+          specify { expect(moving_item.reload.name).not_to eq new_name }
+          specify { expect(moving_item.reload.description).not_to eq new_description }
+        end
+
+        describe "for the current user's own moving" do
+          before do
+            patch :update, id: moving_item, moving_item: { name: new_name,
+                                                 description: new_description }
+          end
+
+          it { expect(response).to redirect_to moving_url(moving_item.moving_id) }
+          specify { expect(moving_item.reload.name).to eq new_name }
+          specify { expect(moving_item.reload.description).to eq new_description }
+        end
+      end
+
+      describe "DELETE #destroy" do
+        describe "for another user's moving item" do
+          it "does not change the MovingItem count, redirecting to the root url" do
+            random_moving_item
+            expect{
+              delete :destroy, id: random_moving_item.id
+            }.not_to change(MovingItem, :count)
+            expect(response).to redirect_to "/"
+          end
+        end
+
+        describe "for the current user's own moving" do
+          it "decrements the MovingItem count, then redirects to the movings/show page" do
+            moving_item
+            expect{
+              delete :destroy, id: moving_item.id
+            }.to change(MovingItem, :count).by(-1)
+            expect(response).to redirect_to moving_url(moving_item.moving_id)
+          end
+        end
       end
     end
   end

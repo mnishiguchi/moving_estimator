@@ -16,9 +16,8 @@ module ControllerMacros
       sign_in user
     end
   end
-end
 
-RSpec.configure do |config|
-  config.include Devise::TestHelpers, :type => :controller
-  config.extend ControllerMacros, :type => :controller
+  def remember_moving(moving)
+    session[:moving_id] = moving.id
+  end
 end

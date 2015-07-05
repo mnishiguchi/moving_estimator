@@ -50,6 +50,7 @@ RSpec.configure do |config|
 
   config.include ApplicationHelper
   config.include Devise::TestHelpers, type: :controller
+  config.include ControllerMacros, type: :controller
 
   # Database cleaner
 
@@ -62,5 +63,9 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
     end
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
   end
 end

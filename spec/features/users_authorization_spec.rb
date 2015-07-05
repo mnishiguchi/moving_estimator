@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Authorization", type: :feature do
+describe "Users authorization", type: :feature do
 
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:admin) }
