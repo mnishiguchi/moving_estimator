@@ -11,10 +11,8 @@ TodoItem = React.createClass
 
   handleToggleCompleted: (e) ->
     e.preventDefault()
-    id = @props.todo.id
-    toggled_completion = not @state.completed
-    @getFlux().actions.toggleTodo(id, toggled_completion)
-    @setState(completed: toggled_completion)
+    @getFlux().actions.toggleTodo(@props.todo, not @state.completed)
+    @setState(completed: not @state.completed)
 
   handleChange: ->
     input = @refs.input.getValue()
@@ -27,7 +25,7 @@ TodoItem = React.createClass
   handleUpdate: (e) ->
     e.preventDefault()
     input = @refs.input.getValue()
-    @getFlux().actions.updateTodo(@props.todo.id, input)
+    @getFlux().actions.updateTodo(@props.todo, input)
     @setState(changed: false, updated: true)
 
   handleCancelChange: (e) ->
@@ -57,7 +55,7 @@ TodoItem = React.createClass
            else if @state.updated
              'success'
 
-    <form ref={ "todo_item_" + @props.todo.id } >
+    <form>
       <Input type='text'
              onChange={ @handleChange }
              ref='input'

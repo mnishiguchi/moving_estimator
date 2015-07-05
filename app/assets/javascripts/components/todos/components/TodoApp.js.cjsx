@@ -23,11 +23,14 @@ TodoApp = React.createClass
       @getFlux().actions.addTodo(@state.newTodoText)
       @setState(newTodoText: "")
 
+  # Clears one completed item that is first found.
   handleClearCompleted: (e) ->
     e.preventDefault()
-    if confirm("Clear all the completed items?")
-      for id, todo of @getStateFromFlux().todos
-        @getFlux().actions.deleteTodo(id) if todo.completed
+    todos = @getStateFromFlux().todos
+    for todo in todos when todo.completed
+      if confirm("Clear #{todo.content}?")
+        @getFlux().actions.deleteTodo(todo)
+        break
 
   handleSelectFilter: (selectedKey) ->
     switch selectedKey
@@ -65,8 +68,8 @@ TodoApp = React.createClass
                buttonAfter={ addButton } />
       </form>
 
-    navigation =
-      <nav id="todo_navbar" >
+    filterButtons =
+      <nav id="filter_buttons" >
         <Button onClick={ @handleClearCompleted } className="pull-right">Clear completed</Button>
         <Nav bsStyle='pills' activeKey={ @state.filterMode } onSelect={ @handleSelectFilter }>
           <NavItem eventKey={1}>All</NavItem>
@@ -76,12 +79,13 @@ TodoApp = React.createClass
       </nav>
 
     createTodoItems = (todos) =>
-      for id, todo of todos when @todoFilter(todo)
-        <TodoItem key={ id } todo={ todo } />
+      console.log todos
+      for todo in todos when @todoFilter(todo)
+        <TodoItem key={ todo.id } todo={ todo } />
 
     <div id="todolist_wrapper">
       { addForm }
-      { navigation }
+      { filterButtons }
       <div id="todo_items_wrapper">
         { createTodoItems(@state.todos) }
       </div>

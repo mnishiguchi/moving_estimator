@@ -3,13 +3,8 @@ constants = require('../constants/todo_constants')
 TodoStore = Fluxxor.createStore
 
   initialize: (todos) ->
-    @todos = {}
-
-    # Adds initial data if any.
-    # Format: { 8: {completed: false, content: "Practice Ruby", id: 8}, ... }
-    if todos
-      for todo in todos
-        @todos[todo.id] = todo
+    @todos = todos || {}
+    console.log todos
 
     @bindActions(constants.ADD_TODO,    @onAddTodo,
                  constants.TOGGLE_TODO, @onToggleTodo,
@@ -22,22 +17,25 @@ TodoStore = Fluxxor.createStore
   onAddTodo: (payload) ->
     # Update UI
     new_todo = payload.new_todo
-    @todos[new_todo.id] = new_todo
+    @todos.push(new_todo)
     @emit('change')
 
   onToggleTodo: (payload) ->
     # Update UI
-    @todos[payload.id].completed = payload.completed
+    index = @todos.indexOf(payload.todo)
+    @todos[index].completed = payload.completed
     @emit('change')
 
   onUpdateTodo: (payload) ->
     # Update UI
-    @todos[payload.id].content = payload.new_content
+    index = @todos.indexOf(payload.todo)
+    @todos[index].content = payload.new_content
     @emit('change')
 
   onDeleteTodo: (payload) ->
     # Update UI
-    delete @todos[payload.id]
+    index = @todos.indexOf(payload.todo)
+    @todos.splice(index, 1)  # Deletes the todo.
     @emit('change')
 
 module.exports = TodoStore

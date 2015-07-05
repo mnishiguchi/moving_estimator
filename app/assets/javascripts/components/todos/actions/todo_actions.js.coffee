@@ -23,11 +23,11 @@ TodoActions =
       console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
   # Saves a new completion status to database.
-  toggleTodo: (id, completed) ->
-    @dispatch(constants.TOGGLE_TODO, id: id, completed: completed)
+  toggleTodo: (todo, completed) ->
+    @dispatch(constants.TOGGLE_TODO, todo: todo, completed: completed)
     $.ajax
       method: "PATCH"
-      url:    "/todos/" + id
+      url:    "/todos/" + todo.id
       data:   todo:
                 completed: completed
     .done (data, textStatus, XHR) =>
@@ -38,11 +38,11 @@ TodoActions =
       console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
   # Saves a new content to database.
-  updateTodo: (id, new_content) ->
-    @dispatch(constants.UPDATE_TODO, id: id, new_content: new_content)
+  updateTodo: (todo, new_content) ->
+    @dispatch(constants.UPDATE_TODO, todo: todo, new_content: new_content)
     $.ajax
       method: "PATCH"
-      url:    "/todos/" + id
+      url:    "/todos/" + todo.id
       data:   todo:
                 content: new_content
     .done (data, textStatus, XHR) =>
@@ -52,11 +52,11 @@ TodoActions =
       console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
   # Deletes a todo to database.
-  deleteTodo: (id) ->
-    @dispatch(constants.DELETE_TODO, id: id)
+  deleteTodo: (todo) ->
+    @dispatch(constants.DELETE_TODO, todo: todo)
     $.ajax
       method: "DELETE"
-      url:    "/todos/" + id
+      url:    "/todos/" + todo.id
     .done (data, textStatus, XHR) =>
       $.growl.notice title: "Deleted", message: data.todo.content
     .fail (XHR, textStatus, errorThrown) =>
