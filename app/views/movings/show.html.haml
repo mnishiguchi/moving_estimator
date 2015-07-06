@@ -11,6 +11,8 @@
   %li= link_to "My movings", movings_path
   %li.active= @moving.title
 
+= react_component 'Records', { data: @moving_items }
+
 .row
   .col-sm-6
     = kv_table_for %w(category volume), @moving.moving_items.group(:category).sum(:volume)
