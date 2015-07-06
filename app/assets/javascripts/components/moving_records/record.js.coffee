@@ -19,6 +19,7 @@
       .fail (XHR, textStatus, errorThrown) =>
         $.growl.error title: "Error", message: "Error deleting record"
         console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
+
   handleEdit: (e) ->
     e.preventDefault()
     data =
@@ -69,38 +70,38 @@
     React.DOM.tr null,
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control input-sm'
+          className: 'form-control'
           type: 'text'
           defaultValue: @props.record.name
           ref: 'name'
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control input-sm'
+          className: 'form-control'
           type: 'number'
           defaultValue: @props.record.volume
           ref: 'volume'
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control input-sm'
+          className: 'form-control'
           type: 'number'
           defaultValue: @props.record.quantity
           ref: 'quantity'
       React.DOM.td null, subtotal
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control input-sm'
+          className: 'form-control'
           type: 'text'
           defaultValue: @props.record.room
           ref: 'room'
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control input-sm'
+          className: 'form-control'
           type: 'text'
           defaultValue: @props.record.category
           ref: 'category'
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control input-sm'
+          className: 'form-control'
           type: 'text'
           defaultValue: @props.record.description
           ref: 'description'

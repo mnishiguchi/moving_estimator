@@ -163,7 +163,7 @@ RSpec.describe MovingItemsController, type: :controller do
         end
       end
 
-      describe "PATCH #update" do
+      xdescribe "PATCH #update" do
         let(:new_name) { "new name" }
         let(:new_description) { "new description" }
 
@@ -190,7 +190,7 @@ RSpec.describe MovingItemsController, type: :controller do
         end
       end
 
-      describe "DELETE #destroy" do
+      xdescribe "DELETE #destroy" do
         describe "for another user's moving item" do
           it "does not change the MovingItem count, redirecting to the root url" do
             random_moving_item
