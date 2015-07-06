@@ -24,6 +24,25 @@ User.create!(username:     "Example User",
               )
 end
 
+# Adds 50 sample items to the first 6 users.
+users = User.order(:created_at).take(6)
+users.each do |user|
+  user.movings.create!(title: "from #{Faker::Address.city} to #{Faker::Address.city}")
+end
+
+50.times do
+  users.each do |user|
+    moving = user.movings.first
+    moving.moving_items.create!(
+      name:        Faker::Commerce.product_name,
+      volume:      3,
+      quantity:    1,
+      room:        Faker::Lorem.characters(10),
+      category:    Faker::Lorem.characters(10),  #<= need fixing
+      description: Faker::Lorem.sentence)
+  end
+end
+
 99.times do |n|
   name  = Faker::Commerce.product_name
   Ingredient.create!(name: name)

@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 
   has_many :todos,   dependent: :destroy
   has_many :movings, dependent: :destroy
-  has_many :moving_items, through: :movings, dependent: :destroy
+  has_many :moving_items, through: :movings
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

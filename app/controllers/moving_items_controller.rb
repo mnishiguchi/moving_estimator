@@ -32,20 +32,19 @@ class MovingItemsController < ApplicationController
   def edit
   end
 
-  # Updates the item to database.
+  # Updates the item to database via JSON
   def update
-    @moving_item.update_columns(moving_item_params)
-    flash[:success] = "Item updated"
-    redirect_to moving_url(@moving)
+    if @moving_item.update_columns(moving_item_params)
+      render json: @moving_item
+    else
+      render json: @moving_item.errors, status: :unprocessable_entity
+    end
   end
 
-  # Delete the moving item record.
+  # Delete the moving item record via JSON
   def destroy
-    # MovingItem.find(params[:id]).destroy
     @moving_item.destroy
-    flash[:success] = "Item deleted"
-    moving = Moving.find(current_moving)
-    redirect_to moving_url(moving)
+    head :no_content
   end
 
   private

@@ -8,33 +8,43 @@
 
   handleDelete: (e) ->
     e.preventDefault()
-    $.ajax
-      method: 'DELETE'
-      url: "/movings/#{ @props.record.id }"
-      dataType: 'JSON'
-      success: () =>
+    if confirm("Are you sure?")
+      $.ajax
+        method: 'DELETE'
+        url: "/moving_items/#{ @props.record.id }"
+        dataType: 'JSON'
+      .done (data, textStatus, XHR) =>
         @props.handleDeleteRecord @props.record
-
+        $.growl.notice title: "Record deleted", message: ""
+      .fail (XHR, textStatus, errorThrown) =>
+        $.growl.error title: "Error", message: "Error deleting record"
+        console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
   handleEdit: (e) ->
     e.preventDefault()
     data =
-      title:  React.findDOMNode(@refs.title).value
-      date:   React.findDOMNode(@refs.date).value
-      amount: React.findDOMNode(@refs.amount).value
+      name:        React.findDOMNode(@refs.name).value
+      volume:      React.findDOMNode(@refs.volume).value
+      quantity:    React.findDOMNode(@refs.quantity).value
+      room:        React.findDOMNode(@refs.room).value
+      category:    React.findDOMNode(@refs.category).value
+      description: React.findDOMNode(@refs.description).value
     $.ajax
-      method: 'PUT'
-      url: "/movings/#{ @props.record.id }"
+      method:   'PATCH'
+      url:      "/moving_items/#{ @props.record.id }"
       dataType: 'JSON'
       data:
-        record: data
-      success: (data) =>
-        @setState edit: false
-        @props.handleEditRecord @props.record, data
-
-
+        moving_item: data
+    .done (data, textStatus, XHR) =>
+      @setState edit: false
+      @props.handleEditRecord(@props.record, data)
+      $.growl.notice title: "Record updated", message: data.name
+    .fail (XHR, textStatus, errorThrown) =>
+      $.growl.error title: "Error", message: "Error updating record"
+      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
   recordRow: ->
     subtotal = @props.record.quantity * @props.record.volume
+
     React.DOM.tr null,
       React.DOM.td null, @props.record.name
       React.DOM.td null, @props.record.volume
@@ -54,46 +64,43 @@
           'Delete'
 
   recordForm: ->
+    subtotal = @props.record.quantity * @props.record.volume
+
     React.DOM.tr null,
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control'
+          className: 'form-control input-sm'
           type: 'text'
           defaultValue: @props.record.name
           ref: 'name'
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control'
+          className: 'form-control input-sm'
           type: 'number'
           defaultValue: @props.record.volume
           ref: 'volume'
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control'
+          className: 'form-control input-sm'
           type: 'number'
           defaultValue: @props.record.quantity
           ref: 'quantity'
+      React.DOM.td null, subtotal
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control'
-          type: 'text'
-          defaultValue: @props.record.subtotal
-          ref: 'subtotal'
-      React.DOM.td null,
-        React.DOM.input
-          className: 'form-control'
+          className: 'form-control input-sm'
           type: 'text'
           defaultValue: @props.record.room
           ref: 'room'
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control'
+          className: 'form-control input-sm'
           type: 'text'
           defaultValue: @props.record.category
           ref: 'category'
       React.DOM.td null,
         React.DOM.input
-          className: 'form-control'
+          className: 'form-control input-sm'
           type: 'text'
           defaultValue: @props.record.description
           ref: 'description'
@@ -103,7 +110,7 @@
           onClick: @handleEdit
           'Update'
         React.DOM.a
-          className: 'btn btn-warning btn-xs'
+          className: 'btn btn-default btn-xs'
           onClick: @handleToggle
           'Cancel'
 

@@ -11,8 +11,6 @@
   %li= link_to "My movings", movings_path
   %li.active= @moving.title
 
-= react_component 'Records', { data: @moving_items }
-
 .row
   .col-sm-6
     = kv_table_for %w(category volume), @moving.moving_items.group(:category).sum(:volume)
@@ -43,7 +41,8 @@
 .tab-content
   #tabs_1{ class: active_content }
     - if @moving_items.count > 0
-      = render 'moving_items/table_moving_items'
+      = react_component 'Records', { data: @moving_items }
+      / = render 'moving_items/table_moving_items'
     - else
       %p{ style: "margin: 16px;" } No item found
   #tabs_2{ class: default_content }

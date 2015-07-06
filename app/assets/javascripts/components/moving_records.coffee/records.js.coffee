@@ -53,21 +53,23 @@
         # React.createElement AmountBox, type: 'danger', amount: @debits(), text: 'Debit'
         # React.createElement AmountBox, type: 'info', amount: @balance(), text: 'Balance'
       # React.createElement RecordForm, handleNewRecord: @addRecord
-      hr null
+      # hr null
       table
         className: 'table table-bordered table-condensed'
         thead
           tr
             th null, 'Name'
-            th null, 'Vol'
-            th null, 'Qty'
+            th null, 'Volume'
+            th null, 'Qantity'
             th null, 'Subtotal'
             th null, 'Room'
             th null, 'Category'
             th null, 'Description'
-            th null, '(action)'
+            th null, ''
         tbody null,
           for record in @state.records
-            React.createElement Record, key: record.id, record: record,
-                                        handleDeleteRecord: @deleteRecord,
-                                        handleEditRecord:   @updateRecord
+            React.createElement Record,
+              key:    record.id,
+              record: record,
+              handleDeleteRecord: @deleteRecord,
+              handleEditRecord:   @updateRecord
