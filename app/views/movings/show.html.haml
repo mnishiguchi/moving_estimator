@@ -11,7 +11,7 @@
   %li= link_to "My movings", movings_path
   %li.active= @moving.title
 
-.row
+.row#volume_overview
   .col-sm-6
     = kv_table_for %w(category volume), @moving.moving_items.group(:category).sum(:volume)
   .col-sm-6
@@ -20,36 +20,32 @@
 -# By default, #tabs_table_all_items is active.
 -# Exceptionally, when the page is re-rendered by MovingItemsController, #tabs_add_form is activated.
 
--# classes for tabs
-- active_tab      = "active"
-- active_content  = %w[tab-pane fade active in]
-- default_tab     = ""
-- default_content = %w[tab-pane fade]
-
 / Tabs
-%ul{ class: "nav nav-tabs", role: 'tablist', id: "tabs_movings" }
-  %li{ class: active_tab }
+%ul.nav.nav-tabs{ role: 'tablist', id: "tabs_movings" }
+  %li.active
     %a{ href: "#tabs_1", role: "tab", data: { toggle: "tab" } }
       All items
-  %li{ class: default_tab }
+  %li
     %a{ href: "#tabs_2", role: "tab", data: { toggle: "tab" } }
       Add item
 
 / Tab Contents
 .tab-content
-  #tabs_1{ class: active_content }
+  #tabs_1.tab-pane.fade.active.in
     - if @moving_items.count > 0
       = react_component 'Records', { data: @moving_items }
       / = render 'moving_items/table_moving_items'
     - else
       %p{ style: "margin: 16px;" } No item found
-  #tabs_2{ class: default_content }
+  #tabs_2.tab-pane.fade
     = render 'moving_items/add_form'
 
 :coffee
 
   jQuery ->
-    $('#tabs_movings li:eq(1) a').tab('show') if #{params[:controller] == 'moving_items'}
+    if #{params[:controller] == 'moving_items'}
+      $('#volume_overview').hide()
+      $('#tabs_movings li:eq(1) a').tab('show')
 
 :css
 

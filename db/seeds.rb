@@ -30,6 +30,9 @@ users.each do |user|
   user.movings.create!(title: "from #{Faker::Address.city} to #{Faker::Address.city}")
 end
 
+categories = %w(ocean air local disposal)
+rooms      = %w(living_room dining_room bedroom kitchen bathroom)
+
 50.times do
   users.each do |user|
     moving = user.movings.first
@@ -37,8 +40,8 @@ end
       name:        Faker::Commerce.product_name,
       volume:      3,
       quantity:    1,
-      room:        Faker::Lorem.characters(10),
-      category:    Faker::Lorem.characters(10),  #<= need fixing
+      room:        rooms.sample,
+      category:    categories.sample,
       description: Faker::Lorem.sentence)
   end
 end

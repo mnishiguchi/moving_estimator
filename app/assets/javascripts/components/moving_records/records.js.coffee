@@ -1,4 +1,5 @@
 @Records = React.createClass
+
   getInitialState: ->
     records: @props.data
 
@@ -20,30 +21,24 @@
     @replaceState records: records
 
   render: ->
-    div   = React.DOM.div
-    hr    = React.DOM.hr
-    table = React.DOM.table
-    thead = React.DOM.thead
-    tr    = React.DOM.tr
-    th    = React.DOM.th
-    tbody = React.DOM.tbody
+    $ = React.DOM
 
-    div null,
-      div
+    $.div null,
+      $.div
         className: 'moving_records table-responsive'
-        table
-          className: 'table table-bordered'
-          thead
-            tr
-              th null, 'Name'
-              th null, 'Volume'
-              th null, 'Qantity'
-              th null, 'Subtotal'
-              th null, 'Room'
-              th null, 'Category'
-              th null, 'Description'
-              th null, ''
-          tbody
+        $.table
+          className: 'table table-bordered table-hover'
+          $.thead
+            $.tr null,
+              $.th null, 'Name'
+              $.th null, 'Volume'
+              $.th null, 'Qantity'
+              $.th null, 'Subtotal'
+              $.th null, 'Room'
+              $.th null, 'Category'
+              $.th null, 'Description'
+              $.th null, ''
+          $.tbody
             for record in @state.records
               React.createElement Record,
                 key:    record.id,

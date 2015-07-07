@@ -1,18 +1,33 @@
 - provide(:title, "Dashboard")
 
-%h1.page-header
-  Dashboard
-  %small= current_user.email
+.profile_header
+  %section.user_info
+    %h2
+      = gravatar_for current_user.email
+      %span.email
+        = current_user.email
+      %span.moving_count.small
+        = pluralize(current_user.movings.count, "moving")
+.clearfix
 
-%ul.nav.nav-pills{ style: "margin-bottom: 20px;" }
-  %li.active= link_to "Dashboard", "#"
+%ul.nav.nav-pills{ style: "margin: 20px 0;" }
   %li= link_to "New moving", new_moving_path
   %li= link_to "My movings", movings_path
   %li= link_to "Todo list", todos_path, :"data-no-turbolink" => true
 
-/ #react_todolist
+:css
 
-/ :coffee
+.profile_header {
+  section.user_info {
+    margin-top: 20px;
+  }
 
-/   $(document).ready ->
-/     React._initTodoApp("react_todolist", todos: #{ @todos })
+  span.gravatar {
+    float: left;
+    margin-right: 20px;
+    margin-top:   5px;
+  }
+  span.email {
+    padding: 20px;
+  }
+}

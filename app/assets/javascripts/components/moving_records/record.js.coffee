@@ -1,4 +1,5 @@
 @Record = React.createClass
+
   getInitialState: ->
     edit:     false
     volume:   @props.record.volume
@@ -15,14 +16,14 @@
     e.preventDefault()
     @setState volume:   @props.record.volume
     @setState quantity: @props.record.quantity
-    @setState edit:    !@state.edit
+    @setState edit:     not @state.edit
 
   handleDelete: (e) ->
     e.preventDefault()
     if confirm("Are you sure?")
       $.ajax
-        method: 'DELETE'
-        url: "/moving_items/#{ @props.record.id }"
+        method:   'DELETE'
+        url:      "/moving_items/#{ @props.record.id }"
         dataType: 'JSON'
       .done (data, textStatus, XHR) =>
         @props.handleDeleteRecord @props.record
@@ -55,80 +56,84 @@
       console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
   recordRow: ->
-    React.DOM.tr null,
-      React.DOM.td null, @props.record.name
-      React.DOM.td null, @props.record.volume
-      React.DOM.td null, @props.record.quantity
-      React.DOM.td null, @calculateSubtotal()
-      React.DOM.td null, @props.record.room
-      React.DOM.td null, @props.record.category
-      React.DOM.td null, @props.record.description
-      React.DOM.td null,
-        React.DOM.button
+    $ = React.DOM
+
+    $.tr null,
+      $.td null, @props.record.name
+      $.td null, @props.record.volume
+      $.td null, @props.record.quantity
+      $.td null, @calculateSubtotal()
+      $.td null, @props.record.room
+      $.td null, @props.record.category
+      $.td null, @props.record.description
+      $.td null,
+        $.button
           className: 'btn btn-default btn-sm btn-block'
           React.DOM.i
             className: 'fa fa-pencil'
             onClick: @handleToggle
             "edit"
-        React.DOM.button
+        $.button
           className: 'btn btn-default btn-sm btn-block'
-          React.DOM.i
+          $.i
             className: 'fa fa-trash'
             onClick: @handleDelete
 
   recordForm: ->
-    React.DOM.tr null,
-      React.DOM.td null,
-        React.DOM.input
+    $ = React.DOM
+
+    $.tr null,
+      $.td null,
+        $.input
           className: 'form-control'
           type: 'text'
           defaultValue: @props.record.name
           ref: 'name'
-      React.DOM.td null,
-        React.DOM.input
+      $.td null,
+        $.input
           className: 'form-control'
           type: 'number'
           defaultValue: @props.record.volume
           ref: 'volume'
           name: 'volume'
           onChange: @handleChangeVolume
-      React.DOM.td null,
-        React.DOM.input
+      $.td null,
+        $.input
           className: 'form-control'
           type: 'number'
           defaultValue: @props.record.quantity
           ref: 'quantity'
           name: 'quantity'
           onChange: @handleChangeVolume
-      React.DOM.td null, @calculateSubtotal()
-      React.DOM.td null,
-        React.DOM.input
+      $.td null, @calculateSubtotal()
+      $.td null,
+        $.input
           className: 'form-control'
           type: 'text'
           defaultValue: @props.record.room
           ref: 'room'
-      React.DOM.td null,
-        React.DOM.input
+      $.td null,
+        $.input
           className: 'form-control'
           type: 'text'
           defaultValue: @props.record.category
           ref: 'category'
-      React.DOM.td null,
-        React.DOM.input
+      $.td null,
+        $.input
           className: 'form-control'
           type: 'text'
           defaultValue: @props.record.description
           ref: 'description'
-      React.DOM.td null,
-        React.DOM.button
-          className: 'btn btn-default btn-sm btn-block'
-          React.DOM.i
+      $.td null,
+        $.button
+          className: 'btn btn-success btn-sm btn-block'
+          $.i
             className: 'fa fa-database'
             onClick: @handleEdit
             'Update'
-        React.DOM.button
+        $.button
           className: 'btn btn-default btn-sm btn-block'
-          React.DOM.i
+          $.i
             className: 'fa fa-undo'
             onClick: @handleToggle
 

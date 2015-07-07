@@ -11,6 +11,15 @@ module ApplicationHelper
     end
   end
 
+  # Returns the Gravatar image tag for the given email.
+  def gravatar_for(email, options = { size: 80 })
+    # Standardizing on all lower-case addresses
+    gravatar_id = Digest::MD5::hexdigest(email.downcase)
+    size = options[:size]
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+    image_tag(gravatar_url, alt: email, class: "gravatar img-thumbnail")
+  end
+
   # A list for all the items of the specified attribute of the object.
   # collection: an array of objects
   # prop:       attribute
@@ -46,7 +55,7 @@ module ApplicationHelper
     end
 
     content_tag(:div, class: "table-responsive") do
-      content_tag(:table, class: "table table-bordered table-hover table-striped") do
+      content_tag(:table, class: "table table-striped") do
         thead + tbody
       end
     end
