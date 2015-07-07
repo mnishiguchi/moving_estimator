@@ -13,7 +13,9 @@
 
   handleToggle: (e) ->
     e.preventDefault()
-    @setState edit: !@state.edit
+    @setState volume:   @props.record.volume
+    @setState quantity: @props.record.quantity
+    @setState edit:    !@state.edit
 
   handleDelete: (e) ->
     e.preventDefault()
