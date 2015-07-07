@@ -32,8 +32,7 @@
 .tab-content
   #tabs_1.tab-pane.fade.active.in
     - if @moving_items.count > 0
-      = react_component 'Records', { data: @moving_items }
-      / = render 'moving_items/table_moving_items'
+      = react_component 'MovingRecordsApp', { data: @moving_items }
     - else
       %p{ style: "margin: 16px;" } No item found
   #tabs_2.tab-pane.fade
