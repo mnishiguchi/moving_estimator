@@ -1,15 +1,53 @@
 - provide(:title, "My movings")
 
-%h1.page-header My movings
+.profile_header
+  %section.user_info
+    %h2
+      = gravatar_for current_user.email
+      %span.email
+        = current_user.email
+      %span.moving_count.small
+        = pluralize(current_user.movings.count, "moving")
+%hr/
+.row
+  / Left
+  %aside.col-md-4
+    %ul.nav.nav-pills{ style: "margin: 20px 0;" }
+      %li= link_to "New moving", new_moving_path
+      %li= link_to "Todo list", todos_path, :"data-no-turbolink" => true
 
-%ol.breadcrumb
-  %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
-  %li.active My movings
+  / Right
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        My movings
+      .panel-body
+        .table-responsive
+          %table.table.table-hover
+            - @movings.each do |m|
+              %tr{ style: "border-bottom: 1px solid #ddd;" }
+                %td= link_to truncate(m.title), moving_path(m)
+                %td
+                  %i= truncate(m.description, length: 100)
+                %td= link_to fa_icon("fa pencil"), edit_moving_path(m),
+                  class: "btn btn-xs btn-default pull-right"
+                %td= link_to fa_icon("fa trash"), moving_path(m),
+                  method: :delete, data: { confirm: "Are you sure?" },
+                  class: "btn btn-xs btn-default pull-right"
 
-.list-group
-- @movings.each do |m|
-  .list-group-item
-    = link_to m.title, moving_path(m)
-    = link_to "delete", moving_path(m), method: :delete,
-                        data: { confirm: "Are you sure?" },
-                        class: "btn btn-xs btn-danger pull-right"
+:css
+
+  .profile_header {
+    section.user_info {
+      margin-top: 20px;
+    }
+
+    span.gravatar {
+      float: left;
+      margin-right: 20px;
+      margin-top:   5px;
+    }
+    span.email {
+      padding: 20px;
+    }
+  }

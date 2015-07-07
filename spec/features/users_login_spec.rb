@@ -29,7 +29,7 @@ describe "Users login", type: :feature do
 
       before { log_in_as(user) }
 
-      it { expect(page).to have_title(full_title("Dashboard")) }
+      it { expect(page).to have_title(full_title("My movings")) }
       it { expect(page).to_not have_link('Log in', href: new_user_session_path) }
 
       describe "navbar dropdown links" do

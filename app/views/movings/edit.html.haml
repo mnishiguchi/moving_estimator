@@ -3,7 +3,6 @@
 %h1.page-header Edit moving
 
 %ol.breadcrumb
-  %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
   %li= link_to "My movings", movings_path
   %li= link_to @moving.title, moving_path(@moving)
   %li.active Edit moving
@@ -21,7 +20,7 @@
 
       .form-group
         = f.label :description
-        = f.text_area :description, class: 'form-control',
+        = f.text_area :description, class: 'form-control', style: "min-height: 100px;",
           placeholder: "Write description"
 
       .form-group{ style: "width: 100%" }

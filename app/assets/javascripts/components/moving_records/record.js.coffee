@@ -69,7 +69,7 @@
       $.td null,
         $.button
           className: 'btn btn-default btn-sm btn-block'
-          React.DOM.i
+          $.i
             className: 'fa fa-pencil'
             onClick: @handleToggle
             "edit"
@@ -94,16 +94,16 @@
           className: 'form-control'
           type: 'number'
           defaultValue: @props.record.volume
-          ref: 'volume'
-          name: 'volume'
+          ref: 'volume'   # For referencing DOM
+          name: 'volume'  # For referencing event
           onChange: @handleChangeVolume
       $.td null,
         $.input
           className: 'form-control'
           type: 'number'
           defaultValue: @props.record.quantity
-          ref: 'quantity'
-          name: 'quantity'
+          ref: 'quantity'   # For referencing DOM
+          name: 'quantity'  # For referencing event
           onChange: @handleChangeVolume
       $.td null, @calculateSubtotal()
       $.td null,
