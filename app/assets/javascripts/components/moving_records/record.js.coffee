@@ -1,6 +1,15 @@
 @Record = React.createClass
   getInitialState: ->
-    edit: false
+    edit:     false
+    volume:   @props.record.volume
+    quantity: @props.record.quantity
+
+  calculateSubtotal: ->
+    @state.volume * @state.quantity
+
+  handleChangeVolume: (e) ->
+    name = e.target.name
+    @setState "#{ name }": e.target.value
 
   handleToggle: (e) ->
     e.preventDefault()
@@ -44,29 +53,28 @@
       console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
   recordRow: ->
-    subtotal = @props.record.quantity * @props.record.volume
-
     React.DOM.tr null,
       React.DOM.td null, @props.record.name
       React.DOM.td null, @props.record.volume
       React.DOM.td null, @props.record.quantity
-      React.DOM.td null, subtotal
+      React.DOM.td null, @calculateSubtotal()
       React.DOM.td null, @props.record.room
       React.DOM.td null, @props.record.category
       React.DOM.td null, @props.record.description
       React.DOM.td null,
-        React.DOM.a
-          className: 'btn btn-default btn-xs'
-          onClick: @handleToggle
-          'Edit'
-        React.DOM.a
-          className: 'btn btn-danger btn-xs'
-          onClick: @handleDelete
-          'Delete'
+        React.DOM.button
+          className: 'btn btn-default btn-sm btn-block'
+          React.DOM.i
+            className: 'fa fa-pencil'
+            onClick: @handleToggle
+            "edit"
+        React.DOM.button
+          className: 'btn btn-default btn-sm btn-block'
+          React.DOM.i
+            className: 'fa fa-trash'
+            onClick: @handleDelete
 
   recordForm: ->
-    subtotal = @props.record.quantity * @props.record.volume
-
     React.DOM.tr null,
       React.DOM.td null,
         React.DOM.input
@@ -80,13 +88,17 @@
           type: 'number'
           defaultValue: @props.record.volume
           ref: 'volume'
+          name: 'volume'
+          onChange: @handleChangeVolume
       React.DOM.td null,
         React.DOM.input
           className: 'form-control'
           type: 'number'
           defaultValue: @props.record.quantity
           ref: 'quantity'
-      React.DOM.td null, subtotal
+          name: 'quantity'
+          onChange: @handleChangeVolume
+      React.DOM.td null, @calculateSubtotal()
       React.DOM.td null,
         React.DOM.input
           className: 'form-control'
@@ -106,14 +118,17 @@
           defaultValue: @props.record.description
           ref: 'description'
       React.DOM.td null,
-        React.DOM.a
-          className: 'btn btn-default btn-xs'
-          onClick: @handleEdit
-          'Update'
-        React.DOM.a
-          className: 'btn btn-default btn-xs'
-          onClick: @handleToggle
-          'Cancel'
+        React.DOM.button
+          className: 'btn btn-default btn-sm btn-block'
+          React.DOM.i
+            className: 'fa fa-database'
+            onClick: @handleEdit
+            'Update'
+        React.DOM.button
+          className: 'btn btn-default btn-sm btn-block'
+          React.DOM.i
+            className: 'fa fa-undo'
+            onClick: @handleToggle
 
   render: ->
     if @state.edit

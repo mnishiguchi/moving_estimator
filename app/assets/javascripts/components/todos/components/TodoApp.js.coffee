@@ -79,7 +79,6 @@ TodoApp = React.createClass
       </nav>
 
     createTodoItems = (todos) =>
-      console.log todos
       for todo in todos when @todoFilter(todo)
         <TodoItem key={ todo.id } todo={ todo } />
 

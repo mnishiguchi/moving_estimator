@@ -55,7 +55,7 @@
       # React.createElement RecordForm, handleNewRecord: @addRecord
       # hr null
       table
-        className: 'table table-bordered table-condensed'
+        className: 'table table-bordered'
         thead
           tr
             th null, 'Name'
