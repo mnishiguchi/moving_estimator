@@ -1,30 +1,31 @@
-#   # Example
-#   React.createElement AmountPanel,
-#     type:       'success'
-#     title:      "Volume for each room"
-#     keyName:    "room"
-#     valName:    "volume"
-#     collection: { "masa": "programmer" }
+## Key-value table panel without a table header
 
-@AmountPanel = React.createClass
+## Example
+#  React.createElement TablePanel,
+#    type:  'success'
+#    title: "Volume for each room"
+#    obj:   { name: masa, job: "programmer", ... }
+
+@TablePanel = React.createClass
+  getInitialState: ->
+    data: @props.data
+
   render: ->
-    React.DOM.div
+    $ = React.DOM
+
+    $.div
       className: 'col-md-4'
-      React.DOM.div
+      $.div
         className: "panel panel-#{ @props.type }"
-        React.DOM.div
+        $.div
           className: 'panel-heading'
           @props.title
-        React.DOM.div
+        $.div
           className: 'panel-body'
-          React.DOM.table
-            className: "table table-bordered"
-            React.DOM.thead null,
-              React.DOM.tr null,
-                React.DOM.th null, @props.keyName
-                React.DOM.th null, @props.valName
-            React.DOM.tbody null,
-              for k, v of @props.collection
-                React.DOM.tr null,
-                  React.DOM.td null, k
-                  React.DOM.td null, v
+          $.table
+            className: "table table-striped"
+            for key, i in Object.keys(@props.data)
+              $.tr
+                key: i # Requried by React.js
+                $.td null, key
+                $.td null, @props.data[key]
