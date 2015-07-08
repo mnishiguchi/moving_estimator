@@ -9,6 +9,7 @@
       %span.moving_count.small
         = pluralize(current_user.movings.count, "moving")
 %hr/
+
 .row
   / Left
   %aside.col-md-4
@@ -29,11 +30,12 @@
                 %td= link_to truncate(m.title), moving_path(m)
                 %td
                   %i= truncate(m.description, length: 100)
-                %td= link_to fa_icon("fa pencil"), edit_moving_path(m),
-                  class: "btn btn-xs btn-default pull-right"
-                %td= link_to fa_icon("fa trash"), moving_path(m),
+                %td
+                  = link_to fa_icon("fa trash", text: "delete"), moving_path(m),
                   method: :delete, data: { confirm: "Are you sure?" },
-                  class: "btn btn-xs btn-default pull-right"
+                    class: "btn btn-sm btn-default pull-right"
+                  = link_to fa_icon("fa pencil", text: "edit"), edit_moving_path(m),
+                    class: "btn btn-sm btn-default pull-right"
 
 :css
 
