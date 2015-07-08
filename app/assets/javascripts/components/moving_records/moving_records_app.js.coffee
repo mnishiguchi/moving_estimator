@@ -34,24 +34,16 @@
     uniqueArray = @uniqueArray(cats)
     console.log uniqueArray
 
-  volumeByRooms: ->
+  # p: "room" or "category"
+  volumeSortedBy: (p)->
     hash = {}
     for obj in @state.records
-      vol = parseFloat( obj.volume * parseFloat(obj.quantity))
-      if hash.hasOwnProperty(obj.room)
-        hash[obj.room] += vol
+      vol = parseFloat(obj.volume * obj.quantity)
+      if hash.hasOwnProperty(obj[p])
+        hash[obj[p]] += vol # Add up data to the matched key
       else
-        hash[obj.room] = vol
-    hash
-
-  volumeByCategories: ->
-    hash = {}
-    for obj in @state.records
-      vol = (parseFloat(obj.volume * obj.quantity))
-      if hash.hasOwnProperty(obj.category)
-        hash[obj.category] += vol
-      else
-        hash[obj.category] = vol
+        hash[obj[p]] = vol  # Create a key
+    console.log hash
     hash
 
   deleteRecord: (record) ->
@@ -65,17 +57,15 @@
     @replaceState records: records
 
   render: ->
-    # console.log @volumeByRooms()
-
     React.DOM.div null,
-      React.createElement TablePanel,
+      React.createElement MovingVolumePanel,
           type:  'green'
           title: "Volume for each category"
-          data:  @volumeByCategories()
-      React.createElement TablePanel,
+          data:  @volumeSortedBy("category")
+      React.createElement MovingVolumePanel,
           type:  'blue'
           title: "Volume for each room"
-          data:  @volumeByRooms()
+          data:  @volumeSortedBy("room")
       React.createElement Records,
         records: @state.records,
         handleDeleteRecord: @deleteRecord,

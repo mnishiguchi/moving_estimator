@@ -10,11 +10,11 @@
   %li= link_to "My movings", movings_path
   %li.active= @moving.title
 
-.row#volume_overview
-  .col-sm-6
-    = kv_table_for %w(category volume), @moving.moving_items.group(:category).sum(:volume)
-  .col-sm-6
-    = kv_table_for %w(room volume), @moving.moving_items.group(:room).sum(:volume)
+/ .row#volume_overview
+/   .col-sm-6
+/     = kv_table_for %w(category volume), @moving.moving_items.group(:category).sum(:volume)
+/   .col-sm-6
+/     = kv_table_for %w(room volume), @moving.moving_items.group(:room).sum(:volume)
 
 -# By default, #tabs_table_all_items is active.
 -# Exceptionally, when the page is re-rendered by MovingItemsController, #tabs_add_form is activated.
@@ -34,8 +34,9 @@
     - if @moving_items.count > 0
       = react_component 'MovingRecordsApp', { data: @moving_items }
     - else
-      %p{ style: "margin: 16px;" } No item found
-  #tabs_2.tab-pane.fade
+      %p{ style: "margin: 16px;" }
+        No item found
+  #tabs_2.tab-pane.fade{ style: "padding-top: 20px" }
     = render 'moving_items/add_form'
 
 :coffee
@@ -44,9 +45,3 @@
     if #{params[:controller] == 'moving_items'}
       $('#volume_overview').hide()
       $('#tabs_movings li:eq(1) a').tab('show')
-
-:css
-
-  #tabs_2 {
-    padding-top: 20px
-  }

@@ -4,9 +4,9 @@
 #  React.createElement TablePanel,
 #    type:  'success'
 #    title: "Volume for each room"
-#    obj:   { name: masa, job: "programmer", ... }
+#    obj:   { ocean: 23, air: 12, ... }
 
-@TablePanel = React.createClass
+@MovingVolumePanel = React.createClass
   getInitialState: ->
     data: @props.data
 
