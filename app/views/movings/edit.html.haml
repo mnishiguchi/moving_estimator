@@ -1,14 +1,14 @@
 - provide(:title, "Edit moving")
 
-%h1.page-header Edit moving
-
-%ol.breadcrumb
-  %li= link_to "My movings", movings_path
-  %li= link_to @moving.title, moving_path(@moving)
-  %li.active Edit moving
-
 .row
   .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
+
+    %h1.page-header Edit moving
+
+    %ol.breadcrumb
+      %li= link_to "My movings", movings_path
+      %li= link_to @moving.title, moving_path(@moving)
+      %li.active Edit moving
     = form_for(@moving) do |f|
 
       = render 'shared/error_messages', object: f.object

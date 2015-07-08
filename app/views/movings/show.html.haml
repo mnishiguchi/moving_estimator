@@ -9,39 +9,13 @@
 %ol.breadcrumb
   %li= link_to "My movings", movings_path
   %li.active= @moving.title
+%hr/
 
-/ .row#volume_overview
-/   .col-sm-6
-/     = kv_table_for %w(category volume), @moving.moving_items.group(:category).sum(:volume)
-/   .col-sm-6
-/     = kv_table_for %w(room volume), @moving.moving_items.group(:room).sum(:volume)
+= render 'moving_items/add_form'
+%hr/
 
--# By default, #tabs_table_all_items is active.
--# Exceptionally, when the page is re-rendered by MovingItemsController, #tabs_add_form is activated.
-
-/ Tabs
-%ul.nav.nav-tabs{ role: 'tablist', id: "tabs_movings" }
-  %li.active
-    %a{ href: "#tabs_1", role: "tab", data: { toggle: "tab" } }
-      All items
-  %li
-    %a{ href: "#tabs_2", role: "tab", data: { toggle: "tab" } }
-      Add item
-
-/ Tab Contents
-.tab-content
-  #tabs_1.tab-pane.fade.active.in
-    - if @moving_items.count > 0
-      = react_component 'MovingRecordsApp', { data: @moving_items }
-    - else
-      %p{ style: "margin: 16px;" }
-        No item found
-  #tabs_2.tab-pane.fade{ style: "padding-top: 20px" }
-    = render 'moving_items/add_form'
-
-:coffee
-
-  jQuery ->
-    if #{params[:controller] == 'moving_items'}
-      $('#volume_overview').hide()
-      $('#tabs_movings li:eq(1) a').tab('show')
+- if @moving_items.count > 0
+  = react_component 'MovingRecordsApp', { data: @moving_items }
+- else
+  %p{ style: "margin: 16px;" }
+    No item found
