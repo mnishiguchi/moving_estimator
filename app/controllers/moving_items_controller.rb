@@ -17,14 +17,23 @@ class MovingItemsController < ApplicationController
     @moving_item = MovingItem.new(moving_item_params.
                                   merge(moving_id: current_moving))
 
-    if @moving_item.save
-      flash[:success] = "Moving item created"
-      moving = Moving.find(current_moving)
-      redirect_to moving_url(moving)
+    if request.referrer == moving_url(@moving)
+      # via Ajax from a React component
+      if @moving_item.save
+        render json: @moving_item
+      else
+        render json: @moving_item.errors, status: :unprocessable_entity
+      end
     else
-      @movings = current_user.movings
-      @moving_items = @moving.moving_items
-      render 'movings/show'
+      if @moving_item.save
+        flash[:success] = "Moving item created"
+        moving = Moving.find(current_moving)
+        redirect_to moving_url(moving)
+      else
+        @movings = current_user.movings
+        @moving_items = @moving.moving_items
+        render 'movings/show'
+      end
     end
   end
 

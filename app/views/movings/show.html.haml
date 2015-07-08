@@ -11,11 +11,9 @@
   %li.active= @moving.title
 %hr/
 
-= render 'moving_items/add_form'
-%hr/
+/ = render 'moving_items/add_form'
+/ %hr/
 
-- if @moving_items.count > 0
-  = react_component 'MovingRecordsApp', { data: @moving_items }
-- else
-  %p{ style: "margin: 16px;" }
-    No item found
+= react_component 'MovingRecordsApp', { data: @moving_items }
+- unless @moving_items.count > 0
+  No item found

@@ -14,7 +14,7 @@
     $ = React.DOM
 
     $.div
-      className: 'col-md-4'
+      className: 'col-sm-6'
       $.div
         className: "panel panel-#{ @props.type }"
         $.div

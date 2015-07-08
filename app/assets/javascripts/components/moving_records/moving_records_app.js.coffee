@@ -6,33 +6,33 @@
   getDefaultProps: ->
     records: []
 
-  # addRecord: (record) ->
-  #   records = React.addons.update(@state.records, { $push: [record] })
-  #   @setState records: records
+  addRecord: (record) ->
+    records = React.addons.update(@state.records, { $push: [record] })
+    @setState records: records
 
   # uses hash lookups for primitives
-  uniqueArray: (a)->
-    prims =
-      'boolean': {}
-      'number' : {}
-      'string' : {}
-    a.filter (item) ->
-      type = typeof item
-      if prims[type].hasOwnProperty(item) then false else (prims[type][item] = true)
+  # uniqueArray: (a)->
+  #   prims =
+  #     'boolean': {}
+  #     'number' : {}
+  #     'string' : {}
+  #   a.filter (item) ->
+  #     type = typeof item
+  #     if prims[type].hasOwnProperty(item) then false else (prims[type][item] = true)
 
-  rooms: ->
-    rooms = []
-    for record in @state.records
-      rooms.push record.room
-    uniqueArray = @uniqueArray(rooms)
-    console.log uniqueArray
+  # rooms: ->
+  #   rooms = []
+  #   for record in @state.records
+  #     rooms.push record.room
+  #   uniqueArray = @uniqueArray(rooms)
+  #   console.log uniqueArray
 
-  categories: ->
-    cats = []
-    for record in @state.records
-      cats.push record.category
-    uniqueArray = @uniqueArray(cats)
-    console.log uniqueArray
+  # categories: ->
+  #   cats = []
+  #   for record in @state.records
+  #     cats.push record.category
+  #   uniqueArray = @uniqueArray(cats)
+  #   console.log uniqueArray
 
   # p: "room" or "category"
   volumeSortedBy: (p)->
@@ -57,7 +57,12 @@
     @replaceState records: records
 
   render: ->
-    React.DOM.div null,
+    $ = React.DOM
+
+    $.div null,
+      React.createElement NewMovingRecordForm,
+        handleNewRecord: @addRecord
+      $.hr null
       React.createElement MovingVolumePanel,
           type:  'green'
           title: "Volume for each category"
@@ -66,6 +71,7 @@
           type:  'blue'
           title: "Volume for each room"
           data:  @volumeSortedBy("room")
+      $.hr null
       React.createElement Records,
         records: @state.records,
         handleDeleteRecord: @deleteRecord,
