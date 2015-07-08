@@ -20,15 +20,18 @@
 
   handleDelete: (e) ->
     e.preventDefault()
+    @setState ajax: true
     if confirm("Are you sure?")
       $.ajax
         method:   'DELETE'
         url:      "/moving_items/#{ @props.record.id }"
         dataType: 'JSON'
       .done (data, textStatus, XHR) =>
+        @setState ajax: false
         @props.handleDeleteRecord @props.record
         $.growl.notice title: "Record deleted", message: ""
       .fail (XHR, textStatus, errorThrown) =>
+        @setState ajax: false
         $.growl.error title: "Error", message: "Error deleting record"
         console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
@@ -41,6 +44,7 @@
       room:        React.findDOMNode(@refs.room).value
       category:    React.findDOMNode(@refs.category).value
       description: React.findDOMNode(@refs.description).value
+    @setState ajax: true
     $.ajax
       method:   'PATCH'
       url:      "/moving_items/#{ @props.record.id }"
@@ -49,9 +53,11 @@
         moving_item: data
     .done (data, textStatus, XHR) =>
       @setState edit: false
+      @setState ajax: false
       @props.handleEditRecord(@props.record, data)
       $.growl.notice title: "Record updated", message: data.name
     .fail (XHR, textStatus, errorThrown) =>
+      @setState ajax: false
       $.growl.error title: "Error", message: "Error updating record"
       console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
@@ -67,17 +73,17 @@
       $.td null, @props.record.category
       $.td null, @props.record.description
       $.td null,
-        $.div
+        $.button
           className: 'btn btn-default btn-sm btn-block'
+          onClick: @handleToggle
           $.div
             className: 'fa fa-pencil'
-            onClick: @handleToggle
             "edit"
-        $.div
+        $.button
           className: 'btn btn-default btn-sm btn-block'
+          onClick: @handleDelete
           $.div
             className: 'fa fa-trash'
-            onClick: @handleDelete
 
   recordForm: ->
     $ = React.DOM
@@ -125,17 +131,18 @@
           defaultValue: @props.record.description
           ref: 'description'
       $.td null,
-        $.div
+        $.button
           className: 'btn btn-success btn-sm btn-block'
+          onClick: @handleEdit
           $.div
             className: 'fa fa-database'
-            onClick: @handleEdit
             'Update'
-        $.div
+        $.button
           className: 'btn btn-default btn-sm btn-block'
+          onClick: @handleToggle
           $.div
             className: 'fa fa-undo'
-            onClick: @handleToggle
+
 
   render: ->
     if @state.edit

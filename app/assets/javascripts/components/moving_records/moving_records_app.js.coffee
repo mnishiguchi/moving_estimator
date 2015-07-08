@@ -2,6 +2,7 @@
 
   getInitialState: ->
     records: @props.data
+    ajax:    false
 
   getDefaultProps: ->
     records: []
@@ -32,10 +33,21 @@
     records = React.addons.update(@state.records, { $splice: [[index, 1, data]] })
     @replaceState records: records
 
+  noticeProcessingAjax: ->
+    $ = React.DOM
+    $.div
+      className: "alert alert-warning"
+      $.i
+        className: "fa fa-cog fa-spin fa-3x"
+      $.div null,
+        "Processing... If this is taking long, please make sure you are online."
+
   render: ->
     $ = React.DOM
 
     $.div null,
+      @noticeProcessingAjax() if @state.ajax
+
       $.div
         className: 'row'
         $.div

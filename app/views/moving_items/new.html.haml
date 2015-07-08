@@ -1,11 +1,12 @@
 - provide(:title, "Add item")
 
-%h1.page-header Add item to "#{@moving.title}"
+.row
+  .col-md-offset-2.col-md-8
+    %h1.page-header Add item to "#{@moving.title}"
 
-%ol.breadcrumb
-  %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
-  %li= link_to "My movings", movings_path
-  %li= link_to @moving.title, moving_path(@moving)
-  %li.active Add item
+    %ol.breadcrumb
+      %li= link_to "My movings", root_path
+      %li= link_to @moving.title, moving_path(@moving)
+      %li.active Add item
 
-= render 'add_form'
+    = render 'add_form'

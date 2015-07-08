@@ -19,16 +19,19 @@
 
   handleSubmit: (e) ->
     e.preventDefault()
+    @setState ajax: true
     $.ajax
       method: 'POST'
       url:    "/moving_items"
       data:   { moving_item: @state }
     .done (data, textStatus, XHR) =>
+      @setState ajax: false
       @setState @getInitialState()  # Update this component's UI.
       @props.handleNewRecord(data)  # Pass new data to the root node.
       $.growl.notice title: "Record added", message: data.name
       console.log data
     .fail (XHR, textStatus, errorThrown) =>
+      @setState ajax: false
       $.growl.error title: "Error", message: "Error adding record"
       console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
 
