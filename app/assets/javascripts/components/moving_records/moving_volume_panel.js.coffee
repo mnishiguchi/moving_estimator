@@ -21,14 +21,14 @@
       $.div
         className: 'panel-body'
         $.table
-          className: "table"
+          className: "table table-striped"
           $.tbody null,
             for key, i in Object.keys(@props.data)
               $.tr
                 key: i # Requried by React.js
                 $.td
-                  className: 'lead'
+                  className: 'lead text-center col-sm-5'
                   key
                 $.td
-                  className: 'lead'
+                  className: 'lead text-center col-sm-5'
                   @props.data[key]
