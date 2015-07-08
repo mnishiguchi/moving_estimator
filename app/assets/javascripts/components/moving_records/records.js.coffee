@@ -8,7 +8,7 @@
         className: 'moving_records table-responsive'
         $.table
           className: 'table table-bordered table-hover'
-          $.thead
+          $.thead null,
             $.tr null,
               $.th null, 'Name'
               $.th null, 'Volume'
@@ -18,10 +18,10 @@
               $.th null, 'Category'
               $.th null, 'Description'
               $.th null, ''
-          $.tbody
-            for record in @props.records
+          $.tbody null,
+            for record, i in @props.records
               React.createElement Record,
-                key:    record.id,
+                key:    i,
                 record: record,
                 handleDeleteRecord: @props.handleDeleteRecord,
                 handleEditRecord:   @props.handleUpdateRecord

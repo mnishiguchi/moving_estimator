@@ -67,15 +67,15 @@
       $.td null, @props.record.category
       $.td null, @props.record.description
       $.td null,
-        $.button
+        $.div
           className: 'btn btn-default btn-sm btn-block'
-          $.i
+          $.div
             className: 'fa fa-pencil'
             onClick: @handleToggle
             "edit"
-        $.button
+        $.div
           className: 'btn btn-default btn-sm btn-block'
-          $.i
+          $.div
             className: 'fa fa-trash'
             onClick: @handleDelete
 
@@ -125,15 +125,15 @@
           defaultValue: @props.record.description
           ref: 'description'
       $.td null,
-        $.button
+        $.div
           className: 'btn btn-success btn-sm btn-block'
-          $.i
+          $.div
             className: 'fa fa-database'
             onClick: @handleEdit
             'Update'
-        $.button
+        $.div
           className: 'btn btn-default btn-sm btn-block'
-          $.i
+          $.div
             className: 'fa fa-undo'
             onClick: @handleToggle
 

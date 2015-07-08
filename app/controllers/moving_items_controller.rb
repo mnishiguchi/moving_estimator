@@ -17,7 +17,7 @@ class MovingItemsController < ApplicationController
     @moving_item = MovingItem.new(moving_item_params.
                                   merge(moving_id: current_moving))
 
-    if request.referrer == moving_url(@moving)
+    if request.xhr?
       # via Ajax from a React component
       if @moving_item.save
         render json: @moving_item

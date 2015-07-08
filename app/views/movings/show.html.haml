@@ -11,8 +11,7 @@
   %li.active= @moving.title
 %hr/
 
-/ = render 'moving_items/add_form'
-/ %hr/
+= link_to "Add new item", new_moving_item_path
 
 = react_component 'MovingRecordsApp', { data: @moving_items }
 - unless @moving_items.count > 0

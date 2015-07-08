@@ -14,16 +14,15 @@
     $ = React.DOM
 
     $.div
-      className: 'col-sm-6'
+      className: "panel panel-#{ @props.type }"
       $.div
-        className: "panel panel-#{ @props.type }"
-        $.div
-          className: 'panel-heading'
-          @props.title
-        $.div
-          className: 'panel-body'
-          $.table
-            className: "table table-striped"
+        className: 'panel-heading'
+        @props.title
+      $.div
+        className: 'panel-body'
+        $.table
+          className: "table table-striped"
+          $.tbody null,
             for key, i in Object.keys(@props.data)
               $.tr
                 key: i # Requried by React.js

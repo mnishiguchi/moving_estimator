@@ -94,6 +94,6 @@
           onChange:    @handleChange
       $.button
         type:      'submit'
-        className: 'btn btn-primary'
+        className: 'btn btn-success'
         disabled:  not @valid()
-        'Create record'
+        'Add item'
