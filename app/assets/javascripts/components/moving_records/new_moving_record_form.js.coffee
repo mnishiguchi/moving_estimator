@@ -103,4 +103,8 @@
             className: if @valid() then 'btn btn-success btn-block' else 'btn btn-default btn-block'
             disabled:  not @valid()
             'Add item'
+          $.span
+            id: "helpBlock"
+            className: "help-block"
+            "Please fill in all the required fields"
       $.div className: "clearfix"
