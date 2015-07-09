@@ -3,7 +3,7 @@
 %h1.page-header
   = @moving.title
   = link_to "Edit", edit_moving_path(@moving), class: "btn btn-primary btn-sm pull-right"
-  %br/
+
   %small= @moving.description
 
 %ol.breadcrumb
@@ -11,8 +11,8 @@
   %li.active= @moving.title
 %hr/
 
-= link_to "Add new item", new_moving_item_path
+= link_to "Add new item", new_moving_item_path, class: "btn btn-primary"
 
 = react_component 'MovingRecordsApp', { data: @moving_items }
-- unless @moving_items.count > 0
-  No item found
+
+= "No item found" if @moving_items.count == 0

@@ -1,5 +1,3 @@
-# MovingRecordsApp = myApp || {}
-
 @MovingRecordsApp = React.createClass
 
   getInitialState: ->
@@ -49,7 +47,8 @@
     data1 = @volumeSortedBy("category")
     data2 = @volumeSortedBy("room")
 
-    $.div null,
+    $.div
+      className: "app_wrapper"
       @noticeProcessingAjax() if @state.ajax
 
       $.h2 null, "Moving volume overview"
