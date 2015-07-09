@@ -39,64 +39,68 @@
     $ = React.DOM
 
     $.form
-      className: 'form-inline'
       onSubmit:  @handleSubmit
       $.div
         className: 'form-group'
-        $.input
-          type:        'text'
-          className:   'form-control'
-          placeholder: 'Item name'
-          name:        'name'
-          value:       @state.name
-          onChange:    @handleChange
-      $.div
-        className: 'form-group'
-        $.input
-          type:        'number'
-          className:   'form-control'
-          placeholder: 'Volume'
-          name:        'volume'
-          value:       @state.volume
-          onChange:    @handleChange
-      $.div
-        className: 'form-group'
-        $.input
-          type:        'number'
-          className:   'form-control'
-          placeholder: 'Quantity'
-          name:        'quantity'
-          value:       @state.quantity
-          onChange:    @handleChange
-      $.div
-        className: 'form-group'
-        $.input
-          type:        'text'
-          className:   'form-control'
-          placeholder: 'Room'
-          name:        'room'
-          value:       @state.room
-          onChange:    @handleChange
-      $.div
-        className: 'form-group'
-        $.input
-          type:        'text'
-          className:   'form-control'
-          placeholder: 'Category'
-          name:        'category'
-          value:       @state.category
-          onChange:    @handleChange
-      $.div
-        className: 'form-group'
-        $.input
-          type:        'text'
-          className:   'form-control'
-          placeholder: 'Description'
-          name:        'description'
-          value:       @state.description
-          onChange:    @handleChange
-      $.button
-        type:      'submit'
-        className: if @valid() then 'btn btn-success' else 'btn btn-default'
-        disabled:  not @valid()
-        'Add item'
+        $.div
+          className: 'form-group col-sm-12'
+          $.input
+            type:        'text'
+            className:   'form-control'
+            placeholder: 'Item name'
+            name:        'name'
+            value:       @state.name
+            onChange:    @handleChange
+        $.div
+          className: 'form-group col-sm-6'
+          $.input
+            type:        'number'
+            className:   'form-control'
+            placeholder: 'Volume'
+            name:        'volume'
+            value:       @state.volume
+            onChange:    @handleChange
+        $.div
+          className: 'form-group col-sm-6'
+          $.input
+            type:        'number'
+            className:   'form-control'
+            placeholder: 'Quantity'
+            name:        'quantity'
+            value:       @state.quantity
+            onChange:    @handleChange
+        $.div
+          className: 'form-group col-sm-6'
+          $.input
+            type:        'text'
+            className:   'form-control'
+            placeholder: 'Category'
+            name:        'category'
+            value:       @state.category
+            onChange:    @handleChange
+        $.div
+          className: 'form-group col-sm-6'
+          $.input
+            type:        'text'
+            className:   'form-control'
+            placeholder: 'Room'
+            name:        'room'
+            value:       @state.room
+            onChange:    @handleChange
+        $.div
+          className: 'form-group col-sm-6'
+          $.textarea
+            rows:        '3'
+            className:   'form-control'
+            placeholder: 'Description'
+            name:        'description'
+            value:       @state.description
+            onChange:    @handleChange
+        $.div
+          className: 'form-group col-sm-6'
+          $.button
+            type:      'submit'
+            className: if @valid() then 'btn btn-success btn-block' else 'btn btn-default btn-block'
+            disabled:  not @valid()
+            'Add item'
+      $.div className: "clearfix"
