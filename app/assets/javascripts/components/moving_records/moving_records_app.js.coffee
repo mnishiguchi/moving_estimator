@@ -1,3 +1,5 @@
+# MovingRecordsApp = myApp || {}
+
 @MovingRecordsApp = React.createClass
 
   getInitialState: ->
@@ -8,7 +10,7 @@
     records: []
 
   addRecord: (record) ->
-    records = React.addons.update(@state.records, { $push: [record] })
+    records = React.addons.update(@state.records, { $unshift: [record] })
     @setState records: records
 
   # p: "room" or "category"
@@ -44,26 +46,34 @@
 
   render: ->
     $ = React.DOM
+    data1 = @volumeSortedBy("category")
+    data2 = @volumeSortedBy("room")
 
     $.div null,
       @noticeProcessingAjax() if @state.ajax
 
+      $.h2 null, "Moving volume overview"
       $.div
         className: 'row'
         $.div
           className: 'col-sm-6'
           React.createElement MovingVolumePanel,
               type:  'green'
-              title: "Volume for each category"
-              data:  @volumeSortedBy("category")
+              icon:  "fa-tag"
+              count: Object.keys(data1).length
+              unit:  "categories"
+              data:  data1
         $.div
           className: 'col-sm-6'
           React.createElement MovingVolumePanel,
               type:  'blue'
-              title: "Volume for each room"
-              data:  @volumeSortedBy("room")
+              icon:  "fa-home"
+              count: Object.keys(data2).length
+              unit:  "rooms"
+              data:  data2
       $.hr null
 
+      $.h2 null, "Add a new item"
       React.createElement NewMovingRecordForm,
         handleNewRecord: @addRecord
       $.hr null

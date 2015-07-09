@@ -26,7 +26,7 @@
       data:   { moving_item: @state }
     .done (data, textStatus, XHR) =>
       @setState ajax: false
-      @setState @getInitialState()  # Update this component's UI.
+      @setState @getInitialState()  # Restore component's initial UI.
       @props.handleNewRecord(data)  # Pass new data to the root node.
       $.growl.notice title: "Record added", message: data.name
       console.log data
@@ -97,6 +97,6 @@
           onChange:    @handleChange
       $.button
         type:      'submit'
-        className: 'btn btn-success'
+        className: if @valid() then 'btn btn-success' else 'btn btn-default'
         disabled:  not @valid()
         'Add item'

@@ -12,7 +12,7 @@
             $.tr null,
               $.th null, 'Name'
               $.th null, 'Volume'
-              $.th null, 'Qantity'
+              $.th null, 'Quantity'
               $.th null, 'Subtotal'
               $.th null, 'Room'
               $.th null, 'Category'
