@@ -13,6 +13,4 @@
 
 = react_component 'MovingRecordsApp', { data: @moving_items,
                    roomSuggestions: Room.all.pluck("name"),
-                   categorySuggestions: @moving.moving_categories.pluck("name") }
-
-= "No item found" if @moving_items.count == 0
+                   categorySuggestions: @moving.moving_items.pluck("category").uniq! }

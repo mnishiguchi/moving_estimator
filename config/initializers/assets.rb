@@ -13,4 +13,4 @@ Rails.application.config.assets.version = '1.0'
 # Command line options used when running browserify
 Rails.application.config.browserify_rails.commandline_options =
   # To compile coffeescript + react jsx (cjsx) automatically
-  "-t coffee-reactify --extension=\".js.cjsx\" --extension=\".js.coffee\""
+  "-t coffee-reactify --extension=\".js.coffee\""
