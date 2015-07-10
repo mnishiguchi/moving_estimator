@@ -26,6 +26,7 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'  # For bootstrap pagination style.
 gem 'bootstrap-sass',          '~> 3.2.0.0' # Converts Less to Sass.
 gem 'font-awesome-rails',      '~> 4.3.0.0' # For icons.
 gem 'haml-rails',              '~> 0.9.0'   # For HAML.
+gem 'jquery-ui-rails',         '~> 5.0.5'   # For autocomplete etc
 # React
 gem 'react-rails',             '~> 1.0.0'   # Compiles JSX.
 gem 'sprockets-coffee-react',  '~> 3.0.1'   # Preprocessor for Coffeescript with React JSX (CJSX).

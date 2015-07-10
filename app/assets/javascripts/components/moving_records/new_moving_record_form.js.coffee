@@ -61,6 +61,15 @@
   fieldColor: (validator) ->
     if validator then 'has-success' else 'has-warning'
 
+  componentDidMount: ->
+    # initialize the jQuery UI autocomplete.
+    roomSuggestions = ['bathroom', 'living room', 'dining room'];
+    $(React.findDOMNode(@refs.room)).autocomplete({source: roomSuggestions})
+
+  componentWillUnmount: ->
+    # get rid of the extra HTML that jQuery UI autocomplete creates.
+    $(React.findDOMNode(@refs.room)).autocomplete('destroy')
+
   render: ->
     $ = React.DOM
 
@@ -112,8 +121,9 @@
           $.input
             type:        'text'
             className:   'form-control'
+            ref:         'room'  # for autocompletion
+            name:        'room'  # for @handleChange
             placeholder: 'Room'
-            name:        'room'
             value:       @state.room
             onChange:    @handleChange
         $.div

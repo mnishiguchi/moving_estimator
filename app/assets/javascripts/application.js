@@ -3,6 +3,7 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require turbolinks
+//= require jquery-ui/autocomplete
 
 //= require react
 //= require react_ujs
@@ -10,3 +11,5 @@
 //= require fluxxor
 //= require components
 //= require growl
+
+//= requre_tree .
