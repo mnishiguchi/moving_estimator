@@ -123,22 +123,27 @@
             name:        'description(optional)'
             value:       @state.description
             onChange:    @handleChange
+
         $.div
-          className: 'form-group col-sm-3'
-          $.button
-            type:      'submit'
-            className: if @valid() then 'btn btn-success btn-block' else 'btn btn-default btn-block'
-            disabled:  not @valid()
-            'Add item'
+          className: 'col-sm-6'
+          $.div
+            className: 'form-group col-sm-8'
+            $.button
+              type:      'submit'
+              className: if @valid() then 'btn btn-success btn-block' else 'btn btn-default btn-block'
+              disabled:  not @valid()
+              'Add item'
+          $.div
+            className: 'form-group col-sm-4'
+            $.button
+              type:      'submit'
+              className: "btn btn-default btn-block"
+              onClick: @handleClear
+              'Clear'
         $.div
-          className: 'form-group col-sm-3'
-          $.button
-            type:      'submit'
-            className: "btn btn-default btn-block"
-            onClick: @handleClear
-            'Clear'
+          className: 'form-group col-sm-6'
           $.span
             id: "helpBlock"
-            className: "help-block"
+            className: "help-block text-center"
             "Please fill in all the required fields"
       $.div className: "clearfix"
