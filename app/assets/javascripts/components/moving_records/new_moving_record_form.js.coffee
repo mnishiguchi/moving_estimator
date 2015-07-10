@@ -70,12 +70,11 @@
   componentWillUnmount: ->
     # get rid of the extra HTML that jQuery UI autocomplete creates.
     $(React.findDOMNode(@refs.room)).autocomplete('destroy')
+    $(React.findDOMNode(@refs.category)).autocomplete('destroy')
 
   updateAutocomplete: ->
-    # roomSuggestions
-    roomSuggestions = @props.roomSuggestions
-    console.log roomSuggestions
-    $(React.findDOMNode(@refs.room)).autocomplete({source: roomSuggestions})
+    $(React.findDOMNode(@refs.room)).autocomplete({source: @props.roomSuggestions})
+    $(React.findDOMNode(@refs.category)).autocomplete({source: @props.categorySuggestions})
 
   render: ->
     R = React.DOM
@@ -119,8 +118,9 @@
           R.input
             type:        'text'
             className:   'form-control'
+            ref:         'category'  # for autocompletion
+            name:        'category'  # for @handleChange
             placeholder: 'Category'
-            name:        'category'
             value:       @state.category
             onChange:    @handleChange
         R.div

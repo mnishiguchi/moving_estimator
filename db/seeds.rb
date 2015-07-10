@@ -46,6 +46,11 @@ rooms      = %w(living_room dining_room bedroom kitchen bathroom)
   end
 end
 
+u = user.first
+categories.each do |c|
+  u.movings.first.moving_categories.create name: c
+end
+
 99.times do |n|
   name  = Faker::Commerce.product_name
   Ingredient.create!(name: name)

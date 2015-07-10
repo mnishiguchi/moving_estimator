@@ -34,27 +34,27 @@
     @replaceState records: records
 
   noticeProcessingAjax: ->
-    $ = React.DOM
-    $.div
+    R = React.DOM
+    R.div
       className: "alert alert-warning"
-      $.i
+      R.i
         className: "fa fa-cog fa-spin fa-3x"
-      $.div null,
+      R.div null,
         "Processing... If this is taking long, please make sure you are online."
 
   render: ->
-    $ = React.DOM
+    R = React.DOM
     data1 = @volumeSortedBy("category")
     data2 = @volumeSortedBy("room")
 
-    $.div
+    R.div
       className: "app_wrapper"
       @noticeProcessingAjax() if @state.ajax
 
-      $.h2 null, "Moving volume overview"
-      $.div
+      R.h2 null, "Moving volume overview"
+      R.div
         className: 'row'
-        $.div
+        R.div
           className: 'col-sm-6'
           React.createElement MovingVolumePanel,
               type:  'green'
@@ -62,7 +62,7 @@
               count: Object.keys(data1).length
               unit:  "categories"
               data:  data1
-        $.div
+        R.div
           className: 'col-sm-6'
           React.createElement MovingVolumePanel,
               type:  'blue'
@@ -70,13 +70,14 @@
               count: Object.keys(data2).length
               unit:  "rooms"
               data:  data2
-      $.hr null
+      R.hr null
 
-      $.h2 null, "Add a new item"
+      R.h2 null, "Add a new item"
       React.createElement NewMovingRecordForm,
         handleNewRecord: @addRecord
         roomSuggestions: @props.roomSuggestions
-      $.hr null
+        categorySuggestions: @props.categorySuggestions
+      R.hr null
 
       React.createElement Records,
         records: @state.records,

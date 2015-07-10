@@ -12,6 +12,7 @@
 %hr/
 
 = react_component 'MovingRecordsApp', { data: @moving_items,
-                                        roomSuggestions: Room.all.pluck("name") }
+                   roomSuggestions: Room.all.pluck("name"),
+                   categorySuggestions: @moving.moving_categories.pluck("name") }
 
 = "No item found" if @moving_items.count == 0
