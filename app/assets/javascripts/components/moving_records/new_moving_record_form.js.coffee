@@ -62,33 +62,40 @@
     if validator then 'has-success' else 'has-warning'
 
   componentDidMount: ->
-    # initialize the jQuery UI autocomplete.
-    roomSuggestions = ['bathroom', 'living room', 'dining room'];
-    $(React.findDOMNode(@refs.room)).autocomplete({source: roomSuggestions})
+    @updateAutocomplete()
+
+  componentDidUpdate: ->
+    @updateAutocomplete()
 
   componentWillUnmount: ->
     # get rid of the extra HTML that jQuery UI autocomplete creates.
     $(React.findDOMNode(@refs.room)).autocomplete('destroy')
 
-  render: ->
-    $ = React.DOM
+  updateAutocomplete: ->
+    # roomSuggestions
+    roomSuggestions = @props.roomSuggestions
+    console.log roomSuggestions
+    $(React.findDOMNode(@refs.room)).autocomplete({source: roomSuggestions})
 
-    $.form
+  render: ->
+    R = React.DOM
+
+    R.form
       onSubmit:  @handleSubmit
-      $.div
+      R.div
         className: 'form-group'
-        $.div
+        R.div
           className: "form-group col-sm-12 #{@fieldColor(@validName())}"
-          $.input
+          R.input
             type:        'text'
             className:   'form-control'
             placeholder: 'Item name'
             name:        'name'
             value:       @state.name
             onChange:    @handleChange
-        $.div
+        R.div
           className: "form-group col-sm-6 #{@fieldColor(@validVolume())}"
-          $.input
+          R.input
             type:        'number'
             min:         "0"
             step:        "0.5"
@@ -97,9 +104,9 @@
             name:        'volume'
             value:       @state.volume
             onChange:    @handleChange
-        $.div
+        R.div
           className: "form-group col-sm-6 #{@fieldColor(@validQuantity())}"
-          $.input
+          R.input
             type:        'number'
             min:         "0"
             className:   'form-control'
@@ -107,18 +114,18 @@
             name:        'quantity'
             value:       @state.quantity
             onChange:    @handleChange
-        $.div
+        R.div
           className: "form-group col-sm-6 #{@fieldColor(@validCategory())}"
-          $.input
+          R.input
             type:        'text'
             className:   'form-control'
             placeholder: 'Category'
             name:        'category'
             value:       @state.category
             onChange:    @handleChange
-        $.div
+        R.div
           className: "form-group col-sm-6 #{@fieldColor(@validRoom())}"
-          $.input
+          R.input
             type:        'text'
             className:   'form-control'
             ref:         'room'  # for autocompletion
@@ -126,9 +133,9 @@
             placeholder: 'Room'
             value:       @state.room
             onChange:    @handleChange
-        $.div
+        R.div
           className: "form-group col-sm-6 #{@fieldColor(@validDescription())}"
-          $.textarea
+          R.textarea
             rows:        '3'
             className:   'form-control'
             placeholder: 'Description'
@@ -136,26 +143,26 @@
             value:       @state.description
             onChange:    @handleChange
 
-        $.div
+        R.div
           className: 'col-sm-6'
-          $.div
+          R.div
             className: 'form-group col-sm-8'
-            $.button
+            R.button
               type:      'submit'
               className: if @valid() then 'btn btn-success btn-block' else 'btn btn-default btn-block'
               disabled:  not @valid()
               'Add item'
-          $.div
+          R.div
             className: 'form-group col-sm-4'
-            $.button
+            R.button
               type:      'submit'
               className: "btn btn-default btn-block"
               onClick: @handleClear
               'Clear'
-        $.div
+        R.div
           className: 'form-group col-sm-6'
-          $.span
+          R.span
             id: "helpBlock"
             className: "help-block text-center"
             "Please fill in all the required fields"
-      $.div className: "clearfix"
+      R.div className: "clearfix"

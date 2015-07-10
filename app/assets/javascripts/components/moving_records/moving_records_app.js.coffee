@@ -75,6 +75,7 @@
       $.h2 null, "Add a new item"
       React.createElement NewMovingRecordForm,
         handleNewRecord: @addRecord
+        roomSuggestions: @props.roomSuggestions
       $.hr null
 
       React.createElement Records,

@@ -11,6 +11,7 @@
   %li.active= @moving.title
 %hr/
 
-= react_component 'MovingRecordsApp', { data: @moving_items }
+= react_component 'MovingRecordsApp', { data: @moving_items,
+                                        roomSuggestions: Room.all.pluck("name") }
 
 = "No item found" if @moving_items.count == 0
