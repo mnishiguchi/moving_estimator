@@ -13,5 +13,13 @@
 require 'rails_helper'
 
 RSpec.describe Moving, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:moving) { FactoryGirl.create(:moving) }
+
+  it { expect(moving).to be_valid }
+
+  it { is_expected.to validate_presence_of :title }
+  it { is_expected.not_to validate_presence_of :description }
+
+  it { is_expected.to validate_length_of :title }
+  it { is_expected.to validate_length_of :description }
 end
