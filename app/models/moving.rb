@@ -14,7 +14,6 @@ class Moving < ActiveRecord::Base
 
   belongs_to :user
   has_many :moving_items, dependent: :destroy
-  has_many :moving_categories, dependent: :destroy
 
   validates :title,       presence: true,  length: { maximum: 50 }
   validates :description, presence: false, length: { maximum: 255 }
