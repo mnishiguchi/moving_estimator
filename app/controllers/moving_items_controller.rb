@@ -9,41 +9,30 @@ class MovingItemsController < ApplicationController
   # Note: A list of items is displayed in Movings#show page.
 
   # Shows a form to create a new item.
-  def new
-    @moving_item = MovingItem.new
-  end
+  # def new
+  #   @moving_item = MovingItem.new
+  # end
 
+  # Creates the item to database via JSON
   def create
     @moving_item = MovingItem.new(moving_item_params.
                                   merge(moving_id: current_moving))
-
-    if request.xhr?
-      # via Ajax from a React component
-      if @moving_item.save
-        render json: @moving_item
-      else
-        render json: @moving_item.errors, status: :unprocessable_entity
-      end
-    # else
-    #   if @moving_item.save
-    #     flash[:success] = "Moving item created"
-    #     moving = Moving.find(current_moving)
-    #     redirect_to moving_url(moving)
-    #   else
-    #     @movings = current_user.movings
-    #     @moving_items = @moving.moving_items
-    #     render 'movings/show'
-    #   end
+    if @moving_item.save
+      # update_rooms_and_categories
+      render json: @moving_item
+    else
+      render json: @moving_item.errors, status: :unprocessable_entity
     end
   end
 
   # Shows an edit form.
-  def edit
-  end
+  # def edit
+  # end
 
   # Updates the item to database via JSON
   def update
     if @moving_item.update(moving_item_params)
+      # update_rooms_and_categories
       render json: @moving_item
     else
       render json: @moving_item.errors, status: :unprocessable_entity
@@ -77,4 +66,9 @@ class MovingItemsController < ApplicationController
       @moving_item = current_user.moving_items.try { find_by(id: id) }
       redirect_to root_url if @moving_item.nil?
     end
+
+    # def update_rooms_and_categories
+    #   @moving.moving_categories.find_or_create_by_name(@moving_item.category)
+    #   Room.find_or_create_by_name(@moving_item.room)
+    # end
 end

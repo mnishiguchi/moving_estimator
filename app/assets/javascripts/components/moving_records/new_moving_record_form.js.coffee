@@ -73,8 +73,23 @@
     $(React.findDOMNode(@refs.category)).autocomplete('destroy')
 
   updateAutocomplete: ->
-    $(React.findDOMNode(@refs.room)).autocomplete({source: @props.roomSuggestions})
-    $(React.findDOMNode(@refs.category)).autocomplete({source: @props.categorySuggestions})
+    $(React.findDOMNode(@refs.room)).autocomplete
+      source: @props.roomSuggestions
+      select: (e, ui) =>
+        @setState room: ui.item.value
+        # debug
+        $.growl.notice title: "selected", message: ""
+        console.log document.activeElement.name
+        console.log ui.item.value
+
+    $(React.findDOMNode(@refs.category)).autocomplete
+      source: @props.categorySuggestions
+      select: (e, ui) =>
+        @setState category: ui.item.value
+        # debug
+        $.growl.notice title: "selected", message: ""
+        console.log document.activeElement.name
+        console.log ui.item.value
 
   render: ->
     R = React.DOM
