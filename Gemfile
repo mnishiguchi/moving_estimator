@@ -61,7 +61,7 @@ group :test do
   gem 'capybara',           '~> 2.4.4'
   gem 'database_cleaner',   '~> 1.4.1'
   gem 'launchy',            '~> 2.4.3'
-  gem 'shoulda-matchers',   '~> 2.8.0'
+  gem 'shoulda-matchers', require: false
   gem 'json_spec',          '~> 1.1.4'
 end
 

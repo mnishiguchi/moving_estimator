@@ -8,30 +8,6 @@
     category:    ""
     description: ""
 
-  valid: ->
-    @validName() && @validVolume() && @validQuantity() &&
-    @validRoom() && @validCategory() && @validDescription()
-
-  # validators
-  validName: ->
-    @state.name && @state.name.length <= 50
-  validVolume: ->
-    @state.volume && @state.volume.length <= 10
-  validQuantity: ->
-    @state.quantity && @state.quantity.length <= 10
-  validRoom: ->
-    @state.room && @state.room.length <= 50
-  validCategory: ->
-    @state.category && @state.category.length <= 50
-  validDescription: ->
-    @state.description.length <= 200
-
-  fieldColor: (validator) ->
-    if validator then 'has-success' else 'has-warning'
-
-  handleClear: (e) ->
-    @setState @getInitialState()  # Restore component's initial UI.
-
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
@@ -53,6 +29,30 @@
       @setState ajax: false
       $.growl.error title: "Error", message: "Error adding record"
       console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
+
+  handleClear: (e) ->
+    @setState @getInitialState()  # Restore component's initial UI.
+
+  valid: ->
+    @validName() && @validVolume() && @validQuantity() &&
+    @validRoom() && @validCategory() && @validDescription()
+
+  # validators for individual fields
+  validName: ->
+    @state.name && @state.name.length <= 50
+  validVolume: ->
+    @state.volume && @state.volume.length <= 10
+  validQuantity: ->
+    @state.quantity && @state.quantity.length <= 10
+  validRoom: ->
+    @state.room && @state.room.length <= 50
+  validCategory: ->
+    @state.category && @state.category.length <= 50
+  validDescription: ->
+    @state.description.length <= 200
+
+  fieldColor: (validator) ->
+    if validator then 'has-success' else 'has-warning'
 
   render: ->
     $ = React.DOM

@@ -16,12 +16,12 @@
 
 FactoryGirl.define do
   factory :moving_item do
-    moving
     name        "macbook"
     volume      3.0
     quantity    1
-    description "high value"
-    room        "living_room"
+    room        "living room"
     category    "local"
+    description "high value"
+    moving
   end
 end
