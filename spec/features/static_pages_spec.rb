@@ -10,12 +10,6 @@ describe "Static pages", type: :feature do
     it { expect(page).to have_title(full_title("")) }
   end
 
-  describe "About page" do
-    before { visit about_path }
-    it { expect(page).to have_content(/Masatoshi/i) }
-    it { expect(page).to have_title(full_title("About")) }
-  end
-
   describe "Navbar links" do
     it "should have the right links on the layout" do
       visit root_path

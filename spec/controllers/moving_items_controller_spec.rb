@@ -24,26 +24,12 @@ RSpec.describe MovingItemsController, type: :controller do
 
   describe "non-logged-in user" do
 
-    describe "GET #new" do
-      it "redirects to the login page" do
-        get :new
-        expect(response).to redirect_to "/users/sign_in"
-      end
-    end
-
     describe "POST #create" do
       pending "re-write for ajax"
       it "does not change the MovingItem count, redirecting to the login page" do
         expect{
           post :create, moving_item: moving_item_params
         }.not_to change(MovingItem, :count)
-        expect(response).to redirect_to "/users/sign_in"
-      end
-    end
-
-    describe "GET #edit" do
-      it "redirects to the login page" do
-        get :edit, id: moving_item.id
         expect(response).to redirect_to "/users/sign_in"
       end
     end
@@ -80,26 +66,12 @@ RSpec.describe MovingItemsController, type: :controller do
 
     describe "without selecting a moving" do
 
-      describe "GET #new" do
-        it "redirects to the root url" do
-          get :new
-          expect(response).to redirect_to "/"
-        end
-      end
-
       describe "POST #create" do
         pending "re-write for ajax"
         it "does not change the MovingItem count, redirecting to the root url" do
           expect{
             post :create, moving_item: moving_item_params
           }.not_to change(MovingItem, :count)
-          expect(response).to redirect_to "/"
-        end
-      end
-
-      describe "GET #edit" do
-        it "redirects to the root url" do
-          get :edit, id: moving_item.id
           expect(response).to redirect_to "/"
         end
       end
@@ -134,13 +106,6 @@ RSpec.describe MovingItemsController, type: :controller do
     describe "after selecting a moving" do
       before { remember_moving(moving) }
 
-      describe "GET #new" do
-        subject { get :new }
-
-        it { is_expected.to have_http_status(:success) }
-        it { is_expected.to render_template(:new) }
-      end
-
       xdescribe "POST #create" do
         pending "re-write for ajax"
         it "increments the MovingItem count, then redirects to the movings/show page" do
@@ -148,21 +113,6 @@ RSpec.describe MovingItemsController, type: :controller do
             post :create, moving_item: moving_item_params
           }.to change(MovingItem, :count).by(1)
           expect(response).to redirect_to moving_url(moving_item.moving_id)
-        end
-      end
-
-      describe "GET #edit" do
-        subject { get :edit, id: id }
-
-        describe "another user's item" do
-          let(:id) { random_moving_item.id }
-          it { is_expected.to redirect_to "/" }
-        end
-
-        describe "current user's own item" do
-          let(:id) { moving_item.id }
-          it { is_expected.to have_http_status(:success) }
-          it { is_expected.to render_template :edit }
         end
       end
 

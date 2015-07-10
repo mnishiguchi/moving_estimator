@@ -11,13 +11,6 @@ RSpec.describe UsersController, :type => :controller do
       end
     end
 
-    describe 'GET #show' do
-      it "redirects to log in page" do
-        get :show
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-
     describe 'DELETE #destroy' do
       before { FactoryGirl.create(:user) }  # Creating a user in database.
       let(:user) { User.first }             # Getting one from datatase as needed.
@@ -45,13 +38,6 @@ RSpec.describe UsersController, :type => :controller do
       end
     end
 
-    describe 'GET #show' do
-      it "renders the show page" do
-        get :show
-        expect(response).to render_template :show
-      end
-    end
-
     describe 'DELETE #destroy' do
       before { @user = FactoryGirl.create(:user) }
 
@@ -74,13 +60,6 @@ RSpec.describe UsersController, :type => :controller do
       it "renders the index page" do
         get :index
         expect(response).to render_template :index
-      end
-    end
-
-    describe 'GET #show' do
-      it "renders the show page" do
-        get :show
-        expect(response).to render_template :show
       end
     end
 

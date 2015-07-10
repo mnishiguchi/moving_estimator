@@ -15,11 +15,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # Each user's dashboard
-  def show
-    @todos = Todo.getInitialData
-  end
-
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
