@@ -78,18 +78,18 @@
       select: (e, ui) =>
         @setState room: ui.item.value
         # debug
-        $.growl.notice title: "selected", message: ""
-        console.log document.activeElement.name
-        console.log ui.item.value
+        # $.growl.notice title: "selected", message: ""
+        # console.log document.activeElement.name
+        # console.log ui.item.value
 
     $(React.findDOMNode(@refs.category)).autocomplete
       source: @props.categorySuggestions
       select: (e, ui) =>
         @setState category: ui.item.value
         # debug
-        $.growl.notice title: "selected", message: ""
-        console.log document.activeElement.name
-        console.log ui.item.value
+        # $.growl.notice title: "selected", message: ""
+        # console.log document.activeElement.name
+        # console.log ui.item.value
 
   render: ->
     R = React.DOM
