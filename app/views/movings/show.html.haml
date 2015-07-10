@@ -11,14 +11,6 @@
   %li.active= @moving.title
 %hr/
 
-= link_to "Add new item", new_moving_item_path, class: "btn btn-primary"
-
 = react_component 'MovingRecordsApp', { data: @moving_items }
 
 = "No item found" if @moving_items.count == 0
-
-/ :css
-/ .form-inline .form-group{
-/     margin-left: 0;
-/     margin-right: 0;
-/ }

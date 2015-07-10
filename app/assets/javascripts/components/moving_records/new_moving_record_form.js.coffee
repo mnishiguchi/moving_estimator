@@ -27,8 +27,8 @@
       console.log data
     .fail (XHR, textStatus, errorThrown) =>
       @setState ajax: false
-      $.growl.error title: "Error", message: "Error adding record"
-      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
+      $.growl.error title: "Error", message: "Error adding record\n#{textStatus}: #{errorThrown}"
+      console.error("#{textStatus}: #{errorThrown}")
 
   handleClear: (e) ->
     @setState @getInitialState()  # Restore component's initial UI.

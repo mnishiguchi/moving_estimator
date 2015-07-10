@@ -32,8 +32,8 @@
         $.growl.notice title: "Record deleted", message: ""
       .fail (XHR, textStatus, errorThrown) =>
         @setState ajax: false
-        $.growl.error title: "Error", message: "Error deleting record"
-        console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
+        $.growl.error title: "Error", message: "Error deleting record\n#{textStatus}: #{errorThrown}"
+        console.error("#{textStatus}: #{errorThrown}")
 
   handleEdit: (e) ->
     e.preventDefault()
@@ -58,8 +58,8 @@
       $.growl.notice title: "Record updated", message: data.name
     .fail (XHR, textStatus, errorThrown) =>
       @setState ajax: false
-      $.growl.error title: "Error", message: "Error updating record"
-      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
+      $.growl.error title: "Error", message: "Error updating record\n#{textStatus}: #{errorThrown}"
+      console.error("#{textStatus}: #{errorThrown}")
 
   recordRow: ->
     $ = React.DOM
@@ -106,9 +106,8 @@
       className: "edit"
       $.td
         className: "col-md-2"
-        $.input
+        $.textarea
           className: 'form-control'
-          type: 'text'
           defaultValue: @props.record.name
           ref: 'name'
       $.td
@@ -116,8 +115,10 @@
         $.input
           className: 'form-control'
           type: 'number'
+          min:  "0"
+          step: "0.5"
           defaultValue: @props.record.volume
-          ref: 'volume'   # For referencing DOM
+          ref:  'volume'  # For referencing DOM
           name: 'volume'  # For referencing event
           onChange: @handleChangeVolume
       $.td
@@ -125,8 +126,9 @@
         $.input
           className: 'form-control'
           type: 'number'
+          min:  "0"
           defaultValue: @props.record.quantity
-          ref: 'quantity'   # For referencing DOM
+          ref:  'quantity'  # For referencing DOM
           name: 'quantity'  # For referencing event
           onChange: @handleChangeVolume
       $.td
@@ -134,23 +136,20 @@
         @calculateSubtotal()
       $.td
         className: "col-md-1"
-        $.input
+        $.textarea
           className: 'form-control'
-          type: 'text'
           defaultValue: @props.record.room
           ref: 'room'
       $.td
         className: "col-md-1"
-        $.input
+        $.textarea
           className: 'form-control'
-          type: 'text'
           defaultValue: @props.record.category
           ref: 'category'
       $.td
         className: "col-md-4"
-        $.input
+        $.textarea
           className: 'form-control'
-          type: 'text'
           defaultValue: @props.record.description
           ref: 'description'
       $.td
@@ -160,7 +159,6 @@
           onClick: @handleEdit
           $.div
             className: 'fa fa-hdd-o'
-            # 'Update'
         $.button
           className: 'btn btn-default btn-sm'
           onClick: @handleToggle
