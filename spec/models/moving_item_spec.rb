@@ -39,6 +39,11 @@ RSpec.describe MovingItem, type: :model do
   it { is_expected.to validate_numericality_of :volume }
   it { is_expected.to validate_numericality_of :quantity }
 
+  context "with an empty name" do
+    before { moving_item.update_attribute(:name, "") }
+    it { is_expected.not_to be_valid }
+  end
+
   context "with a lowercase name" do
     before { moving_item.update_attribute(:name, "Upcase name") }
     it { is_expected.not_to be_valid }

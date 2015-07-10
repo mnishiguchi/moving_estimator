@@ -27,11 +27,18 @@
       console.log data
     .fail (XHR, textStatus, errorThrown) =>
       @setState ajax: false
-      $.growl.error title: "Error", message: "Error adding record\n#{textStatus}: #{errorThrown}"
+      if error_messages = JSON.parse(XHR.responseText)
+        for k, v of error_messages
+          $.growl.error title: "#{ @capitalize(k) } #{v}", message: ""
+      else
+        $.growl.error title: "Error adding record", message: "#{errorThrown}"
       console.error("#{textStatus}: #{errorThrown}")
 
   handleClear: (e) ->
     @setState @getInitialState()  # Restore component's initial UI.
+
+  capitalize: (string) ->
+    string.charAt(0).toUpperCase() + string.slice(1)
 
   valid: ->
     @validName() && @validVolume() && @validQuantity() &&
@@ -68,7 +75,6 @@
             className:   'form-control'
             placeholder: 'Item name'
             name:        'name'
-            required:    true
             value:       @state.name
             onChange:    @handleChange
         $.div
@@ -80,7 +86,6 @@
             className:   'form-control'
             placeholder: 'Volume'
             name:        'volume'
-            required:    true
             value:       @state.volume
             onChange:    @handleChange
         $.div
@@ -91,7 +96,6 @@
             className:   'form-control'
             placeholder: 'Quantity'
             name:        'quantity'
-            required:    true
             value:       @state.quantity
             onChange:    @handleChange
         $.div
@@ -101,7 +105,6 @@
             className:   'form-control'
             placeholder: 'Category'
             name:        'category'
-            required:    true
             value:       @state.category
             onChange:    @handleChange
         $.div
@@ -111,7 +114,6 @@
             className:   'form-control'
             placeholder: 'Room'
             name:        'room'
-            required:    true
             value:       @state.room
             onChange:    @handleChange
         $.div

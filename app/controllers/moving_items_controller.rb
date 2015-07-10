@@ -43,7 +43,7 @@ class MovingItemsController < ApplicationController
 
   # Updates the item to database via JSON
   def update
-    if @moving_item.update_columns(moving_item_params)
+    if @moving_item.update(moving_item_params)
       render json: @moving_item
     else
       render json: @moving_item.errors, status: :unprocessable_entity

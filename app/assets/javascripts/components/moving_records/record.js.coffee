@@ -32,7 +32,7 @@
         $.growl.notice title: "Record deleted", message: ""
       .fail (XHR, textStatus, errorThrown) =>
         @setState ajax: false
-        $.growl.error title: "Error", message: "Error deleting record\n#{textStatus}: #{errorThrown}"
+        $.growl.error title: "Error deleting record", message: "#{textStatus}: #{errorThrown}"
         console.error("#{textStatus}: #{errorThrown}")
 
   handleEdit: (e) ->
@@ -58,8 +58,15 @@
       $.growl.notice title: "Record updated", message: data.name
     .fail (XHR, textStatus, errorThrown) =>
       @setState ajax: false
-      $.growl.error title: "Error", message: "Error updating record\n#{textStatus}: #{errorThrown}"
+      if error_messages = JSON.parse(XHR.responseText)
+        for k, v of error_messages
+          $.growl.error title: "#{ @capitalize(k) } #{ v }", message: ""
+      else
+        $.growl.error title: "Error updating record", message: "#{errorThrown}"
       console.error("#{textStatus}: #{errorThrown}")
+
+  capitalize: (string) ->
+    string.charAt(0).toUpperCase() + string.slice(1)
 
   recordRow: ->
     $ = React.DOM

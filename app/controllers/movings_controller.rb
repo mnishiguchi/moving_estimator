@@ -41,9 +41,12 @@ class MovingsController < ApplicationController
 
   # Updates the moving to database.
   def update
-    @moving.update_columns(moving_params)
-    flash[:success] = "Moving updated"
-    redirect_to moving_url(@moving)
+    if @moving.update(moving_params)
+      flash[:success] = "Moving updated"
+      redirect_to moving_url(@moving)
+    else
+      render 'edit'
+    end
   end
 
   # Delete the moving record.
