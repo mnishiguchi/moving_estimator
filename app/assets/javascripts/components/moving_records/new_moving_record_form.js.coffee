@@ -9,27 +9,28 @@
     description: ""
 
   componentDidMount: ->
-    @updateAutocomplete()
+    @updateAutocomplete()  # Initialize the jQuery UI autocomplete.
 
   componentDidUpdate: ->
-    @updateAutocomplete()
+    @updateAutocomplete()  # Update the jQuery UI autocomplete.
 
   componentWillUnmount: ->
-    # get rid of the extra HTML that jQuery UI autocomplete creates.
+    # Remove the extra HTML that jQuery UI autocomplete creates.
     $(React.findDOMNode(@refs.room)).autocomplete('destroy')
     $(React.findDOMNode(@refs.category)).autocomplete('destroy')
 
+  # Sets up the jQuery UI autocomplete on the real DOM with the provided data.
+  # When an autocomplete item is selected, updates the value accordingly.
   updateAutocomplete: ->
     $(React.findDOMNode(@refs.room)).autocomplete
       source: @props.roomSuggestions
-      select: (e, ui) =>
-        @setState room: ui.item.value
+      select: (e, ui) => @setState room: ui.item.value
 
     $(React.findDOMNode(@refs.category)).autocomplete
       source: @props.categorySuggestions
-      select: (e, ui) =>
-        @setState category: ui.item.value
+      select: (e, ui) => @setState category: ui.item.value
 
+  # Updates the active element's value based on user's input.
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
@@ -59,24 +60,17 @@
   handleClear: (e) ->
     @setState @getInitialState()  # Restore component's initial UI.
 
-  # field validations
+  # Field validations
   valid: ->
     @validName() && @validVolume() && @validQuantity() &&
     @validRoom() && @validCategory() && @validDescription()
-  validName: ->
-    @state.name && @state.name.length <= 50
-  validVolume: ->
-    @state.volume && @state.volume.length <= 10
-  validQuantity: ->
-    @state.quantity && @state.quantity.length <= 10
-  validRoom: ->
-    @state.room && @state.room.length <= 50
-  validCategory: ->
-    @state.category && @state.category.length <= 50
-  validDescription: ->
-    @state.description.length <= 200
-  fieldColor: (validator) ->
-    if validator then 'has-success' else 'has-warning'
+  validName:        -> @state.name && @state.name.length <= 50
+  validVolume:      -> @state.volume && @state.volume.length <= 10
+  validQuantity:    -> @state.quantity && @state.quantity.length <= 10
+  validRoom:        -> @state.room && @state.room.length <= 50
+  validCategory:    -> @state.category && @state.category.length <= 50
+  validDescription: -> @state.description.length <= 200
+  fieldColor: (validator) -> if validator then 'has-success' else 'has-warning'
 
   capitalize: (string) ->
     string.charAt(0).toUpperCase() + string.slice(1)
@@ -123,7 +117,7 @@
           R.input
             type:        'text'
             className:   'form-control'
-            ref:         'category'  # for autocompletion
+            ref:         'category'  # for Autocomplete to access the DOM
             name:        'category'  # for @handleChange
             placeholder: 'Category'
             value:       @state.category
@@ -133,7 +127,7 @@
           R.input
             type:        'text'
             className:   'form-control'
-            ref:         'room'  # for autocompletion
+            ref:         'room'  # for Autocomplete to access the DOM
             name:        'room'  # for @handleChange
             placeholder: 'Room'
             value:       @state.room
