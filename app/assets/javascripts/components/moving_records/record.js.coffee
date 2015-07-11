@@ -5,9 +5,6 @@
     volume:   @props.record.volume
     quantity: @props.record.quantity
 
-  calculateSubtotal: ->
-    @state.volume * @state.quantity
-
   handleChangeVolume: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
@@ -21,7 +18,7 @@
   handleDelete: (e) ->
     e.preventDefault()
     @setState ajax: true
-    if confirm("Are you sure?")
+    if confirm("Deleting a record. Are you sure?")
       $.ajax
         method:   'DELETE'
         url:      "/moving_items/#{ @props.record.id }"
@@ -32,7 +29,7 @@
         $.growl.notice title: "Record deleted", message: ""
       .fail (XHR, textStatus, errorThrown) =>
         @setState ajax: false
-        $.growl.error title: "Error deleting record", message: "#{textStatus}: #{errorThrown}"
+        $.growl.error title: "Error deleting record", message: "#{errorThrown}"
         console.error("#{textStatus}: #{errorThrown}")
 
   handleEdit: (e) ->
@@ -65,9 +62,13 @@
         $.growl.error title: "Error updating record", message: "#{errorThrown}"
       console.error("#{textStatus}: #{errorThrown}")
 
+  calculateSubtotal: ->
+    @state.volume * @state.quantity
+
   capitalize: (string) ->
     string.charAt(0).toUpperCase() + string.slice(1)
 
+  # A table row with the data passed in from the parent node.
   recordRow: ->
     $ = React.DOM
 
@@ -83,7 +84,7 @@
         @props.record.quantity
       $.td
         className: "col-md-1"
-        @calculateSubtotal()
+        (@props.record.volume * @props.record.quantity)
       $.td
         className: "col-md-1"
         @props.record.room
@@ -106,6 +107,7 @@
           $.div
             className: 'fa fa-trash'
 
+  # An edit form that is displayed when the edit button is clicked.
   recordForm: ->
     $ = React.DOM
 
@@ -125,8 +127,8 @@
           min:  "0"
           step: "0.5"
           defaultValue: @props.record.volume
-          ref:  'volume'  # For referencing DOM
-          name: 'volume'  # For referencing event
+          ref:  'volume'  # For referencing value in actual DOM
+          name: 'volume'  # For referencing change event
           onChange: @handleChangeVolume
       $.td
         className: "col-md-1"
@@ -135,12 +137,12 @@
           type: 'number'
           min:  "0"
           defaultValue: @props.record.quantity
-          ref:  'quantity'  # For referencing DOM
-          name: 'quantity'  # For referencing event
+          ref:  'quantity'  # For referencing value in actual DOM
+          name: 'quantity'  # For referencing change event
           onChange: @handleChangeVolume
       $.td
         className: "col-md-1"
-        @calculateSubtotal()
+        @calculateSubtotal()  # Dynamically changing based on user's input
       $.td
         className: "col-md-1"
         $.textarea

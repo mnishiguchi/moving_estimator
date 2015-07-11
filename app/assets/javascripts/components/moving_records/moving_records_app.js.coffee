@@ -11,18 +11,6 @@
     records = React.addons.update(@state.records, { $unshift: [record] })
     @setState records: records
 
-  # p: "room" or "category"
-  volumeSortedBy: (p)->
-    hash = {}
-    for obj in @state.records
-      vol = parseFloat(obj.volume * obj.quantity)
-      if hash.hasOwnProperty(obj[p])
-        hash[obj[p]] += vol # Add up data to the matched key
-      else
-        hash[obj[p]] = vol  # Create a key
-    console.log hash
-    hash
-
   deleteRecord: (record) ->
     index = @state.records.indexOf record
     records = React.addons.update(@state.records, { $splice: [[index, 1]] })
@@ -32,6 +20,17 @@
     index = @state.records.indexOf record
     records = React.addons.update(@state.records, { $splice: [[index, 1, data]] })
     @replaceState records: records
+
+  # prop: "room" or "category"
+  volumeSortedBy: (prop)->
+    hash = {}
+    for obj in @state.records
+      vol = parseFloat(obj.volume * obj.quantity)
+      if hash.hasOwnProperty(obj[prop])
+        hash[obj[prop]] += vol  # Add up data to the matched key
+      else
+        hash[obj[prop]] = vol   # Create a key
+    hash
 
   noticeProcessingAjax: ->
     R = React.DOM
