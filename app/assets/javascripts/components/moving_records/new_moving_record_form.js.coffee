@@ -8,6 +8,28 @@
     category:    ""
     description: ""
 
+  componentDidMount: ->
+    @updateAutocomplete()
+
+  componentDidUpdate: ->
+    @updateAutocomplete()
+
+  componentWillUnmount: ->
+    # get rid of the extra HTML that jQuery UI autocomplete creates.
+    $(React.findDOMNode(@refs.room)).autocomplete('destroy')
+    $(React.findDOMNode(@refs.category)).autocomplete('destroy')
+
+  updateAutocomplete: ->
+    $(React.findDOMNode(@refs.room)).autocomplete
+      source: @props.roomSuggestions
+      select: (e, ui) =>
+        @setState room: ui.item.value
+
+    $(React.findDOMNode(@refs.category)).autocomplete
+      source: @props.categorySuggestions
+      select: (e, ui) =>
+        @setState category: ui.item.value
+
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
@@ -37,14 +59,10 @@
   handleClear: (e) ->
     @setState @getInitialState()  # Restore component's initial UI.
 
-  capitalize: (string) ->
-    string.charAt(0).toUpperCase() + string.slice(1)
-
+  # field validations
   valid: ->
     @validName() && @validVolume() && @validQuantity() &&
     @validRoom() && @validCategory() && @validDescription()
-
-  # validators for individual fields
   validName: ->
     @state.name && @state.name.length <= 50
   validVolume: ->
@@ -57,39 +75,11 @@
     @state.category && @state.category.length <= 50
   validDescription: ->
     @state.description.length <= 200
-
   fieldColor: (validator) ->
     if validator then 'has-success' else 'has-warning'
 
-  componentDidMount: ->
-    @updateAutocomplete()
-
-  componentDidUpdate: ->
-    @updateAutocomplete()
-
-  componentWillUnmount: ->
-    # get rid of the extra HTML that jQuery UI autocomplete creates.
-    $(React.findDOMNode(@refs.room)).autocomplete('destroy')
-    $(React.findDOMNode(@refs.category)).autocomplete('destroy')
-
-  updateAutocomplete: ->
-    $(React.findDOMNode(@refs.room)).autocomplete
-      source: @props.roomSuggestions
-      select: (e, ui) =>
-        @setState room: ui.item.value
-        # debug
-        # $.growl.notice title: "selected", message: ""
-        # console.log document.activeElement.name
-        # console.log ui.item.value
-
-    $(React.findDOMNode(@refs.category)).autocomplete
-      source: @props.categorySuggestions
-      select: (e, ui) =>
-        @setState category: ui.item.value
-        # debug
-        # $.growl.notice title: "selected", message: ""
-        # console.log document.activeElement.name
-        # console.log ui.item.value
+  capitalize: (string) ->
+    string.charAt(0).toUpperCase() + string.slice(1)
 
   render: ->
     R = React.DOM
@@ -170,7 +160,6 @@
           R.div
             className: 'form-group col-sm-4'
             R.button
-              type:      'submit'
               className: "btn btn-default btn-block"
               onClick: @handleClear
               'Clear'
