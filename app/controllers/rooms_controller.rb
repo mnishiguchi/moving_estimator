@@ -3,9 +3,9 @@ class RoomsController < ApplicationController
   before_action :ensure_admin!      # all actions
   before_action :authenticate_user! # all actions
 
-  # Displays all the rooms
+  # Displays all the rooms on a React component.
   def index
-    @rooms = Room.select("id, name").sorted.to_json
+    @rooms = Room.select("id, name").sorted
   end
 
   # Creates the room to database via JSON
