@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :rooms, only: [:index, :crete, :update, :destroy]
+
   resources :movings  # ALL
   resources :moving_items, only: [:create, :update, :destroy]
 

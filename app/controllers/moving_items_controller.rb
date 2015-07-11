@@ -8,11 +8,6 @@ class MovingItemsController < ApplicationController
 
   # Note: A list of items is displayed in Movings#show page.
 
-  # Shows a form to create a new item.
-  # def new
-  #   @moving_item = MovingItem.new
-  # end
-
   # Creates the item to database via JSON
   def create
     @moving_item = MovingItem.new(moving_item_params.
@@ -24,10 +19,6 @@ class MovingItemsController < ApplicationController
       render json: @moving_item.errors, status: :unprocessable_entity
     end
   end
-
-  # Shows an edit form.
-  # def edit
-  # end
 
   # Updates the item to database via JSON
   def update
