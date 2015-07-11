@@ -16,9 +16,10 @@
     records = React.addons.update(@state.records, { $splice: [[index, 1]] })
     @replaceState records: records
 
-  updateRecord: (record, data) ->
+  # Relpace a record with the new one.
+  updateRecord: (record, newRecord) ->
     index = @state.records.indexOf record
-    records = React.addons.update(@state.records, { $splice: [[index, 1, data]] })
+    records = React.addons.update(@state.records, { $splice: [[index, 1, newRecord]] })
     @replaceState records: records
 
   # prop: "room" or "category"

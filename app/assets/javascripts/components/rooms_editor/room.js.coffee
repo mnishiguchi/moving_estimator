@@ -16,20 +16,19 @@
   # When the update button is clicked, saves it to database via Ajax.
   handleUpdate: (e) ->
     e.preventDefault()
-    input = e.target.value
-    @props.handleUpdateRecord(@props.room, input)
-    @setState(changed: false, updated: true)
+    input =
+      name: React.findDOMNode(@refs.input).value
     $.ajax
       method:   'PATCH'
-      url:      "/rooms/#{ @props.record.id }"
+      url:      "/rooms/#{ @props.room.id }"
       dataType: 'JSON'
-      data:
-        room: data
+      data: { room: input }
     .done (data, textStatus, XHR) =>
-      @props.handleUpdateRecord(@props.record, data)
-      $.growl.notice title: "Record updated", message: data.name
+      @props.handleUpdateRecord(@props.room, data)
+      @setState(changed: false, updated: true)
+      $.growl.notice title: "Room updated", message: data.name
     .fail (XHR, textStatus, errorThrown) =>
-      $.growl.error title: "Error updating record", message: "#{errorThrown}"
+      $.growl.error title: "Error updating room", message: "#{errorThrown}"
       console.error("#{textStatus}: #{errorThrown}")
 
   handleDelete: (e) ->
@@ -37,13 +36,13 @@
     if confirm("Deleting a room. Are you sure?")
       $.ajax
         method:   'DELETE'
-        url:      "/room/#{ @props.record.id }"
+        url:      "/room/#{ @props.room.id }"
         dataType: 'JSON'
       .done (data, textStatus, XHR) =>
-        @props.handleDeleteRecord @props.record
-        $.growl.notice title: "Record deleted", message: ""
+        @props.handleDeleteRecord @props.room
+        $.growl.notice title: "Room deleted", message: ""
       .fail (XHR, textStatus, errorThrown) =>
-        $.growl.error title: "Error deleting record", message: "#{errorThrown}"
+        $.growl.error title: "Error deleting room", message: "#{errorThrown}"
         console.error("#{textStatus}: #{errorThrown}")
 
   handleCancelChange: (e) ->

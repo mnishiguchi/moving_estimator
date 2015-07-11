@@ -10,15 +10,15 @@
   #   # rooms = React.addons.update(@state.rooms, { $unshift: [record] })
   #   # @setState rooms: rooms
 
-  # updateRecord: (record, data) ->
-  #   # index = @state.rooms.indexOf record
-  #   # rooms = React.addons.update(@state.rooms, { $splice: [[index, 1, data]] })
-  #   # @replaceState rooms: rooms
+  updateRecord: (room, newData) ->
+    index = @state.rooms.indexOf room
+    rooms = React.addons.update(@state.rooms, { $splice: [[index, 1, newData]] })
+    @replaceState rooms: rooms
 
-  # deleteRecord: (record) ->
-  #   # index = @state.rooms.indexOf record
-  #   # rooms = React.addons.update(@state.rooms, { $splice: [[index, 1]] })
-  #   # @replaceState rooms: rooms
+  deleteRecord: (record) ->
+    # index = @state.rooms.indexOf record
+    # rooms = React.addons.update(@state.rooms, { $splice: [[index, 1]] })
+    # @replaceState rooms: rooms
 
   # createRooms: =>
   #   for room, i in @props.rooms
@@ -43,5 +43,5 @@
           React.createElement Room,
             key:  i,
             room: room
-            # handleUpdateRecord: @updateRecord
-            # handleDeleteRecord: @deleteRecord
+            handleUpdateRecord: @updateRecord
+            handleDeleteRecord: @deleteRecord
