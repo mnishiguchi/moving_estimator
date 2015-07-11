@@ -33,10 +33,11 @@
 
   handleDelete: (e) ->
     e.preventDefault()
+    id = @props.room.id
     if confirm("Deleting a room. Are you sure?")
       $.ajax
         method:   'DELETE'
-        url:      "/room/#{ @props.room.id }"
+        url:      "/rooms/#{ id }"
         dataType: 'JSON'
       .done (data, textStatus, XHR) =>
         @props.handleDeleteRecord @props.room
@@ -68,7 +69,13 @@
       R.i
         className: "fa fa-times"
 
-  editForm: ->
+  fieldColor: ->
+    if @state.changed
+      'has-warning'
+    else if @state.updated
+      'has-success'
+
+  render: ->
     R = React.DOM
 
     R.form
@@ -82,30 +89,11 @@
             @deleteButton()
           R.input
             className:   "form-control"
+            type:        "text"
             placeholder: "new room"
-            type:     "text"
-            onChange: @handleChange
             ref:      'input'
             value:    @state.value
-            R.div
-              className: "input-group-addon"
-              @updateButton() if @state.changed
-
-  fieldColor: ->
-    if @state.changed
-      'has-warning'
-    else if @state.updated
-      'has-success'
-
-  render: ->
-    R = React.DOM
-
-    R.div null,
-      @editForm()
-
-
-
-
-
-
-
+            onChange: @handleChange
+          R.div
+            className: "input-group-addon"
+            @updateButton() if @state.changed

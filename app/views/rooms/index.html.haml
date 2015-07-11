@@ -1,6 +1,6 @@
 - provide(:title, "Rooms editor")
 
 %h1.page-header Edit rooms
-%p Find me in app/views/rooms/index.html.haml
 
-= react_component 'RoomsEditorApp', { data: @rooms }
+%section.rooms_editor
+  = react_component 'RoomsEditorApp', { data: @rooms }
