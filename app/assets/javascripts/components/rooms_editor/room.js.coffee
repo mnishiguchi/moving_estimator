@@ -28,7 +28,11 @@
       @setState(changed: false, updated: true)
       $.growl.notice title: "Room updated", message: data.name
     .fail (XHR, textStatus, errorThrown) =>
-      $.growl.error title: "Error updating room", message: "#{errorThrown}"
+      if error_messages = JSON.parse(XHR.responseText)
+        for k, v of error_messages
+          $.growl.error title: "#{ @capitalize(k) } #{ v }", message: ""
+      else
+        $.growl.error title: "Error updating room", message: "#{errorThrown}"
       console.error("#{textStatus}: #{errorThrown}")
 
   handleDelete: (e) ->
@@ -75,6 +79,9 @@
       'has-warning'
     else if @state.updated
       'has-success'
+
+  capitalize: (string) ->
+    string.charAt(0).toUpperCase() + string.slice(1)
 
   render: ->
     R = React.DOM

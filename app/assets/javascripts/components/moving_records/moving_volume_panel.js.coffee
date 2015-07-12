@@ -6,52 +6,48 @@
 #    unit:  "rooms"
 #    obj:   { ocean: 23, air: 12, ... }
 
+R = React.DOM
+
 @MovingVolumePanel = React.createClass
 
   getInitialState: ->
     data: @props.data
 
   panelHeading: ->
-    $ = React.DOM
-
-    $.div
+    R.div
       className: 'panel-heading'
-      $.div
+      R.div
         className: "row"
-        $.div
+        R.div
           className: "col-xs-3"
-          $.div
+          R.div
             className: "fa #{@props.icon} fa-5x"
-        $.div
+        R.div
           className: "col-xs-9 text-right"
-          $.div
+          R.div
             className: 'huge'
             @props.count
-          $.div null,
+          R.div null,
             @props.unit
 
   panelBody: ->
-    $ = React.DOM
-
-    $.div
+    R.div
       className: 'panel-body'
-      $.table
+      R.table
         className: "table table-striped"
-        $.tbody null,
+        R.tbody null,
           for key, i in Object.keys(@props.data)
-            $.tr
+            R.tr
               key: i # Requried by React.js
-              $.td
+              R.td
                 className: 'lead text-center col-sm-5'
                 key
-              $.td
+              R.td
                 className: 'lead text-center col-sm-5'
                 @props.data[key]
 
   render: ->
-    $ = React.DOM
-
-    $.div
+    R.div
       className: "panel panel-#{@props.type}"
       @panelHeading()
       @panelBody()

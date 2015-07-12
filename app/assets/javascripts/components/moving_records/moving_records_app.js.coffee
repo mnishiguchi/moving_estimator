@@ -1,3 +1,5 @@
+R = React.DOM
+
 @MovingRecordsApp = React.createClass
 
   getInitialState: ->
@@ -34,7 +36,6 @@
     hash
 
   noticeProcessingAjax: ->
-    R = React.DOM
     R.div
       className: "alert alert-warning"
       R.i
@@ -43,7 +44,6 @@
         "Processing... If this is taking long, please make sure you are online."
 
   render: ->
-    R = React.DOM
     data1 = @volumeSortedBy("category")
     data2 = @volumeSortedBy("room")
 

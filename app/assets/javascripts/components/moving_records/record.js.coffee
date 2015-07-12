@@ -1,3 +1,5 @@
+R = React.DOM
+
 @Record = React.createClass
 
   getInitialState: ->
@@ -70,58 +72,54 @@
 
   # A table row with the data passed in from the parent node.
   recordRow: ->
-    $ = React.DOM
-
-    $.tr null,
-      $.td
+    R.tr null,
+      R.td
         className: "col-md-2"
         @props.record.name
-      $.td
+      R.td
         className: "col-md-1"
         @props.record.volume
-      $.td
+      R.td
         className: "col-md-1"
         @props.record.quantity
-      $.td
+      R.td
         className: "col-md-1"
         (@props.record.volume * @props.record.quantity)
-      $.td
+      R.td
         className: "col-md-1"
         @props.record.room
-      $.td
+      R.td
         className: "col-md-1"
         @props.record.category
-      $.td
+      R.td
         className: "col-md-4"
         @props.record.description
-      $.td
+      R.td
         className: "col-md-1"
-        $.button
+        R.button
           className: 'btn btn-warning btn-sm'
           onClick: @handleToggle
-          $.div
+          R.div
             className: 'fa fa-pencil'
-        $.button
+        R.button
           className: 'btn btn-danger btn-sm'
           onClick: @handleDelete
-          $.div
+          R.div
             className: 'fa fa-trash'
 
   # An edit form that is displayed when the edit button is clicked.
   recordForm: ->
-    $ = React.DOM
-
-    $.tr
+    R.tr
       className: "edit"
-      $.td
+      R.td
         className: "col-md-2"
-        $.textarea
+        R.textarea
           className: 'form-control'
           defaultValue: @props.record.name
           ref: 'name'
-      $.td
+      R.td
         className: "col-md-1"
-        $.input
+        R.input
           className: 'form-control'
           type: 'number'
           min:  "0"
@@ -130,9 +128,9 @@
           ref:  'volume'  # For referencing value in actual DOM
           name: 'volume'  # For referencing change event
           onChange: @handleChangeVolume
-      $.td
+      R.td
         className: "col-md-1"
-        $.input
+        R.input
           className: 'form-control'
           type: 'number'
           min:  "0"
@@ -140,38 +138,38 @@
           ref:  'quantity'  # For referencing value in actual DOM
           name: 'quantity'  # For referencing change event
           onChange: @handleChangeVolume
-      $.td
+      R.td
         className: "col-md-1"
         @calculateSubtotal()  # Dynamically changing based on user's input
-      $.td
+      R.td
         className: "col-md-1"
-        $.textarea
+        R.textarea
           className: 'form-control'
           defaultValue: @props.record.room
           ref: 'room'
-      $.td
+      R.td
         className: "col-md-1"
-        $.textarea
+        R.textarea
           className: 'form-control'
           defaultValue: @props.record.category
           ref: 'category'
-      $.td
+      R.td
         className: "col-md-4"
-        $.textarea
+        R.textarea
           className: 'form-control'
           defaultValue: @props.record.description
           ref: 'description'
-      $.td
+      R.td
         className: "col-md-1"
-        $.button
+        R.button
           className: 'btn btn-success btn-sm'
           onClick: @handleEdit
-          $.div
+          R.div
             className: 'fa fa-hdd-o'
-        $.button
+        R.button
           className: 'btn btn-default btn-sm'
           onClick: @handleToggle
-          $.div
+          R.div
             className: 'fa fa-undo'
 
   render: ->
