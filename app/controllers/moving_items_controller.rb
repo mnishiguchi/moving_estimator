@@ -5,6 +5,7 @@ class MovingItemsController < ApplicationController
   before_action :authenticate_user!  # all actions
   before_action :current_moving!     # all actions
   before_action :correct_user!, only: [:edit, :update, :destroy]
+  after_action  :update_rooms,  only: [:create, :update]
 
   # Note: A list of items is displayed in Movings#show page.
 
@@ -13,7 +14,6 @@ class MovingItemsController < ApplicationController
     @moving_item = MovingItem.new(moving_item_params.
                                   merge(moving_id: current_moving))
     if @moving_item.save
-      # update_rooms_and_categories
       render json: @moving_item
     else
       render json: @moving_item.errors, status: :unprocessable_entity
@@ -23,7 +23,6 @@ class MovingItemsController < ApplicationController
   # Updates the item to database via JSON
   def update
     if @moving_item.update(moving_item_params)
-      # update_rooms_and_categories
       render json: @moving_item
     else
       render json: @moving_item.errors, status: :unprocessable_entity
@@ -33,7 +32,6 @@ class MovingItemsController < ApplicationController
   # Delete the moving item record via JSON
   def destroy
     if @moving_item.destroy
-      # update_rooms_and_categories
       render json: @moving_item
     else
       render json: @moving_item.errors, status: :unprocessable_entity
@@ -62,8 +60,8 @@ class MovingItemsController < ApplicationController
       redirect_to root_url if @moving_item.nil?
     end
 
-    # def update_rooms_and_categories
-    #   @moving.moving_categories.find_or_create_by_name(@moving_item.category)
-    #   Room.find_or_create_by_name(@moving_item.room)
-    # end
+    # Adds a room name to database if it is new.
+    def update_rooms
+      Room.find_or_create_by(name: @moving_item.room)
+    end
 end
