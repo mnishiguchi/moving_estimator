@@ -33,15 +33,14 @@
 
   handleDelete: (e) ->
     e.preventDefault()
-    id = @props.room.id
     if confirm("Deleting a room. Are you sure?")
       $.ajax
         method:   'DELETE'
-        url:      "/rooms/#{ id }"
+        url:      "/rooms/#{ @props.room.id }"
         dataType: 'JSON'
       .done (data, textStatus, XHR) =>
         @props.handleDeleteRecord @props.room
-        $.growl.notice title: "Room deleted", message: ""
+        $.growl.notice title: "Room deleted", message: data.name
       .fail (XHR, textStatus, errorThrown) =>
         $.growl.error title: "Error deleting room", message: "#{errorThrown}"
         console.error("#{textStatus}: #{errorThrown}")
@@ -52,15 +51,17 @@
 
   updateButton: ->
     R = React.DOM
-    R.div null,
-      R.a
-        onClick: @handleUpdate
-        "Update"
-      R.div
-        "\u0020|\u0020"
-      R.a
-        onClick: @handleCancelChange
-        "Cancel"
+    R.div
+      className: "input-group-addon"
+      R.div null,
+        R.a
+          onClick: @handleUpdate
+          "Update"
+        R.div
+          "\u0020|\u0020"
+        R.a
+          onClick: @handleCancelChange
+          "Cancel"
 
   deleteButton: ->
     R = React.DOM
@@ -79,7 +80,7 @@
     R = React.DOM
 
     R.form
-      className: "form-inline"
+      className: "form-horizontal"
       R.div
         className: "form-group #{@fieldColor()}"
         R.div
@@ -91,9 +92,7 @@
             className:   "form-control"
             type:        "text"
             placeholder: "new room"
-            ref:      'input'
-            value:    @state.value
-            onChange: @handleChange
-          R.div
-            className: "input-group-addon"
-            @updateButton() if @state.changed
+            ref:         'input'
+            value:       @state.value
+            onChange:    @handleChange
+          @updateButton() if @state.changed

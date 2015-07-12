@@ -6,10 +6,6 @@
   getDefaultProps: ->
     rooms: []
 
-  addRecord: (room) ->
-    rooms = React.addons.update(@state.rooms, { $unshift: [room] })
-    @setState rooms: rooms
-
   updateRecord: (room, newData) ->
     index = @state.rooms.indexOf room
     rooms = React.addons.update(@state.rooms, { $splice: [[index, 1, newData]] })
@@ -26,19 +22,11 @@
     R.div
       className: "app_wrapper"
 
-      # The add room form
-      R.h2 null,
-        "Add a new item"
-      React.createElement NewRoomForm,
-        handleNewRecord: @addRecord
-
       # The rooms list
-      R.h2 null,
-        "All rooms"
       R.div null,
-        for room, i in @state.rooms
+        for room in @state.rooms
           React.createElement Room,
-            key:  i,
+            key:  room.id,  # Use resource id instead of i
             room: room
             handleUpdateRecord: @updateRecord
             handleDeleteRecord: @deleteRecord

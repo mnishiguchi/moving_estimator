@@ -8,13 +8,18 @@ class RoomsController < ApplicationController
     @rooms = Room.select("id, name").sorted
   end
 
-  # Creates the room to database via JSON
+  # An HTML form to create a new room
+  def new
+    @room = Room.new
+  end
+
+  # Creates the room to database on HTML form
   def create
     @room = Room.new(room_params)
     if @room.save
-      render json: @room
+      redirect_to rooms_path
     else
-      render json: @room.errors, status: :unprocessable_entity
+      render "new"
     end
   end
 
@@ -30,9 +35,12 @@ class RoomsController < ApplicationController
 
   # Delete the room record via JSON
   def destroy
-    room = Room.find(params[:id])
-    room.destroy
-    head :no_content
+    @room = Room.find(params[:id])
+    if @room.destroy
+      render json: @room
+    else
+      render json: @room.errors, status: :unprocessable_entity
+    end
   end
 
   private

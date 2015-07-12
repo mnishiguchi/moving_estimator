@@ -1,6 +1,9 @@
 - provide(:title, "Rooms editor")
 
-%h1.page-header Edit rooms
+.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
+  %h1.page-header
+    Room editor
+    = link_to "Add new", new_room_path(@moving), class: "btn btn-primary btn-sm pull-right"
 
-%section.rooms_editor
-  = react_component 'RoomsEditorApp', { data: @rooms }
+  .rooms_editor
+    = react_component 'RoomsEditorApp', { data: @rooms }

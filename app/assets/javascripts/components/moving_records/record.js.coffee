@@ -26,7 +26,7 @@
       .done (data, textStatus, XHR) =>
         @setState ajax: false
         @props.handleDeleteRecord @props.record
-        $.growl.notice title: "Record deleted", message: ""
+        $.growl.notice title: "Record deleted", message: data.name
       .fail (XHR, textStatus, errorThrown) =>
         @setState ajax: false
         $.growl.error title: "Error deleting record", message: "#{errorThrown}"

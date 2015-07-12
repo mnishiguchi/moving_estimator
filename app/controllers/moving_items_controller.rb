@@ -32,8 +32,12 @@ class MovingItemsController < ApplicationController
 
   # Delete the moving item record via JSON
   def destroy
-    @moving_item.destroy
-    head :no_content
+    if @moving_item.destroy
+      # update_rooms_and_categories
+      render json: @moving_item
+    else
+      render json: @moving_item.errors, status: :unprocessable_entity
+    end
   end
 
   private

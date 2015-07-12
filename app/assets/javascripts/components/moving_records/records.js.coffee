@@ -19,11 +19,11 @@
             $.th null, 'Description'
             $.th null, ''
         $.tbody null,
-          for record, i in @props.records
+          for record in @props.records
             React.createElement Record,
-              key:    i,
-              record: record,
-              handleDeleteRecord: @props.handleDeleteRecord,
+              key:    record.id
+              record: record
+              handleDeleteRecord: @props.handleDeleteRecord
               handleEditRecord:   @props.handleUpdateRecord
 
   render: ->

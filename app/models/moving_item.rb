@@ -19,11 +19,11 @@ class MovingItem < ActiveRecord::Base
 
   before_save :downcase_input!  # Standardizes on all lower-case words.
 
-  validates :name,        presence: true,  length: { maximum: 50 }
-  validates :volume,      presence: true,  length: { maximum: 10 }, numericality: true  #<= float
-  validates :quantity,    presence: true,  length: { maximum: 10 }, numericality: { only_integer: true }
-  validates :room,        presence: true,  length: { maximum: 50 }
-  validates :category,    presence: true,  length: { maximum: 50 }
+  validates :name,        presence: true,  length: { maximum: 20 }
+  validates :volume,      presence: true,  length: { maximum: 5 }, numericality: true  #<= float
+  validates :quantity,    presence: true,  length: { maximum: 5 }, numericality: { only_integer: true }
+  validates :room,        presence: true,  length: { maximum: 20 }
+  validates :category,    presence: true,  length: { maximum: 20 }
   validates :description, presence: false, length: { maximum: 200 }
 
   private
