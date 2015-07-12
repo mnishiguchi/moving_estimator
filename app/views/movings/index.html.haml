@@ -27,8 +27,8 @@
       .panel-heading
         My movings
       .panel-body
-        .table-responsive
-          %table.table.table-hover
+        .table-responsive{ style: "margin-bottom: 0;" }
+          %table.table.table-hover{ style: "margin-bottom: 0;" }
             - @movings.each do |m|
               %tr{ style: "border-bottom: 1px solid #ddd;" }
                 %td
