@@ -51,6 +51,11 @@ R = React.DOM
       className: "app_wrapper"
       @noticeProcessingAjax() if @state.ajax
 
+      R.canvas
+        id: "chart"
+        ref: "chart"
+        style: { height: 450, width: 600 }  #<= trial
+
       R.h2 null, "Moving volume overview"
       R.div
         className: 'row'

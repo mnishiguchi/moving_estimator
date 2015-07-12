@@ -10,6 +10,8 @@
 //= require react-bootstrap
 //= require fluxxor
 //= require growl
+//= require Chart
+
 //= require components
 
 //= requre_tree .

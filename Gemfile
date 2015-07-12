@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 # ruby 2.2.1p85 (2015-02-26 revision 49769) [x86_64-darwin14]
-gem 'rails',       '4.2.1'
+gem 'rails',       '~> 4.2.1'
 gem 'pg',          '~> 0.17.1'
 
 # Assets
 gem 'bower-rails', '~> 0.9.2'
 source 'https://rails-assets.org' do
   gem 'rails-assets-fluxxor'
-  gem 'rails-assets-metisMenu'
   gem 'rails-assets-growl'
   gem 'rails-assets-react-bootstrap'
 end
@@ -17,16 +16,17 @@ gem 'sass-rails',   '~> 5.0'
 gem 'uglifier',     '~> 2.7.1'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails', '~> 4.0.3'
-gem 'turbolinks',        '~> 2.5.3'
+gem 'turbolinks',   '~> 2.5.3'
 gem 'jbuilder',     '~> 2.0'
 gem 'sdoc',         '~> 0.4.0', group: :doc
 # Views/Styles
+gem 'haml-rails',              '~> 0.9.0'   # For HAML.
+gem 'bootstrap-sass',          '~> 3.2.0.0' # Converts Less to Sass.
 gem 'will_paginate',           '~> 3.0.7'   # For pagination.
 gem 'bootstrap-will_paginate', '~> 0.0.10'  # For bootstrap pagination style.
-gem 'bootstrap-sass',          '~> 3.2.0.0' # Converts Less to Sass.
 gem 'font-awesome-rails',      '~> 4.3.0.0' # For icons.
-gem 'haml-rails',              '~> 0.9.0'   # For HAML.
 gem 'jquery-ui-rails',         '~> 5.0.5'   # For autocomplete etc
+gem 'chart-js-rails'
 # React
 gem 'react-rails',             '~> 1.0.0'   # Compiles JSX.
 gem 'sprockets-coffee-react',  '~> 3.0.1'   # Preprocessor for Coffeescript with React JSX (CJSX).
