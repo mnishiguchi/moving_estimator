@@ -11,6 +11,6 @@ This is a web application with which users can estimate the volume of their hous
 3. entry - name
 4. volume - name:string volume:integer
 
-![alt text](https://bitbucket.org/mnishiguchi/moving_estimator/src/6b629fae76a8e87d69c3674c658c65bd5e697de3/erd.jpg?at=moving-estimator)
+![alt text](https://bitbucket.org/mnishiguchi/moving_estimator/src/2644bf65c8c3bc8733f56ce85cca0f3deea90a74/erd.jpg?at=moving-estimator)
 
 
