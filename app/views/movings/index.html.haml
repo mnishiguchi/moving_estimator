@@ -1,14 +1,18 @@
 - provide(:title, "My movings")
 
 .profile_header
-  %section.user_info
-    %h2
-      = gravatar_for current_user.email
-      %span.email
-        = current_user.email
-      %span.moving_count.small
-        = pluralize(current_user.movings.count, "moving")
-%hr/
+  %ul.media-list
+    %li.media
+      .media-left.pull-left
+        %a{:href => "#"}
+          = gravatar_for current_user.email
+        %figcaption.text-center
+          = link_to "change", "http://gravatar.com/emails"
+      .media-body
+        %h2.media-heading
+          = current_user.email
+        %span.moving_count.badge
+          = pluralize(current_user.movings.count, "moving")
 
 .row
   / Left
@@ -40,16 +44,5 @@
 :css
 
   .profile_header {
-    section.user_info {
-      margin-top: 20px;
-    }
-
-    span.gravatar {
-      float: left;
-      margin-right: 20px;
-      margin-top:   5px;
-    }
-    span.email {
-      padding: 20px;
-    }
+    margin-top: 20px;
   }

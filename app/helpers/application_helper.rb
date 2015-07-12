@@ -17,7 +17,7 @@ module ApplicationHelper
     gravatar_id = Digest::MD5::hexdigest(email.downcase)
     size = options[:size]
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
-    image_tag(gravatar_url, alt: email, class: "gravatar img-thumbnail")
+    image_tag(gravatar_url, alt: email, class: "gravatar img-thumbnail img-responsive center-block")
   end
 
   # A list for all the items of the specified attribute of the object.
