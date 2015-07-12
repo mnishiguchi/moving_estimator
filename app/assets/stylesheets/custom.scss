@@ -6,10 +6,19 @@ $gray-medium-light: #eaeaea;
   max-width: 1200px;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
+
 #main_container .alert {
   margin-top: 15px;
 }
 
+// Home page
 .center {
   text-align: center;
 }

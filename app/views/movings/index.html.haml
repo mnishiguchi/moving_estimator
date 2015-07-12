@@ -1,10 +1,10 @@
 - provide(:title, "My movings")
 
-.profile_header
+.profile_header{ style: "margin-top: 20px;" }
   %ul.media-list
     %li.media
       .media-left.pull-left
-        %a{:href => "#"}
+        %a{ href: movings_path }
           = gravatar_for current_user.email
         %figcaption.text-center
           = link_to "change", "http://gravatar.com/emails"
@@ -31,7 +31,8 @@
           %table.table.table-hover
             - @movings.each do |m|
               %tr{ style: "border-bottom: 1px solid #ddd;" }
-                %td= link_to truncate(m.title), moving_path(m)
+                %td
+                  = link_to truncate(m.title), moving_path(m)
                 %td
                   %i= truncate(m.description, length: 100)
                 %td
@@ -40,9 +41,3 @@
                     class: "btn btn-sm btn-default pull-right"
                   = link_to fa_icon("fa pencil", text: "edit"), edit_moving_path(m),
                     class: "btn btn-sm btn-default pull-right"
-
-:css
-
-  .profile_header {
-    margin-top: 20px;
-  }
