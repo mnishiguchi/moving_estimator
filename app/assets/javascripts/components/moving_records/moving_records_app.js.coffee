@@ -13,7 +13,10 @@ BarChartCanvas = React.createClass
   render: ->
     React.DOM.canvas
       id:    @props.id
-      style: { height: 200, width: 300 }
+      style: { height: 200, width: 400 }
+
+# Remember Chart.js instances so we can delete them later.
+chartInstances = {}
 
 R = React.DOM
 
@@ -34,15 +37,20 @@ R = React.DOM
   componentDidUpdate: ->
     @drawCharts()
 
+  componentWillUnmount: ->
+    # Remove the extra HTML that Chart.js creates.
+    chartInstances["barChart"].destroy()
+    chartInstances["pieChart"].destroy()
+
   # Find the canvas nodes and create charts.
   drawCharts: ->
-    canvas = document.getElementById("chart")
+    canvas = React.findDOMNode(@refs.bar)
     ctx    = canvas.getContext("2d")
-    chart  = new Chart( ctx ).Pie(@dataForPieChart())
+    chartInstances["barChart"] = new Chart( ctx ).Bar(@dataForBarChart())
 
-    canvas = document.getElementById("bar")
+    canvas = React.findDOMNode(@refs.chart)
     ctx    = canvas.getContext("2d")
-    bar    = new Chart( ctx ).Bar(@dataForBarChart())
+    chartInstances["pieChart"] = new Chart( ctx ).Pie(@dataForPieChart())
 
   addRecord: (record) ->
     records = React.addons.update(@state.records, { $unshift: [record] })
@@ -96,10 +104,10 @@ R = React.DOM
     data   = source.map (obj) -> obj.volume
     datasets = [
         {
-          fillColor:       "rgba(220,220,220,0.5)"
-          strokeColor:     "rgba(220,220,220,0.8)"
-          highlightFill:   "rgba(220,220,220,0.75)"
-          highlightStroke: "rgba(220,220,220,1)"
+          fillColor:       "rgba(151,187,205,0.5)"
+          strokeColor:     "rgba(151,187,205,0.8)"
+          highlightFill:   "rgba(151,187,205,0.75)"
+          highlightStroke: "rgba(151,187,205,1)"
           data:            data
         }
       ]
@@ -113,6 +121,12 @@ R = React.DOM
       else if a[prop] < b[prop]
         return 1
       0
+
+  totalVolume: ->
+    sum = 0
+    for obj in @state.records
+      sum += obj.volume
+    sum
 
   # prop: "room" or "category"
   volumeSortedBy: (prop) ->
@@ -142,7 +156,7 @@ R = React.DOM
       R.div null,
         "Processing... If this is taking long, please make sure you are online."
 
-  barChartPanel: ->
+  chartsPanel: ->
     R.div
       className: "panel panel-blue"
       R.div
@@ -153,23 +167,27 @@ R = React.DOM
             className: "col-xs-3"
             R.div
               className: "fa fa-home fa-5x"
+          R.div
+            className: "col-xs-9 text-right"
+            R.div
+              className: 'huge'
+              "Total: #{@totalVolume()}"
+            R.div null,
+              "cubic feet"
       R.div
         className: 'panel-body'
-        React.createElement BarChartCanvas,
-          id: "bar"
-
-  pieChartPanel: ->
-    R.div
-      className: "panel panel-default"
-      R.div
-        className: 'panel-heading'
-        React.createElement PieChartCanvas,
-          id: "chart"
+        R.div
+          className: 'row text-center'
+          R.div
+            className: 'col-sm-6'
+            React.createElement BarChartCanvas,
+              ref: "bar"
+          R.div
+            className: 'col-sm-6'
+            React.createElement PieChartCanvas,
+              ref: "chart"
 
   render: ->
-    data1 = @volumeSortedBy("category")
-    data2 = @volumeSortedBy("room")
-
     R.div
       className: "app_wrapper"
       @noticeProcessingAjax() if @state.ajax
@@ -178,11 +196,8 @@ R = React.DOM
       R.div
         className: 'row'
         R.div
-          className: 'col-sm-6'
-          @barChartPanel()
-        R.div
-          className: 'col-sm-6'
-          @pieChartPanel()
+          className: 'col-sm-12'
+          @chartsPanel()
 
       R.hr null
 

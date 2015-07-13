@@ -47,7 +47,6 @@
       @setState @getInitialState()  # Restore component's initial UI.
       @props.handleNewRecord(data)  # Pass new data to the root node.
       $.growl.notice title: "Record added", message: data.name
-      console.log data
     .fail (XHR, textStatus, errorThrown) =>
       @setState ajax: false
       if error_messages = JSON.parse(XHR.responseText)
