@@ -1,5 +1,18 @@
 R = React.DOM
 
+# Canvases for charts
+PieChartCanvas = React.createClass
+  render: ->
+    React.DOM.canvas
+      id:    @props.id
+      style: { height: 200, width: 200 }
+
+GraphCanvas = React.createClass
+  render: ->
+    React.DOM.canvas
+      id:    @props.id
+      style: { height: 200, width: 200 }
+
 @MovingRecordsApp = React.createClass
 
   getInitialState: ->
@@ -19,6 +32,10 @@ R = React.DOM
     canvas = document.getElementById("chart")
     ctx    = canvas.getContext("2d")
     chart  = new Chart( ctx ).Pie(@dataForChart())
+
+    canvas = document.getElementById("bar")
+    ctx    = canvas.getContext("2d")
+    bar    = new Chart( ctx ).Bar(@dataForGraph())
 
   dataForChart: ->
     [
@@ -41,7 +58,26 @@ R = React.DOM
         label:     "Yellow"
       }
     ]
-
+  dataForGraph: ->
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [65, 59, 80, 81, 56, 55, 40]
+        },
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: [28, 48, 40, 19, 86, 27, 90]
+        }
+    ]
   addRecord: (record) ->
     records = React.addons.update(@state.records, { $unshift: [record] })
     @setState records: records
@@ -76,6 +112,38 @@ R = React.DOM
       R.div null,
         "Processing... If this is taking long, please make sure you are online."
 
+  barChartPanel: ->
+    R.div
+      className: "panel panel-blue"
+      R.div
+        className: 'panel-heading'
+        R.div
+          className: "row"
+          R.div
+            className: "col-xs-3"
+            R.div
+              className: "fa fa-home fa-5x"
+      R.div
+        className: 'panel-body'
+        React.createElement GraphCanvas,
+          id: "bar"
+
+  pieChartPanel: ->
+    R.div
+      className: "panel panel-red"
+      R.div
+        className: 'panel-heading'
+        R.div
+          className: "row"
+          R.div
+            className: "col-xs-3"
+            R.div
+              className: "fa fa-home fa-5x"
+      R.div
+        className: 'panel-body'
+        React.createElement PieChartCanvas,
+          id: "chart"
+
   render: ->
     data1 = @volumeSortedBy("category")
     data2 = @volumeSortedBy("room")
@@ -84,28 +152,16 @@ R = React.DOM
       className: "app_wrapper"
       @noticeProcessingAjax() if @state.ajax
 
-      React.createElement ChartOfVolumeByRooms,
-        graphName: "chart"
-
       R.h2 null, "Moving volume overview"
       R.div
         className: 'row'
         R.div
           className: 'col-sm-6'
-          React.createElement MovingVolumePanel,
-              type:  'green'
-              icon:  "fa-tag"
-              count: Object.keys(data1).length
-              unit:  "categories"
-              data:  data1
+          @barChartPanel()
         R.div
           className: 'col-sm-6'
-          React.createElement MovingVolumePanel,
-              type:  'blue'
-              icon:  "fa-home"
-              count: Object.keys(data2).length
-              unit:  "rooms"
-              data:  data2
+          @pieChartPanel()
+
       R.hr null
 
       R.h2 null, "Add a new item"
