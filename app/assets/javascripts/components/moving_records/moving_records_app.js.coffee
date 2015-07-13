@@ -1,9 +1,6 @@
+# required props
 # @props.id
 # @props.data
-# @props.volumeByCategories
-# @props.volumeByRooms
-
-R = React.DOM
 
 # Canvases for charts
 PieChartCanvas = React.createClass
@@ -17,6 +14,8 @@ BarChartCanvas = React.createClass
     React.DOM.canvas
       id:    @props.id
       style: { height: 200, width: 200 }
+
+R = React.DOM
 
 @MovingRecordsApp = React.createClass
 
@@ -39,11 +38,11 @@ BarChartCanvas = React.createClass
   drawCharts: ->
     canvas = document.getElementById("chart")
     ctx    = canvas.getContext("2d")
-    chart  = new Chart( ctx ).Pie(@dataForPie())
+    chart  = new Chart( ctx ).Pie(@dataForPieChart())
 
     canvas = document.getElementById("bar")
     ctx    = canvas.getContext("2d")
-    bar    = new Chart( ctx ).Bar(@dataForGraph())
+    bar    = new Chart( ctx ).Bar(@dataForBarChart())
 
   shuffleArray: (o) ->
     i = o.length
@@ -54,27 +53,20 @@ BarChartCanvas = React.createClass
       o[j] = x
     o
 
-  dataForPie: ->
-    # sample data
-    volumeByRooms = [
-        {
-          room: ""
-          volume: 300
-        }
-        {
-          room: ""
-          volume: 200
-        }
-        {
-          room: ""
-          volume:  100
-        }
-      ]
+  dataForPieChart: ->
+    # # data structure
+    # volumeByRooms = [
+    #     {
+    #       room: "kitchen"
+    #       volume: 300
+    #     }
+    #   ]
+    data = @volumeSortedBy("room")
     ary = []
     colors = ["#995577", "#005588", "#668833", "#CC7700", "#665533", "#883355",
               "#AA3333", "#446633", "3388AA", "#CC5522", "#999988", "#DD5555"]
     @shuffleArray(colors)
-    for item in volumeByRooms
+    for item in data
       numOfColors = colors.length
       color = colors.pop(Math.floor(Math.random() * numOfColors))
       obj =
@@ -85,7 +77,7 @@ BarChartCanvas = React.createClass
       ary.push(obj)
     ary
 
-  dataForGraph: ->
+  dataForBarChart: ->
     labels:   ["January", "February", "March", "April", "May", "June", "July"]
     datasets: [
         {
@@ -105,6 +97,7 @@ BarChartCanvas = React.createClass
           data:            [28, 48, 40, 19, 86, 27, 90]
         }
       ]
+
   addRecord: (record) ->
     records = React.addons.update(@state.records, { $unshift: [record] })
     @setState records: records
@@ -120,16 +113,34 @@ BarChartCanvas = React.createClass
     records = React.addons.update(@state.records, { $splice: [[index, 1, newRecord]] })
     @replaceState records: records
 
+  # For sorting an array of objects by the value of specified property.
+  predicateBy: (prop) ->
+    (a, b) ->
+      if a[prop] > b[prop]
+        return -1
+      else if a[prop] < b[prop]
+        return 1
+      0
+
   # prop: "room" or "category"
-  volumeSortedBy: (prop)->
-    hash = {}
+  volumeSortedBy: (prop) ->
+    # 1. Filtering
+    filtered = {}
     for obj in @state.records
       vol = parseFloat(obj.volume * obj.quantity)
-      if hash.hasOwnProperty(obj[prop])
-        hash[obj[prop]] += vol  # Add up data to the matched key
+      if filtered.hasOwnProperty(obj[prop])
+        filtered[obj[prop]] += vol  # Add up data to the matched key
       else
-        hash[obj[prop]] = vol   # Create a key
-    hash
+        filtered[obj[prop]] = vol   # Create a key
+    # 2. Converting to an array of data objects
+    ary = []
+    for room, volume of filtered
+      data = {}
+      data[prop] = room
+      data["volume"] = volume
+      ary.push data
+    # 3. Sorting
+    ary.sort( @predicateBy("volume") )
 
   noticeProcessingAjax: ->
     R.div
@@ -157,17 +168,9 @@ BarChartCanvas = React.createClass
 
   pieChartPanel: ->
     R.div
-      className: "panel panel-red"
+      className: "panel panel-default"
       R.div
         className: 'panel-heading'
-        R.div
-          className: "row"
-          R.div
-            className: "col-xs-3"
-            R.div
-              className: "fa fa-home fa-5x"
-      R.div
-        className: 'panel-body'
         React.createElement PieChartCanvas,
           id: "chart"
 
