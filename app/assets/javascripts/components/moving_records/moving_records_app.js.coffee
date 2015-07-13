@@ -9,6 +9,39 @@ R = React.DOM
   getDefaultProps: ->
     records: []
 
+  componentDidMount: ->
+    @drawCharts()
+
+  componentDidUpdate: ->
+    @drawCharts()
+
+  drawCharts: ->
+    canvas = document.getElementById("chart")
+    ctx    = canvas.getContext("2d")
+    chart  = new Chart( ctx ).Pie(@dataForChart())
+
+  dataForChart: ->
+    [
+      {
+        value:     300
+        color:     "#F7464A"
+        highlight: "#FF5A5E"
+        label:     "Red"
+      },
+      {
+        value:     50
+        color:     "#46BFBD"
+        highlight: "#5AD3D1"
+        label:     "Green"
+      },
+      {
+        value:     100
+        color:     "#FDB45C"
+        highlight: "#FFC870"
+        label:     "Yellow"
+      }
+    ]
+
   addRecord: (record) ->
     records = React.addons.update(@state.records, { $unshift: [record] })
     @setState records: records
@@ -51,10 +84,8 @@ R = React.DOM
       className: "app_wrapper"
       @noticeProcessingAjax() if @state.ajax
 
-      R.canvas
-        id: "chart"
-        ref: "chart"
-        style: { height: 450, width: 600 }  #<= trial
+      React.createElement ChartOfVolumeByRooms,
+        graphName: "chart"
 
       R.h2 null, "Moving volume overview"
       R.div
