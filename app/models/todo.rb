@@ -24,6 +24,6 @@ class Todo < ActiveRecord::Base
 
     # Converts the input to all lower-case.
     def downcase_input!
-      name.downcase!
+      content.downcase!
     end
 end

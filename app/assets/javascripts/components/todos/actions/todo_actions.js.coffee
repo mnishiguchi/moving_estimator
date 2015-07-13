@@ -13,14 +13,18 @@ TodoActions =
                 content: content
     .done (data, textStatus, XHR) =>
       new_todo =
-        id:        data.todo.id
-        content:   data.todo.content
-        completed: data.todo.completed
+        id:        data.id
+        content:   data.content
+        completed: data.completed
       @dispatch(constants.ADD_TODO, new_todo: new_todo)
-      $.growl.notice title: "Todo added", message: data.todo.content
+      $.growl.notice title: "Todo added", message: data.content
     .fail (XHR, textStatus, errorThrown) =>
-      $.growl.error title: "Error", message: "Error adding todo"
-      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
+      if error_messages = JSON.parse(XHR.responseText)
+        for k, v of error_messages
+          $.growl.error title: "#{ @capitalize(k) } #{v}", message: ""
+      else
+        $.growl.error title: "Error adding todo", message: "#{errorThrown}"
+      console.error("#{textStatus}: #{errorThrown}")
 
   # Saves a new completion status to database.
   toggleTodo: (todo, completed) ->
@@ -31,11 +35,15 @@ TodoActions =
       data:   todo:
                 completed: completed
     .done (data, textStatus, XHR) =>
-      title = if data.todo.completed then "Completed" else "Not completed"
-      $.growl.notice title: title, message: data.todo.content
+      title = if data.completed then "Completed" else "Not completed"
+      $.growl.notice title: title, message: data.content
     .fail (XHR, textStatus, errorThrown) =>
-      $.growl.error title: "Error", message: "Error toggleing todo completion"
-      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
+      if error_messages = JSON.parse(XHR.responseText)
+        for k, v of error_messages
+          $.growl.error title: "#{ @capitalize(k) } #{v}", message: ""
+      else
+        $.growl.error title: "Error toggling todo", message: "#{errorThrown}"
+      console.error("#{textStatus}: #{errorThrown}")
 
   # Saves a new content to database.
   updateTodo: (todo, new_content) ->
@@ -48,8 +56,12 @@ TodoActions =
     .done (data, textStatus, XHR) =>
       $.growl.notice title: "Todo updated", message: ""
     .fail (XHR, textStatus, errorThrown) =>
-      $.growl.error title: "Error", message: "Error updating todo"
-      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
+      if error_messages = JSON.parse(XHR.responseText)
+        for k, v of error_messages
+          $.growl.error title: "#{ @capitalize(k) } #{v}", message: ""
+      else
+        $.growl.error title: "Error updating todo", message: "#{errorThrown}"
+      console.error("#{textStatus}: #{errorThrown}")
 
   # Deletes a todo to database.
   deleteTodo: (todo) ->
@@ -58,9 +70,13 @@ TodoActions =
       method: "DELETE"
       url:    "/todos/" + todo.id
     .done (data, textStatus, XHR) =>
-      $.growl.notice title: "Deleted", message: data.todo.content
+      $.growl.notice title: "Deleted", message: data.content
     .fail (XHR, textStatus, errorThrown) =>
-      $.growl.error title: "Error", message: "Error deleting todos"
-      console.error("#{XHR.status}: #{textStatus}: #{errorThrown}")
+      if error_messages = JSON.parse(XHR.responseText)
+        for k, v of error_messages
+          $.growl.error title: "#{ @capitalize(k) } #{v}", message: ""
+      else
+        $.growl.error title: "Error deleting todo", message: "#{errorThrown}"
+      console.error("#{textStatus}: #{errorThrown}")
 
 module.exports = TodoActions
