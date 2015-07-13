@@ -1,3 +1,8 @@
+# @props.id
+# @props.data
+# @props.volumeByCategories
+# @props.volumeByRooms
+
 R = React.DOM
 
 # Canvases for charts
@@ -40,27 +45,46 @@ BarChartCanvas = React.createClass
     ctx    = canvas.getContext("2d")
     bar    = new Chart( ctx ).Bar(@dataForGraph())
 
+  shuffleArray: (o) ->
+    i = o.length
+    while i
+      j = Math.floor(Math.random() * i)
+      x = o[--i]
+      o[i] = o[j]
+      o[j] = x
+    o
+
   dataForPie: ->
-    [
-      {
-        value:     300
-        color:     "#F7464A"
-        highlight: "#FF5A5E"
-        label:     "Red"
-      }
-      {
-        value:     50
-        color:     "#46BFBD"
-        highlight: "#5AD3D1"
-        label:     "Green"
-      }
-      {
-        value:     100
-        color:     "#FDB45C"
-        highlight: "#FFC870"
-        label:     "Yellow"
-      }
-    ]
+    # sample data
+    volumeByRooms = [
+        {
+          room: ""
+          volume: 300
+        }
+        {
+          room: ""
+          volume: 200
+        }
+        {
+          room: ""
+          volume:  100
+        }
+      ]
+    ary = []
+    colors = ["#995577", "#005588", "#668833", "#CC7700", "#665533", "#883355",
+              "#AA3333", "#446633", "3388AA", "#CC5522", "#999988", "#DD5555"]
+    @shuffleArray(colors)
+    for item in volumeByRooms
+      numOfColors = colors.length
+      color = colors.pop(Math.floor(Math.random() * numOfColors))
+      obj =
+        value:     item.volume
+        color:     color
+        highlight: color
+        label:     item.room
+      ary.push(obj)
+    ary
+
   dataForGraph: ->
     labels:   ["January", "February", "March", "April", "May", "June", "July"]
     datasets: [
