@@ -1,18 +1,12 @@
-# required props
-# @props.id
-# @props.data
-
 # Canvases for charts
 PieChartCanvas = React.createClass
   render: ->
     React.DOM.canvas
-      id:    @props.id
       style: { height: 200, width: 200 }
 
 BarChartCanvas = React.createClass
   render: ->
     React.DOM.canvas
-      id:    @props.id
       style: { height: 200, width: 400 }
 
 # Remember Chart.js instances so we can delete them later.
@@ -28,6 +22,92 @@ R = React.DOM
 
   getDefaultProps: ->
     records: []
+
+  addRecord: (record) ->
+    records = React.addons.update(@state.records, { $unshift: [record] })
+    @setState records: records
+
+  deleteRecord: (record) ->
+    index = @state.records.indexOf record
+    records = React.addons.update(@state.records, { $splice: [[index, 1]] })
+    @replaceState records: records
+
+  # Relpace a record with the new one.
+  updateRecord: (record, newRecord) ->
+    index = @state.records.indexOf record
+    records = React.addons.update(@state.records, { $splice: [[index, 1, newRecord]] })
+    @replaceState records: records
+
+  noticeProcessingAjax: ->
+    R.div
+      className: "alert alert-warning"
+      R.i
+        className: "fa fa-cog fa-spin fa-3x"
+      R.div null,
+        "Processing... If this is taking long, please make sure you are online."
+
+  chartsPanel: ->
+    R.div
+      className: "panel panel-blue"
+      R.div
+        className: 'panel-heading'
+        R.div
+          className: "row"
+          R.div
+            className: "col-xs-3"
+            R.div
+              className: "fa fa-home fa-5x"
+          R.div
+            className: "col-xs-9 text-right"
+            R.div
+              className: 'huge'
+              "Total: #{@totalVolume()}"
+            R.div null,
+              "cubic feet"
+      R.div
+        className: 'panel-body'
+        R.div
+          className: 'row text-center'
+          R.div
+            className: 'col-sm-6'
+            React.createElement BarChartCanvas,
+              ref: "bar"
+          R.div
+            className: 'col-sm-6'
+            React.createElement PieChartCanvas,
+              ref: "chart"
+
+  totalVolume: ->
+    sum = 0
+    for obj in @state.records
+      sum += obj.volume
+    sum
+
+  render: ->
+    R.div
+      className: "app_wrapper"
+      @noticeProcessingAjax() if @state.ajax
+
+      R.h2 null, "Moving volume overview"
+      R.div
+        className: 'row'
+        R.div
+          className: 'col-sm-12'
+          @chartsPanel()
+
+      R.hr null
+
+      R.h2 null, "Add a new item"
+      React.createElement NewMovingRecordForm,
+        handleNewRecord: @addRecord
+        roomSuggestions: @props.roomSuggestions
+        categorySuggestions: @props.categorySuggestions
+      R.hr null
+
+      React.createElement Records,
+        records: @state.records,
+        handleDeleteRecord: @deleteRecord,
+        handleUpdateRecord: @updateRecord
 
   # Draw the charts after the component has been rendered.
   componentDidMount: ->
@@ -51,21 +131,6 @@ R = React.DOM
     canvas = React.findDOMNode(@refs.chart)
     ctx    = canvas.getContext("2d")
     chartInstances["pieChart"] = new Chart( ctx ).Pie(@dataForPieChart())
-
-  addRecord: (record) ->
-    records = React.addons.update(@state.records, { $unshift: [record] })
-    @setState records: records
-
-  deleteRecord: (record) ->
-    index = @state.records.indexOf record
-    records = React.addons.update(@state.records, { $splice: [[index, 1]] })
-    @replaceState records: records
-
-  # Relpace a record with the new one.
-  updateRecord: (record, newRecord) ->
-    index = @state.records.indexOf record
-    records = React.addons.update(@state.records, { $splice: [[index, 1, newRecord]] })
-    @replaceState records: records
 
   shuffleArray: (o) ->
     i = o.length
@@ -122,12 +187,6 @@ R = React.DOM
         return 1
       0
 
-  totalVolume: ->
-    sum = 0
-    for obj in @state.records
-      sum += obj.volume
-    sum
-
   # prop: "room" or "category"
   volumeSortedBy: (prop) ->
     # 1. Filtering
@@ -147,68 +206,3 @@ R = React.DOM
       ary.push data
     # 3. Sorting
     ary.sort( @predicateBy("volume") )
-
-  noticeProcessingAjax: ->
-    R.div
-      className: "alert alert-warning"
-      R.i
-        className: "fa fa-cog fa-spin fa-3x"
-      R.div null,
-        "Processing... If this is taking long, please make sure you are online."
-
-  chartsPanel: ->
-    R.div
-      className: "panel panel-blue"
-      R.div
-        className: 'panel-heading'
-        R.div
-          className: "row"
-          R.div
-            className: "col-xs-3"
-            R.div
-              className: "fa fa-home fa-5x"
-          R.div
-            className: "col-xs-9 text-right"
-            R.div
-              className: 'huge'
-              "Total: #{@totalVolume()}"
-            R.div null,
-              "cubic feet"
-      R.div
-        className: 'panel-body'
-        R.div
-          className: 'row text-center'
-          R.div
-            className: 'col-sm-6'
-            React.createElement BarChartCanvas,
-              ref: "bar"
-          R.div
-            className: 'col-sm-6'
-            React.createElement PieChartCanvas,
-              ref: "chart"
-
-  render: ->
-    R.div
-      className: "app_wrapper"
-      @noticeProcessingAjax() if @state.ajax
-
-      R.h2 null, "Moving volume overview"
-      R.div
-        className: 'row'
-        R.div
-          className: 'col-sm-12'
-          @chartsPanel()
-
-      R.hr null
-
-      R.h2 null, "Add a new item"
-      React.createElement NewMovingRecordForm,
-        handleNewRecord: @addRecord
-        roomSuggestions: @props.roomSuggestions
-        categorySuggestions: @props.categorySuggestions
-      R.hr null
-
-      React.createElement Records,
-        records: @state.records,
-        handleDeleteRecord: @deleteRecord,
-        handleUpdateRecord: @updateRecord
