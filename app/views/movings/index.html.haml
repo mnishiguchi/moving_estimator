@@ -21,8 +21,6 @@
       %li= link_to "New moving", new_moving_path
       %li= link_to "Todo list", todos_path, :"data-no-turbolink" => true
 
-    %canvas#chart_rooms{:height => "200", :width => "200"}
-
   / Right
   .col-md-8
     .panel.panel-default
@@ -43,29 +41,3 @@
                     class: "btn btn-sm btn-default pull-right"
                   = link_to fa_icon("fa pencil", text: "edit"), edit_moving_path(m),
                     class: "btn btn-sm btn-default pull-right"
-
-:coffee
-
-  jQuery ->
-    data = [
-            {
-                value: 300,
-                color:"#F7464A",
-                highlight: "#FF5A5E",
-                label: "Red"
-            },
-            {
-                value: 50,
-                color: "#46BFBD",
-                highlight: "#5AD3D1",
-                label: "Green"
-            },
-            {
-                value: 100,
-                color: "#FDB45C",
-                highlight: "#FFC870",
-                label: "Yellow"
-            }
-          ]
-
-    myNewChart = new Chart($("#chart_rooms").get(0).getContext("2d")).Pie(data)
