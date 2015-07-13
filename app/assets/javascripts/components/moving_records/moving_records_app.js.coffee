@@ -7,7 +7,7 @@ PieChartCanvas = React.createClass
       id:    @props.id
       style: { height: 200, width: 200 }
 
-GraphCanvas = React.createClass
+BarChartCanvas = React.createClass
   render: ->
     React.DOM.canvas
       id:    @props.id
@@ -22,35 +22,38 @@ GraphCanvas = React.createClass
   getDefaultProps: ->
     records: []
 
+  # Draw the charts after the component has been rendered.
   componentDidMount: ->
     @drawCharts()
 
+  # Update the chart.
   componentDidUpdate: ->
     @drawCharts()
 
+  # Find the canvas nodes and create charts.
   drawCharts: ->
     canvas = document.getElementById("chart")
     ctx    = canvas.getContext("2d")
-    chart  = new Chart( ctx ).Pie(@dataForChart())
+    chart  = new Chart( ctx ).Pie(@dataForPie())
 
     canvas = document.getElementById("bar")
     ctx    = canvas.getContext("2d")
     bar    = new Chart( ctx ).Bar(@dataForGraph())
 
-  dataForChart: ->
+  dataForPie: ->
     [
       {
         value:     300
         color:     "#F7464A"
         highlight: "#FF5A5E"
         label:     "Red"
-      },
+      }
       {
         value:     50
         color:     "#46BFBD"
         highlight: "#5AD3D1"
         label:     "Green"
-      },
+      }
       {
         value:     100
         color:     "#FDB45C"
@@ -59,25 +62,25 @@ GraphCanvas = React.createClass
       }
     ]
   dataForGraph: ->
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels:   ["January", "February", "March", "April", "May", "June", "July"]
     datasets: [
         {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,0.8)",
-            highlightFill: "rgba(151,187,205,0.75)",
-            highlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
+          label:           "My First dataset"
+          fillColor:       "rgba(220,220,220,0.5)"
+          strokeColor:     "rgba(220,220,220,0.8)"
+          highlightFill:   "rgba(220,220,220,0.75)"
+          highlightStroke: "rgba(220,220,220,1)"
+          data:            [65, 59, 80, 81, 56, 55, 40]
         }
-    ]
+        {
+          label:           "My Second dataset"
+          fillColor:       "rgba(151,187,205,0.5)"
+          strokeColor:     "rgba(151,187,205,0.8)"
+          highlightFill:   "rgba(151,187,205,0.75)"
+          highlightStroke: "rgba(151,187,205,1)"
+          data:            [28, 48, 40, 19, 86, 27, 90]
+        }
+      ]
   addRecord: (record) ->
     records = React.addons.update(@state.records, { $unshift: [record] })
     @setState records: records
@@ -125,7 +128,7 @@ GraphCanvas = React.createClass
               className: "fa fa-home fa-5x"
       R.div
         className: 'panel-body'
-        React.createElement GraphCanvas,
+        React.createElement BarChartCanvas,
           id: "bar"
 
   pieChartPanel: ->
