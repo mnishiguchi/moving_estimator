@@ -1,3 +1,5 @@
+R = React.DOM
+
 # Canvases for charts
 PieChartCanvas = React.createClass
   render: ->
@@ -9,16 +11,14 @@ BarChartCanvas = React.createClass
     React.DOM.canvas
       style: { height: 200, width: 400 }
 
-# Remember Chart.js instances so we can delete them later.
-chartInstances = {}
-
-R = React.DOM
 
 @MovingRecordsApp = React.createClass
 
   getInitialState: ->
     records: @props.data
     ajax:    false
+    barChartInstance: null
+    pieChartInstance: null
 
   getDefaultProps: ->
     records: []
@@ -71,11 +71,11 @@ R = React.DOM
           R.div
             className: 'col-sm-6'
             React.createElement BarChartCanvas,
-              ref: "bar"
+              ref: "barChart"
           R.div
             className: 'col-sm-6'
             React.createElement PieChartCanvas,
-              ref: "chart"
+              ref: "pieChart"
 
   totalVolume: ->
     sum = 0
@@ -89,12 +89,8 @@ R = React.DOM
       @noticeProcessingAjax() if @state.ajax
 
       R.h2 null, "Moving volume overview"
-      R.div
-        className: 'row'
-        R.div
-          className: 'col-sm-12'
-          @chartsPanel()
 
+      @chartsPanel()
       R.hr null
 
       R.h2 null, "Add a new item"
@@ -119,18 +115,18 @@ R = React.DOM
 
   componentWillUnmount: ->
     # Remove the extra HTML that Chart.js creates.
-    chartInstances["barChart"].destroy()
-    chartInstances["pieChart"].destroy()
+    @state.barChartInstance.destroy()
+    @state.pieChartInstance.destroy()
 
   # Find the canvas nodes and create charts.
   drawCharts: ->
-    canvas = React.findDOMNode(@refs.bar)
+    canvas = React.findDOMNode(@refs.barChart)
     ctx    = canvas.getContext("2d")
-    chartInstances["barChart"] = new Chart(ctx).Bar(@dataForBarChart())
+    @state.barChartInstance = new Chart(ctx).Bar(@dataForBarChart())
 
-    canvas = React.findDOMNode(@refs.chart)
+    canvas = React.findDOMNode(@refs.pieChart)
     ctx    = canvas.getContext("2d")
-    chartInstances["pieChart"] = new Chart(ctx).Pie(@dataForPieChart())
+    @state.pieChartInstance = new Chart(ctx).Pie(@dataForPieChart())
 
   shuffleArray: (o) ->
     i = o.length
