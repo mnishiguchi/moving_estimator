@@ -80,7 +80,7 @@ R = React.DOM
   totalVolume: ->
     sum = 0
     for obj in @state.records
-      sum += obj.volume
+      sum += (obj.volume * obj.quantity)
     sum
 
   render: ->
@@ -126,11 +126,11 @@ R = React.DOM
   drawCharts: ->
     canvas = React.findDOMNode(@refs.bar)
     ctx    = canvas.getContext("2d")
-    chartInstances["barChart"] = new Chart( ctx ).Bar(@dataForBarChart())
+    chartInstances["barChart"] = new Chart(ctx).Bar(@dataForBarChart())
 
     canvas = React.findDOMNode(@refs.chart)
     ctx    = canvas.getContext("2d")
-    chartInstances["pieChart"] = new Chart( ctx ).Pie(@dataForPieChart())
+    chartInstances["pieChart"] = new Chart(ctx).Pie(@dataForPieChart())
 
   shuffleArray: (o) ->
     i = o.length
@@ -142,23 +142,16 @@ R = React.DOM
     o
 
   dataForPieChart: ->
-    # data structure
-    # volumeByRooms = [
-    #     { room: "kitchen",     volume: 300 },
-    #     { room: "living room", volume: 200 },
-    #   ]
     source = @volumeSortedBy("room")
     ary = []
-    colors = ["#995577", "#005588", "#668833", "#CC7700", "#665533", "#883355",
-              "#AA3333", "#446633", "3388AA", "#CC5522", "#999988", "#DD5555"]
+    colors = ["#FE2E2E", "#FE9A2E", "#FE9A2E", "#9AFE2E", "#2EFE2E", "#2EFE9A",
+              "#2EFEF7", "#2E9AFE", "#2E2EFE", "#9A2EFE", "#FE2EF7", "#FE2E9A"]
     @shuffleArray(colors)
-    for item in source
-      numOfColors = colors.length
-      color = colors.pop(Math.floor(Math.random() * numOfColors))
+    for item, i in source
       obj =
         value:     item.volume
-        color:     color
-        highlight: color
+        color:     colors[i]
+        highlight: colors[i]
         label:     item.room
       ary.push(obj)
     ary
