@@ -1,17 +1,5 @@
 R = React.DOM
 
-# Canvases for charts
-PieChartCanvas = React.createClass
-  render: ->
-    React.DOM.canvas
-      style: { height: 200, width: 200 }
-
-BarChartCanvas = React.createClass
-  render: ->
-    React.DOM.canvas
-      style: { height: 200, width: 400 }
-
-
 @MovingRecordsApp = React.createClass
 
   getInitialState: ->
@@ -70,12 +58,14 @@ BarChartCanvas = React.createClass
           className: 'row text-center'
           R.div
             className: 'col-sm-6'
-            React.createElement BarChartCanvas,
-              ref: "barChart"
+            React.createElement VolumeBarChart,
+              name: "barChart"
+              data: @dataForBarChart()
           R.div
             className: 'col-sm-6'
-            React.createElement PieChartCanvas,
-              ref: "pieChart"
+            React.createElement VolumePieChart,
+              name: "pieChart"
+              data: @dataForPieChart()
 
   totalVolume: ->
     sum = 0
@@ -104,29 +94,6 @@ BarChartCanvas = React.createClass
         records: @state.records,
         handleDeleteRecord: @deleteRecord,
         handleUpdateRecord: @updateRecord
-
-  # Draw the charts after the component has been rendered.
-  componentDidMount: ->
-    @drawCharts()
-
-  # Update the chart.
-  componentDidUpdate: ->
-    @drawCharts()
-
-  componentWillUnmount: ->
-    # Remove the extra HTML that Chart.js creates.
-    @state.barChartInstance.destroy()
-    @state.pieChartInstance.destroy()
-
-  # Find the canvas nodes and create charts.
-  drawCharts: ->
-    canvas = React.findDOMNode(@refs.barChart)
-    ctx    = canvas.getContext("2d")
-    @state.barChartInstance = new Chart(ctx).Bar(@dataForBarChart())
-
-    canvas = React.findDOMNode(@refs.pieChart)
-    ctx    = canvas.getContext("2d")
-    @state.pieChartInstance = new Chart(ctx).Pie(@dataForPieChart())
 
   shuffleArray: (o) ->
     i = o.length

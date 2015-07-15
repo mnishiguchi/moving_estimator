@@ -27,5 +27,5 @@ chartType = "Bar"
   initializeChart: ->
     canvas = React.findDOMNode(@refs[@props.name])
     ctx    = canvas.getContext("2d")
-    chart  = new Chart(ctx).Bar(@props.data)
+    chart  = new Chart(ctx)[chartType](@props.data)
     @setState.chartInstance = chart
