@@ -19,13 +19,11 @@ chartType = "Bar"
     @initializeChart()
 
   componentDidUpdate:  ->
-    @initializeChart()
-
-  componentWillUnmount: ->
     @state.chartInstance.destroy()
+    @initializeChart()
 
   initializeChart: ->
     canvas = React.findDOMNode(@refs[@props.name])
     ctx    = canvas.getContext("2d")
     chart  = new Chart(ctx)[chartType](@props.data)
-    @setState.chartInstance = chart
+    @state.chartInstance = chart
