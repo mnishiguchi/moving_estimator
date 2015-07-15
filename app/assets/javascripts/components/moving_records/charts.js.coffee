@@ -1,56 +1,34 @@
-# # https://github.com/jhudson8/react-chartjs/blob/master/dist/react-chartjs.js
-
-## Example
-# PieChart = CustomChart.Pie
-# MyComponent = React.createClass
-#   render: ->
-#     React.createElement PieChart
-#       data:    chartData
-#       options: chartOptions
+# chartType - e.g. "Bar", "Pie"
 
 @CustomChart = (chartType) ->
-  console.log chartType
-  classData =
 
+  # props.name - for ref
+  # props.data - for drawing a chart
+  # props.height - for canvas dimension
+  # props.width  - for canvas dimension
+
+  React.createClass
     displayName: chartType + 'Chart'
 
-    getInitialState: -> {}
+    getInitialState: ->
+      chartInstance: null
 
     # Create a canvas element on which a chart will be drawn
     render: ->
-      # 1. Wrap up all the props passed in and a ref
-      _props = ref: 'canvass'
-      for name of @props
-        if @props.hasOwnProperty(name)
-          if name != 'data' and name != 'options'
-            _props[name] = @props[name]
-      # 2. Create a <canvas> element with the props
-      React.createElement 'canvas', _props
+      # Create a <canvas> element with the props
+      React.DOM.canvas
+        ref:   @props.name
+        style: { height: @props.height, width: @props.width }
 
     componentDidMount: ->
-      @initializeChart(@props)
+      @initializeChart()
 
-    componentWillUnmount: ->
-      chart = @state.chart
-      chart.destroy()
+    componentDidUpdate:  ->
+      @state.chartInstance.destroy()
+      @initializeChart()
 
-    componentWillReceiveProps: (nextProps) ->
-      chart = @state.chart
-      chart.destroy()
-      @initializeChart nextProps
-
-    initializeChart: (nextProps) ->
-      canvas = React.findDOMNode(this)
-      ctx    = canvas.getContext('2d')
-      chart  = new Chart(ctx)[chartType](nextProps.data, nextProps.options or {})
-      @state.chart = chart
-
-    # return the chartjs instance
-    getChart: ->
-      @state.chart
-
-    # return the canvass element that contains the chart
-    getCanvass: ->
-      @refs.canvass.getDOMNode()
-
-  React.createClass(classData)
+    initializeChart: ->
+      canvas = React.findDOMNode(@refs[@props.name])
+      ctx    = canvas.getContext("2d")
+      chart  = new Chart(ctx)[chartType](@props.data)
+      @state.chartInstance = chart

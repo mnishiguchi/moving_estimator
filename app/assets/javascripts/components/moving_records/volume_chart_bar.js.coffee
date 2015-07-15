@@ -1,29 +1,26 @@
 # props.name - for ref
 # props.data
 
-chartType = "Bar"
-@VolumeBarChart = React.createClass
+# chartType = "Bar"
+# @VolumeBarChart = React.createClass
 
-  getInitialState: ->
-    chartInstance: null
+#   getInitialState: ->
+#     chartInstance: null
 
-  render: ->
-    console.log "VolumeBarChart#render"
-    console.log @props
+#   render: ->
+#     React.DOM.canvas
+#       ref:   @props.name
+#       style: { height: 200, width: 400 }
 
-    React.DOM.canvas
-      ref:   @props.name
-      style: { height: 200, width: 400 }
+#   componentDidMount: ->
+#     @initializeChart()
 
-  componentDidMount: ->
-    @initializeChart()
+#   componentDidUpdate:  ->
+#     @state.chartInstance.destroy()
+#     @initializeChart()
 
-  componentDidUpdate:  ->
-    @state.chartInstance.destroy()
-    @initializeChart()
-
-  initializeChart: ->
-    canvas = React.findDOMNode(@refs[@props.name])
-    ctx    = canvas.getContext("2d")
-    chart  = new Chart(ctx)[chartType](@props.data)
-    @state.chartInstance = chart
+#   initializeChart: ->
+#     canvas = React.findDOMNode(@refs[@props.name])
+#     ctx    = canvas.getContext("2d")
+#     chart  = new Chart(ctx)[chartType](@props.data)
+#     @state.chartInstance = chart

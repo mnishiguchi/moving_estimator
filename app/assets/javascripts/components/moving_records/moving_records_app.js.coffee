@@ -58,14 +58,18 @@ R = React.DOM
           className: 'row text-center'
           R.div
             className: 'col-sm-6'
-            React.createElement VolumeBarChart,
+            React.createElement CustomChart("Bar"),
               name: "barChart"
               data: @dataForBarChart()
+              height: 200
+              width:  400
           R.div
             className: 'col-sm-6'
-            React.createElement VolumePieChart,
+            React.createElement CustomChart("Pie"),
               name: "pieChart"
               data: @dataForPieChart()
+              height: 200
+              width:  200
 
   totalVolume: ->
     sum = 0
