@@ -1,3 +1,7 @@
+# Chart.js configuration
+Chart.defaults.global.tooltipEvents = ["mousemove", "touchstart", "touchmove"]
+Chart.defaults.global.scaleLabel    = "<%=value%>cu.ft"
+
 @ChartComponent = (chartType) ->
 
   React.createClass
