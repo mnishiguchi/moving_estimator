@@ -1,4 +1,4 @@
-@InteractiveChart = (chartType) ->
+window.InteractiveChart = (chartType) ->
 
   React.createClass
     displayName: chartType + 'Chart'
