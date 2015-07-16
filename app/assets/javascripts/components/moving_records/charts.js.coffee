@@ -1,11 +1,10 @@
 # chartType - e.g. "Bar", "Pie"
+# props.name - for ref
+# props.data - for drawing a chart
+# props.height - for canvas dimension
+# props.width  - for canvas dimension
 
 @CustomChart = (chartType) ->
-
-  # props.name - for ref
-  # props.data - for drawing a chart
-  # props.height - for canvas dimension
-  # props.width  - for canvas dimension
 
   React.createClass
     displayName: chartType + 'Chart'
@@ -13,9 +12,7 @@
     getInitialState: ->
       chartInstance: null
 
-    # Create a canvas element on which a chart will be drawn
     render: ->
-      # Create a <canvas> element with the props
       React.DOM.canvas
         ref:   @props.name
         style: { height: @props.height, width: @props.width }
@@ -31,4 +28,4 @@
       canvas = React.findDOMNode(@refs[@props.name])
       ctx    = canvas.getContext("2d")
       chart  = new Chart(ctx)[chartType](@props.data)
-      @state.chartInstance = chart
+      @setState.chartInstance = chart
