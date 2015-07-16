@@ -58,14 +58,14 @@ R = React.DOM
           className: 'row text-center'
           R.div
             className: 'col-sm-6'
-            React.createElement CustomChart("Bar"),
+            React.createElement InteractiveChart("Bar"),
               name: "barChart"
               data: @dataForBarChart()
               height: 200
               width:  400
           R.div
             className: 'col-sm-6'
-            React.createElement CustomChart("Pie"),
+            React.createElement InteractiveChart("Pie"),
               name: "pieChart"
               data: @dataForPieChart()
               height: 200

@@ -1,10 +1,4 @@
-# chartType - e.g. "Bar", "Pie"
-# props.name - for ref
-# props.data - for drawing a chart
-# props.height - for canvas dimension
-# props.width  - for canvas dimension
-
-@CustomChart = (chartType) ->
+@InteractiveChart = (chartType) ->
 
   React.createClass
     displayName: chartType + 'Chart'
