@@ -7,6 +7,7 @@ R = React.DOM
     ajax:    false
     barChartInstance: null
     pieChartInstance: null
+    formDisplay: false
 
   getDefaultProps: ->
     records: []
@@ -77,6 +78,10 @@ R = React.DOM
       sum += (obj.volume * obj.quantity)
     sum
 
+  handleToggleForm: (e) ->
+    e.preventDefault()
+    @setState(formDisplay: not @state.formDisplay)
+
   render: ->
     R.div
       className: "app_wrapper"
@@ -87,11 +92,20 @@ R = React.DOM
       @chartsPanel()
       R.hr null
 
-      R.h2 null, "Add a new item"
-      React.createElement NewMovingRecordForm,
-        handleNewRecord: @addRecord
-        roomSuggestions: @props.roomSuggestions
-        categorySuggestions: @props.categorySuggestions
+      R.h2
+        style: if @state.formDisplay then {} else { color: "#ABC"}
+        "Add a new item"
+        R.button
+          onClick: @handleToggleForm
+          className: "toggle_show_hide btn btn-primary pull-right"
+          if @state.formDisplay then "hide form" else "show form"
+
+      if @state.formDisplay
+        React.createElement NewMovingRecordForm,
+          className: "new_record_form"
+          handleNewRecord: @addRecord
+          roomSuggestions: @props.roomSuggestions
+          categorySuggestions: @props.categorySuggestions
       R.hr null
 
       React.createElement Records,

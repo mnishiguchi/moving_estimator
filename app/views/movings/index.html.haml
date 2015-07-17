@@ -23,9 +23,9 @@
         - @movings.each do |m|
           %tr{ style: "border-bottom: 1px solid #ddd;" }
             %td
-              = link_to truncate(m.title), moving_path(m)
+              %strong= link_to truncate(m.title), moving_path(m)
             %td
-              %i= truncate(m.description, length: 100)
+              %i= truncate(m.description, length: 50)
             %td
               = link_to fa_icon("fa trash", text: "delete"), moving_path(m),
               method: :delete, data: { confirm: "Are you sure?" },
