@@ -1,7 +1,3 @@
-IngredientStore     = require('./stores/ingredient_store')
-IngredientActions   = require('./actions/ingredient_actions')
-IngredientEditorApp = require('./components/IngredientEditorApp')
-
 # Invoked in a Rails template with JSON data passed in.
 
 React._initIngredientEditorApp = (mountNode, options) ->

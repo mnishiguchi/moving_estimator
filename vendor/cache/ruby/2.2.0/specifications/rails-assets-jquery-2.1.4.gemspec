@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["rails-assets.org"]
-  s.date = "2015-07-03"
+  s.date = "2015-07-15"
   s.description = ""
   s.homepage = "https://github.com/jquery/jquery"
   s.licenses = ["MIT"]

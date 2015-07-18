@@ -30,7 +30,7 @@ gem 'chart-js-rails'
 # React
 gem 'react-rails',             '~> 1.0.0'   # Compiles JSX.
 gem 'sprockets-coffee-react',  '~> 3.0.1'   # Preprocessor for Coffeescript with React JSX (CJSX).
-gem 'browserify-rails',        '~> 1.0.1'   # Adds CommonJS module support to Sprockets (via Browserify)
+# gem 'browserify-rails',        '~> 1.0.1'   # Adds CommonJS module support to Sprockets (via Browserify)
 # Others
 gem 'jquery-turbolinks',       '~> 2.1.0'   # For jQuery to work with turbolinks.
 gem 'devise',                  '~> 3.4.1'   # Authentication

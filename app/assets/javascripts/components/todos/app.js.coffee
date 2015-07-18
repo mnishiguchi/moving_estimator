@@ -1,7 +1,3 @@
-TodoStore   = require('./stores/todo_store')
-TodoActions = require('./actions/todo_actions')
-TodoApp     = require('./components/TodoApp')
-
 # Invoked in a Rails template with JSON data passed in.
 
 React._initTodoApp = (mountNode, options) ->

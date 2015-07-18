@@ -1,4 +1,4 @@
-/Users/masa/.rbenv/versions/2.2.1/bin/ruby -r ./siteconf20150712-98538-eu86bc.rb extconf.rb
+/Users/masa/.rbenv/versions/2.2.1/bin/ruby -r ./siteconf20150717-66599-x6w905.rb extconf.rb
 creating Makefile
 
 make "DESTDIR=" clean
@@ -8,4 +8,4 @@ compiling debug_inspector.c
 linking shared-object debug_inspector.bundle
 
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 debug_inspector.bundle ./.gem.20150712-98538-bgo803
+/usr/bin/install -c -m 0755 debug_inspector.bundle ./.gem.20150717-66599-1ks5068
