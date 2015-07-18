@@ -93,6 +93,7 @@ R = React.DOM
       R.hr null
 
       R.h2
+        onClick: @handleToggleForm
         style: if @state.formDisplay then {} else { color: "#ABC"}
         "Add a new item"
         R.button

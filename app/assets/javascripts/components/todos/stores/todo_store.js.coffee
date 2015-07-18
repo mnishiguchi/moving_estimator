@@ -4,7 +4,6 @@ TodoStore = Fluxxor.createStore
 
   initialize: (todos) ->
     @todos = todos || {}
-    console.log todos
 
     @bindActions(constants.ADD_TODO,    @onAddTodo,
                  constants.TOGGLE_TODO, @onToggleTodo,

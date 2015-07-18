@@ -35,10 +35,10 @@ describe "Users login", type: :feature do
       describe "navbar dropdown links" do
         before { click_link user.username }
 
-        it { expect(page).to have_link("Dashboard", href: root_path) }
-        it { expect(page).to have_link("Settings",  href: edit_user_registration_path) }
-        it { expect(page).to have_link("Contact",   href: contact_path) }
-        it { expect(page).to have_link('Log out',   href: destroy_user_session_path) }
+        it { expect(page).to have_link("My movings", href: root_path) }
+        it { expect(page).to have_link("Settings",   href: edit_user_registration_path) }
+        it { expect(page).to have_link("Contact",    href: contact_path) }
+        it { expect(page).to have_link('Log out',    href: destroy_user_session_path) }
       end
 
       describe "followed by logout" do
