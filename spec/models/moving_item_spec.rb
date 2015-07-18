@@ -22,22 +22,28 @@ RSpec.describe MovingItem, type: :model do
 
   it { expect(moving_item).to be_valid }
 
-  it { is_expected.to validate_presence_of :name }
-  it { is_expected.to validate_presence_of :volume }
-  it { is_expected.to validate_presence_of :quantity }
-  it { is_expected.to validate_presence_of :room }
-  it { is_expected.to validate_presence_of :category }
-  it { is_expected.not_to validate_presence_of :description }
+  it "validates presence" do
+    is_expected.to validate_presence_of :name
+    is_expected.to validate_presence_of :volume
+    is_expected.to validate_presence_of :quantity
+    is_expected.to validate_presence_of :room
+    is_expected.to validate_presence_of :category
+    is_expected.not_to validate_presence_of :description
+  end
 
-  it { is_expected.to validate_length_of :name }
-  it { is_expected.to validate_length_of :volume }
-  it { is_expected.to validate_length_of :quantity }
-  it { is_expected.to validate_length_of :room }
-  it { is_expected.to validate_length_of :category }
-  it { is_expected.to validate_length_of :description }
+  it "validates length" do
+    is_expected.to validate_length_of :name
+    is_expected.to validate_length_of :volume
+    is_expected.to validate_length_of :quantity
+    is_expected.to validate_length_of :room
+    is_expected.to validate_length_of :category
+    is_expected.to validate_length_of :description
+  end
 
-  it { is_expected.to validate_numericality_of :volume }
-  it { is_expected.to validate_numericality_of :quantity }
+  it "validates numericality" do
+    is_expected.to validate_numericality_of :volume
+    is_expected.to validate_numericality_of :quantity
+  end
 
   context "with an empty name" do
     before { moving_item.update_attribute(:name, "") }
