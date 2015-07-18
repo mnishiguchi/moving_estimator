@@ -1,3 +1,5 @@
+R = React.DOM
+
 @Room =  React.createClass
 
   getInitialState: ->
@@ -54,7 +56,6 @@
     @setState(value: @props.room.name, changed: false)
 
   updateButton: ->
-    R = React.DOM
     R.div
       className: "input-group-addon"
       R.div null,
@@ -68,7 +69,6 @@
           "Cancel"
 
   deleteButton: ->
-    R = React.DOM
     R.button
       onClick: @handleDelete
       R.i
@@ -84,8 +84,6 @@
     string.charAt(0).toUpperCase() + string.slice(1)
 
   render: ->
-    R = React.DOM
-
     R.form
       className: "form-horizontal"
       R.div
