@@ -1,14 +1,11 @@
 - provide(:title, "Todos")
 
-%h1.page-header Todos
+.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
+  %h1.page-header Todos
 
-%ol.breadcrumb
-  %li= link_to "Dashboard", root_path, :"data-no-turbolink" => true
-  %li.active Todo list
-
-#react_todolist
+  #todo_component
 
 :coffee
 
   $(document).ready ->
-    React._initTodoApp("react_todolist", todos: #{ @todos })
+    window.initializeTodoApp("todo_component", todos: #{ @todos })

@@ -98,7 +98,7 @@ R = React.DOM
         "Add a new item"
         R.button
           onClick: @handleToggleForm
-          className: "toggle_show_hide btn btn-primary pull-right"
+          className: "toggle_show_hide btn pull-right #{if @state.formDisplay then 'btn-default' else 'btn-primary'}"
           if @state.formDisplay then "hide form" else "show form"
 
       if @state.formDisplay
@@ -114,14 +114,17 @@ R = React.DOM
         handleDeleteRecord: @deleteRecord,
         handleUpdateRecord: @updateRecord
 
-  shuffleArray: (o) ->
-    i = o.length
+  shuffleArray: (a) ->
+    i = a.length
     while i
+      # 1. Randomly pick one.
       j = Math.floor(Math.random() * i)
-      x = o[--i]
-      o[i] = o[j]
-      o[j] = x
-    o
+      # 2. Swap the tail with the random one.
+      # 3. Cut off the tail at the same time.
+      tmp  = a[--i]
+      a[i] = a[j]
+      a[j] = tmp
+    a
 
   dataForPieChart: ->
     source = @volumeSortedBy("room")

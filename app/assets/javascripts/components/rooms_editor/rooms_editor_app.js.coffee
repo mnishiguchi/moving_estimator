@@ -1,3 +1,5 @@
+R = React.DOM
+
 @RoomsEditorApp = React.createClass
 
   getInitialState: ->
@@ -17,8 +19,6 @@
     @replaceState rooms: rooms
 
   render: ->
-    R = React.DOM
-
     R.div
       className: "app_wrapper"
 

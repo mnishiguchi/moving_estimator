@@ -1,6 +1,6 @@
 # Invoked in a Rails template with JSON data passed in.
 
-React._initTodoApp = (mountNode, options) ->
+window.initializeTodoApp = (mountNode, options) ->
 
   # Instantiating the stores.
   stores =
@@ -19,4 +19,5 @@ React._initTodoApp = (mountNode, options) ->
   # Rendering the whole component to the mount node.
   # Checking if mount node exists to suppress error caused by loading irrelevant pages.
   if(m = document.getElementById(mountNode))
-    React.render(<TodoApp flux={ flux } />, m)
+    app = React.createElement TodoApp, {flux: flux}
+    React.render(app, m)
