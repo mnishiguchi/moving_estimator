@@ -6,4 +6,11 @@
   Download:
   = link_to "CSV", users_path(format: "csv")
 
-= render 'people_cards', users: @users
+#people_cards
+
+  = render 'people_filter'
+
+  .cards_wrapper
+    - @users.each do |user|
+      = render 'user', user: user
+  = will_paginate @users

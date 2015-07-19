@@ -2,9 +2,9 @@ class IngredientsController < ApplicationController
 
   before_action :ensure_admin!,     except: :show
   before_action :authenticate_user! # all actions
+  before_action :search_ingredients, only: :index
 
   def index
-    @ingredients = Ingredient.all.sorted
   end
 
   def new
@@ -46,5 +46,12 @@ class IngredientsController < ApplicationController
 
     def ingredient_params
       params.require(:ingredient).permit(:name, :volume)
+    end
+
+    def search_ingredients
+      @ingredients =  if params[:search].present?
+        then Ingredient.search(params[:search])
+        else Ingredient.all
+        end.sorted
     end
 end

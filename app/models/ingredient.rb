@@ -10,12 +10,26 @@
 #
 
 class Ingredient < ActiveRecord::Base
-  scope :sorted, ->{ order(name: :asc) }
+  include PgSearch
 
   before_save :downcase_input!  # Standardizes on all lower-case words.
 
   validates  :name, presence: true, uniqueness: true, length: { maximum: 50 }
   validates  :volume, presence: true, length: { maximum: 5 }, numericality: true  #<= float
+
+  scope :sorted, ->{ order(name: :asc) }
+
+  pg_search_scope :search,
+                  against: [
+                    :name,
+                    :volume
+                  ],
+                  using: {
+                    tsearch: {
+                      prefix: true,
+                      normalization: 2
+                    }
+                  }
 
   private
 

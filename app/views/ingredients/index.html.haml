@@ -4,6 +4,11 @@
   Ingredients
   = link_to "Add new", new_ingredient_path(@ingredient), class: "btn btn-primary btn-sm pull-right"
 
+.filter_wrapper{ style: "margin-bottom: 20px;" }
+  = form_tag(ingredients_path, method: "get") do
+    = text_field_tag :search, nil, placeholder: "Search ingredients ...", class: "form-control"
+    = submit_tag "", style: "display: none;"
+
 .table-responsive
   %table.table.table-bordered.table-hover.table-striped.table-condensed
     %thead
