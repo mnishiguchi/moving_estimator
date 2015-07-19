@@ -13,6 +13,7 @@
           = current_user.email
         %span.moving_count.badge
           = pluralize(current_user.movings.count, "moving")
+        = link_to "New moving", new_moving_path, class: "btn btn-primary pull-right"
 
 .panel.panel-default{ style: "margin-top: 30px;" }
   .panel-heading
@@ -23,7 +24,7 @@
         - @movings.each do |m|
           %tr{ style: "border-bottom: 1px solid #ddd;" }
             %td
-              %strong= link_to truncate(m.title), moving_path(m)
+              = link_to truncate(m.title), moving_path(m), class: "lead"
             %td
               %i= truncate(m.description, length: 50)
             %td

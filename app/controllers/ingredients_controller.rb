@@ -4,7 +4,7 @@ class IngredientsController < ApplicationController
   before_action :authenticate_user! # all actions
 
   def index
-    @ingredients = Ingredient.all
+    @ingredients = Ingredient.all.sorted
   end
 
   def new

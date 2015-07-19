@@ -4,5 +4,13 @@
   Ingredients
   = link_to "Add new", new_ingredient_path(@ingredient), class: "btn btn-primary btn-sm pull-right"
 
-%ul
-  = render @ingredients
+.table-responsive
+  %table.table.table-bordered.table-hover.table-striped.table-condensed
+    %thead
+      %tr
+        %th.text-center Name
+        %th.text-center Volume
+        %th.text-center Updated at
+        %th.text-center Action
+    %tbody
+      = render @ingredients

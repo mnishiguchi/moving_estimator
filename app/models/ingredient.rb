@@ -17,10 +17,6 @@ class Ingredient < ActiveRecord::Base
   validates  :name, presence: true, uniqueness: true, length: { maximum: 50 }
   validates  :volume, presence: true, length: { maximum: 5 }, numericality: true  #<= float
 
-  def self.getInitialData
-    User.current_user.todos.select(:id, :content, :completed, :created_at).to_json
-  end
-
   private
 
     # Converts the input to all lower-case.

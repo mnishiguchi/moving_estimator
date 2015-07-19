@@ -1,7 +1,9 @@
-%li{ id: "ingredient-#{ingredient.id}" }
-  = ingredient.name
-  = ingredient.volume
-  = link_to "edit", edit_ingredient_path(ingredient)
-  - if current_user.admin? && current_user
-    = "|"
-    = link_to "delete", ingredient, method: :delete, data: { confirm: "Are you sure?" }
+%tr{ id: "ingredient-#{ingredient.id}" }
+  %td= link_to ingredient.name, edit_ingredient_path(ingredient), class: "lead"
+  %td.text-center= link_to ingredient.volume, edit_ingredient_path(ingredient), class: "lead"
+  %td.text-center= ingredient.updated_at
+  %td.text-center
+    = link_to "edit", edit_ingredient_path(ingredient)
+    - if current_user.admin? && current_user
+      = "|"
+      = link_to "delete", ingredient, method: :delete, data: { confirm: "Are you sure?" }
