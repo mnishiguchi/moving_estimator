@@ -19,17 +19,20 @@ class Ingredient < ActiveRecord::Base
 
   scope :sorted, ->{ order(name: :asc) }
 
-  pg_search_scope :search,
-                  against: [
-                    :name,
-                    :volume
-                  ],
-                  using: {
-                    tsearch: {
-                      prefix: true,
-                      normalization: 2
-                    }
-                  }
+  scope :named, ->(q) { where("name ilike ?", "%#{q}%") }
+
+
+  # pg_search_scope :search,
+  #                 against: [
+  #                   :name,
+  #                   :volume
+  #                 ],
+  #                 using: {
+  #                   tsearch: {
+  #                     prefix: true,
+  #                     normalization: 2
+  #                   }
+  #                 }
 
   private
 

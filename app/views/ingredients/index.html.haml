@@ -5,9 +5,12 @@
   = link_to "Add new", new_ingredient_path(@ingredient), class: "btn btn-primary btn-sm pull-right"
 
 .filter_wrapper{ style: "margin-bottom: 20px;" }
-  = form_tag(ingredients_path, method: "get") do
-    = text_field_tag :search, nil, placeholder: "Search ingredients ...", class: "form-control"
-    = submit_tag "", style: "display: none;"
+  = form_for @search, url: ingredients_path, html: {method: :get}, class: "form-horizontal" do |f|
+    .form-group
+      .input-group
+        = f.search_field :q, class: "form-control"
+        %span.input-group-btn
+          = f.button fa_icon("search"), class: "btn btn-default"
 
 .table-responsive
   %table.table.table-bordered.table-hover.table-striped.table-condensed

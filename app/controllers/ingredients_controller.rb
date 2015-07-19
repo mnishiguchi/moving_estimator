@@ -49,9 +49,10 @@ class IngredientsController < ApplicationController
     end
 
     def search_ingredients
-      @ingredients =  if params[:search].present?
-        then Ingredient.search(params[:search])
+      @search = SearchForm.new(params[:search_form])
+      @ingredients = if @search.q.present?
+        then Ingredient.all.named(@search.q)
         else Ingredient.all
-        end.sorted
+      end.sorted
     end
 end
