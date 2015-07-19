@@ -1,12 +1,8 @@
 - provide(:title, "Ingredients editor")
 
-%h1.page-header Edit ingredients
+%h1.page-header
+  Ingredients
+  = link_to "Add new", new_ingredient_path(@ingredient), class: "btn btn-primary btn-sm pull-right"
 
-.well
-
-  #react_ingredient_editor
-
-:coffee
-
-  $(document).ready ->
-    React._initIngredientEditorApp("react_ingredient_editor", ingredients: #{ @ingredients })
+%ul
+  = render @ingredients

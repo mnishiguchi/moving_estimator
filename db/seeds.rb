@@ -31,7 +31,7 @@ users.each do |user|
 end
 
 categories = %w(ocean air local disposal)
-rooms      = %w(living_room dining_room bedroom kitchen bathroom)
+rooms      = ["living room", "dining room", "bedroom", "kitchen", "bathroom")
 
 50.times do
   users.each do |user|
@@ -46,12 +46,12 @@ rooms      = %w(living_room dining_room bedroom kitchen bathroom)
   end
 end
 
-u = user.first
-categories.each do |c|
-  u.movings.first.moving_categories.create name: c
-end
-
+# Ingredients
+volume_values = (2..10).to_a
 99.times do |n|
   name  = Faker::Commerce.product_name
-  Ingredient.create!(name: name)
+  Ingredient.create!(name: name, volume: volume_values.sample)
 end
+
+
+

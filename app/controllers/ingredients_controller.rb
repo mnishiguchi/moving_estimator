@@ -4,24 +4,47 @@ class IngredientsController < ApplicationController
   before_action :authenticate_user! # all actions
 
   def index
-    @ingredients = Ingredient.select("id, name").sorted.to_json
+    @ingredients = Ingredient.all
+  end
+
+  def new
+    @ingredient = Ingredient.new
+  end
+
+  def create
+    @ingredient = Ingredient.find(params[:id])
+    if @ingredient.create(ingredient_params)
+      flash[:notice] = "Ingredient created"
+      redirect_to ingredients_url
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+    @ingredient = Ingredient.find(params[:id])
   end
 
   def update
-    ingredient = Ingredient.find(params[:id])
-    ingredient.update_attributes(ingredient_params)
-    render nothing: true, status:  200
+    @ingredient = Ingredient.find(params[:id])
+    if @ingredient.update(ingredient_params)
+      flash[:notice] = "Ingredient updated"
+      redirect_to ingredients_url
+    else
+      render 'edit'
+    end
   end
 
   def destroy
     ingredient = Ingredient.find(params[:id])
     ingredient.destroy
-    render nothing: true, status: 200
+    flash[:notice] = "Ingredient deleted"
+    redirect_to ingredients_url
   end
 
   private
 
     def ingredient_params
-      params.require(:ingredient).permit(:name)
+      params.require(:ingredient).permit(:name, :volume)
     end
 end

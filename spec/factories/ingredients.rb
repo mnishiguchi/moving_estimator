@@ -9,9 +9,9 @@
 #  volume     :float
 #
 
-# FactoryGirl.define do
-#   factory :ingredient_suggestion do
-#     name "MyString"
-#   end
-
-# end
+FactoryGirl.define do
+  factory :ingredient do
+    name "laptop"
+    volume 3.3
+  end
+end

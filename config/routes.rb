@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :moving_items, only: [:create, :update, :destroy]
 
   resources :todos, except: [:show]
-  resources :ingredients, only: [:index, :update, :destroy]
+  resources :ingredients, except: :show
 
   devise_for :users, controllers: { confirmations: 'confirmations' }
   resources  :users, only: [:index, :destroy]
