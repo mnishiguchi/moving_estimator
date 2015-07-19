@@ -1,10 +1,18 @@
 / Home non-logged-in
 .jumbotron.center
+
+  = fa_icon "home 5x"
+  = fa_icon "truck 3x"
+
   %h1
-    Masatoshi Nishiguchi
+    Moving Estimator
 
-  %h2
-    %i I am planning to add some useful applications here.
+  %i.lead.clearfix
+    estimates the volume of your moving
 
-= render 'shared/inventory'
+  %div{ style: "margin-top: 40px;" }
+  = link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-success"
+
+%hr/
+
 = render "shared/about_author"
