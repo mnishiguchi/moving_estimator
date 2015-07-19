@@ -10,34 +10,18 @@
 #
 
 class Ingredient < ActiveRecord::Base
-  include PgSearch
 
-  before_save :downcase_input!  # Standardizes on all lower-case words.
+  before_save :downcase_name  # Standardizes on all lower-case words.
 
   validates  :name, presence: true, uniqueness: true, length: { maximum: 50 }
   validates  :volume, presence: true, length: { maximum: 5 }, numericality: true  #<= float
 
   scope :sorted, ->{ order(name: :asc) }
-
-  scope :named, ->(q) { where("name ilike ?", "%#{q}%") }
-
-
-  # pg_search_scope :search,
-  #                 against: [
-  #                   :name,
-  #                   :volume
-  #                 ],
-  #                 using: {
-  #                   tsearch: {
-  #                     prefix: true,
-  #                     normalization: 2
-  #                   }
-  #                 }
+  scope :named, ->(q) { where("name ILIKE :name OR volume = :volume", name: "%#{q}%", volume: q) }
 
   private
 
-    # Converts the input to all lower-case.
-    def downcase_input!
+    def downcase_name
       name.downcase!
     end
 end
