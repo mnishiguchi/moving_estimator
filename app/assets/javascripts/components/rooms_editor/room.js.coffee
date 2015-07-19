@@ -94,6 +94,7 @@ R = React.DOM
             className: "input-group-addon"
             @deleteButton()
           R.input
+            style: { "font-size": "1.5em" }
             className:   "form-control"
             type:        "text"
             placeholder: "new room"

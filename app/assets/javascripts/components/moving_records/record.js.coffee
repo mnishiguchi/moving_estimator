@@ -74,33 +74,35 @@ R = React.DOM
   recordRow: ->
     R.tr null,
       R.td
-        className: "col-md-2"
+        className: "col-sm-3"
         @props.record.name
       R.td
-        className: "col-md-1"
+        className: ""
         @props.record.volume
       R.td
-        className: "col-md-1"
+        className: ""
         @props.record.quantity
       R.td
-        className: "col-md-1"
+        className: ""
         (@props.record.volume * @props.record.quantity)
       R.td
-        className: "col-md-1"
+        className: "col-sm-2"
         @props.record.room
       R.td
-        className: "col-md-1"
+        className: "col-sm-2"
         @props.record.category
       R.td
-        className: "col-md-4"
+        className: "col-sm-5"
         @props.record.description
       R.td
-        className: "col-md-1"
+        className: ""
         R.button
           className: 'btn btn-warning btn-sm'
           onClick: @handleToggle
           R.div
             className: 'fa fa-pencil'
+      R.td
+        className: ""
         R.button
           className: 'btn btn-danger btn-sm'
           onClick: @handleDelete
@@ -112,13 +114,13 @@ R = React.DOM
     R.tr
       className: "edit"
       R.td
-        className: "col-md-2"
+        className: "col-sm-3"
         R.textarea
           className: 'form-control'
           defaultValue: @props.record.name
           ref: 'name'
       R.td
-        className: "col-md-1"
+        className: "col-sm-1"
         R.input
           className: 'form-control'
           type: 'number'
@@ -129,7 +131,7 @@ R = React.DOM
           name: 'volume'  # For referencing change event
           onChange: @handleChangeVolume
       R.td
-        className: "col-md-1"
+        className: "col-sm-1"
         R.input
           className: 'form-control'
           type: 'number'
@@ -139,33 +141,35 @@ R = React.DOM
           name: 'quantity'  # For referencing change event
           onChange: @handleChangeVolume
       R.td
-        className: "col-md-1"
+        className: ""
         @calculateSubtotal()  # Dynamically changing based on user's input
       R.td
-        className: "col-md-1"
+        className: "col-sm-2"
         R.textarea
           className: 'form-control'
           defaultValue: @props.record.room
           ref: 'room'
       R.td
-        className: "col-md-1"
+        className: "col-sm-2"
         R.textarea
           className: 'form-control'
           defaultValue: @props.record.category
           ref: 'category'
       R.td
-        className: "col-md-4"
+        className: "col-sm-5"
         R.textarea
           className: 'form-control'
           defaultValue: @props.record.description
           ref: 'description'
       R.td
-        className: "col-md-1"
+        className: ""
         R.button
           className: 'btn btn-success btn-sm'
           onClick: @handleEdit
           R.div
             className: 'fa fa-hdd-o'
+      R.td
+        className: ""
         R.button
           className: 'btn btn-default btn-sm'
           onClick: @handleToggle

@@ -1,6 +1,6 @@
 # Invoked in a Rails template with JSON data passed in.
 
-window.initializeTodoApp = (mountNode, options) ->
+@initializeTodoApp = (mountNode, options) ->
 
   # Instantiating the stores.
   stores =

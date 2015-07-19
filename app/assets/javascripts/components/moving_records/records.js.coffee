@@ -17,7 +17,8 @@
             $.th null, 'Room'
             $.th null, 'Category'
             $.th null, 'Description'
-            $.th null, ''
+            $.th null, ""
+            $.th null, ""
         $.tbody null,
           for record in @props.records
             React.createElement Record,

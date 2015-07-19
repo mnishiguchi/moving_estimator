@@ -1,9 +1,9 @@
 %tr{ id: "ingredient-#{ingredient.id}" }
-  %td= link_to ingredient.name, edit_ingredient_path(ingredient), class: "lead"
-  %td.text-center= link_to ingredient.volume, edit_ingredient_path(ingredient), class: "lead"
-  %td.text-center= ingredient.updated_at
+  %td.col-sm-5= link_to ingredient.name, edit_ingredient_path(ingredient), class: "lead"
+  %td.col-sm-2.text-center= link_to ingredient.volume, edit_ingredient_path(ingredient), class: "lead"
+  %td.col-sm-3.text-center= ingredient.updated_at
   %td.text-center
     = link_to "edit", edit_ingredient_path(ingredient)
-    - if current_user.admin? && current_user
-      = "|"
+  - if current_user.admin? && current_user
+    %td.text-center
       = link_to "delete", ingredient, method: :delete, data: { confirm: "Are you sure?" }
