@@ -43,7 +43,7 @@ R = React.DOM
     R.input
       className: "form-control"
       type:      "text"
-      style:     { "font-size": "1.5em" }
+      style:     { fontSize: "1.5em" }
       ref:       'input'
       value:     @state.value
       onChange:  @handleChange
