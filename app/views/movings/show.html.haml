@@ -6,12 +6,7 @@
 
   %small= @moving.description
 
-/ %ol.breadcrumb
-/   %li= link_to "My movings", movings_path
-/   %li.active= @moving.title
-/ %hr/
-
 = react_component 'MovingRecordsApp', { data: @moving_items,
-                   itemNameSuggestions: Ingredient.pluck(:name, :volume).to_h,
+                   itemNameSuggestions: Hash[*Ingredient.pluck(:name, :volume).flatten],
                    roomSuggestions:     Room.all.pluck(:name),
                    categorySuggestions: @moving.moving_items.pluck(:category).uniq! }
