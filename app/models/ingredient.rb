@@ -17,7 +17,7 @@ class Ingredient < ActiveRecord::Base
   validates  :volume, presence: true, length: { maximum: 5 }, numericality: true  #<= float
 
   scope :sorted, ->{ order(name: :asc) }
-  scope :named, ->(q) { where("name ILIKE :name OR volume = :volume", name: "%#{q}%", volume: q) }
+  scope :search, ->(q) { where("name ILIKE :name OR volume = :volume", name: "%#{q}%", volume: q.to_f) }
 
   private
 

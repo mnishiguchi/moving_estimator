@@ -11,8 +11,8 @@ R = React.DOM
   getInitialState: ->
     # params
     name:        ""
-    volume:      3
-    quantity:    1
+    volume:      ""
+    quantity:    ""
     room:        ""
     category:    ""
     description: ""
