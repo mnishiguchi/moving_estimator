@@ -138,7 +138,7 @@ R = React.DOM
               'Add item'
           R.div
             className: 'form-group col-sm-4'
-            R.button
+            R.a
               className: "btn btn-default btn-block"
               onClick: @handleClear
               'Clear'
