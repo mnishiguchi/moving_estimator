@@ -1,25 +1,29 @@
+R = React.DOM
+
 @Records = React.createClass
+  propTypes:
+    records:            React.PropTypes.arrayOf(React.PropTypes.object)
+    handleDeleteRecord: React.PropTypes.func
+    handleUpdateRecord: React.PropTypes.func
 
   dataTable: ->
-    $ = React.DOM
-
-    $.div
+    R.div
       className: 'moving_records table-responsive'
-      $.h2 null, "All items"
-      $.table
+      R.h2 null, "All items"
+      R.table
         className: 'table table-bordered table-hover'
-        $.thead null,
-          $.tr null,
-            $.th null, 'Name'
-            $.th null, 'Volume'
-            $.th null, 'Quantity'
-            $.th null, 'Subtotal'
-            $.th null, 'Room'
-            $.th null, 'Category'
-            $.th null, 'Description'
-            $.th null, ""
-            $.th null, ""
-        $.tbody null,
+        R.thead null,
+          R.tr null,
+            R.th null, 'Name'
+            R.th null, 'Volume'
+            R.th null, 'Quantity'
+            R.th null, 'Subtotal'
+            R.th null, 'Room'
+            R.th null, 'Category'
+            R.th null, 'Description'
+            R.th null, ""
+            R.th null, ""
+        R.tbody null,
           for record in @props.records
             React.createElement Record,
               key:    record.id
@@ -28,8 +32,6 @@
               handleEditRecord:   @props.handleUpdateRecord
 
   render: ->
-    $ = React.DOM
-
-    $.div null,
+    R.div null,
       if @props.records.length > 0
         @dataTable()

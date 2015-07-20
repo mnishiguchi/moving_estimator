@@ -6,6 +6,12 @@ Chart.defaults.global.scaleLabel    = "<%=value%>cu.ft"
 
   React.createClass
     displayName: "#{chartType}Chart"
+    propTypes:
+      name:    React.PropTypes.string
+      data:    React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object])
+      height:  React.PropTypes.number
+      width:   React.PropTypes.number
+      options: React.PropTypes.object
 
     getInitialState: ->
       chartInstance: null

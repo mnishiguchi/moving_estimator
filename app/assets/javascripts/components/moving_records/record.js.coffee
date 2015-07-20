@@ -1,6 +1,11 @@
 R = React.DOM
 
 @Record = React.createClass
+  propTypes:
+    key:                React.PropTypes.number
+    record:             React.PropTypes.object
+    handleEditRecord:   React.PropTypes.func
+    handleDeleteRecord: React.PropTypes.func
 
   getInitialState: ->
     edit:     false

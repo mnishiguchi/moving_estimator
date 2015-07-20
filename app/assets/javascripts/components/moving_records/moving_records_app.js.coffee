@@ -1,12 +1,11 @@
-## Required properties
-# data:                an array of moving item objects [{}, {}, ...]
-# itemNameSuggestions: {sofa: 30, desk: 10, ...}
-# roomSuggestions:     ["", "", ...]
-# categorySuggestions: ["", "", ...]
-
 R = React.DOM
 
 @MovingRecordsApp = React.createClass
+  propTypes:
+    data:                React.PropTypes.arrayOf(React.PropTypes.object)
+    itemNameSuggestions: React.PropTypes.object # {sofa: 30, desk: 10, ...}
+    roomSuggestions:     React.PropTypes.arrayOf(React.PropTypes.string)
+    categorySuggestions: React.PropTypes.arrayOf(React.PropTypes.string)
 
   getInitialState: ->
     records: @props.data
