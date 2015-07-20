@@ -11,8 +11,8 @@ R = React.DOM
   getInitialState: ->
     # params
     name:        ""
-    volume:      ""
-    quantity:    ""
+    volume:      3
+    quantity:    1
     room:        ""
     category:    ""
     description: ""
@@ -22,8 +22,8 @@ R = React.DOM
     @validName() && @validVolume() && @validQuantity() &&
     @validRoom() && @validCategory() && @validDescription()
   validName:        -> @state.name && @state.name.length <= 50
-  validVolume:      -> @state.volume && @state.volume.length <= 10
-  validQuantity:    -> @state.quantity && @state.quantity.length <= 10
+  validVolume:      -> @state.volume
+  validQuantity:    -> @state.quantity
   validRoom:        -> @state.room && @state.room.length <= 50
   validCategory:    -> @state.category && @state.category.length <= 50
   validDescription: -> @state.description.length <= 200
