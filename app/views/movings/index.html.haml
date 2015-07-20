@@ -30,7 +30,7 @@
         - @movings.each do |m|
           %tr{ style: "border-bottom: 1px solid #ddd;" }
             %td.col-sm-3
-              = link_to truncate(m.title), moving_path(m), class: "lead"
+              %strong= link_to truncate(m.title), moving_path(m)
             %td.col-sm-9
               %i= truncate(m.description, length: 100)
             %td

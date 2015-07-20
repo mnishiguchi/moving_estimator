@@ -1,3 +1,9 @@
+## Required properties
+# data:                an array of moving item objects [{}, {}, ...]
+# itemNameSuggestions: {sofa: 30, desk: 10, ...}
+# roomSuggestions:     ["", "", ...]
+# categorySuggestions: ["", "", ...]
+
 R = React.DOM
 
 @MovingRecordsApp = React.createClass
@@ -7,7 +13,7 @@ R = React.DOM
     ajax:    false
     barChartInstance: null
     pieChartInstance: null
-    formDisplay: false
+    formDisplay:      false
 
   getDefaultProps: ->
     records: []
@@ -26,6 +32,10 @@ R = React.DOM
     index = @state.records.indexOf record
     records = React.addons.update(@state.records, { $splice: [[index, 1, newRecord]] })
     @replaceState records: records
+
+  handleToggleForm: (e) ->
+    e.preventDefault()
+    @setState(formDisplay: not @state.formDisplay)
 
   noticeProcessingAjax: ->
     R.div
@@ -74,22 +84,10 @@ R = React.DOM
               height: 200
               width:  200
 
-  totalVolume: ->
-    sum = 0
-    for obj in @state.records
-      sum += (obj.volume * obj.quantity)
-    sum
-
-  handleToggleForm: (e) ->
-    e.preventDefault()
-    @setState(formDisplay: not @state.formDisplay)
-
   render: ->
     R.div
       className: "app_wrapper"
       @noticeProcessingAjax() if @state.ajax
-
-      #R.h2 null, "Moving volume overview"
 
       @chartsPanel()
       R.hr null
@@ -107,6 +105,7 @@ R = React.DOM
         React.createElement NewMovingRecordForm,
           className: "new_record_form"
           handleNewRecord: @addRecord
+          itemNameSuggestions: @props.itemNameSuggestions
           roomSuggestions: @props.roomSuggestions
           categorySuggestions: @props.categorySuggestions
       R.hr null
@@ -189,3 +188,9 @@ R = React.DOM
       ary.push data
     # 3. Sorting
     ary.sort( @predicateBy("volume") )
+
+  totalVolume: ->
+    sum = 0
+    for obj in @state.records
+      sum += (obj.volume * obj.quantity)
+    sum

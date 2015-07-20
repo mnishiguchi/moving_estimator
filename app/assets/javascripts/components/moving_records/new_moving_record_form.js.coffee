@@ -1,6 +1,15 @@
+## Required properties
+# handleNewRecord
+# itemNameSuggestions
+# roomSuggestions
+# categorySuggestions
+
+R = React.DOM
+
 @NewMovingRecordForm = React.createClass
 
   getInitialState: ->
+    # params
     name:        ""
     volume:      ""
     quantity:    ""
@@ -8,29 +17,19 @@
     category:    ""
     description: ""
 
-  componentDidMount: ->
-    @updateAutocomplete()  # Initialize the jQuery UI autocomplete.
+  # Field validations
+  valid: ->
+    @validName() && @validVolume() && @validQuantity() &&
+    @validRoom() && @validCategory() && @validDescription()
+  validName:        -> @state.name && @state.name.length <= 50
+  validVolume:      -> @state.volume && @state.volume.length <= 10
+  validQuantity:    -> @state.quantity && @state.quantity.length <= 10
+  validRoom:        -> @state.room && @state.room.length <= 50
+  validCategory:    -> @state.category && @state.category.length <= 50
+  validDescription: -> @state.description.length <= 200
+  fieldColor: (validator) -> if validator then 'has-success' else 'has-warning'
 
-  componentDidUpdate: ->
-    @updateAutocomplete()  # Update the jQuery UI autocomplete.
-
-  componentWillUnmount: ->
-    # Remove the extra HTML that jQuery UI autocomplete creates.
-    $(React.findDOMNode(@refs.room)).autocomplete('destroy')
-    $(React.findDOMNode(@refs.category)).autocomplete('destroy')
-
-  # Sets up the jQuery UI autocomplete on the real DOM with the provided data.
-  # When an autocomplete item is selected, updates the value accordingly.
-  updateAutocomplete: ->
-    $(React.findDOMNode(@refs.room)).autocomplete
-      source: @props.roomSuggestions
-      select: (e, ui) => @setState room: ui.item.value
-
-    $(React.findDOMNode(@refs.category)).autocomplete
-      source: @props.categorySuggestions
-      select: (e, ui) => @setState category: ui.item.value
-
-  # Updates the active element's value based on user's input.
+  # Find the active element by name attribute and update it with user's input.
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
@@ -59,24 +58,10 @@
   handleClear: (e) ->
     @setState @getInitialState()  # Restore component's initial UI.
 
-  # Field validations
-  valid: ->
-    @validName() && @validVolume() && @validQuantity() &&
-    @validRoom() && @validCategory() && @validDescription()
-  validName:        -> @state.name && @state.name.length <= 50
-  validVolume:      -> @state.volume && @state.volume.length <= 10
-  validQuantity:    -> @state.quantity && @state.quantity.length <= 10
-  validRoom:        -> @state.room && @state.room.length <= 50
-  validCategory:    -> @state.category && @state.category.length <= 50
-  validDescription: -> @state.description.length <= 200
-  fieldColor: (validator) -> if validator then 'has-success' else 'has-warning'
-
   capitalize: (string) ->
     string.charAt(0).toUpperCase() + string.slice(1)
 
   render: ->
-    R = React.DOM
-
     R.form
       onSubmit:  @handleSubmit
       R.div
@@ -87,7 +72,8 @@
             type:        'text'
             className:   'form-control'
             placeholder: 'Item name'
-            name:        'name'
+            ref:         'name'  # for Autocomplete to access the DOM
+            name:        'name'  # for @handleChange
             value:       @state.name
             onChange:    @handleChange
         R.div
@@ -163,3 +149,33 @@
             className: "help-block text-center"
             "Please fill in all the required fields"
       R.div className: "clearfix"
+
+  componentDidMount: ->
+    @updateAutocomplete()  # Initialize the jQuery UI autocomplete.
+
+  componentDidUpdate: ->
+    @updateAutocomplete()  # Update the jQuery UI autocomplete.
+
+  componentWillUnmount: ->
+    # Remove the extra HTML that jQuery UI autocomplete creates.
+    $(React.findDOMNode(@refs.name)).autocomplete('destroy')
+    $(React.findDOMNode(@refs.room)).autocomplete('destroy')
+    $(React.findDOMNode(@refs.category)).autocomplete('destroy')
+
+  updateAutocomplete: ->
+    # Sets up the jQuery UI autocomplete on the real DOM with the provided data.
+    # When an autocomplete item is selected, updates the value accordingly.
+    $(React.findDOMNode(@refs.name)).autocomplete
+      source: Object.keys(@props.itemNameSuggestions)
+      select: (e, ui) =>
+        itemName = ui.item.value
+        @setState name:   itemName
+        @setState volume: @props.itemNameSuggestions[itemName]
+
+    $(React.findDOMNode(@refs.room)).autocomplete
+      source: @props.roomSuggestions
+      select: (e, ui) => @setState room: ui.item.value
+
+    $(React.findDOMNode(@refs.category)).autocomplete
+      source: @props.categorySuggestions
+      select: (e, ui) => @setState category: ui.item.value

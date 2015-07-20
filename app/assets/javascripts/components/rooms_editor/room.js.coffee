@@ -70,9 +70,11 @@ R = React.DOM
 
   deleteButton: ->
     R.button
+      className: "btn btn-default"
       onClick: @handleDelete
       R.i
         className: "fa fa-times"
+        style: { color: "#DD0000" }
 
   fieldColor: ->
     if @state.changed
@@ -91,10 +93,10 @@ R = React.DOM
         R.div
           className: "input-group"
           R.div
-            className: "input-group-addon"
+            className: "input-group-btn"
             @deleteButton()
           R.input
-            style: { "font-size": "1.5em" }
+            style: { "fontSize": "1.5em" }
             className:   "form-control"
             type:        "text"
             placeholder: "new room"

@@ -12,5 +12,6 @@
 / %hr/
 
 = react_component 'MovingRecordsApp', { data: @moving_items,
-                   roomSuggestions: Room.all.pluck("name"),
-                   categorySuggestions: @moving.moving_items.pluck("category").uniq! }
+                   itemNameSuggestions: Ingredient.pluck(:name, :volume).to_h,
+                   roomSuggestions:     Room.all.pluck(:name),
+                   categorySuggestions: @moving.moving_items.pluck(:category).uniq! }
