@@ -23,26 +23,28 @@
 
     .field.form-group
       = f.label :password
-      %i (leave blank if you don't want to change it)
+      %i (Optional)
       %br/
       = f.password_field :password, autocomplete: "off", class: 'form-control'
 
     .field.form-group
       = f.label :password_confirmation
+      %i (Optional)
       %br/
       = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
 
     .field.form-group
       = f.label :current_password
-      %i (we need your current password to confirm your changes)
+      %i (Required to confirm your changes)
       %br/
       = f.password_field :current_password, autocomplete: "off", class: 'form-control'
 
-    .actions
-      / = f.submit "Update"
+    %p.actions
       = f.button "Update", class: "submit btn btn-success",
         data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
-  %hr
+
+    %div{ style: "margin-bottom: 20px;" }
+      = link_to "Back", :back
 
   %h1.page-header
     Cancel my account
@@ -50,5 +52,7 @@
     Unhappy?
     = button_to "Cancel my account", registration_path(resource_name),
       data: { confirm: "Are you sure?" }, method: :delete, class: "submit btn btn-danger"
-  %br
-  = link_to "Back", :back
+
+  %div{ style: "margin-bottom: 20px;" }
+    = link_to "Back", :back
+

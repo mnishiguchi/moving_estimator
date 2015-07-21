@@ -1,42 +1,23 @@
 - provide(:title, "My movings")
 
 .profile_header{ style: "margin-top: 20px;" }
-  %ul.media-list
-    %li.media
-      .media-left.pull-left
-        %a{ href: movings_path }
-          = gravatar_for current_user.email
-        %figcaption.text-center
-          = link_to "change", "http://gravatar.com/emails"
-      .media-body
-        %h2.media-heading
-          = current_user.email
-        %span.moving_count.badge
-          = pluralize(current_user.movings.count, "moving")
-        = link_to "New moving", new_moving_path, class: "btn btn-primary pull-right"
+  =render "profile_header"
 
-.panel.panel-default{ style: "margin-top: 30px;" }
-  .panel-heading
-    My movings
-  .panel-body
-    .table-responsive{ style: "margin-bottom: 0;" }
-      %table.table.table-hover{ style: "margin-bottom: 0;" }
-        %thead
-          %tr
-            %th Title
-            %th Description
-            %th{ colspan: "2" }
-        %tbody
-        - @movings.each do |m|
-          %tr{ style: "border-bottom: 1px solid #ddd;" }
-            %td.col-sm-3
-              %strong= link_to truncate(m.title), moving_path(m)
-            %td.col-sm-9
-              %i= truncate(m.description, length: 100)
-            %td
-              = link_to fa_icon("fa pencil", text: "edit"), edit_moving_path(m),
-                class: "btn btn-sm btn-default"
-            %td
-              = link_to fa_icon("fa trash", text: "delete"), moving_path(m),
-              method: :delete, data: { confirm: "Are you sure?" },
-                class: "btn btn-sm btn-default "
+%ul.nav.nav-tabs{ role: 'tablist', style: "margin-top: 30px;" }
+  %li.active
+    %a{ href: "#tab_movings", role: "tab", data: { toggle: "tab" } }
+      My movings
+  %li
+    %a{ href: "#tab_todos", role: "tab", data: { toggle: "tab" } }
+      Todo list
+
+.tab-content
+  #tab_movings{ class: "tab-pane fade active in" }
+    = render "movings"
+  #tab_todos{ class: "tab-pane fade" }
+    #todo_component{ style: "padding: 10px 5px;"}
+
+:coffee
+
+  $(document).ready ->
+    initializeTodoApp("todo_component", todos: #{ Todo.getInitialData })

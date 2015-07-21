@@ -1,0 +1,13 @@
+%ul.media-list
+  %li.media
+    .media-left.pull-left
+      %a{ href: movings_path }
+        = gravatar_for current_user.email
+      %figcaption.text-center
+        = link_to "change", "http://gravatar.com/emails"
+    .media-body
+      %h2.media-heading
+        = current_user.email
+      %span.moving_count.badge
+        = pluralize(current_user.movings.count, "moving")
+      = link_to "New moving", new_moving_path, class: "btn btn-primary pull-right"

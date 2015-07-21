@@ -1,11 +1,10 @@
 - provide(:title, "Todos")
 
-.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
-  %h1.page-header Todos
+%h1.page-header Todos
 
-  #todo_component
+#todo_component
 
 :coffee
 
   $(document).ready ->
-    initializeTodoApp("todo_component", todos: #{ @todos })
+    initializeTodoApp("todo_component", todos: #{ Todo.getInitialData })

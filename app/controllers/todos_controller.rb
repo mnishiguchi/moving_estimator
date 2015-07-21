@@ -4,7 +4,6 @@ class TodosController < ApplicationController
 
   # Initializes the todo app with initial JSON data.
   def index
-    @todos = Todo.getInitialData
   end
 
   # Creates a new todo item via Ajax.

@@ -14,7 +14,7 @@
   onAddTodo: (payload) ->
     # Update UI
     new_todo = payload.new_todo
-    @todos.push(new_todo)
+    @todos.unshift(new_todo)
     @emit('change')
 
   onToggleTodo: (payload) ->
