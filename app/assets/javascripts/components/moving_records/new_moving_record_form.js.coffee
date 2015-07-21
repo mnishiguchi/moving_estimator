@@ -157,13 +157,19 @@ R = React.DOM
 
   componentWillUnmount: ->
     # Remove the extra HTML that jQuery UI autocomplete creates.
-    $(React.findDOMNode(@refs.name)).autocomplete('destroy')
-    $(React.findDOMNode(@refs.room)).autocomplete('destroy')
-    $(React.findDOMNode(@refs.category)).autocomplete('destroy')
+    $name = $(React.findDOMNode(@refs.name))
+    $name.autocomplete('destroy') if $name.data('ui-autocomplete') != undefined
+
+    $room = $(React.findDOMNode(@refs.room))
+    $room.autocomplete('destroy') if $room.data('ui-autocomplete') != undefined
+
+    $category = $(React.findDOMNode(@refs.category))
+    $category.autocomplete('destroy') if $category.data('ui-autocomplete') != undefined
 
   updateAutocomplete: ->
     # Sets up the jQuery UI autocomplete on the real DOM with the provided data.
     # When an autocomplete item is selected, updates the value accordingly.
+    return if not @props.itemNameSuggestions
     $(React.findDOMNode(@refs.name)).autocomplete
       source: Object.keys(@props.itemNameSuggestions)
       select: (e, ui) =>
@@ -172,10 +178,12 @@ R = React.DOM
         @setState volume:   @props.itemNameSuggestions[itemName]
         @setState quantity: 1
 
+    return if not @props.roomSuggestions
     $(React.findDOMNode(@refs.room)).autocomplete
       source: @props.roomSuggestions
       select: (e, ui) => @setState room: ui.item.value
 
+    return if not @props.categorySuggestions
     $(React.findDOMNode(@refs.category)).autocomplete
       source: @props.categorySuggestions
       select: (e, ui) => @setState category: ui.item.value
