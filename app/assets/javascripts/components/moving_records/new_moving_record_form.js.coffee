@@ -1,12 +1,11 @@
-## Required properties
-# handleNewRecord
-# itemNameSuggestions
-# roomSuggestions
-# categorySuggestions
-
 R = React.DOM
 
 @NewMovingRecordForm = React.createClass
+  propTypes:
+    handleNewRecord:     React.PropTypes.func
+    itemNameSuggestions: React.PropTypes.object # {sofa: 30, desk: 10, ...}
+    roomSuggestions:     React.PropTypes.arrayOf(React.PropTypes.string)
+    categorySuggestions: React.PropTypes.arrayOf(React.PropTypes.string)
 
   getInitialState: ->
     # params
