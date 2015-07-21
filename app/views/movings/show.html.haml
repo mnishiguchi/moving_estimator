@@ -1,10 +1,10 @@
 - provide(:title, @moving.title)
 
-%h1.page-header
+%h1
   = @moving.title
   = link_to "Edit", edit_moving_path(@moving), class: "btn btn-primary btn-sm pull-right"
-
-  %small= @moving.description
+%i.lead.text-muted= @moving.description
+%hr/
 
 %p.pull-right
   Download:

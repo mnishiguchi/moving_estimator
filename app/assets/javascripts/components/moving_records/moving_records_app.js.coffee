@@ -19,7 +19,7 @@ R = React.DOM
 
   addRecord: (record) ->
     records = React.addons.update(@state.records, { $unshift: [record] })
-    @setState records: records
+    @setState { records: records, formDisplay: false }
 
   deleteRecord: (record) ->
     index = @state.records.indexOf record
@@ -32,9 +32,13 @@ R = React.DOM
     records = React.addons.update(@state.records, { $splice: [[index, 1, newRecord]] })
     @replaceState records: records
 
-  handleToggleForm: (e) ->
+  handleDisplayTable: (e) ->
     e.preventDefault()
-    @setState(formDisplay: not @state.formDisplay)
+    @setState(formDisplay: false)
+
+  handleDisplayForm: (e) ->
+    e.preventDefault()
+    @setState(formDisplay: true)
 
   noticeProcessingAjax: ->
     R.div
@@ -44,57 +48,55 @@ R = React.DOM
       R.div null,
         "Processing... If this is taking long, please make sure you are online."
 
+  chartsPanelHeading: ->
+    R.div
+      className: 'panel-heading'
+      R.div
+        className: "row"
+        R.div
+          className: "col-xs-3"
+          R.div
+            className: "fa fa-home fa-5x"
+          R.div
+            className: "fa fa-truck fa-3x"
+        R.div
+          className: "col-xs-9 text-right"
+          R.div
+            className: 'huge'
+            "Total: #{@totalVolume()}"
+          R.div null,
+            "cubic feet"
+
+  chartsPanelBody: ->
+    R.div
+      className: 'panel-body'
+      R.div
+        className: 'row text-center'
+        R.div
+          className: 'col-sm-6'
+          React.createElement ChartComponent("Bar"),
+            name: "barChart"
+            data: @dataForBarChart()
+            height: 200
+            width:  400
+        R.div
+          className: 'col-sm-6'
+          React.createElement ChartComponent("Pie"),
+            name: "pieChart"
+            data: @dataForPieChart()
+            height: 200
+            width:  200
+
   chartsPanel: ->
     R.div
       className: "panel panel-blue"
-      R.div
-        className: 'panel-heading'
-        R.div
-          className: "row"
-          R.div
-            className: "col-xs-3"
-            R.div
-              className: "fa fa-home fa-5x"
-            R.div
-              className: "fa fa-truck fa-3x"
-          R.div
-            className: "col-xs-9 text-right"
-            R.div
-              className: 'huge'
-              "Total: #{@totalVolume()}"
-            R.div null,
-              "cubic feet"
-      R.div
-        className: 'panel-body'
-        R.div
-          className: 'row text-center'
-          R.div
-            className: 'col-sm-6'
-            React.createElement ChartComponent("Bar"),
-              name: "barChart"
-              data: @dataForBarChart()
-              height: 200
-              width:  400
-          R.div
-            className: 'col-sm-6'
-            React.createElement ChartComponent("Pie"),
-              name: "pieChart"
-              data: @dataForPieChart()
-              height: 200
-              width:  200
-      R.hr null
+      @chartsPanelHeading()
+      @chartsPanelBody() if @state.records.length
 
   addForm: ->
     R.div null,
-      R.h2
-        onClick: @handleToggleForm
-        style: if @state.formDisplay then {} else {color: "#ABC"}
+      R.h2 null,
         "Add a new item"
-        R.button
-          onClick: @handleToggleForm
-          className: "toggle_show_hide btn pull-right #{if @state.formDisplay then 'btn-default' else 'btn-primary'}"
-          if @state.formDisplay then "hide form" else "show form"
-
       if @state.formDisplay
         React.createElement NewMovingRecordForm,
           className: "new_record_form"
@@ -104,17 +106,45 @@ R = React.DOM
           categorySuggestions: @props.categorySuggestions
       R.hr null
 
+  tabs: ->
+    R.ul
+      className: "nav nav-tabs"
+      role: 'tablist'
+      R.li
+        className: if not @state.formDisplay then "active" else ""
+        R.a
+          href:    "#tab_moving_items"
+          onClick: @handleDisplayTable
+          "All items"
+      R.li
+        className: if @state.formDisplay then "active" else ""
+        R.a
+          href:   "#tab_new_item"
+          onClick: @handleDisplayForm
+          "Add new item"
+
+  tabContents: ->
+    R.div
+      className: "tab-content"
+      R.div
+        id: "tab_moving_items"
+        className: if not @state.formDisplay then "tab-pane fade active in" else "tab-pane fade"
+        React.createElement Records,
+          records:            @state.records
+          handleDeleteRecord: @deleteRecord
+          handleUpdateRecord: @updateRecord
+      R.div
+        id: "tab_new_item"
+        className: if @state.formDisplay then "tab-pane fade active in" else "tab-pane fade"
+        @addForm()
+
   render: ->
     R.div
       className: "app_wrapper"
       @noticeProcessingAjax() if @state.ajax
       @chartsPanel()
-      @addForm()
-
-      React.createElement Records,
-        records: @state.records,
-        handleDeleteRecord: @deleteRecord,
-        handleUpdateRecord: @updateRecord
+      @tabs()
+      @tabContents()
 
   shuffleArray: (a) ->
     i = a.length
