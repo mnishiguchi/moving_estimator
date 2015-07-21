@@ -168,8 +168,9 @@ R = React.DOM
       source: Object.keys(@props.itemNameSuggestions)
       select: (e, ui) =>
         itemName = ui.item.value
-        @setState name:   itemName
-        @setState volume: @props.itemNameSuggestions[itemName]
+        @setState name:     itemName
+        @setState volume:   @props.itemNameSuggestions[itemName]
+        @setState quantity: 1
 
     $(React.findDOMNode(@refs.room)).autocomplete
       source: @props.roomSuggestions
