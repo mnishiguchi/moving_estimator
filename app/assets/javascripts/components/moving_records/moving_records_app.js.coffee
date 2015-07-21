@@ -82,15 +82,10 @@ R = React.DOM
               data: @dataForPieChart()
               height: 200
               width:  200
-
-  render: ->
-    R.div
-      className: "app_wrapper"
-      @noticeProcessingAjax() if @state.ajax
-
-      @chartsPanel()
       R.hr null
 
+  addForm: ->
+    R.div null,
       R.h2
         onClick: @handleToggleForm
         style: if @state.formDisplay then {} else {color: "#ABC"}
@@ -108,6 +103,13 @@ R = React.DOM
           roomSuggestions: @props.roomSuggestions
           categorySuggestions: @props.categorySuggestions
       R.hr null
+
+  render: ->
+    R.div
+      className: "app_wrapper"
+      @noticeProcessingAjax() if @state.ajax
+      @chartsPanel()
+      @addForm()
 
       React.createElement Records,
         records: @state.records,
