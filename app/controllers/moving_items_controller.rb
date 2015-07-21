@@ -7,7 +7,15 @@ class MovingItemsController < ApplicationController
   before_action :correct_user!, only: [:edit, :update, :destroy]
   after_action  :update_rooms,  only: [:create, :update]
 
-  # Note: A list of items is displayed in Movings#show page.
+  # Export csv file
+  def index
+    moving_items = @moving.moving_items
+    respond_to do |format|
+      format.json { render json: moving_items }  # for debug
+      format.csv  { send_data moving_items.to_csv,
+                    filename: "#{@moving.title}-items-#{Date.today}.csv" }
+    end
+  end
 
   # Creates the item to database via JSON
   def create

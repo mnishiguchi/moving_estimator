@@ -6,7 +6,11 @@
 
   %small= @moving.description
 
+%p
+  Download:
+  = link_to "CSV", moving_items_path(format: "csv")
+
 = react_component 'MovingRecordsApp', { data: @moving_items,
-                   itemNameSuggestions: Hash[*Ingredient.pluck(:name, :volume).flatten],
+                   itemNameSuggestions: Hash[Ingredient.pluck(:name, :volume)],
                    roomSuggestions:     Room.all.pluck(:name),
                    categorySuggestions: @moving.moving_items.pluck(:category).uniq! }

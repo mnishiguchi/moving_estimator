@@ -26,6 +26,25 @@ class MovingItem < ActiveRecord::Base
   validates :category,    presence: true,  length: { maximum: 50 }
   validates :description, presence: false, length: { maximum: 200 }
 
+  class << self
+
+    def to_csv(options = {})  # e.g., headers
+      attributes = %w(name volume quantity room category description)
+      moving = first.moving
+
+      CSV.generate(options) do |csv|
+        csv << [ Time.zone.now.getlocal ]
+        csv << [ moving.title ]
+        csv << [ moving.description ]
+        csv << []
+        csv << attributes
+        all.each do |item|
+          csv << attributes.map{ |attr| item.send(attr) }
+        end
+      end
+    end
+  end
+
   private
 
     # Converts the input to all lower-case.
