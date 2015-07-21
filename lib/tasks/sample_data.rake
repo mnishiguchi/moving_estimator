@@ -102,5 +102,5 @@ def household_goods
   ]
   goods.map { |w| w.gsub!(/_/, " ") }  # remove underscores
   goods = goods.each_slice(2).to_a     # array of key-value pairs
-  goods = goods.to_h                   # hash
+  goods = Hash[goods]                  # hash
 end
