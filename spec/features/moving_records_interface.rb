@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Moving records interface", type: :feature do
+feature "Moving records interface", type: :feature do
 
   let(:user) { FactoryGirl.create(:user) }
 
@@ -76,26 +76,29 @@ describe "Moving records interface", type: :feature do
       expect(page).to have_title(full_title(moving.title))
     end
 
-    it "has moving records component" do
-      expect(page).to have_selector('canvas', count: 2)
-      expect(page).to have_selector('ul.nav.nav-tabs')
-      expect(page).to have_selector('div.tab-content')
+    it "has a moving records component" do
+      expect(page).to have_selector('canvas', count: 2) # two charts
+      expect(page).to have_selector('ul.nav.nav-tabs')  # tabs
+      expect(page).to have_selector('div.tab-content')  # tab contents
       expect(page).to have_selector('table')
     end
 
     describe "moving records component" do
       describe "charts panel" do
-        it "has total volume"
-        it "has a bar chart"
-        it "has a pie chart"
+        it "has a total volume" do
+          items = moving.moving_items
+          subtotals = items.map { |item| item.volume * item.quantity }
+          total_volume = subtotals.inject(&:+).to_i
+          expect(page).to have_content(total_volume)
+        end
       end
 
       describe "tabs" do
-        describe "moving records table" do
+        describe "click the first tab" do
           it "has a table"
         end
 
-        describe "new record form" do
+        describe "click the second tab" do
           it "has a form"
         end
       end

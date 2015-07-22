@@ -1,0 +1,36 @@
+/* Remove effect added by tableSorter */
+th:focus { outline: 0 none; }
+
+/* Add arrows */
+// http://astronautweb.co/snippet/font-awesome/
+
+th.tablesorter-headerUnSorted span.arrow,
+th.tablesorter-headerAsc span.arrow,
+th.tablesorter-headerDesc span.arrow {
+    position: relative;
+}
+
+th.tablesorter-headerUnSorted span.arrow:before {
+  content: "\f0dc";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  color: #ABC;
+}
+
+th.tablesorter-headerAsc span.arrow:before {
+  content: "\f0de";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+}
+
+th.tablesorter-headerDesc span.arrow:before {
+  content: "\f0dd";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+}

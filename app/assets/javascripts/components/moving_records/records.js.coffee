@@ -16,12 +16,19 @@ R = React.DOM
         R.thead null,
           R.tr null,
             R.th null, 'Name'
+              R.span className: "arrow"
             R.th null, 'Volume'
+              R.span className: "arrow"
             R.th null, 'Quantity'
+              R.span className: "arrow"
             R.th null, 'Subtotal'
+              R.span className: "arrow"
             R.th null, 'Room'
+              R.span className: "arrow"
             R.th null, 'Category'
+              R.span className: "arrow"
             R.th null, 'Description'
+              R.span className: "arrow"
             R.th null, ""
             R.th null, ""
         R.tbody null,
