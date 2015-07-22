@@ -104,7 +104,6 @@ R = React.DOM
           itemNameSuggestions: @props.itemNameSuggestions
           roomSuggestions: @props.roomSuggestions
           categorySuggestions: @props.categorySuggestions
-      R.hr null
 
   tabs: ->
     R.ul
