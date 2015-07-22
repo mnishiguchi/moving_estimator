@@ -34,11 +34,11 @@ R = React.DOM
 
   handleDisplayTable: (e) ->
     e.preventDefault()
-    @setState(formDisplay: false)
+    @setState(formDisplay: false) if @state.formDisplay
 
   handleDisplayForm: (e) ->
     e.preventDefault()
-    @setState(formDisplay: true)
+    @setState(formDisplay: true) if not @state.formDisplay
 
   noticeProcessingAjax: ->
     R.div
