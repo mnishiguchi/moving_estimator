@@ -11,6 +11,7 @@ R = React.DOM
       className: 'moving_records table-responsive'
       R.h2 null, "All items"
       R.table
+        id:        "moving_records"
         className: 'table table-bordered table-hover'
         R.thead null,
           R.tr null,
@@ -35,3 +36,6 @@ R = React.DOM
     R.div null,
       if @props.records.length > 0
         @dataTable()
+
+  componentDidMount: ->
+    $("table#moving_records").tablesorter()

@@ -15,3 +15,9 @@
                    itemNameSuggestions: Hash[Ingredient.pluck(:name, :volume)],
                    roomSuggestions:     Room.all.pluck(:name),
                    categorySuggestions: @moving.moving_items.pluck(:category).uniq! }
+
+:css
+
+  th:focus {
+      outline: 0 none;
+  }
