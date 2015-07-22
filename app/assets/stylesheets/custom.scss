@@ -18,6 +18,11 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: middle;
 }
 
+// Make the borders of table rows consistent
+tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
 #main_container .alert {
   margin-top: 15px;
 }

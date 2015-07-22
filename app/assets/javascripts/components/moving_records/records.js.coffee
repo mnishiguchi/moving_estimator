@@ -12,7 +12,7 @@ R = React.DOM
       R.h2 null, "All items"
       R.table
         id:        "moving_records"
-        className: 'table table-bordered table-hover'
+        className: 'table table-hover'
         R.thead null,
           R.tr null,
             R.th null, 'Name'
