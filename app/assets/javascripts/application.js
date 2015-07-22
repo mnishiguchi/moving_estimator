@@ -4,9 +4,9 @@
 //= require bootstrap
 //= require turbolinks
 //= require jquery-ui/autocomplete
+//= require jquery.tablesorter
 //= require react
 //= require react_ujs
-//= require react-bootstrap
 //= require fluxxor
 //= require growl
 //= require Chart

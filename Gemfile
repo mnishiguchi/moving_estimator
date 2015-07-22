@@ -8,7 +8,7 @@ gem 'bower-rails', '~> 0.9.2'
 source 'https://rails-assets.org' do
   gem 'rails-assets-fluxxor'
   gem 'rails-assets-growl'
-  gem 'rails-assets-react-bootstrap'
+  gem 'rails-assets-jquery.tablesorter'
 end
 
 # Default

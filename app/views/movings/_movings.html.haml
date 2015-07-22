@@ -1,8 +1,10 @@
 .table-responsive{ style: "margin-bottom: 0;" }
-  %table.table.table-hover{ style: "margin-bottom: 0;" }
+  %table#movings.table.table-hover{ style: "margin-bottom: 0;" }
     %thead
       %tr
-        %th{ colspan: "4" }
+        %th= fa_icon("fw sort")
+        %th= fa_icon("fw sort")
+        %th{ span: "2" }
     %tbody
     - @movings.each do |m|
       %tr{ style: "border-bottom: 1px solid #ddd;" }
@@ -17,3 +19,17 @@
           = link_to fa_icon("fa trash", text: "delete"), moving_path(m),
           method: :delete, data: { confirm: "Are you sure?" },
             class: "btn btn-sm btn-default "
+
+:coffee
+
+  $(document).ready ->
+    $("table#movings").tablesorter()
+
+:css
+
+  th:focus {
+      / border-color: #FFF;
+      / box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6);
+      outline: 0 none;
+  }
+
