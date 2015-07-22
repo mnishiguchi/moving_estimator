@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-# ruby 2.2.1p85 (2015-02-26 revision 49769) [x86_64-darwin14]
+ruby '2.2.1'
+
 gem 'rails',       '~> 4.2.1'
 gem 'pg',          '~> 0.17.1'
 
@@ -20,16 +21,16 @@ gem 'turbolinks',   '~> 2.5.3'
 gem 'jbuilder',     '~> 2.0'
 gem 'sdoc',         '~> 0.4.0', group: :doc
 # Views/Styles
-gem 'haml-rails',              '~> 0.9.0'   # For HAML.
+gem 'haml-rails',              '~> 0.9.0'
 gem 'bootstrap-sass',          '~> 3.2.0.0' # Converts Less to Sass.
 gem 'will_paginate',           '~> 3.0.7'   # For pagination.
 gem 'bootstrap-will_paginate', '~> 0.0.10'  # For bootstrap pagination style.
-gem 'font-awesome-rails',      '~> 4.3.0.0' # For icons.
+gem 'font-awesome-rails',      '~> 4.3.0.0'
 gem 'jquery-ui-rails',         '~> 5.0.5'   # For autocomplete etc
 gem 'chart-js-rails'
 # React
-gem 'react-rails',             '~> 1.0.0'   # Compiles JSX.
-gem 'sprockets-coffee-react',  '~> 3.0.1'   # Preprocessor for Coffeescript with React JSX (CJSX).
+gem 'react-rails',             '~> 1.0.0'
+gem 'sprockets-coffee-react',  '~> 3.0.1'
 # gem 'browserify-rails',        '~> 1.0.1'   # Adds CommonJS module support to Sprockets (via Browserify)
 # Others
 gem 'jquery-turbolinks',       '~> 2.1.0'   # For jQuery to work with turbolinks.
@@ -40,30 +41,31 @@ gem 'growl',                   '~> 1.0.3'   # Growlnotifies bindings.
 gem 'pg_search',               '~> 1.0.3'   # Named scopes that take advantage of PostgreSQL's full text search
 
 group :development do
-  gem 'dotenv-rails',       '~> 2.0.1'  # Autoloads dotenv in Rails.
-  gem 'rails-erd',          '~> 1.3.1'  # Run bundle exec erd to print an entity-relationship diagram.
+  gem 'dotenv-rails' # Autoloads dotenv in Rails.
+  gem 'rails-erd'    # Run bundle exec erd to print an entity-relationship diagram.
 end
 
 group :development, :test do
   gem 'rspec-rails',        '~> 3.3.2'
-  gem 'guard-rspec',        '~> 4.5.0'  # Automates the running of the tests.
-  gem 'factory_girl_rails', '~> 4.5.0'  # Alternative to Fixture.
-  gem 'byebug',             '~> 3.4.0'  # The byebug prompt in the terminal.
-  gem 'better_errors',      '~> 2.1.1'  # An error page on the browser.
-  gem 'binding_of_caller',  '~> 0.7.2'  # For the binding of a method's caller.
-  gem 'annotate',           '~> 2.6.8'  # Annotates models.
-  gem 'awesome_print',      '~> 1.6.1'  # Pretty-prints Ruby objects.
-  gem 'quiet_assets',       '~> 1.1.0'  # Turns off Rails asset pipeline log.
-  gem 'spring',             '~> 1.1.3'
+  gem 'guard-rspec',        '~> 4.5.0'
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'byebug'            # The byebug prompt in the terminal.
+  gem 'better_errors'     # An error page on the browser.
+  gem 'binding_of_caller' # For the binding of a method's caller.
+  gem 'annotate'          # Annotates models.
+  gem 'awesome_print'     # Pretty-prints Ruby objects.
+  gem 'quiet_assets'      # Turns off Rails asset pipeline log.
+  gem 'spring', '~> 1.1.3'
 end
 
 group :test do
-  gem 'selenium-webdriver', '~> 2.45.0'
-  gem 'capybara',           '~> 2.4.4'
-  gem 'database_cleaner',   '~> 1.4.1'
-  gem 'launchy',            '~> 2.4.3'
+  gem 'capybara'
+  gem 'selenium-webdriver' # default driver
+  gem "capybara-webkit"    # headless driver for js
+  gem 'database_cleaner'
+  gem 'launchy'
   gem 'shoulda-matchers', require: false
-  gem 'json_spec',          '~> 1.1.4'
+  gem 'json_spec'
 end
 
 group :production do
