@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'capybara/poltergeist'
 
 feature "Moving records interface", type: :feature do
 
@@ -55,7 +56,7 @@ feature "Moving records interface", type: :feature do
     end
   end
 
-  describe "visit a moving page", js: true do
+  describe "visit a moving page", js: true, driver: :poltergeist do
     let(:moving) do
       moving = user.movings.create(FactoryGirl.attributes_for(:moving))
         5.times do
