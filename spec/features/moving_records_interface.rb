@@ -95,12 +95,13 @@ feature "Moving records interface", type: :feature do
       end
 
       describe "tabs" do
-        describe "click the first tab" do
-          it "has a table"
-        end
+        it "has a table"
 
         describe "click the second tab" do
           it "has a form"
+        end
+        describe "click the first tab" do
+          it "has a table"
         end
       end
     end

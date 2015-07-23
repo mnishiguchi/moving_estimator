@@ -20,7 +20,8 @@ th.tablesorter-headerUnSorted span.arrow:before {
 }
 
 th.tablesorter-headerAsc span.arrow:before {
-  content: "\f0de";
+  // fa-sort-alpha-asc
+  content: "\f15d";
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
@@ -28,7 +29,8 @@ th.tablesorter-headerAsc span.arrow:before {
 }
 
 th.tablesorter-headerDesc span.arrow:before {
-  content: "\f0dd";
+  // fa-sort-alpha-desc
+  content: "\f15e";
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
