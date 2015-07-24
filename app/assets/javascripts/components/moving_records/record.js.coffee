@@ -61,16 +61,13 @@ R = React.DOM
     .fail (XHR, textStatus, errorThrown) =>
       if error_messages = JSON.parse(XHR.responseText)
         for k, v of error_messages
-          $.growl.error title: "#{ @capitalize(k) } #{ v }", message: ""
+          $.growl.error title: "#{ capitalize(k) } #{ v }", message: ""
       else
         $.growl.error title: "Error updating record", message: "#{errorThrown}"
       console.error("#{textStatus}: #{errorThrown}")
 
   calculateSubtotal: ->
     @state.volume * @state.quantity
-
-  capitalize: (string) ->
-    string.charAt(0).toUpperCase() + string.slice(1)
 
   # A table row with the data passed in from the parent node.
   recordRow: ->
@@ -99,14 +96,14 @@ R = React.DOM
       R.td
         className: ""
         R.button
-          className: 'btn btn-warning btn-sm'
+          className: 'edit btn btn-warning btn-sm'
           onClick: @handleToggle
           R.div
             className: 'fa fa-pencil'
       R.td
         className: ""
         R.button
-          className: 'btn btn-danger btn-sm'
+          className: 'delete btn btn-danger btn-sm'
           onClick: @handleDelete
           R.div
             className: 'fa fa-trash'
@@ -166,14 +163,14 @@ R = React.DOM
       R.td
         className: ""
         R.button
-          className: 'btn btn-success btn-sm'
+          className: 'update btn btn-success btn-sm'
           onClick: @handleEdit
           R.div
             className: 'fa fa-hdd-o'
       R.td
         className: ""
         R.button
-          className: 'btn btn-default btn-sm'
+          className: 'undo btn btn-default btn-sm'
           onClick: @handleToggle
           R.div
             className: 'fa fa-undo'

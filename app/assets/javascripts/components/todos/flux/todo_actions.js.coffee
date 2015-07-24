@@ -20,7 +20,7 @@
     .fail (XHR, textStatus, errorThrown) =>
       if error_messages = JSON.parse(XHR.responseText)
         for k, v of error_messages
-          $.growl.error title: "#{ @capitalize(k) } #{v}", message: ""
+          $.growl.error title: "#{ capitalize(k) } #{v}", message: ""
       else
         $.growl.error title: "Error adding todo", message: "#{errorThrown}"
       console.error("#{textStatus}: #{errorThrown}")
@@ -40,7 +40,7 @@
     .fail (XHR, textStatus, errorThrown) =>
       if error_messages = JSON.parse(XHR.responseText)
         for k, v of error_messages
-          $.growl.error title: "#{ @capitalize(k) } #{v}", message: ""
+          $.growl.error title: "#{ capitalize(k) } #{v}", message: ""
       else
         $.growl.error title: "Error toggling todo", message: "#{errorThrown}"
       console.error("#{textStatus}: #{errorThrown}")
@@ -59,7 +59,7 @@
     .fail (XHR, textStatus, errorThrown) =>
       if error_messages = JSON.parse(XHR.responseText)
         for k, v of error_messages
-          $.growl.error title: "#{ @capitalize(k) } #{v}", message: ""
+          $.growl.error title: "#{ capitalize(k) } #{v}", message: ""
       else
         $.growl.error title: "Error updating todo", message: "#{errorThrown}"
       console.error("#{textStatus}: #{errorThrown}")
@@ -76,7 +76,7 @@
     .fail (XHR, textStatus, errorThrown) =>
       if error_messages = JSON.parse(XHR.responseText)
         for k, v of error_messages
-          $.growl.error title: "#{ @capitalize(k) } #{v}", message: ""
+          $.growl.error title: "#{ capitalize(k) } #{v}", message: ""
       else
         $.growl.error title: "Error deleting todo", message: "#{errorThrown}"
       console.error("#{textStatus}: #{errorThrown}")

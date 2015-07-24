@@ -11,4 +11,5 @@
 //= require growl
 //= require Chart
 //= require components
+//= require utilities
 //= requre_tree .

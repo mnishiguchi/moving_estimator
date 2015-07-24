@@ -56,7 +56,7 @@ feature "Moving records interface", type: :feature do
     end
   end
 
-  describe "visit a moving page", js: true, driver: :poltergeist do
+  describe "visit a moving page", js: true, driver: :poltergeist, js_errors: false do
     let(:moving) do
       moving = user.movings.create(FactoryGirl.attributes_for(:moving))
         5.times do
@@ -64,7 +64,7 @@ feature "Moving records interface", type: :feature do
         end
       moving
     end
-    after(:all) { MovingItem.delete_all }
+    # after(:all) { MovingItem.delete_all }
 
     before { visit moving_path(moving) }
 
@@ -95,13 +95,61 @@ feature "Moving records interface", type: :feature do
       end
 
       describe "tabs" do
-        it "has a table"
+        it { expect(page).to have_selector('table') }
 
         describe "click the second tab" do
-          it "has a form"
+          before { click_link "Add new item" }
+          it "has a form" do
+            expect(page).to have_content("Add a new item")
+            expect(page).to have_selector('form')
+          end
+
+          describe "form" do
+            let(:submit) { "Add item" }
+
+            describe "with invalid information" do
+              it { expect(page).to have_button(submit, disabled: true) }
+            end
+
+            describe "with valid information" do
+              let(:item_name) { Faker::Commerce.product_name.upcase! }
+
+              it "create a new item and insert it into the table" do
+                fill_in "name",     with: item_name
+                fill_in "volume",   with: "3"
+                fill_in "quantity", with: "1"
+                fill_in "category", with: "local"
+                fill_in "room",     with: "living room"
+                click_button submit
+                expect(page).to have_content(item_name.downcase!)
+                expect(MovingItem.last.name).to eq item_name
+              end
+            end
+          end
         end
+
         describe "click the first tab" do
-          it "has a table"
+          before { click_link "All items" }
+          it "has a table" do
+            expect(page).to have_content("All items")
+            expect(page).to have_selector('table')
+          end
+
+          describe "table" do
+            describe "normal mode" do
+              it "has edit buttons and delete buttons" do
+                expect(page).to have_selector('button.edit')
+                expect(page).to have_selector('button.delete')
+              end
+            end
+            describe "edit mode" do
+              before { first("button.edit").click }
+              it "has update buttons and undo buttons" do
+                expect(page).to have_selector('button.update')
+                expect(page).to have_selector('button.undo')
+              end
+            end
+          end
         end
       end
     end
