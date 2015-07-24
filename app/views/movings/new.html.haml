@@ -1,28 +1,20 @@
 - provide(:title, "New moving")
 
-.row
-  .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
+/ .row
+/   .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
 
-    %h1.page-header New moving
+%h1.page-header New moving
 
-    %ol.breadcrumb
-      %li= link_to "My movings", root_path
-      %li.active New moving
+%ol.breadcrumb
+  %li= link_to "My movings", root_path
+  %li.active New moving
 
-    = form_for(@moving) do |f|
+= form_for(@moving) do |f|
 
-      = render 'shared/error_messages', object: f.object
+  = render 'shared/error_messages', object: f.object
 
-      .form-group
-        = f.label :title
-        = f.text_field :title, class: 'form-control',
-        placeholder: "Name this moving"
+  = render 'fields', f: f
 
-      .form-group
-        = f.label :description
-        = f.text_area :description, class: 'form-control', style: "min-height: 100px;",
-          placeholder: "Write description"
-
-      .form-group{ style: "width: 100%" }
-        = f.button "Create moving", class: "submit btn btn-success btn-block",
-          data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
+  .form-group{ style: "width: 100%" }
+    = f.button "Create moving", class: "submit btn btn-success btn-block",
+      data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }

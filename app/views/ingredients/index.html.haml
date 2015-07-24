@@ -8,7 +8,7 @@
   = form_for @search, url: ingredients_path, html: {method: :get}, class: "form-horizontal" do |f|
     .form-group
       .input-group
-        = f.search_field :q, class: "form-control"
+        = f.search_field :q, maxLength: "50", class: "form-control"
         %span.input-group-btn
           = f.button fa_icon("search"), class: "btn btn-default"
 

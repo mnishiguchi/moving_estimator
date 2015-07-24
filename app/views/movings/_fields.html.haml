@@ -1,0 +1,106 @@
+%section.moving_info
+  %h3 Basic info
+
+  .form-group
+    = f.label :title, "Moving project name"
+    = f.text_field :title, class: 'form-control',
+    placeholder: "Name this moving"
+
+    .form-group
+      = f.label :move_date, "Moving Date"
+      = f.date_field :move_date, class: 'form-control'
+
+  .form-group
+    .table-responsive
+      %table.table.table-condensed#move_type
+        %thead
+          %tr
+            %th= f.label :move_type, ""
+            %th= f.label :dwelling_type, ""
+            %th= f.label :dwelling_sqft, "Square footage of current residence"
+        %tbody
+          %tr
+            %td= f.select :move_type, move_types, { include_blank: "- Select one -" }
+            %td= f.select :dwelling_type, dwelling_types, { include_blank: "- Select one -" }
+            %td
+              = f.number_field :dwelling_sqft
+              sq.ft
+
+  .form-group
+    .table-responsive
+      %table.table.table-condensed
+        %thead
+          %tr
+            %th{ colspan: 4 } Rooms in current residence
+        %tbody
+          -Room.all.each_slice(4) do |group|
+            %tr
+              - group.each do |room|
+                %td
+                  = check_box_tag 'room_ids[]', room.id
+                  = room.name
+
+.row
+  %section.moving_from.col-sm-6
+    %h3 Moving from
+
+    .form-group
+      = f.label :street_from, "Street", class: "col-xs-4"
+      = f.text_field :street_from, class: "col-xs-8"
+
+    .form-group
+      = f.label :city_from, "City", class: "col-xs-4"
+      = f.text_field :city_from, class: "col-xs-8"
+
+    .form-group
+      = f.label :state_from, "State", class: "col-xs-4"
+      = f.select :state_from, us_states, { include_blank: "- Select one -" }, class: "col-xs-8"
+
+    .form-group
+      = f.label :zip_from, "Zip", class: "col-xs-4"
+      = f.text_field :zip_from, class: "col-xs-8"
+
+  %section.moving_to.col-sm-6
+    %h3 Moving to
+
+    .form-group
+      = f.label :street_to, "Street", class: "col-xs-4"
+      = f.text_field :street_to, class: "col-xs-8"
+
+    .form-group
+      = f.label :city_to, "City", class: "col-xs-4"
+      = f.text_field :city_to, class: "col-xs-8"
+
+    .form-group
+      = f.label :state_to, "State", class: "col-xs-4"
+      = f.select :state_to, us_states, { include_blank: "- Select one -" }, class: "col-xs-8"
+
+    .form-group
+      = f.label :zip_to, "Zip", class: "col-xs-4"
+      = f.text_field :zip_to, class: 'col-xs-8'
+
+%h3 Memo
+
+.form-group
+  = f.text_area :description, class: 'form-control', style: "min-height: 100px;",
+    placeholder: "Write description"
+
+:css
+  section.moving_info > .form-group,
+  section.moving_from > .form-group,
+  section.moving_to > .form-group {
+    padding: 0.5em;
+  }
+
+  section.moving_info input[type=text] {
+    margin-bottom: 10px;
+  }
+
+  section.moving_from,
+  section.moving_to {
+    margin-bottom: 30px;
+  }
+
+  table#move_type input[name=zip] {
+    width: 50px;
+  }

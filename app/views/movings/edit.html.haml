@@ -13,15 +13,7 @@
 
       = render 'shared/error_messages', object: f.object
 
-      .form-group
-        = f.label :title
-        = f.text_field :title, class: 'form-control',
-        placeholder: "Name this moving"
-
-      .form-group
-        = f.label :description
-        = f.text_area :description, class: 'form-control', style: "min-height: 100px;",
-          placeholder: "Write description"
+      = render 'fields', f: f
 
       .form-group{ style: "width: 100%" }
         = f.button "Edit moving", class: "submit btn btn-success btn-lg btn-block",

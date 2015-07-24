@@ -80,6 +80,7 @@ R = React.DOM
           R.input
             type:        'number'
             min:         "0"
+            max:         "99"
             step:        "0.5"
             className:   'form-control'
             placeholder: 'Volume'
@@ -91,6 +92,7 @@ R = React.DOM
           R.input
             type:        'number'
             min:         "0"
+            max:         "50"
             className:   'form-control'
             placeholder: 'Quantity'
             name:        'quantity'

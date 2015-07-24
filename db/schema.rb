@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718211253) do
+ActiveRecord::Schema.define(version: 20150724204258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,8 +41,21 @@ ActiveRecord::Schema.define(version: 20150718211253) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "move_type"
+    t.date     "move_date"
+    t.integer  "dwelling_sqft"
+    t.string   "dwelling_type"
+    t.string   "rooms",         default: [],              array: true
+    t.string   "street_from"
+    t.string   "city_from"
+    t.string   "state_from"
+    t.string   "zip_from"
+    t.string   "street_to"
+    t.string   "city_to"
+    t.string   "state_to"
+    t.string   "zip_to"
   end
 
   add_index "movings", ["user_id"], name: "index_movings_on_user_id", using: :btree
