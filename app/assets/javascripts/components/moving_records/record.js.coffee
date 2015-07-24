@@ -24,23 +24,22 @@ R = React.DOM
 
   handleDelete: (e) ->
     e.preventDefault()
-    @setState ajax: true
+    return if not isOnline()
     if confirm("Deleting a record. Are you sure?")
       $.ajax
         method:   'DELETE'
         url:      "/moving_items/#{ @props.record.id }"
         dataType: 'JSON'
       .done (data, textStatus, XHR) =>
-        @setState ajax: false
         @props.handleDeleteRecord @props.record
         $.growl.notice title: "Record deleted", message: data.name
       .fail (XHR, textStatus, errorThrown) =>
-        @setState ajax: false
         $.growl.error title: "Error deleting record", message: "#{errorThrown}"
         console.error("#{textStatus}: #{errorThrown}")
 
   handleEdit: (e) ->
     e.preventDefault()
+    return if not isOnline()
     data =
       name:        React.findDOMNode(@refs.name).value
       volume:      React.findDOMNode(@refs.volume).value
@@ -48,7 +47,7 @@ R = React.DOM
       room:        React.findDOMNode(@refs.room).value
       category:    React.findDOMNode(@refs.category).value
       description: React.findDOMNode(@refs.description).value
-    @setState ajax: true
+
     $.ajax
       method:   'PATCH'
       url:      "/moving_items/#{ @props.record.id }"
@@ -57,11 +56,9 @@ R = React.DOM
         moving_item: data
     .done (data, textStatus, XHR) =>
       @setState edit: false
-      @setState ajax: false
       @props.handleEditRecord(@props.record, data)
       $.growl.notice title: "Record updated", message: data.name
     .fail (XHR, textStatus, errorThrown) =>
-      @setState ajax: false
       if error_messages = JSON.parse(XHR.responseText)
         for k, v of error_messages
           $.growl.error title: "#{ @capitalize(k) } #{ v }", message: ""

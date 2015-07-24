@@ -9,7 +9,6 @@ R = React.DOM
 
   getInitialState: ->
     records: @props.data
-    ajax:    false
     barChartInstance: null
     pieChartInstance: null
     formDisplay:      false
@@ -40,13 +39,13 @@ R = React.DOM
     e.preventDefault()
     @setState(formDisplay: true) if not @state.formDisplay
 
-  noticeProcessingAjax: ->
-    R.div
-      className: "alert alert-warning"
-      R.i
-        className: "fa fa-cog fa-spin fa-3x"
-      R.div null,
-        "Processing... If this is taking long, please make sure you are online."
+  # noticeProcessingAjax: ->
+  #   R.div
+  #     className: "alert alert-warning"
+  #     R.i
+  #       className: "fa fa-cog fa-spin fa-3x"
+  #     R.div null,
+  #       "Processing... If this is taking long, please make sure you are online."
 
   chartsPanelHeading: ->
     R.div
@@ -140,7 +139,6 @@ R = React.DOM
   render: ->
     R.div
       className: "app_wrapper"
-      @noticeProcessingAjax() if @state.ajax
       @chartsPanel()
       @tabs()
       @tabContents()
