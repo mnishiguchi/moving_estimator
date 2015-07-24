@@ -115,13 +115,13 @@ R = React.DOM
       R.td
         className: "col-sm-3"
         R.textarea
-          className: 'form-control'
+          className: 'name form-control'
           defaultValue: @props.record.name
           ref: 'name'
       R.td
         className: "col-sm-1"
         R.input
-          className: 'form-control'
+          className: 'volume form-control'
           type: 'number'
           min:  "0"
           step: "0.5"
@@ -132,7 +132,7 @@ R = React.DOM
       R.td
         className: "col-sm-1"
         R.input
-          className: 'form-control'
+          className: 'quantity form-control'
           type: 'number'
           min:  "0"
           defaultValue: @props.record.quantity
@@ -145,13 +145,13 @@ R = React.DOM
       R.td
         className: "col-sm-2"
         R.textarea
-          className: 'form-control'
+          className: 'room form-control'
           defaultValue: @props.record.room
           ref: 'room'
       R.td
         className: "col-sm-2"
         R.textarea
-          className: 'form-control'
+          className: 'category form-control'
           defaultValue: @props.record.category
           ref: 'category'
       R.td
