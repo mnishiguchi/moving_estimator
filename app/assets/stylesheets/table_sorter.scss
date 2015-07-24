@@ -11,7 +11,8 @@ th.tablesorter-headerDesc span.arrow {
 }
 
 th.tablesorter-headerUnSorted span.arrow:before {
-  content: "\f0dc";
+  // fa-arrows-v
+  content: "\f07d";
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;

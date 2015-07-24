@@ -101,7 +101,7 @@ R = React.DOM
           className: "new_record_form"
           handleNewRecord: @addRecord
           itemNameSuggestions: @props.itemNameSuggestions
-          roomSuggestions: @props.roomSuggestions
+          roomSuggestions:     @props.roomSuggestions
           categorySuggestions: @props.categorySuggestions
 
   tabs: ->
