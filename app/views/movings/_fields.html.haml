@@ -30,13 +30,16 @@
           %th{ colspan: 4 }
             %label.h4 Rooms in current residence
       %tbody
-        -Room.all.each_slice(4) do |group|
+        = f.hidden_field :rooms, multiple: true, value: nil
+        - Room.all.pluck(:id, :name).each_slice(4) do |group|
           %tr
-            - group.each do |room|
+            - group.each do |room_id, name|
+              - options = { multiple: true, checked: @moving.rooms.map(&:id).include?(room_id) }
+              - checked_value, unchecked_value = room_id, nil
               %td
                 %label
-                  = check_box_tag 'room_ids[]', room.id
-                  = room.name
+                  = f.check_box :rooms, options, checked_value, unchecked_value
+                  = name
 
 .row
   %section.moving_from.col-sm-6

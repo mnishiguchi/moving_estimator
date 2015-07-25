@@ -28,6 +28,7 @@ class MovingsController < ApplicationController
                          merge(user_id: current_user.id))
 
     if @moving.save
+      @moving.set_rooms(params[:moving][:rooms])
       flash[:success] = "Moving created"
       redirect_to moving_url(@moving)
     else
@@ -42,6 +43,7 @@ class MovingsController < ApplicationController
   # Updates the moving to database.
   def update
     if @moving.update(moving_params)
+      @moving.set_rooms(params[:moving][:rooms])
       flash[:success] = "Moving updated"
       redirect_to moving_url(@moving)
     else
@@ -60,7 +62,10 @@ class MovingsController < ApplicationController
   private
 
     def moving_params
-      params.require(:moving).permit(:title, :description)
+      params.require(:moving).permit(:title, :description,
+        :move_date, :move_type, :dwelling_type, :dwelling_sqft, :rooms,
+        :street_from, :city_from, :state_from, :zip_from,
+        :street_to, :city_to, :state_to, :zip_to)
     end
 
     # Rejects if a user tries to access another user’s moving.

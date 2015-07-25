@@ -33,14 +33,32 @@ class Moving < ActiveRecord::Base
   validates :title,       presence: true,  length: { maximum: 50 }
   validates :description, presence: false, length: { maximum: 255 }
 
+
   # TODO - update validations
 
-  def add_room(room)
-    rooms.create(moving_id: self.id, room_id: room.id)
+  def set_rooms(room_ids)
+    reject_empty_options!(room_ids)
+    forgetAllRooms
+    rememberRooms(room_ids)
+    self
   end
 
-  def delete_room(room)
-    rooms = rooms.find_by(moving_id: self.id, room_id: room.id)
-    rooms.destroy
-  end
+  private
+
+    def rememberRooms(room_ids)
+      room_ids.each do |room_id|
+        unless MovingRoom.find_or_create_by(moving_id: self.id, room_id: room_id)
+          raise "couldn't save rooms"
+        end
+      end
+    end
+
+    def forgetAllRooms
+      MovingRoom.where(moving_id: self.id).destroy_all
+    end
+
+    # hiddenタグによって生成される空文字のcodeを除去する
+    def reject_empty_options!(room_ids)
+      room_ids.reject!(&:empty?)
+    end
 end
