@@ -7,8 +7,8 @@
 %hr/
 
 %p.pull-right
-  Download:
-  = link_to "CSV", moving_items_path(format: "csv"), class: "badge"
+  = link_to "Download CSV", moving_items_path(format: "csv"), class: "badge"
+  = link_to "Email CSV", "#", class: "badge"
 .clearfix
 
 = react_component 'MovingRecordsApp', { data: @moving_items,

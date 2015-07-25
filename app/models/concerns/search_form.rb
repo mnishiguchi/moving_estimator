@@ -4,16 +4,16 @@ class SearchForm
   attr_accessor :q
 end
 
-### Example ###
+# == Example ==
 
-## Model
+# - Model -
 
 # class Ingredient < ActiveRecord::Base
 #
 #   scope :sorted, ->{ order(name: :asc) }
 #   scope :named, ->(q) { where("name ilike ?", "%#{q}%") }
 
-## View
+# - View -
 
 # .filter_wrapper{ style: "margin-bottom: 20px;" }
 #   = form_for @search, url: ingredients_path, html: {method: :get}, class: "form-horizontal" do |f|
@@ -23,7 +23,7 @@ end
 #         %span.input-group-btn
 #           = f.button fa_icon("search"), class: "btn btn-default"
 
-## Controller
+# - Controller -
 
 # class IngredientsController < ApplicationController
 #

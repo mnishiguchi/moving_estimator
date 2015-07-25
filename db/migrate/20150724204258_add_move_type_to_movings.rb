@@ -5,7 +5,6 @@ class AddMoveTypeToMovings < ActiveRecord::Migration
 
     add_column :movings, :dwelling_sqft, :int
     add_column :movings, :dwelling_type, :string
-    add_column :movings, :rooms, :string, array: true, default: []
 
     add_column :movings, :street_from, :string
     add_column :movings, :city_from, :string
