@@ -27,14 +27,16 @@
     %table.table.table-condensed
       %thead
         %tr
-          %th.h4{ colspan: 4 } Rooms in current residence
+          %th{ colspan: 4 }
+            %label.h4 Rooms in current residence
       %tbody
         -Room.all.each_slice(4) do |group|
           %tr
             - group.each do |room|
               %td
-                = check_box_tag 'room_ids[]', room.id
-                = room.name
+                %label
+                  = check_box_tag 'room_ids[]', room.id
+                  = room.name
 
 .row
   %section.moving_from.col-sm-6
@@ -97,10 +99,10 @@
     margin-bottom: 30px;
   }
 
-  table#move_type thead,
-  table#move_type thead tr,
-  table#move_type thead tr th,
-  table#move_type thead tr th label.h4 {
+  table thead,
+  table thead tr,
+  table thead tr th,
+  table thead tr th label.h4 {
     margin-top: 5px;
     margin-bottom: 5px;
   }

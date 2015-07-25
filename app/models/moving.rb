@@ -33,6 +33,8 @@ class Moving < ActiveRecord::Base
   validates :title,       presence: true,  length: { maximum: 50 }
   validates :description, presence: false, length: { maximum: 255 }
 
+  # TODO - update validations
+
   def add_room(room)
     rooms.create(moving_id: self.id, room_id: room.id)
   end
