@@ -18,6 +18,17 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: middle;
 }
 
+// Make checkbox UI consistent
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+
 // Make the borders of table rows consistent
 tbody tr {
   border-bottom: 1px solid #ddd;

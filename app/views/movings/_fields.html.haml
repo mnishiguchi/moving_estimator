@@ -1,105 +1,124 @@
-%section.moving_info.wrapper
+#movings_fields
 
-  .form-group
-    = f.label :title, "Moving project name", class: "h4"
-    = f.text_field :title, class: 'form-control', placeholder: "Name this moving"
+  %h2 Moving project
 
-  .form-group
-    = f.label :move_date, "Moving Date", class: "h4"
-    = f.date_field :move_date, class: 'form-control'
+  .row
 
-  .table-responsive
-    %table.table.table-condensed#move_type
-      %thead
-        %tr
-          %th= f.label :move_type, "", class: "h4"
-          %th= f.label :dwelling_type, "", class: "h4"
-          %th= f.label :dwelling_sqft, "Square footage of current residence", class: "h4"
-      %tbody
-        %tr
-          %td= f.select :move_type, move_types, { include_blank: "- Select one -" }
-          %td= f.select :dwelling_type, dwelling_types, { include_blank: "- Select one -" }
-          %td
-            = f.number_field :dwelling_sqft, min: 0, max: 99999, step: 50, value: 0
-            sq.ft
+    .form-group.col-sm-6
+      = f.label :title, "Moving project name", class: "h4"
+      = f.text_field :title, class: 'form-control', placeholder: "Name this moving"
+    .clearfix
 
-  .table-responsive
-    %table.table.table-condensed
-      %thead
-        %tr
-          %th{ colspan: 4 }
-            %label.h4 Rooms in current residence
-      %tbody
-        = f.hidden_field :rooms, multiple: true, value: nil
-        - Room.all.pluck(:id, :name).each_slice(4) do |group|
-          %tr
-            - group.each do |room_id, name|
-              - options = { multiple: true, checked: @moving.rooms.map(&:id).include?(room_id) }
-              - checked_value, unchecked_value = room_id, nil
-              %td
-                %label
-                  = f.check_box :rooms, options, checked_value, unchecked_value
-                  = name
+  .row
 
-.row.wrapper
-  %section.moving_from.col-sm-6
-    %h4 Moving from
+    .form-group.col-sm-6
+      = f.label :move_date, "Moving Date", class: "h4"
+      = f.date_field :move_date, class: 'form-control'
 
-    .form-group
-      = f.label :street_from, "Street", class: "col-xs-4"
-      = f.text_field :street_from, class: "col-xs-8"
+    .form-group.col-sm-6
+      = f.label :move_type, "", class: "h4"
+      = f.select :move_type, move_types, { include_blank: "- Select one -" }, class: 'form-control'
 
-    .form-group
-      = f.label :city_from, "City", class: "col-xs-4"
-      = f.text_field :city_from, class: "col-xs-8"
+  %hr
 
-    .form-group
-      = f.label :state_from, "State", class: "col-xs-4"
-      = f.select :state_from, us_states, { include_blank: "- Select one -" }, class: "state col-xs-8"
+  %h2 Current residence
 
-    .form-group
-      = f.label :zip_from, "Zip", class: "col-xs-4"
-      = f.text_field :zip_from, class: "col-xs-8"
+  .row
 
-  %section.moving_to.col-sm-6
-    %h4 Moving to
+    .form-group.col-sm-6
+      = f.label :dwelling_type, "", class: "h4"
+      = f.select :move_type, move_types, { include_blank: "- Select one -" }, class: 'form-control'
 
-    .form-group
-      = f.label :street_to, "Street", class: "col-xs-4"
-      = f.text_field :street_to, class: "col-xs-8"
+    .form-group.col-sm-6
+      = f.label :dwelling_sqft, "Square footage", class: "h4"
+      = f.number_field :dwelling_sqft, min: 0, max: 99999, step: 50, value: 0, class: 'form-control'
+      sq.ft
 
-    .form-group
-      = f.label :city_to, "City", class: "col-xs-4"
-      = f.text_field :city_to, class: "col-xs-8"
+  .row
+    .form-group.col-sm-12
 
-    .form-group
-      = f.label :state_to, "State", class: "col-xs-4"
-      = f.select :state_to, us_states, { include_blank: "- Select one -" }, class: "state col-xs-8"
+      .table-responsive
+        %table.table.table-condensed
+          %thead
+            %tr
+              %th{ colspan: 4 }
+                %label.h4 Rooms
+          %tbody
+            = f.hidden_field :rooms, multiple: true, value: nil
+            - Room.all.pluck(:id, :name).each_slice(4) do |group|
+              %tr
+                - group.each do |room_id, name|
+                  - options = { multiple: true, checked: @moving.rooms.map(&:id).include?(room_id) }
+                  - checked_value, unchecked_value = room_id, nil
+                  %td
+                    %label
+                      = f.check_box :rooms, options, checked_value, unchecked_value
+                      = name
 
-    .form-group
-      = f.label :zip_to, "Zip", class: "col-xs-4"
-      = f.text_field :zip_to, class: 'col-xs-8'
+  %hr
 
-.wrapper
-  %h4 Memo
+  %h2 Moving
 
-  .form-group
-    = f.text_area :description, class: 'form-control', style: "min-height: 100px;",
-      placeholder: "Write description"
+  .row
+    .moving_from.col-sm-6
+      %h4 from
+
+      .form-group
+        = f.label :street_from, "Street", class: ""
+        = f.text_field :street_from, class: "form-control"
+
+      .form-group
+        = f.label :city_from, "City", class: ""
+        = f.text_field :city_from, class: "form-control"
+
+      .form-group
+        = f.label :state_from, "State", class: ""
+        = f.select :state_from, us_states, { include_blank: "- Select one -" }, class: "state form-control"
+
+      .form-group
+        = f.label :zip_from, "Zip", class: ""
+        = f.text_field :zip_from, class: "form-control"
+
+    .moving_to.col-sm-6
+      %h4 to
+
+      .form-group
+        = f.label :street_to, "Street", class: ""
+        = f.text_field :street_to, class: "form-control"
+
+      .form-group
+        = f.label :city_to, "City", class: ""
+        = f.text_field :city_to, class: "form-control"
+
+      .form-group
+        = f.label :state_to, "State", class: ""
+        = f.select :state_to, us_states, { include_blank: "- Select one -" }, class: "state form-control"
+
+      .form-group
+        = f.label :zip_to, "Zip", class: ""
+        = f.text_field :zip_to, class: 'form-control'
+
+  .row
+    .form-group.col-sm-12
+
+      %h4 Memo
+
+      .form-group
+        = f.text_area :description, class: 'form-control', style: "min-height: 100px;"
 
 :css
-
-  section.moving_from > .form-group,
-  section.moving_to > .form-group {
-    padding: 0.5em;
-  }
 
   select.state {
     margin-top: 2px;
   }
 
-  section.moving_from,
-  section.moving_to {
+  .moving_from .form-group,
+  .moving_to .form-group {
+    padding: 0 2em;
+  }
+
+  .moving_from,
+  .moving_to {
     margin-bottom: 30px;
   }
 
