@@ -36,21 +36,21 @@ class Moving < ActiveRecord::Base
 
   # TODO - update validations
 
-  def set_rooms(room_ids)
+  def save_rooms(room_ids)
     reject_empty_options!(room_ids)
     forgetAllRooms
     rememberRooms(room_ids)
-    self
   end
 
   private
 
+    # Return true if rooms are successfully saved; else false.
     def rememberRooms(room_ids)
       room_ids.each do |room_id|
-        unless MovingRoom.find_or_create_by(moving_id: self.id, room_id: room_id)
-          raise "couldn't save rooms"
-        end
+        result = MovingRoom.create(moving_id: self.id, room_id: room_id)
+        return false if result.errors.any?
       end
+      true
     end
 
     def forgetAllRooms

@@ -12,4 +12,7 @@
 class MovingRoom < ActiveRecord::Base
   belongs_to :moving
   belongs_to :room
+
+  validates :moving_id, presence: true
+  validates :room_id, presence: true
 end

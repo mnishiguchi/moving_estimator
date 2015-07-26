@@ -24,11 +24,12 @@ class MovingsController < ApplicationController
 
   # Creates a new moving based on the form.
   def create
-    @moving = Moving.new(moving_params.
-                         merge(user_id: current_user.id))
+    @moving = Moving.new(moving_params.merge(user_id: current_user.id))
 
     if @moving.save
-      @moving.set_rooms(params[:moving][:rooms])
+      unless @moving.save_rooms(params[:moving][:rooms])
+        flash[:warning] = "Couldn't save rooms"
+      end
       flash[:success] = "Moving created"
       redirect_to moving_url(@moving)
     else
@@ -43,7 +44,9 @@ class MovingsController < ApplicationController
   # Updates the moving to database.
   def update
     if @moving.update(moving_params)
-      @moving.set_rooms(params[:moving][:rooms])
+      unless @moving.save_rooms(params[:moving][:rooms])
+        flash[:warning] = "Couldn't save rooms"
+      end
       flash[:success] = "Moving updated"
       redirect_to moving_url(@moving)
     else
