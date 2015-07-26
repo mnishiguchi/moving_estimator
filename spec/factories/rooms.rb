@@ -10,7 +10,7 @@
 
 FactoryGirl.define do
   factory :room do
-    name "MyString"
+    name "living room"
   end
 
 end
