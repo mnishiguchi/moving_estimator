@@ -1,53 +1,76 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-include RoomsHelper
-rooms = RoomsHelper::rooms
+include MovingsHelper
 
-categories      = %w(ocean air local disposal)
+# make an admin user
 
-# make_users
-
-admin = User.create!(username:     "Masa Nishiguchi",
-                     email:        "nishiguchi.masa@gmail.com",
-                     confirmed_at: Time.zone.now,
-                     password:     "longpassword" )
+admin = User.create!(
+  username:     "Masa Nishiguchi",
+  email:        "nishiguchi.masa@gmail.com",
+  confirmed_at: Time.zone.now,
+  password:     "longpassword"
+)
 admin.toggle!(:admin)
 
-99.times do |n|
-  name     = Faker::Name.name
-  email    = "example-#{n+1}@example.com"
-  password = "longpassword"
-  User.create!(username:     name,
-               email:        email,
-               confirmed_at: Time.zone.now,
-               password:     password )
+# make sample users
+
+66.times do |n|
+  User.create!(
+    username:     Faker::Name.name,
+    email:        "example-#{n+1}@example.com",
+    confirmed_at: Time.zone.now,
+    password:     "longpassword"
+  )
 end
 
-# make_movings
+# make movings on a few users
 
-users = User.take(6)
+users = User.take(3)
 users.each do |user|
   n = (1..10).to_a.sample
   n.times do
-    title       = "from #{Faker::Address.city} to #{Faker::Address.city}"
-    description = Faker::Lorem.sentence(6)
-    moving      = user.movings.create!(title: title, description: description)
+    moving = user.movings.create!(
+      title:         "from #{Faker::Address.city} to #{Faker::Address.city}",
+      description:   Faker::Hacker.say_something_smart,
+      move_type:     move_types.sample,
+      move_date:     Time.zone.now,
+      dwelling_sqft: Faker::Number.between(100, 900) + [0, 50].sample,
+      dwelling_type: dwelling_types.sample,
+      street_from:   Faker::Address.street_address,
+      city_from:     Faker::Address.city,
+      state_from:    Faker::Address.state,
+      zip_from:      Faker::Address.zip,
+      street_to:     Faker::Address.street_address,
+      city_to:       Faker::Address.city,
+      state_to:      Faker::Address.state,
+      zip_to:        Faker::Address.zip
+    )
 
-    n = (1..50).to_a.sample
+    n = (1..30).to_a.sample
     n.times do
-      name        = Faker::Commerce.product_name
-      volume      = Faker::Number.between(1, 10) + [0, 0.5].sample
-      quantity    = Faker::Number.between(1, 10)
-      room        = rooms.sample
-      category    = categories.sample
-      description = Faker::Lorem.sentence(6)
-      moving.moving_items.create!(name: name, volume: volume, quantity: quantity,
-                                  room: room, category: category, description: description)
+      moving.moving_items.create!(
+        name:        Faker::Commerce.product_name,
+        volume:      Faker::Number.between(1, 10) + [0, 0.5].sample,
+        quantity:    Faker::Number.between(1, 10),
+        room:        rooms.sample,
+        category:    %w(a b c).sample,
+        description: Faker::Lorem.sentence(6)
+      )
     end
   end
 end
 
-# make_rooms
+# make rooms
 
 rooms.each { |room| Room.create!(name: room) }
+
+# make movings-rooms relationship
+
+users.each do |user|
+  user.movings.each do |m|
+    (1..16).to_a.sample(5).each do |room_id|
+      m.moving_rooms.create(moving_id: m.id, room_id: room_id)
+    end
+  end
+end

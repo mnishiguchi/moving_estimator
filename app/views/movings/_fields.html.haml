@@ -27,11 +27,11 @@
 
     .form-group.col-sm-6
       = f.label :dwelling_type, "", class: "h4"
-      = f.select :move_type, move_types, { include_blank: "- Select one -" }, class: 'form-control'
+      = f.select :dwelling_type, dwelling_types, { include_blank: "- Select one -" }, class: 'form-control'
 
     .form-group.col-sm-6
       = f.label :dwelling_sqft, "Square footage", class: "h4"
-      = f.number_field :dwelling_sqft, min: 0, max: 99999, step: 50, value: 0, class: 'form-control'
+      = f.number_field :dwelling_sqft, min: 0, max: 99999, step: 50, class: 'form-control'
       sq.ft
 
   .row
@@ -45,7 +45,7 @@
                 %label.h4 Rooms
           %tbody
             = f.hidden_field :rooms, multiple: true, value: nil
-            - Room.all.pluck(:id, :name).each_slice(4) do |group|
+            - Room.limit(16).pluck(:id, :name).each_slice(4) do |group|
               %tr
                 - group.each do |room_id, name|
                   - options = { multiple: true, checked: @moving.rooms.map(&:id).include?(room_id) }
