@@ -16,12 +16,12 @@
 
 FactoryGirl.define do
   factory :moving_item do
-    name        "macbook"
-    volume      3.0
-    quantity    1
+    name        Faker::Commerce.product_name
+    volume      Faker::Number.decimal(1, 1)
+    quantity    Faker::Number.between(1, 10)
     room        "living room"
-    category    "local"
-    description "high value"
+    category    Faker::Lorem.word
+    description Faker::Commerce.department(2, true)
     moving
   end
 end

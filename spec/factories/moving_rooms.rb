@@ -11,8 +11,8 @@
 
 FactoryGirl.define do
   factory :moving_room do
-    moving_id 1
-room_id 1
+    moving_id Faker::Number.between(1, 10)
+    room_id   Faker::Number.between(1, 10)
   end
 
 end

@@ -26,20 +26,20 @@
 
 FactoryGirl.define do
   factory :moving do
-    title       "title"
-    description "description"
+    title         "#{Faker::Hacker.adjective} #{Faker::Hacker.noun}"
+    description   Faker::Hacker.say_something_smart
     move_type     "international"
     move_date     Time.zone.now
-    dwelling_sqft 123
+    dwelling_sqft 999
     dwelling_type "apartment"
-    street_from   ""
-    city_from     "Washington"
-    state_from    "District of Columbia"
-    zip_from      20009
-    street_to     ""
-    city_to       "Rockville"
-    state_to      "Maryland"
-    zip_to        20852
+    street_from   Faker::Address.street_address
+    city_from     Faker::Address.city
+    state_from    Faker::Address.state
+    zip_from      Faker::Address.zip
+    street_to     Faker::Address.street_address
+    city_to       Faker::Address.city
+    state_to      Faker::Address.state
+    zip_to        Faker::Address.zip
     user
     # association :user, factory: :user
   end
