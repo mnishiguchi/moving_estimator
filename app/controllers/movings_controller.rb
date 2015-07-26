@@ -65,8 +65,8 @@ class MovingsController < ApplicationController
   private
 
     def moving_params
-      params.require(:moving).permit(:title, :description,
-        :move_date, :move_type, :dwelling_type, :dwelling_sqft, :rooms,
+      params.require(:moving).permit(:title, :description, { :room => [] },
+        :move_date, :move_type, :dwelling_type, :dwelling_sqft,
         :street_from, :city_from, :state_from, :zip_from,
         :street_to, :city_to, :state_to, :zip_to)
     end
