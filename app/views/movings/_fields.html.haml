@@ -1,4 +1,4 @@
-%section.moving_info
+%section.moving_info.wrapper
 
   .form-group
     = f.label :title, "Moving project name", class: "h4"
@@ -20,7 +20,7 @@
           %td= f.select :move_type, move_types, { include_blank: "- Select one -" }
           %td= f.select :dwelling_type, dwelling_types, { include_blank: "- Select one -" }
           %td
-            = f.number_field :dwelling_sqft, min: 0, max: 99999, step: 50
+            = f.number_field :dwelling_sqft, min: 0, max: 99999, step: 50, value: 0
             sq.ft
 
   .table-responsive
@@ -41,7 +41,7 @@
                   = f.check_box :rooms, options, checked_value, unchecked_value
                   = name
 
-.row
+.row.wrapper
   %section.moving_from.col-sm-6
     %h4 Moving from
 
@@ -80,11 +80,12 @@
       = f.label :zip_to, "Zip", class: "col-xs-4"
       = f.text_field :zip_to, class: 'col-xs-8'
 
-%h4 Memo
+.wrapper
+  %h4 Memo
 
-.form-group
-  = f.text_area :description, class: 'form-control', style: "min-height: 100px;",
-    placeholder: "Write description"
+  .form-group
+    = f.text_area :description, class: 'form-control', style: "min-height: 100px;",
+      placeholder: "Write description"
 
 :css
 
