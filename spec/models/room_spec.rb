@@ -11,5 +11,7 @@
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:room) { Room.new(name: "living room") }
+
+  it { expect(room).to be_valid }
 end

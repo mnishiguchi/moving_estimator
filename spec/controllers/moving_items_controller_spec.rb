@@ -1,12 +1,5 @@
 require 'rails_helper'
 
-#     moving_items POST   /moving_items(.:format)           moving_items#create
-#  new_moving_item GET    /moving_items/new(.:format)       moving_items#new
-# edit_moving_item GET    /moving_items/:id/edit(.:format)  moving_items#edit
-#      moving_item PATCH  /moving_items/:id(.:format)       moving_items#update
-#                  PUT    /moving_items/:id(.:format)       moving_items#update
-#                  DELETE /moving_items/:id(.:format)       moving_items#destroy
-
 RSpec.describe MovingItemsController, type: :controller do
 
   # A current user
@@ -25,27 +18,24 @@ RSpec.describe MovingItemsController, type: :controller do
   describe "non-logged-in user" do
 
     describe "POST #create" do
-      pending "re-write for ajax"
+
       it "does not change the MovingItem count, redirecting to the login page" do
         expect{
           post :create, moving_item: moving_item_params
         }.not_to change(MovingItem, :count)
+
         expect(response).to redirect_to "/users/sign_in"
       end
     end
 
     describe "PATCH #update" do
-      let(:new_params) do
-        p = FactoryGirl.attributes_for(:moving_item)
-        p[:name] = "new name"
-      end
+      let(:new_name) { "new name" }
 
-      before do
-        patch :update, id: moving_item, moving: new_params
-      end
+      before { patch :update, id: moving_item, moving: { name: new_name } }
 
       it { expect(response).to redirect_to "/users/sign_in" }
-      specify { expect(moving_item.reload.attributes).not_to eq new_params }
+
+      specify { expect(moving_item.reload.name).not_to eq new_name }
     end
 
     describe "DELETE #destroy" do
@@ -54,6 +44,7 @@ RSpec.describe MovingItemsController, type: :controller do
         expect{
           delete :destroy, id: moving_item.id
         }.not_to change(MovingItem, :count)
+
         expect(response).to redirect_to "/users/sign_in"
       end
     end
@@ -67,29 +58,22 @@ RSpec.describe MovingItemsController, type: :controller do
     describe "without selecting a moving" do
 
       describe "POST #create" do
-        pending "re-write for ajax"
+
         it "does not change the MovingItem count, redirecting to the root url" do
           expect{
             post :create, moving_item: moving_item_params
           }.not_to change(MovingItem, :count)
+
           expect(response).to redirect_to "/"
         end
       end
 
       describe "PATCH #update" do
-        let(:new_params) do
-          p = FactoryGirl.attributes_for(:moving_item)
-          p[:name] = "new name"
-        end
+        let(:new_name) { "new name" }
+        before { patch :update, id: moving_item, moving: new_name }
 
-        describe "for another user's moving item" do
-          before do
-            patch :update, id: moving_item, moving: new_params
-          end
-
-          it { expect(response).to redirect_to "/" }
-          specify { expect(moving_item.reload.attributes).not_to eq new_params }
-        end
+        it { expect(response).to redirect_to "/" }
+        specify { expect(moving_item.reload.attributes).not_to eq new_name }
       end
 
       describe "DELETE #destroy" do
@@ -106,17 +90,16 @@ RSpec.describe MovingItemsController, type: :controller do
     describe "after selecting a moving" do
       before { remember_moving(moving) }
 
-      xdescribe "POST #create" do
-        pending "re-write for ajax"
+      describe "POST #create" do
+
         it "increments the MovingItem count, then redirects to the movings/show page" do
           expect{
             post :create, moving_item: moving_item_params
           }.to change(MovingItem, :count).by(1)
-          expect(response).to redirect_to moving_url(moving_item.moving_id)
         end
       end
 
-      xdescribe "PATCH #update" do
+      describe "PATCH #update" do
         let(:new_name) { "new name" }
         let(:new_description) { "new description" }
 
@@ -127,6 +110,7 @@ RSpec.describe MovingItemsController, type: :controller do
           end
 
           it { expect(response).to redirect_to "/" }
+
           specify { expect(moving_item.reload.name).not_to eq new_name }
           specify { expect(moving_item.reload.description).not_to eq new_description }
         end
@@ -137,30 +121,34 @@ RSpec.describe MovingItemsController, type: :controller do
                                                  description: new_description }
           end
 
-          it { expect(response).to redirect_to moving_url(moving_item.moving_id) }
+          it { expect(response).to have_http_status(:success) }
+
           specify { expect(moving_item.reload.name).to eq new_name }
           specify { expect(moving_item.reload.description).to eq new_description }
         end
       end
 
-      xdescribe "DELETE #destroy" do
+      describe "DELETE #destroy" do
         describe "for another user's moving item" do
+
           it "does not change the MovingItem count, redirecting to the root url" do
             random_moving_item
             expect{
               delete :destroy, id: random_moving_item.id
             }.not_to change(MovingItem, :count)
+
             expect(response).to redirect_to "/"
           end
         end
 
         describe "for the current user's own moving" do
-          it "decrements the MovingItem count, then redirects to the movings/show page" do
+          it "decrements the MovingItem count" do
             moving_item
             expect{
               delete :destroy, id: moving_item.id
             }.to change(MovingItem, :count).by(-1)
-            expect(response).to redirect_to moving_url(moving_item.moving_id)
+
+            expect(response).to have_http_status(:success)
           end
         end
       end
