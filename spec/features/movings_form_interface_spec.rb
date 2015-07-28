@@ -28,7 +28,7 @@ feature "Movings form interface", type: :feature do
     before do
       find("#moving_title").set("test title")
       find("#moving_description").set(Faker::Hacker.say_something_smart)
-      select "international", from: "Move type"
+      select "international", from: "Moving type"
       find("#moving_move_date").set(Time.zone.now)
       find("#moving_dwelling_sqft").set(999)
       check "room 1"
