@@ -20,6 +20,8 @@
 #  city_to       :string
 #  state_to      :string
 #  zip_to        :string
+#  country_from  :string
+#  country_to    :string
 #
 
 # http://www.rubydoc.info/gems/factory_girl/file/GETTING_STARTED.md#Associations

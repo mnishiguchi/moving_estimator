@@ -20,6 +20,8 @@
 #  city_to       :string
 #  state_to      :string
 #  zip_to        :string
+#  country_from  :string
+#  country_to    :string
 #
 
 class Moving < ActiveRecord::Base
@@ -33,19 +35,21 @@ class Moving < ActiveRecord::Base
   VALID_ZIP_REGEX = /\A[0-9]{5}(?:-[0-9]{4})?\z/
 
   validates :title,       presence: true,  length: { maximum: 50 }
-  validates :description, presence: false, length: { maximum: 255 }
   validates :move_type, presence: true
   validates :move_date, presence: true
   validates :dwelling_sqft, length: { maximum: 5 }, numericality: { only_integer: true }
   validates :dwelling_type, presence: true
   validates :street_from , length: { maximum: 50 }
   validates :street_to,    length: { maximum: 50 }
-  validates :city_from,  presence: true, length: { maximum: 50 }
-  validates :city_to,    presence: true, length: { maximum: 50 }
+  validates :city_from,  presence: true, length: { maximum: 30 }
+  validates :city_to,    presence: true, length: { maximum: 30 }
   validates :state_from, presence: true
   validates :state_to,   presence: true
   validates :zip_from, format: { with: VALID_ZIP_REGEX }, allow_blank: true
   validates :zip_to,   format: { with: VALID_ZIP_REGEX }, allow_blank: true
+  validates :country_from , length: { maximum: 30 }
+  validates :country_to,    length: { maximum: 30 }
+  validates :description, length: { maximum: 255 }
 
   def save_rooms(room_ids)
     forgetAllRooms

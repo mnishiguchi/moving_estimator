@@ -20,6 +20,8 @@
 #  city_to       :string
 #  state_to      :string
 #  zip_to        :string
+#  country_from  :string
+#  country_to    :string
 #
 
 require 'rails_helper'

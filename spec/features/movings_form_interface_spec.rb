@@ -36,12 +36,14 @@ feature "Movings form interface", type: :feature do
       select "apartment", from: "Dwelling type"
       find("#moving_street_from").set(Faker::Address.street_address)
       find("#moving_city_from").set(Faker::Address.city)
-      select "Hawaii", from: "moving_state_from"
+      find("#moving_state_from").set "Tokyo"
       find("#moving_zip_from").set(Faker::Address.zip)
+      find("#moving_country_from").set "Japan"
       find("#moving_street_to").set(Faker::Address.street_address)
       find('#moving_city_to').set(Faker::Address.city)
-      select "Hawaii", from: "moving_state_to"
+      find("#moving_state_to").set "Seoul"
       find("#moving_zip_to").set(Faker::Address.zip)
+      find("#moving_country_to").set "Korea"
     end
 
     it "should create a moving" do
