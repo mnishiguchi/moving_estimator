@@ -23,11 +23,12 @@
         = f.label :remember_me
 
     .actions
-      / = f.submit "Log in"
       = f.button "Log in", class: "submit btn btn-success",
       data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
     %br
+
     %p
       New user?
       = link_to "Sign up now!", new_registration_path(resource_name)
+
   = render "devise/shared/links"
