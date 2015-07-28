@@ -1,131 +1,99 @@
 #movings_fields
 
-  %h2 Moving project
-
   .row
 
     .form-group.col-sm-6
-      = f.label :title, "Moving project name", class: "h4"
+      = f.label :title, "* Moving project name", class: "h4"
       = f.text_field :title, class: 'form-control', placeholder: "Name this moving"
     .clearfix
 
   .row
 
     .form-group.col-sm-6
-      = f.label :move_date, "Moving Date", class: "h4"
+      = f.label :move_date, "* Moving date", class: "h4"
       = f.date_field :move_date, class: 'form-control'
 
     .form-group.col-sm-6
-      = f.label :move_type, "", class: "h4"
+      = f.label :move_type, "* Moving type", class: "h4"
       = f.select :move_type, move_types, { include_blank: "- Select one -" }, class: 'form-control'
-
-  %hr
 
   %h2 Current residence
 
   .row
 
     .form-group.col-sm-6
-      = f.label :dwelling_type, "", class: "h4"
+      = f.label :dwelling_type, "* Dwelling type", class: "h4"
       = f.select :dwelling_type, dwelling_types, { include_blank: "- Select one -" }, class: 'form-control'
 
     .form-group.col-sm-6
-      = f.label :dwelling_sqft, "Square footage", class: "h4"
-      = f.number_field :dwelling_sqft, min: 0, max: 99999, step: 50, class: 'form-control'
-      sq.ft
+      = f.label :dwelling_sqft, "* Square footage", class: "h4"
+      .input-group
+        = f.number_field :dwelling_sqft, min: 0, max: 99999, step: 50, class: 'form-control'
+        .input-group-addon sq.ft
 
   .row
-    .form-group.col-sm-12
 
-      .table-responsive
-        %table.table.table-condensed
-          %thead
+    .table-responsive.col-sm-12
+      %table.table.table-condensed
+        %thead
+          %tr
+            %th{ colspan: 4 }
+              %label.h4 Rooms
+        %tbody
+          = f.hidden_field :rooms, multiple: true, value: nil
+          - Room.limit(16).pluck(:id, :name).each_slice(4) do |group|
             %tr
-              %th{ colspan: 4 }
-                %label.h4 Rooms
-          %tbody
-            = f.hidden_field :rooms, multiple: true, value: nil
-            - Room.limit(16).pluck(:id, :name).each_slice(4) do |group|
-              %tr
-                - group.each do |room_id, name|
-                  - options = { multiple: true, checked: @moving.rooms.map(&:id).include?(room_id) }
-                  - checked_value, unchecked_value = room_id, nil
-                  %td
-                    %label
-                      = f.check_box :rooms, options, checked_value, unchecked_value
-                      = name
-
-  %hr
-
-  %h2 Moving
+              - group.each do |room_id, name|
+                - options = { multiple: true, checked: @moving.rooms.map(&:id).include?(room_id) }
+                - checked_value, unchecked_value = room_id, nil
+                %td
+                  %label
+                    = f.check_box :rooms, options, checked_value, unchecked_value
+                    = name
 
   .row
+
     .moving_from.col-sm-6
-      %h4 from
+      %h2 Moving from
 
       .form-group
-        = f.label :street_from, "Street", class: ""
+        = f.label :street_from, "Street", class: "h4"
         = f.text_field :street_from, class: "form-control"
 
       .form-group
-        = f.label :city_from, "City", class: ""
+        = f.label :city_from, "* City", class: "h4"
         = f.text_field :city_from, class: "form-control"
 
       .form-group
-        = f.label :state_from, "State", class: ""
+        = f.label :state_from, "* State", class: "h4"
         = f.select :state_from, us_states, { include_blank: "- Select one -" }, class: "state form-control"
 
       .form-group
-        = f.label :zip_from, "Zip", class: ""
+        = f.label :zip_from, "Zip", class: "h4"
         = f.text_field :zip_from, class: "form-control"
 
     .moving_to.col-sm-6
-      %h4 to
+      %h2 Moving to
 
       .form-group
-        = f.label :street_to, "Street", class: ""
+        = f.label :street_to, "Street", class: "h4"
         = f.text_field :street_to, class: "form-control"
 
       .form-group
-        = f.label :city_to, "City", class: ""
+        = f.label :city_to, "* City", class: "h4"
         = f.text_field :city_to, class: "form-control"
 
       .form-group
-        = f.label :state_to, "State", class: ""
+        = f.label :state_to, "* State", class: "h4"
         = f.select :state_to, us_states, { include_blank: "- Select one -" }, class: "state form-control"
 
       .form-group
-        = f.label :zip_to, "Zip", class: ""
+        = f.label :zip_to, "Zip", class: "h4"
         = f.text_field :zip_to, class: 'form-control'
 
   .row
-    .form-group.col-sm-12
 
-      %h4 Memo
-
+    .col-sm-12
+      %h2 Memo
       .form-group
         = f.text_area :description, class: 'form-control', style: "min-height: 100px;"
-
-:css
-
-  select.state {
-    margin-top: 2px;
-  }
-
-  .moving_from .form-group,
-  .moving_to .form-group {
-    padding: 0 2em;
-  }
-
-  .moving_from,
-  .moving_to {
-    margin-bottom: 30px;
-  }
-
-  table thead,
-  table thead tr,
-  table thead tr th,
-  table thead tr th label.h4 {
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
