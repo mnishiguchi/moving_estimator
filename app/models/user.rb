@@ -20,6 +20,8 @@
 #  confirmation_sent_at   :datetime
 #  admin                  :boolean          default(FALSE)
 #  username               :string
+#  corporate              :boolean          default(FALSE)
+#  mover_url              :string
 #
 
 class User < ActiveRecord::Base

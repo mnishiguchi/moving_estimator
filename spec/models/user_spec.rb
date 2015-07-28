@@ -20,6 +20,8 @@
 #  confirmation_sent_at   :datetime
 #  admin                  :boolean          default(FALSE)
 #  username               :string
+#  corporate              :boolean          default(FALSE)
+#  mover_url              :string
 #
 
 require 'rails_helper'
@@ -34,7 +36,9 @@ describe User do
 
   it { expect(user).to be_valid }
   it { expect(user).to respond_to(:admin) }
+  it { expect(user).to respond_to(:corporate) }
   it { expect(user).to_not be_admin }
+  it { expect(user).to_not be_corporate }
 
   describe "with admin attribute set to 'true'" do
     before do
@@ -43,6 +47,15 @@ describe User do
     end
 
     it { expect(user).to be_admin }
+  end
+
+  describe "with corporate attribute set to 'true'" do
+    before do
+      user.save!
+      user.toggle!(:corporate)
+    end
+
+    it { expect(user).to be_corporate }
   end
 
   describe "CSV export" do

@@ -4,6 +4,7 @@ class MovingsController < ApplicationController
 
   before_action :authenticate_user! # all actions
   before_action :correct_user!,     only: [:show, :edit, :update, :destroy]
+  before_action :set_mover_url!,    only: :index
 
   # Lists all the movings.
   def index
@@ -77,5 +78,17 @@ class MovingsController < ApplicationController
       id = params[:id]
       @moving = current_user.movings.try { find_by(id: id) }
       redirect_to root_url if @moving.nil?
+    end
+
+    # Remember the url if current user comes from a mover's website.
+    def set_mover_url!
+      if url = user_reffered?
+        current_user.update(mover_url: url) unless current_user.mover_url
+      end
+    end
+
+    # Return a mover's url if user is referred here, else false.
+    def user_reffered?
+      if /#{root_url}/.match(request.referrer) then false else request.referrer end
     end
 end

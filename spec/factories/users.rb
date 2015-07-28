@@ -20,6 +20,8 @@
 #  confirmation_sent_at   :datetime
 #  admin                  :boolean          default(FALSE)
 #  username               :string
+#  corporate              :boolean          default(FALSE)
+#  mover_url              :string
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
