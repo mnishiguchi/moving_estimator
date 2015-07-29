@@ -107,3 +107,12 @@
       %h2 Memo
       .form-group
         = f.text_area :description, class: 'form-control', style: "min-height: 100px;"
+
+:coffee
+
+  jQuery ->
+    $('#moving_state_from').autocomplete
+      source: #{us_states}
+
+    $('#moving_state_to').autocomplete
+      source: #{us_states}
