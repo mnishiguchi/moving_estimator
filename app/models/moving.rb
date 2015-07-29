@@ -34,7 +34,7 @@ class Moving < ActiveRecord::Base
 
   VALID_ZIP_REGEX = /\A[0-9]{5}(?:-[0-9]{4})?\z/
 
-  validates :title,       presence: true,  length: { maximum: 30 }
+  validates :title,       presence: true,  length: { maximum: 50 }
   validates :move_type, presence: true
   validates :move_date, presence: true
   validates :dwelling_sqft, length: { maximum: 5 }, numericality: { only_integer: true }

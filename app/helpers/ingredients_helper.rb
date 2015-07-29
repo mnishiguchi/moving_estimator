@@ -1,4 +1,4 @@
-module IngredientSuggestionsHelper
+module IngredientsHelper
 
   def living_room
     {

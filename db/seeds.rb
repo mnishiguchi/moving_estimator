@@ -2,6 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 include MovingsHelper
+include IngredientsHelper
 
 # make an admin user
 
@@ -73,4 +74,10 @@ users.each do |user|
       m.moving_rooms.create(moving_id: m.id, room_id: room_id)
     end
   end
+end
+
+# make item names suggestions(ingredients)
+
+[living_room, kitchen, bedroom, dining_room, outdoor, office].each do |household_goods|
+  household_goods.each { |name, volume| Ingredient.create!(name: name, volume: volume) }
 end
