@@ -18,7 +18,7 @@ R = React.DOM
 
   addRecord: (record) ->
     records = React.addons.update(@state.records, { $unshift: [record] })
-    @setState { records: records, formDisplay: false }
+    @setState { records: records, formDisplay: true }
 
   deleteRecord: (record) ->
     index = @state.records.indexOf record
