@@ -18,16 +18,17 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: middle;
 }
 
-// Make checkbox UI consistent
-.checkbox {
-  margin-top: -10px;
-  margin-bottom: 10px;
-  span {
-    margin-left: 20px;
-    font-weight: normal;
+// Align checkbox/radio and text
+@media (min-width: 768px) {
+  .form-inline .radio input[type="radio"],
+  .form-inline .checkbox input[type="checkbox"] {
+    float: left;
+    margin-right: 5px;
+    label {
+      font-weight: normal;
+    }
   }
 }
-
 
 // Make the borders of table rows consistent
 tbody tr {

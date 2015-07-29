@@ -41,15 +41,18 @@
               %label.h4 Rooms
         %tbody
           = f.hidden_field :rooms, multiple: true, value: nil
-          - Room.limit(16).pluck(:id, :name).each_slice(4) do |group|
+          - Room.limit(20).pluck(:id, :name).each_slice(4) do |slices|
             %tr
-              - group.each do |room_id, name|
-                - options = { multiple: true, checked: @moving.rooms.map(&:id).include?(room_id) }
+              - slices.each do |room_id, room_name|
+                - options = { multiple: true,
+                              checked: @moving.rooms.map(&:id).include?(room_id) }
                 - checked_value, unchecked_value = room_id, nil
                 %td
-                  %label
-                    = f.check_box :rooms, options, checked_value, unchecked_value
-                    = name
+                  .form-inline
+                    .checkbox
+                      %label
+                        = f.check_box :rooms, options, checked_value, unchecked_value
+                        = room_name
 
   .row
 

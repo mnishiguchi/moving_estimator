@@ -26,12 +26,6 @@ module MovingsHelper
       "Washington", "West Virginia", "Wisconsin", "Wyoming"]
   end
 
-  # def rooms
-  #   ["master bedroom", "bedroom 1", "bedroom 2", "bedroom 3", "bedroom 4",
-  #     "dining room", "kitchen", "family room", "living room", "sun room",
-  #     "basement", "media room", "patio", "garage", "outdoor playset", "shed"]
-  # end
-
   def dwelling_types
     ["single home", "apartment", "townhouse", "office", "others"]
   end

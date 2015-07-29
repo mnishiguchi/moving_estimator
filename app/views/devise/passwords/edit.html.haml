@@ -20,7 +20,6 @@
       = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
 
     .actions
-      / = f.submit "Change my password"
       = f.button "Change my password", class: "submit btn btn-success",
         data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
 

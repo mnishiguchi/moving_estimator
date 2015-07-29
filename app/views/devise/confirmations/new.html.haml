@@ -13,7 +13,6 @@
       = f.email_field :email, autofocus: false, class: 'form-control'
 
     .actions
-      /= f.submit "Resend confirmation instructions"
       = f.button "Resend confirmation instructions", class: "submit btn btn-success",
         data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
 

@@ -1,6 +1,6 @@
 module RoomsHelper
 
-  # 16 default items
+  # 20 default items
   def rooms
     rooms = [
       "Master Bedroom",
@@ -17,8 +17,12 @@ module RoomsHelper
       "Media Room",
       "Patio",
       "Garage",
-      "Outdoor Playset",
-      "Shed"
+      "Outdoors",
+      "Shed",
+      "Office1",
+      "Office2",
+      "Attic",
+      "Exercise Room"
     ]
   end
 end
