@@ -67,18 +67,23 @@ class User < ActiveRecord::Base
 
   # ==> OmniAuth
 
+  # Find the user by data from OmniAuth; if not found, create a new user based on that data.
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
-      user.uid = auth.uid
+      user.uid      = auth.uid
       user.username = auth.info.nickname
     end
   end
 
+  # Override to be able to accept session["devise.user_attributes"] when it exists.
+  # Devise will clean up session with "devise." namespace.
   def self.new_with_session(params, session)
     if session["devise.user_attributes"]
+      # No need for mass assignment protecton since we trust this hash.
       new(session["devise.user_attributes"], without_protection: true) do |user|
         user.attributes = params
+        # Ensure that this user passed all the validations.
         user.valid?
       end
     else
@@ -86,6 +91,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Override to check if user's provider attributes is empty.
   def password_required?
     super && provider.blank?
   end

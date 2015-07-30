@@ -8,7 +8,7 @@ include IngredientsHelper
 
 admin = User.create!(
   username:     "Masa Nishiguchi",
-  email:        "nishiguchi.masa@gmail.com",
+  email:        "masatoshi.nishiguchi@udc.edu",
   confirmed_at: Time.zone.now,
   password:     "longpassword"
 )
