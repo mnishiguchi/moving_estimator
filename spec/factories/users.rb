@@ -22,6 +22,8 @@
 #  username               :string
 #  corporate              :boolean          default(FALSE)
 #  mover_url              :string
+#  provider               :string
+#  uid                    :string
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

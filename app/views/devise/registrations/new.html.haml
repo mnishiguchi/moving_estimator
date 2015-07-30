@@ -18,18 +18,20 @@
       %br/
       = f.email_field :email, autofocus: false, class: 'form-control'
 
-    .field.form-group
-      = f.label :password
-      - if @validatable
-        %em
-          (#{@minimum_password_length} characters minimum)
-      %br/
-      = f.password_field :password, autocomplete: "off", class: 'form-control'
+    - if f.object.password_required?
 
-    .field.form-group
-      = f.label :password_confirmation
-      %br/
-      = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+      .field.form-group
+        = f.label :password
+        - if @validatable
+          %em
+            (#{@minimum_password_length} characters minimum)
+        %br/
+        = f.password_field :password, autocomplete: "off", class: 'form-control'
+
+      .field.form-group
+        = f.label :password_confirmation
+        %br/
+        = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
 
     .actions
       = f.button "Create my account", class: "submit btn btn-success",

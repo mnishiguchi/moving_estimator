@@ -27,6 +27,10 @@
     .actions
       = f.button "Log in", class: "submit btn btn-success",
       data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
+
+      %p
+        or
+        = link_to "Log in with twitter", omniauth_authorize_path(resource_name, :twitter)
     %br
 
     %p

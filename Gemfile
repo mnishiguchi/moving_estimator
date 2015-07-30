@@ -37,13 +37,14 @@ gem 'gibbon', '~> 1.1.5'   # A wrapper for MailChimp API 2.0 and Export API 1.0
 gem 'faker'
 gem 'growl'
 gem 'pg_search'
+gem 'omniauth-twitter'
 
 group :development do
-  gem 'dotenv-rails' # Autoloads dotenv in Rails.
   gem 'rails-erd'    # Run bundle exec erd to print an entity-relationship diagram.
 end
 
 group :development, :test do
+  gem 'dotenv-rails' # Autoloads dotenv in Rails.
   gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'factory_girl_rails'
