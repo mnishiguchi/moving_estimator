@@ -18,7 +18,7 @@
             %br/
             = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
 
-        .col-sm-6
+        .col-sm-6.well
           = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
 
             - if params[:omniauth_fail]

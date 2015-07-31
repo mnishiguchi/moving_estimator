@@ -30,6 +30,15 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+// Vertical divider between sections
+.vertical_divider_left {
+  border-right: 1px solid #ABC;
+}
+
+.vertical_divider_right {
+  border-right: 1px solid #ABC;
+}
+
 // Make the borders of table rows consistent
 tbody tr {
   border-bottom: 1px solid #ddd;

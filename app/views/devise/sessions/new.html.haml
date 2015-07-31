@@ -8,6 +8,7 @@
 
       .row
         .col-sm-6
+
           = link_to fa_icon("fw twitter", text: "Log in with twitter"), omniauth_authorize_path(resource_name, :twitter),
           class: "btn btn-default btn-block btn-lg"
           %hr/
@@ -18,7 +19,7 @@
             %br/
             = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
 
-        .col-sm-6
+        .col-sm-6.well
           = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
 
             .field.form-group
