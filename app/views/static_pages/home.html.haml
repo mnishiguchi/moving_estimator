@@ -2,7 +2,7 @@
 .landing_page{ style: "padding: 80px 0;" }
   .row
     .col-md-7
-      .langing_header{ style: "padding: 0 30px;" }
+      .langing_header{ style: "padding: 0 30px 30px 30px;" }
         = fa_icon "home 5x"
         = fa_icon "truck 3x"
 
@@ -11,33 +11,12 @@
         %i.lead.clearfix
           estimates the volume of your moving
 
+      .alert.alert-warning
+        New user?
+        = link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"
+
     .col-md-5
-      .well
-        = form_for(User.new, url: user_registration_path) do |f|
+      .well= render("devise/shared/login_form")
 
-          .field.form-group
-            = f.text_field :username, autofocus: false, class: 'form-control', placeholder: "Username"
-
-          .field.form-group
-            = f.email_field :email, autofocus: false, class: 'form-control', placeholder: "Email"
-
-          - if f.object.password_required?
-
-            .field.form-group
-              = f.password_field :password, autocomplete: "off", class: 'form-control',
-                placeholder: "Password (#{@minimum_password_length} characters min)"
-
-            .field.form-group
-              = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control',
-                placeholder: "Password confirmation"
-
-          .actions
-            = f.button "Create my account", class: "submit btn btn-success btn-lg btn-block",
-              data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
-
-      = link_to fa_icon("fw twitter", text: "Sign up with twitter"), user_omniauth_authorize_path(:twitter),
-      class: "btn btn-default btn-block btn-lg"
-
-:css
-
-
+      = link_to fa_icon("fw twitter", text: "Sign up / Log in with twitter"), user_omniauth_authorize_path(:twitter),
+      class: "btn btn-info btn-block btn-lg"
