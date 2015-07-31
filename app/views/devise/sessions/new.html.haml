@@ -12,6 +12,12 @@
           class: "btn btn-default btn-block btn-lg"
           %hr/
 
+          .alert.alert-info
+            New user?
+            = link_to "Sign up now!", new_registration_path(resource_name)
+            %br/
+            = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
+
         .col-sm-6
           = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
 
@@ -31,10 +37,4 @@
 
             .actions
               = f.button "Log in", class: "submit btn btn-success btn-lg btn-block",
-              data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
-
-            %br
-
-            %p
-              New user?
-              = link_to "Sign up now!", new_registration_path(resource_name)
+                data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }

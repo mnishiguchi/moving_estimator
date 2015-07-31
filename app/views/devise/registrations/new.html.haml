@@ -1,43 +1,47 @@
 - provide(:title, "Sign up")
 
-.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
-  %h1.page-header
-    Sign up
+.sessions_new
+  .row
+    .col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1
+      .sessions_layout
+        %h1.page-header Sign up
 
-  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .row
+        .col-sm-6
+          = link_to fa_icon("fw twitter", text: "Sign up with twitter"), omniauth_authorize_path(resource_name, :twitter),
+          class: "btn btn-default btn-block btn-lg"
+          %hr/
 
-    - if params[:omniauth_fail]
-      .alert.alert-danger Email address is required.
-    - else
-      = devise_error_messages!
+          .alert.alert-info
+            Already have an account?
+            = link_to "Log in", new_session_path(resource_name)
+            %br/
+            = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
 
-    .field.form-group
-      = f.label :username
-      = f.text_field :username, autofocus: false, class: 'form-control'
+        .col-sm-6
+          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
 
-    .field.form-group
-      = f.label :email
-      = f.email_field :email, autofocus: false, class: 'form-control'
+            - if params[:omniauth_fail]
+              .alert.alert-danger Email address is required.
+            - else
+              = devise_error_messages!
 
-    - if f.object.password_required?
+            .field.form-group
+              = f.text_field :username, autofocus: false, class: 'form-control', placeholder: "Username"
 
-      .field.form-group
-        = f.label :password
-        - if @validatable
-          %em
-            (#{@minimum_password_length} characters minimum)
-        = f.password_field :password, autocomplete: "off", class: 'form-control'
+            .field.form-group
+              = f.email_field :email, autofocus: false, class: 'form-control', placeholder: "Email"
 
-      .field.form-group
-        = f.label :password_confirmation
-        = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+            - if f.object.password_required?
 
-    .actions
-      = f.button "Create my account", class: "submit btn btn-success",
-          data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
-    %br/
-    %p
-      Already have an account?
-      = link_to "Log in", new_session_path(resource_name)
+              .field.form-group
+                = f.password_field :password, autocomplete: "off", class: 'form-control',
+                  placeholder: "Password (#{@minimum_password_length} characters min)"
 
-  = render "devise/shared/links"
+              .field.form-group
+                = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control',
+                  placeholder: "Password confirmation"
+
+            .actions
+              = f.button "Create my account", class: "submit btn btn-success btn-lg btn-block",
+                data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
