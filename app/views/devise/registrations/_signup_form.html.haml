@@ -1,0 +1,26 @@
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+
+  - if params[:omniauth_fail]
+    .alert.alert-danger Email address is required.
+  - else
+    = devise_error_messages!
+
+  .field.form-group
+    = f.text_field :username, autofocus: false, class: 'form-control', placeholder: "Username"
+
+  .field.form-group
+    = f.email_field :email, autofocus: false, class: 'form-control', placeholder: "Email"
+
+  - if f.object.password_required?
+
+    .field.form-group
+      = f.password_field :password, autocomplete: "off", class: 'form-control',
+        placeholder: "Password (#{@minimum_password_length} characters min)"
+
+    .field.form-group
+      = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control',
+        placeholder: "Password confirmation"
+
+  .actions
+    = f.button "Create my account", class: "submit btn btn-success btn-lg btn-block",
+      data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }

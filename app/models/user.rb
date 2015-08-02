@@ -72,18 +72,25 @@ class User < ActiveRecord::Base
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
       user.uid      = auth.uid
-      user.username = auth.info.nickname
+
+      # Note: Password should be left blank.
+      if auth.provider == "twitter"
+        user.username = auth.info.nickname
+
+      elsif auth.provider == "facebook"
+        user.username = auth.info.name
+        user.email    = auth.info.email
+      end
     end
   end
 
-  # Override to be able to accept session["devise.user_attributes"] when it exists.
+  # Override
+  # Run User.new based on session["devise.user_attributes"] when it exists.
   # Devise will clean up session with "devise." namespace.
   def self.new_with_session(params, session)
     if session["devise.user_attributes"]
-      # No need for mass assignment protecton since we trust this hash.
-      new(session["devise.user_attributes"], without_protection: true) do |user|
+      new(session["devise.user_attributes"]) do |user|
         user.attributes = params
-        # Ensure that this user passed all the validations.
         user.valid?
       end
     else
@@ -91,11 +98,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Override to check if user's provider attributes is empty.
+  # Override
   def password_required?
     super && provider.blank?
   end
 
+  # Override
+  # If user has no password, allow user to update info without requiring password.
   def update_with_password(params, *options)
     if encrypted_password.blank?
       update_attributes(params, *options)

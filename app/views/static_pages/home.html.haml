@@ -1,8 +1,8 @@
 / Home non-logged-in
-.landing_page{ style: "padding: 80px 0;" }
+.landing_page
   .row
     .col-md-7
-      .langing_header{ style: "padding: 0 30px 30px 30px;" }
+      .langing_header
         = fa_icon "home 5x"
         = fa_icon "truck 3x"
 
@@ -11,12 +11,14 @@
         %i.lead.clearfix
           estimates the volume of your moving
 
-      .alert.alert-warning
-        New user?
-        = link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"
+      .omniauth
+        = link_to fa_icon("fw twitter", text: "Sign up / Log in with twitter"),
+          user_omniauth_authorize_path(:twitter),
+          class: "btn btn-info btn-block btn-lg"
+
+        .alert.alert-warning
+          New user?
+          = link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"
 
     .col-md-5
-      .well= render("devise/shared/login_form")
-
-      = link_to fa_icon("fw twitter", text: "Sign up / Log in with twitter"), user_omniauth_authorize_path(:twitter),
-      class: "btn btn-info btn-block btn-lg"
+      = render "login_form"

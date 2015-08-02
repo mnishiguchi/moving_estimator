@@ -48,7 +48,7 @@ tbody tr {
   margin-top: 15px;
 }
 
-// Home page
+// Home page (Landing page)
 .center {
   text-align: center;
 }
@@ -65,6 +65,18 @@ tbody tr {
     font-weight: normal;
     color: $gray-light;
   }
+}
+
+.landing_page {
+  padding: 80px 0;
+}
+
+.langing_header{
+  padding: 0 30px 30px 30px;
+}
+
+.omniauth {
+  padding: 0 20px;
 }
 
 /* Debug */

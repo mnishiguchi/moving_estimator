@@ -10,17 +10,30 @@
 
       .row
         .col-sm-6
+<<<<<<< HEAD
           = link_to fa_icon("fw twitter", text: "Sign up with twitter"), user_omniauth_authorize_path(:twitter),
           class: "btn btn-info btn-block btn-lg"
+=======
+          = link_to fa_icon("fw twitter", text: "Sign up with twitter"),
+            omniauth_authorize_path(resource_name, :twitter),
+            class: "btn btn-info btn-block btn-lg"
+>>>>>>> improve-landing-page
           %hr/
 
           .alert.alert-info
             Already have an account?
             / = link_to "Log in", new_user_session_path
             = link_to "Log in", new_session_path(resource_name)
+<<<<<<< HEAD
             %br/
             / = link_to "Didn't receive confirmation instructions?", new_user_confirmation_path
             = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
 
         .col-sm-6.well
           = render("devise/shared/signup_form")
+=======
+            = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
+
+        .col-sm-6
+          .well= render "signup_form"
+>>>>>>> improve-landing-page
