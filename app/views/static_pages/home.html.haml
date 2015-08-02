@@ -15,9 +15,9 @@
         = link_to fa_icon("fw twitter", text: "Sign up / Log in with twitter"), user_omniauth_authorize_path(:twitter),
         class: "btn btn-info btn-block btn-lg"
 
-      .alert.alert-warning
-        New user?
-        = link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"
+        .alert.alert-warning
+          New user?
+          = link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"
 
     .col-md-5
       = render "login_form"
