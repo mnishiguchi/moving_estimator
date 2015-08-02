@@ -1,18 +1,40 @@
 / Home non-logged-in
-.jumbotron.center
+.landing_page
+  .row
+    .col-md-7
+      .langing_header
+        = fa_icon "home 5x"
+        = fa_icon "truck 3x"
 
-  = fa_icon "home 5x"
-  = fa_icon "truck 3x"
+        %h1 Moving Estimator
 
-  %h1
-    Moving Estimator
+        %i.lead.clearfix
+          estimates the volume of your moving
 
-  %i.lead.clearfix
-    estimates the volume of your moving
+      .omniauth
+        = link_to fa_icon("fw twitter", text: "Sign up / Log in with twitter"), user_omniauth_authorize_path(:twitter),
+        class: "btn btn-info btn-block btn-lg"
 
-  %div{ style: "margin-top: 40px;" }
-  = link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-success"
+      .alert.alert-warning
+        New user?
+        = link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"
 
-%hr/
+    .col-md-5
+      = form_for(resource = User.new, url: user_session_path) do |f|
 
-= render "shared/about_author"
+        .field.form-group
+          = f.email_field :email, autofocus: false, class: 'form-control', placeholder: "Email"
+
+        .field.form-group
+          = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Password"
+
+        %ul.list-inline
+          %li
+            %ul.list-inline
+              %li= f.check_box :remember_me
+              %li= f.label :remember_me
+          %li= link_to fa_icon("fw question-circle", text: "Forgot your password?"), new_user_password_path
+
+        .actions
+          = f.button "Log in", class: "submit btn btn-success btn-lg btn-block",
+            data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
