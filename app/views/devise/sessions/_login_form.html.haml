@@ -7,11 +7,10 @@
     = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Password"
 
   %ul.list-inline
-    - if devise_mapping.rememberable?
-      %li
-        %ul.list-inline
-          %li= f.check_box :remember_me
-          %li= f.label :remember_me
+    %li
+      %ul.list-inline
+        %li= f.check_box :remember_me
+        %li= f.label :remember_me
     %li= link_to fa_icon("fw question-circle", text: "Forgot your password?"), new_password_path(resource_name)
 
   .actions
