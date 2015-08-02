@@ -100,6 +100,7 @@ class User < ActiveRecord::Base
 
   # Override
   def password_required?
+    # !persisted? || !password.nil? || !password_confirmation.nil?  # super
     super && provider.blank?
   end
 
