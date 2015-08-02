@@ -1,0 +1,1 @@
+var todosApp = window.app = {};

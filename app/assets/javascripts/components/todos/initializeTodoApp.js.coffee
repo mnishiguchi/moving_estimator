@@ -1,6 +1,6 @@
 # Invoked in a Rails template with JSON data passed in.
 
-@initializeTodoApp = (mountNode, options={}) ->
+todosApp.initialize = (mountNode, options={}) ->
 
   todoData =  if options.hasOwnProperty("todos") then options["todos"] else []
 
