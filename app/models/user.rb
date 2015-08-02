@@ -35,10 +35,10 @@ class User < ActiveRecord::Base
   has_many :movings, dependent: :destroy
   has_many :moving_items, through: :movings, dependent: :destroy
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+  # Include default devise modules.
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable, :omniauthable
 
   # The username attribute was added via application controller.
   # The admin attribute was added by migration.
