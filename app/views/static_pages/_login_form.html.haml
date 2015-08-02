@@ -1,0 +1,19 @@
+.well
+  = form_for(resource = User.new, url: user_session_path) do |f|
+
+    .field.form-group
+      = f.email_field :email, autofocus: false, class: 'form-control', placeholder: "Email"
+
+    .field.form-group
+      = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Password"
+
+    %ul.list-inline
+      %li
+        %ul.list-inline
+          %li= f.check_box :remember_me
+          %li= f.label :remember_me
+      %li= link_to fa_icon("fw question-circle", text: "Forgot your password?"), new_user_password_path
+
+    .actions
+      = f.button "Log in", class: "submit btn btn-success btn-lg btn-block",
+        data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
