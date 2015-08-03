@@ -10,7 +10,6 @@
 //= require fluxxor
 //= require growl
 //= require Chart
-//= require todos_app
 //= require components
 //= require utilities
 //= requre_tree .
