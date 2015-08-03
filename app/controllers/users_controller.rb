@@ -6,13 +6,6 @@ class UsersController < ApplicationController
 
   # A list of all users (for admin only)
   def index
-    # For exporting csv
-    respond_to do |format|
-      format.html
-      format.json { render json: @users }
-      format.csv { send_data @users.unscoped.to_csv,
-                             filename: "users-#{Date.today}.csv" }
-    end
   end
 
   def destroy
