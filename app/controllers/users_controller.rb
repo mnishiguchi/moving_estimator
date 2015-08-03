@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user! # all actions
   before_action :search_users,      only: :index
 
-  # A list of all users (for admin only)
+  # A list of all users and csv export(for admin only)
   def index
   end
 

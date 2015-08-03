@@ -9,12 +9,7 @@ class MovingItemsController < ApplicationController
 
   # Export csv file
   def index
-    moving_items = @moving.moving_items
-    respond_to do |format|
-      format.json { render json: moving_items }  # for debug
-      format.csv  { send_data moving_items.to_csv,
-                    filename: "#{@moving.title}-items-#{Date.today}.csv" }
-    end
+    @moving_items = @moving.moving_items
   end
 
   # Creates the item to database via JSON
