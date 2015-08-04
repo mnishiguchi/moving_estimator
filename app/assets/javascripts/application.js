@@ -11,5 +11,6 @@
 //= require growl
 //= require Chart
 //= require components
+//= require facebook
 //= require utilities
 //= requre_tree .

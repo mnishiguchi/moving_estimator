@@ -117,19 +117,6 @@ class User < ActiveRecord::Base
 
   class << self
 
-    # For exporting csv
-    # def to_csv(options = {})  # e.g., headers
-    #   attributes = %w(id username sign_in_count created_at confirmed_at updated_at)
-
-    #   CSV.generate(options) do |csv|
-    #     csv << attributes
-
-    #     all.each do |user|
-    #       csv << attributes.map{ |attr| user.send(attr) }
-    #     end
-    #   end
-    # end
-
     # Sets current user in Thread.
     def current_user=(user)
       Thread.current[:current_user] = user
