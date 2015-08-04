@@ -11,6 +11,6 @@
 //= require growl
 //= require Chart
 //= require components
-//= require facebook
+//= require facebook_sdk_basic
 //= require utilities
 //= requre_tree .
