@@ -1,3 +1,4 @@
+// https://developers.facebook.com/quickstarts/468547786650263/?platform=web
 window.fbAsyncInit = function() {
   FB.init({
     appId      : '468547786650263',
