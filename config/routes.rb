@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   resources :todos,        only: [:index, :create, :update, :destroy]
   resources :ingredients,  only: [:index, :new, :create, :edit, :update, :destroy]
 
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks'}
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks'
+                                    # registrations: "registrations",
+                                    # sessions:      "sessions",
+                                    # confirmations: "confirmations",
+                                    # passwords:     "passwords"
+                                  }
 
   resources  :users, only: [:index, :destroy]
 

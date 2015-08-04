@@ -10,6 +10,9 @@
 
       .row
         .col-sm-6
+          = link_to fa_icon("fw facebook", text: "Sign up with facebook"),
+            omniauth_authorize_path(resource_name, :facebook),
+            class: "btn btn-default btn-block btn-lg"
           = link_to fa_icon("fw twitter", text: "Sign up with twitter"),
             omniauth_authorize_path(resource_name, :twitter),
             class: "btn btn-info btn-block btn-lg"
@@ -17,7 +20,6 @@
 
           .alert.alert-info
             Already have an account?
-            / = link_to "Log in", new_user_session_path
             = link_to "Log in", new_session_path(resource_name)
             = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
 

@@ -37,6 +37,8 @@ gem 'gibbon', '~> 1.1.5'   # A wrapper for MailChimp API 2.0 and Export API 1.0
 gem 'faker'
 gem 'growl'
 gem 'pg_search'
+gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
 group :development do
