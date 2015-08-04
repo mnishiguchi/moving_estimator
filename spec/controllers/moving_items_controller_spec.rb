@@ -17,6 +17,18 @@ RSpec.describe MovingItemsController, type: :controller do
 
   describe "non-logged-in user" do
 
+    describe 'GET #index' do
+      it "redirects to the login page" do
+        get :index
+        expect(response).to redirect_to "/users/sign_in"
+      end
+
+      describe "CSV format" do
+        before { get :index, format: "csv" }
+        it { expect(response.status).to eq 401 }
+      end
+    end
+
     describe "POST #create" do
 
       it "does not change the MovingItem count, redirecting to the login page" do
@@ -57,6 +69,18 @@ RSpec.describe MovingItemsController, type: :controller do
 
     describe "without selecting a moving" do
 
+      describe 'GET #index' do
+        it "redirects to the root url" do
+          get :index
+          expect(response).to redirect_to "/"
+        end
+
+        describe "CSV format" do
+          before { get :index, format: "csv" }
+          it { expect(response).to redirect_to "/" }
+        end
+      end
+
       describe "POST #create" do
 
         it "does not change the MovingItem count, redirecting to the root url" do
@@ -88,7 +112,52 @@ RSpec.describe MovingItemsController, type: :controller do
     end
 
     describe "after selecting a moving" do
-      before { remember_moving(moving) }
+      before do
+        remember_moving(moving)
+
+        10.times do
+          attributes = FactoryGirl.attributes_for(:moving_item)
+          moving.moving_items.create(attributes)
+        end
+      end
+
+      describe 'GET #index' do
+        describe "CSV format" do
+          render_views
+
+          before { get :index, format: "csv" }
+
+          it { expect(response).to render_template :index }
+          it { expect(response.headers["Content-Type"]).to eq "text/csv; charset=utf-8" }
+
+          describe "head" do
+            it { expect(response.body).to include Time.zone.now.getlocal.to_s[0..9] }
+            it { expect(response.body).to include moving.title }
+            it { expect(response.body).to include moving.description }
+          end
+
+          describe "body" do
+            attributes = %w(name volume quantity room category description)
+
+            attributes.each do |field|
+              it "has column name - #{field}" do
+                expect(response.body).to include field
+              end
+            end
+
+            attributes.each do |field|
+              it "has correct value for #{field}" do
+                expect(response.body).to include moving_item[field].to_s
+              end
+            end
+
+            it "has correct number of rows" do
+              num_of_rows = 5 + moving.moving_items.count
+              expect(response.body.split(/\n/).size).to eq num_of_rows
+            end
+          end
+        end
+      end
 
       describe "POST #create" do
 
