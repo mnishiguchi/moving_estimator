@@ -79,19 +79,16 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       describe "CSV format" do
-        subject { get :index, format: "csv" }
-        # let(:user) { FactoryGirl.create(:user) }
+        render_views
+        before { get :index, format: "csv" }
+        let(:user) { User.first}
 
-        # it "exports an csv file" do
-        #   attributes = %w(id username sign_in_count created_at confirmed_at updated_at)
-        #   attributes.each do |field|
-        #     expect(subject).to include user[field]
-        #   end
-        # end
+        it { expect(response).to render_template :index }
+        it { expect(response.headers["Content-Type"]).to eq "text/csv; charset=utf-8" }
 
-        it "redirects to root page" do
-          get :index, format: "csv"
-          expect(response).to render_template :index
+        attributes = %w(id username sign_in_count created_at confirmed_at updated_at)
+        attributes.each do |field|
+          it { expect(response.body).to include user[field].to_s }
         end
       end
     end

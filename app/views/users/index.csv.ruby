@@ -10,7 +10,7 @@ options = {}
 # ==> column names
 attributes = %w(id username sign_in_count created_at confirmed_at updated_at)
 
-CSV.generate(options) do |csv|
+@download = CSV.generate(options) do |csv|
   # table header
   csv << attributes
 
