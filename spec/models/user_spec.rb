@@ -59,17 +59,4 @@ describe User do
 
     it { expect(user).to be_corporate }
   end
-
-  describe "CSV export" do
-    before(:all) { FactoryGirl.create(:user) }
-
-    %w(id username sign_in_count created_at confirmed_at updated_at).each do |attr|
-      it { expect(User.to_csv).to include(attr) }
-    end
-
-    it "returns comma-separated values" do
-      User.first.update_columns(username: "Masatoshi Nishiguchi")
-      expect(User.to_csv).to match /\w+,Masatoshi Nishiguchi,\w+/
-    end
-  end
 end

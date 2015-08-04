@@ -9,6 +9,14 @@ RSpec.describe UsersController, :type => :controller do
         get :index
         expect(response).to redirect_to root_path
       end
+
+      describe "CSV format" do
+        subject { get :index, format: "csv" }
+        it "redirects to root page" do
+          get :index, format: "csv"
+          expect(response).to redirect_to root_path
+        end
+      end
     end
 
     describe 'DELETE #destroy' do
@@ -36,6 +44,14 @@ RSpec.describe UsersController, :type => :controller do
         get :index
         expect(response).to redirect_to root_path
       end
+
+      describe "CSV format" do
+        subject { get :index, format: "csv" }
+        it "redirects to root page" do
+          get :index, format: "csv"
+          expect(response).to redirect_to root_path
+        end
+      end
     end
 
     describe 'DELETE #destroy' do
@@ -60,6 +76,23 @@ RSpec.describe UsersController, :type => :controller do
       it "renders the index page" do
         get :index
         expect(response).to render_template :index
+      end
+
+      describe "CSV format" do
+        subject { get :index, format: "csv" }
+        # let(:user) { FactoryGirl.create(:user) }
+
+        # it "exports an csv file" do
+        #   attributes = %w(id username sign_in_count created_at confirmed_at updated_at)
+        #   attributes.each do |field|
+        #     expect(subject).to include user[field]
+        #   end
+        # end
+
+        it "redirects to root page" do
+          get :index, format: "csv"
+          expect(response).to render_template :index
+        end
       end
     end
 
