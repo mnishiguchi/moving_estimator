@@ -6,8 +6,8 @@ describe "Contact us", type: :feature do
     before { visit contact_path }
 
     it "has correct title and content" do
-      expect(page).to have_content('Contact')
-      expect(page).to have_title(full_title('Contact'))
+      expect(page).to have_content('Feedback')
+      expect(page).to have_title(full_title('Feedback'))
     end
   end
 
@@ -23,7 +23,7 @@ describe "Contact us", type: :feature do
         before { click_button submit }
 
         it "re-renders the Contact page with error message" do
-          expect(page).to have_title('Contact')
+          expect(page).to have_title('Feedback')
           expect(page).to have_content('error')
         end
       end

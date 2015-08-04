@@ -12,8 +12,10 @@ describe "Users login", type: :feature do
   describe "login" do
     before { visit new_user_session_path }
 
+    let(:submit) { "Log in" }
+
     describe "with invalid information" do
-      before { click_button "Log in" }
+      before { click_button submit }
 
       it { expect(page).to have_title('Log in') }
       it { expect(page).to have_error_message('Invalid') }
@@ -25,9 +27,14 @@ describe "Users login", type: :feature do
     end
 
     describe "with valid information" do
+
       let(:user) { FactoryGirl.create(:user) }
 
-      before { log_in_as(user) }
+      before do
+        find("#user_email").set user.email
+        find("#user_password").set user.password
+        click_button submit
+      end
 
       it { expect(page).to have_title(full_title("My movings")) }
       it { expect(page).to_not have_link('Log in', href: new_user_session_path) }
@@ -35,10 +42,10 @@ describe "Users login", type: :feature do
       describe "navbar dropdown links" do
         before { click_link user.username }
 
-        it { expect(page).to have_link("My movings", href: root_path) }
-        it { expect(page).to have_link("Settings",   href: edit_user_registration_path) }
-        it { expect(page).to have_link("Contact",    href: contact_path) }
-        it { expect(page).to have_link('Log out',    href: destroy_user_session_path) }
+        it { expect(page).to have_link("Movings",  href: root_path) }
+        it { expect(page).to have_link("Settings", href: edit_user_registration_path) }
+        it { expect(page).to have_link("Contact",  href: contact_path) }
+        it { expect(page).to have_link('Log out',  href: destroy_user_session_path) }
       end
 
       describe "followed by logout" do

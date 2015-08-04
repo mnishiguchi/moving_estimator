@@ -29,10 +29,10 @@ describe "Users signup", type: :feature do
 
     describe "with valid information" do
       before do
-        fill_in "Username",              with: "Example User"
-        fill_in "Email",                 with: "user@example.com"
-        fill_in "Password",              with: "password"
-        fill_in "Password confirmation", with: "password"
+        find("#user_username").set "Example User"
+        find("#user_email").set "user@example.com"
+        find("#user_password").set "password"
+        find("#user_password_confirmation").set "password"
       end
 
       it "should create a user" do
@@ -44,7 +44,7 @@ describe "Users signup", type: :feature do
         let(:user) { User.find_by(email: 'user@example.com') }
 
         it { expect(page).to have_title(full_title("")) }  # Root page
-        it { expect(page).to have_success_message('confirmation link') }
+        it { expect(page).to have_success_message('activate your account') }
       end
     end
   end

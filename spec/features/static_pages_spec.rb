@@ -17,8 +17,8 @@ describe "Static pages", type: :feature do
       expect(page).to have_title(full_title("Sign up"))
       first(:link, "Log in").click
       expect(page).to have_title(full_title("Log in"))
-      click_link "Contact"
-      expect(page).to have_title(full_title("Contact"))
+      # click_link "Contact"
+      # expect(page).to have_title(full_title("Contact"))
       click_link "logo"
       expect(page).to have_title(full_title(""))
     end
