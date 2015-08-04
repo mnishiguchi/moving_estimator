@@ -17,8 +17,9 @@ class UsersController < ApplicationController
   private
 
     def search_users
-      @users =  if params[:search].present?
-        then User.search(params[:search])
+      @search = SearchForm.new(params[:search_form])
+      @users =  if @search.q.present?
+        then User.search(@search.q)
         else User.all
         end.sorted.paginate(page: params[:page])
     end

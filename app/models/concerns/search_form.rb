@@ -4,16 +4,16 @@ class SearchForm
   attr_accessor :q
 end
 
-# == Example ==
+### Example ###
 
-# - Model -
+# ==> Model
 
-# class Ingredient < ActiveRecord::Base
-#
-#   scope :sorted, ->{ order(name: :asc) }
-#   scope :named, ->(q) { where("name ilike ?", "%#{q}%") }
+# class User < ActiveRecord::Base
+#   scope :sorted, ->{ order(username: :asc) }
+#   scope :search, ->(q) { where("username ilike ?", "%#{q}%") }
+# end
 
-# - View -
+# ==> View
 
 # .filter_wrapper{ style: "margin-bottom: 20px;" }
 #   = form_for @search, url: ingredients_path, html: {method: :get}, class: "form-horizontal" do |f|
@@ -23,19 +23,24 @@ end
 #         %span.input-group-btn
 #           = f.button fa_icon("search"), class: "btn btn-default"
 
-# - Controller -
+# ==> Controller
 
-# class IngredientsController < ApplicationController
+# class UsersController < ApplicationController
 #
-#   before_action :search_ingredients, only: :index
+#   before_action :ensure_admin!,     except: :show
+#   before_action :authenticate_user! # all actions
+#   before_action :search_users,      only: :index
 #
 #   def index
 #   end
 #
-# def search_ingredients
-#   @search = SearchForm.new(params[:search_form])
-#   @ingredients = if @search.q.present?
-#     then Ingredient.all.named(@search.q)
-#     else Ingredient.all
-#   end.sorted
+#   private
+#
+#     def search_users
+#       @search = SearchForm.new(params[:search_form])
+#       @users =  if @search.q.present?
+#         then User.search(@search.q)
+#         else User.all
+#         end.sorted.paginate(page: params[:page])
+#     end
 # end

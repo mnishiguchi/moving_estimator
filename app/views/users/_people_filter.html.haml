@@ -1,4 +1,7 @@
-.filter_wrapper
-  = form_tag(users_path, method: "get") do
-    = text_field_tag :search, nil, placeholder: "Search users ...", class: "form-control"
-    = submit_tag "", style: "display: none;"
+.filter_wrapper{ style: "margin-bottom: 20px;" }
+  = form_for @search, url: users_path, html: {method: :get}, class: "form-horizontal" do |f|
+    .form-group
+      .input-group
+        = f.search_field :q, class: "form-control"
+        %span.input-group-btn
+          = f.button fa_icon("search"), class: "btn btn-default"

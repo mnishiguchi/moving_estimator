@@ -27,7 +27,6 @@
 #
 
 class User < ActiveRecord::Base
-  include PgSearch
 
   attr_accessor :current_moving
 
@@ -44,18 +43,7 @@ class User < ActiveRecord::Base
   # The admin attribute was added by migration.
 
   scope :sorted, ->{ order(username: :asc) }
-
-  pg_search_scope :search,
-                  against: [
-                    :username,
-                    :email
-                  ],
-                  using: {
-                    tsearch: {
-                      prefix: true,
-                      normalization: 2
-                    }
-                  }
+  scope :search, ->(q) { where("username ilike ?", "%#{q}%") }
 
   def remember_moving(moving)
     current_moving = moving
