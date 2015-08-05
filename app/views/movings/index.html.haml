@@ -3,6 +3,13 @@
 .profile_header{ style: "margin-top: 20px;" }
   =render "profile_header"
 
+- if Rails.env.development?
+  %table
+    - current_user.attributes.each do |key, value|
+      %tr
+        %td= key
+        %td= value
+
 %ul.nav.nav-tabs{ role: 'tablist', style: "margin-top: 30px;" }
   %li.active
     %a{ href: "#tab_movings", role: "tab", data: { toggle: "tab" } }

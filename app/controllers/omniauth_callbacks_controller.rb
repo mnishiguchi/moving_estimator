@@ -1,7 +1,7 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def all
-    # raise request.env["omniauth.auth"].to_yaml
+    # raise request.env["omniauth.auth"].to_yaml  # For debugging
     user = User.from_omniauth(request.env["omniauth.auth"])
     if user.persisted?  # Ensure that this user is saved to database.
       sign_in_and_redirect user
