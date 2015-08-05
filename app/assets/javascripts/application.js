@@ -3,6 +3,8 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require turbolinks
+//= require_tree ./header
+//= require_tree ./utils
 //= require jquery-ui/autocomplete
 //= require jquery.tablesorter
 //= require react

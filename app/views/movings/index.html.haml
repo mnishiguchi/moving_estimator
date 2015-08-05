@@ -3,6 +3,9 @@
 .profile_header{ style: "margin-top: 20px;" }
   =render "profile_header"
 
+= render "shared/social"
+
+-# Dump user data for debugging
 - if Rails.env.development?
   %table
     - current_user.attributes.each do |key, value|

@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   has_many :todos,   dependent: :destroy
   has_many :movings, dependent: :destroy
   has_many :moving_items, through: :movings, dependent: :destroy
+  has_many :social_profiles, dependent: :destroy
 
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
@@ -55,22 +56,26 @@ class User < ActiveRecord::Base
 
   # ==> OmniAuth
 
-  # Find the user by data from OmniAuth; if not found, create a new user based on that data.
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid      = auth.uid
-
-      # Note: Password should be left blank.
-      if auth.provider == "twitter"
-        user.username = auth.info.nickname
-
-      elsif auth.provider == "facebook"
-        user.username = auth.info.name
-        user.email    = auth.info.email
-      end
-    end
+  def social_profile(provider)
+    social_profiles.select{ |sp| sp.provider == provider.to_s }.first
   end
+
+  # Find the user by data from OmniAuth; if not found, create a new user based on that data.
+  # def self.from_omniauth(auth)
+  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  #     user.provider = auth.provider
+  #     user.uid      = auth.uid
+  #     # Note: Leave the password field blank.
+
+  #     if auth.provider == "twitter"
+  #       user.username = auth.info.nickname
+
+  #     elsif auth.provider == "facebook"
+  #       user.username = auth.info.name
+  #       user.email    = auth.info.email
+  #     end
+  #   end
+  # end
 
   # Override
   # Run User.new based on session["devise.user_attributes"] when it exists.

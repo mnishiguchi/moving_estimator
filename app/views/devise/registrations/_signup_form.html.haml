@@ -1,10 +1,6 @@
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
 
-  - if params[:from_omniauth_callback]
-    .alert.alert-warning
-      Please fill out these required fields.
-  - else
-    = devise_error_messages!
+  = devise_error_messages!
 
   .field.form-group
     = f.text_field :username, autofocus: false, class: 'form-control', placeholder: "Username"
