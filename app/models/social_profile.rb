@@ -24,7 +24,7 @@ class SocialProfile < ActiveRecord::Base
   store :other
   validates_uniqueness_of :uid, scope: :provider
 
-  def set_values(omniauth)
+  def set_omniauth_data(omniauth)
 
     return if provider.to_s != omniauth['provider'].to_s || uid != omniauth['uid']
 

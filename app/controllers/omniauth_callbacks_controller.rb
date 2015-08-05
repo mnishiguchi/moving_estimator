@@ -1,9 +1,7 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def all
-    ap request.env["omniauth.auth"]  # For debugging
-
-    # user = User.from_omniauth(request.env["omniauth.auth"])
+    ap request.env["omniauth.auth"]  #<== debugging
 
     profile = social_profile_from_omniauth(request.env["omniauth.auth"])
     user    = find_user_by_social_profile(profile)
@@ -16,11 +14,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       sign_in_and_redirect user
       set_flash_message(:notice, :success, kind: __callee__.to_s.capitalize) if is_navigational_format?
-    else
 
-      ap "no, user not persisted"  #<== debugging
+    else  # 何らかの理由でデータベースに保存されていない。
 
-      session["devise.user_attributes"] = user.attributes
+      ap "no, user NOT persisted"  #<== debugging
+
+      session["devise.user_attributes"] = user.attributes  # 認証データを覚えておく。
       redirect_to new_user_registration_url
     end
   end
@@ -40,7 +39,7 @@ def social_profile_from_omniauth(auth)
   end
 
   # Set omniauth data on the profile
-  profile.set_values(auth)
+  profile.set_omniauth_data(auth)
 
   # Look for corresponding user if not already registered
   unless profile.user_id
@@ -57,16 +56,24 @@ def find_user_by_social_profile(profile)
   if profile.user
     user = profile.user
   else
-    user = User.new provider: profile.provider,
-                    uid:      profile.uid,
-                    username: profile.name,
-                    # パスワード不要なので、パスワードには触らない。
-                    email: "#{SecureRandom.uuid}@example.com"
+    user = User.create! provider: profile.provider,
+                        uid:      profile.uid,
+                        username: profile.name,
+                        # パスワード不要なので、パスワードには触らない。
+                        email: "#{SecureRandom.uuid}@example.com"
     user.skip_confirmation!
   end
   user
 end
 
+
 # def fix_temp_email(user)
-#   user
-# end
+
+#   ap /example/.match(user.email)
+
+#   if /example/.match(user.email)
+#     profiles = user.social_profiles
+#     emails = profile.select { |p| p.email.present? && /^example/.match(p.email)}.uniq
+#     user.email = emails.first
+#     user.save!
+#   end
