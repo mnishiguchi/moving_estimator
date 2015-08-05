@@ -1,7 +1,7 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def all
-    # raise request.env["omniauth.auth"].to_yaml  # For debugging
+    ap request.env["omniauth.auth"]  # For debugging
 
     # user = User.from_omniauth(request.env["omniauth.auth"])
 
@@ -54,12 +54,19 @@ end
 def find_user_by_social_profile(profile)
   raise unless profile.present?
 
-  return profile.user if profile.user
-
-  user = User.new(provider: profile.provider,
-           uid:      profile.uid,
-           username: profile.name)
-           # パスワード不要なので、パスワードには触らない。
-           # email: "#{SecureRandom.uuid}@example.com"
+  if profile.user
+    user = profile.user
+  else
+    user = User.new provider: profile.provider,
+                    uid:      profile.uid,
+                    username: profile.name,
+                    # パスワード不要なので、パスワードには触らない。
+                    email: "#{SecureRandom.uuid}@example.com"
+    user.skip_confirmation!
+  end
   user
 end
+
+# def fix_temp_email(user)
+#   user
+# end
