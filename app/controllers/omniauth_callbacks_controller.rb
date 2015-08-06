@@ -6,17 +6,19 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     profile = social_profile_from_omniauth(request.env["omniauth.auth"])
     user    = find_user_by_social_profile(profile)
 
-    ap user  #<== debugging
+    ap profile  #<== debugging
+    ap user     #<== debugging
 
     if user.persisted?  # Ensure that this user is saved to database.
-
       ap "yes, user persisted"  #<== debugging
+
+      # Update profile with user data
+      profile.update_columns(user_id: user.id, email: user.email)
 
       sign_in_and_redirect user
       set_flash_message(:notice, :success, kind: __callee__.to_s.capitalize) if is_navigational_format?
 
     else  # 何らかの理由でデータベースに保存されていない。
-
       ap "no, user NOT persisted"  #<== debugging
 
       session["devise.user_attributes"] = user.attributes  # 認証データを覚えておく。
@@ -28,52 +30,53 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   alias_method :twitter, :all
 end
 
-# Look for a socialprofile based on omniauth data; if none found create one
+# Look for a socialprofile based on omniauth data; if not found create one
 def social_profile_from_omniauth(auth)
   raise unless auth.present?
 
   # Get a profile
   profile = SocialProfile.where(provider: auth['provider'], uid: auth['uid']).first
   unless profile
-    profile = SocialProfile.new(provider: auth['provider'], uid: auth['uid'])
+    profile = SocialProfile.create!(provider: auth['provider'], uid: auth['uid'])
   end
 
   # Set omniauth data on the profile
   profile.set_omniauth_data(auth)
 
-  # Look for corresponding user if not already registered
-  unless profile.user_id
+  # Set corresponding user id if not already registered
+  unless profile.user_id.present?
     user = User.where(provider: profile.provider, uid: profile.uid).try(:first)
     profile.user_id = user.id if user
   end
-  profile
+  return profile
 end
 
-# Look for a user who belongs to this profile; if none found, create one
+# Look for a user who belongs to this profile; if user not found, create a new one.
 def find_user_by_social_profile(profile)
   raise unless profile.present?
 
-  if profile.user
-    user = profile.user
-  else
+  # 1. Try to find user by profile
+  return profile.user if profile.user
+
+  # 2. Try to find user by profile email;
+  user = User.find_by(email: profile.email) if profile.email.present?
+
+  # 3. if user not found, create a new one.
+  unless user
+    email = if profile.email.present? then profile.email
+                                      else "#{SecureRandom.uuid}@example.com"
+                                      end
     user = User.create! provider: profile.provider,
                         uid:      profile.uid,
                         username: profile.name,
-                        # パスワード不要なので、パスワードには触らない。
-                        email: "#{SecureRandom.uuid}@example.com"
-    user.skip_confirmation!
+                        email:    email
+                        # Let's leave password alone.
+    # Update profile's email
+    profile.update_columns(email: user.email)
+
+    ap "User created"   #<== debugging
   end
-  user
+  # No need for email confirmation because we use omniauth.
+  user.skip_confirmation!
+  return user
 end
-
-
-# def fix_temp_email(user)
-
-#   ap /example/.match(user.email)
-
-#   if /example/.match(user.email)
-#     profiles = user.social_profiles
-#     emails = profile.select { |p| p.email.present? && /^example/.match(p.email)}.uniq
-#     user.email = emails.first
-#     user.save!
-#   end
