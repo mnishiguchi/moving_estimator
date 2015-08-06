@@ -60,7 +60,7 @@ class SocialProfile < ActiveRecord::Base
     end
 
     self.raw_info = raw_info.to_json
-    self.save!
+    self.save!  # Finally save to database here
     self
   end
 end

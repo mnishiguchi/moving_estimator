@@ -30,20 +30,18 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   alias_method :twitter, :all
 end
 
-# Look for a socialprofile based on omniauth data; if not found create one
+# Look for a socialprofile based on omniauth data; if not found create one.
 def social_profile_from_omniauth(auth)
   raise unless auth.present?
 
-  # Get a profile
-  profile = SocialProfile.where(provider: auth['provider'], uid: auth['uid']).first
-  unless profile
-    profile = SocialProfile.create!(provider: auth['provider'], uid: auth['uid'])
-  end
+  # Get a profile based on provider and uid.
+  data = { provider: auth['provider'], uid: auth['uid'] }
+  profile = SocialProfile.where(data).first_or_create(data)
 
-  # Set omniauth data on the profile
+  # Set omniauth data on the profile.
   profile.set_omniauth_data(auth)
 
-  # Set corresponding user id if not already registered
+  # Set corresponding user id if not already registered.
   unless profile.user_id.present?
     user = User.where(provider: profile.provider, uid: profile.uid).try(:first)
     profile.user_id = user.id if user
@@ -55,23 +53,25 @@ end
 def find_user_by_social_profile(profile)
   raise unless profile.present?
 
-  # 1. Try to find user by profile
+  # 1. Try to find user by profile.
   return profile.user if profile.user
 
-  # 2. Try to find user by profile email;
+  # 2. Try to find user by profile email.
   user = User.find_by(email: profile.email) if profile.email.present?
 
   # 3. if user not found, create a new one.
   unless user
-    email = if profile.email.present? then profile.email
-                                      else "#{SecureRandom.uuid}@example.com"
-                                      end
+    email = if profile.email.present?
+            then profile.email
+            else "#{SecureRandom.uuid}@example.com" end
+
     user = User.create! provider: profile.provider,
                         uid:      profile.uid,
                         username: profile.name,
                         email:    email
                         # Let's leave password alone.
-    # Update profile's email
+
+    # Update profile's email.
     profile.update_columns(email: user.email)
 
     ap "User created"   #<== debugging
