@@ -6,6 +6,8 @@
 
 # Ignore secrets
 .env
+/config/secrets.yml
+/config/initializers/devise.rb
 
 # Ignore bundler config.
 /.bundle
