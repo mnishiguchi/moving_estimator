@@ -1,0 +1,11 @@
+-# required variables: `provider` and `display_name`
+
+- connected = current_user.try(:social_profile, provider)
+
+%tr
+  %td= fa_icon("fw #{provider}", text: display_name)
+  %td
+    = button_to (connected ? 'connected' : 'connect'),
+      user_omniauth_authorize_path(provider),
+      id: "#{provider}-auth", class: "social-connect",
+      disabled: (connected ? 'disabled' : nil)

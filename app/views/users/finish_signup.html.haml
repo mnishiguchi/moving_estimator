@@ -1,17 +1,21 @@
 #add-email.container
-  %h1 Add Email
-  = form_for(current_user, as: 'user', url: finish_signup_path(current_user),
-                                      html: { role: 'form'}) do |f|
-    - if @show_errors && current_user.errors.any?
-      #error_explanation
-        - current_user.errors.full_messages.each do |msg|
-          = msg
-          %br/
-    .form-group
-      = f.label :email
-      .controls
-        = f.text_field :email, autofocus: true, value: '',
-          class: 'form-control input-lg', placeholder: 'Example: email@me.com'
-        %p.help-block Please confirm your email address. No spam.
+  %h1.page-header Add Email
+  = form_for(@user, url: finish_signup_path(@user)) do |f|
+    = render "shared/error_messages", object: f.object
+
+    .field.form-group
+      = f.text_field :username, autofocus: true, class: 'form-control', placeholder: "Username"
+
+    .field.form-group
+      = f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Email"
+
+    .field.form-group
+      = f.password_field :password, autocomplete: "off", class: 'form-control',
+        placeholder: "Password (8 characters min)"
+
+    .field.form-group
+      = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control',
+        placeholder: "Password confirmation"
+
     .actions
-      = f.submit 'Continue', class: 'btn btn-primary'
+      = f.submit 'Continue', class: 'btn btn-success'

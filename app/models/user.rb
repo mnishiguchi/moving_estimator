@@ -137,15 +137,6 @@ class User < ActiveRecord::Base
   #   super && provider.blank?
   # end
 
-  # Override
-  # If user has no password, allow user to update info without requiring password.
-  def update_with_password(params, *options)
-    if encrypted_password.blank?
-      update_attributes(params, *options)
-    else
-      super
-    end
-  end
 
   # ==> current user made available through User model
 

@@ -23,8 +23,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(resource)
 
-    ap __method__.to_s + " was invoked"  #<== debugging
+    ap __method__.to_s + " was invoked"                #<== debugging
     ap "email_verified?: #{resource.email_verified?}"  #<== debugging
+    ap resource.errors.any?
+
 
     if resource.email_verified?
       super resource
@@ -33,55 +35,3 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 end
-
-# # Look for a socialprofile based on omniauth data; if not found create one.
-# def social_profile_from_omniauth(auth)
-#   raise unless auth.present?
-
-#   # Get a profile based on provider and uid.
-#   data = { provider: auth['provider'], uid: auth['uid'] }
-#   profile = SocialProfile.where(data).first_or_create(data)
-
-#   # Set omniauth data on the profile.
-#   profile.set_oauth_data(auth)
-
-#   # Set corresponding user id if not already registered.
-#   unless profile.user_id.present?
-#     user = User.where(provider: profile.provider, uid: profile.uid).try(:first)
-#     profile.user_id = user.id if user
-#   end
-#   return profile
-# end
-
-# # Look for a user who belongs to this profile; if user not found, create a new one.
-# def find_user_by_social_profile(profile)
-#   raise unless profile.present?
-
-#   # 1. Try to find user by profile.
-#   return profile.user if profile.user
-
-#   # 2. Try to find user by profile email.
-#   user = User.find_by(email: profile.email) if profile.email.present?
-
-#   # 3. if user not found, create a new one.
-#   unless user
-#     email = if profile.email.present?
-#             then profile.email
-#             else "#{SecureRandom.uuid}@example.com" end
-
-#     user = User.create! provider: profile.provider,
-#                         uid:      profile.uid,
-#                         username: profile.name,
-#                         email:    email
-#                         # Let's leave password alone.
-
-#     # Update profile's email.
-#     profile.update_columns(email: user.email)
-
-#     ap "User created"   #<== debugging
-#   end
-#   # No need for email confirmation because we use omniauth.
-#   user.skip_confirmation!
-#   return user
-# end
-

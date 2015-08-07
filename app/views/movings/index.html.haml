@@ -3,9 +3,7 @@
 .profile_header{ style: "margin-top: 20px;" }
   =render "profile_header"
 
-= render "shared/social"
-
-= render "shared/omniauth_buttons"
+.alert.alert-info= render "shared/social"
 
 -# Dump user data for debugging
 - if Rails.env.development?

@@ -3,12 +3,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_current_user
 
   def ensure_signup_complete
 
-    ap __method__ + "was invoked"  #<== debugging
+    ap __method__.to_s + " was invoked"  #<== debugging
 
     # Ensure we don't go into an infinite loop
     return if action_name == 'finish_signup'
@@ -20,20 +20,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  protected
+  # protected
 
-    # Confugure parameters Devise should accept.
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) do |u|
-        u.permit(:username, :email, :password, :password_confirmation, :remember_me)
-      end
-      devise_parameter_sanitizer.for(:sign_in) do |u|
-        u.permit(:login, :username, :email, :password, :remember_me)
-      end
-      devise_parameter_sanitizer.for(:account_update) do |u|
-        u.permit(:username, :email, :password, :password_confirmation, :current_password)
-      end
-    end
+  #   Confugure parameters Devise should accept.
+  #   def configure_permitted_parameters
+  #     devise_parameter_sanitizer.for(:sign_up) do |u|
+  #       u.permit(:username, :email, :password, :password_confirmation, :remember_me)
+  #     end
+  #     devise_parameter_sanitizer.for(:sign_in) do |u|
+  #       u.permit(:login, :username, :email, :password, :remember_me)
+  #     end
+  #     devise_parameter_sanitizer.for(:account_update) do |u|
+  #       u.permit(:username, :email, :password, :password_confirmation, :current_password)
+  #     end
+  #   end
 
   private
 
