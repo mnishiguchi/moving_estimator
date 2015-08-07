@@ -8,13 +8,14 @@ class UsersController < ApplicationController
     search_users
   end
 
-  # GET   /users/:id/finish_signup
-  # PATCH /users/:id/finish_signup
+  # GET   /users/:id/finish_signup - Add email form
+  # PATCH /users/:id/finish_signup - Update user data based on the form
   def finish_signup
-    if request.patch?
-      if @user.update(user_params)
-        redirect_to root_url, notice: 'Your profile was successfully updated.'
-      end
+    if request.patch? && @user.update(user_params)
+
+      @user.send_confirmation_instructions unless @user.confirmed?
+      flash[:info] = 'We sent you a confirmation email. Please find a confirmation link.'
+      redirect_to root_url
     end
   end
 

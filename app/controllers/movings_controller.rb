@@ -3,7 +3,6 @@ class MovingsController < ApplicationController
   include MovingsHelper
 
   before_action :authenticate_user! # all actions
-  before_action :ensure_signup_complete, only: [:new, :create, :update, :destroy]
   before_action :correct_user!,     only: [:show, :edit, :update, :destroy]
   before_action :set_mover_url!,    only: :index
 

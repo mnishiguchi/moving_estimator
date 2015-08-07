@@ -98,21 +98,30 @@ class User < ActiveRecord::Base
           uid:      "See social profiles",
           password: Devise.friendly_token[0,20]
         )
-        user.skip_confirmation!
+        user.skip_confirmation!  # Temporarily disable confirmation
         user.save!
       end
     end
-
-    # Associate the profile with the user if needed
-    if profile.user != user
-      profile.user = user
-      profile.save!
-    end
-    user
+    user.associate_profile!(profile)
   end
 
+  # Associate the profile with the user if needed
+  def associate_profile!(profile)
+    if profile.user != self
+      profile.user = self
+      profile.save!
+    end
+    self
+  end
+
+  # Ensure that user's email is confirmed.
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
+  end
+
+  # Undo the effect of skip_confirmation!
+  def reset_confirmation!
+    self.update_column(:confirmed_at, nil)
   end
 
   # Override
@@ -128,15 +137,6 @@ class User < ActiveRecord::Base
       super
     end
   end
-
-  # Override
-  # def password_required?
-  #   ap "password_required?: #{super && provider.blank?}"  #<== debugging
-
-  #   # !persisted? || !password.nil? || !password_confirmation.nil?  # super
-  #   super && provider.blank?
-  # end
-
 
   # ==> current user made available through User model
 
