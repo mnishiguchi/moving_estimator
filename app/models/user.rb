@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
   scope :sorted, ->{ order(username: :asc) }
   scope :search, ->(q) { where("username ilike ?", "%#{q}%") }
 
+  # ==> currently-selected moving
+
   def remember_moving(moving)
     current_moving = moving
   end
@@ -56,26 +58,62 @@ class User < ActiveRecord::Base
 
   # ==> OmniAuth
 
+  TEMP_EMAIL_PREFIX = 'change@me'
+  TEMP_EMAIL_REGEX = /\Achange@me/
+
   def social_profile(provider)
     social_profiles.select{ |sp| sp.provider == provider.to_s }.first
   end
 
-  # Find the user by data from OmniAuth; if not found, create a new user based on that data.
-  # def self.from_omniauth(auth)
-  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-  #     user.provider = auth.provider
-  #     user.uid      = auth.uid
-  #     # Note: Leave the password field blank.
+  def self.find_for_oauth(auth, signed_in_resource = nil)
 
-  #     if auth.provider == "twitter"
-  #       user.username = auth.info.nickname
+    # Get the profile and user if they exist
+    profile = SocialProfile.find_for_oauth(auth)
 
-  #     elsif auth.provider == "facebook"
-  #       user.username = auth.info.name
-  #       user.email    = auth.info.email
-  #     end
-  #   end
-  # end
+    # If a signed_in_resource is provided it always overrides the existing user
+    # to prevent the profile being locked with accidentally created accounts.
+    # Note that this may leave zombie accounts (with no associated profile) which
+    # can be cleaned up at a later date.
+    user = signed_in_resource ? signed_in_resource : profile.user
+
+    # Create the user if needed
+    if user.nil?
+
+      # Get the existing user by email if the provider gives us a verified email.
+      # If no verified email was provided we assign a temporary email and ask the
+      # user to verify it on the next step via UsersController.finish_signup
+      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
+      email = auth.info.email if email_is_verified
+      user = User.where(email: email).first if email
+
+      ap "user: nil; email_is_verified: #{email_is_verified}"
+
+      # Create the user if it's a new registration
+      if user.nil?
+        user = User.new(
+          username: auth.extra.raw_info.name,
+          #username: auth.info.nickname || auth.uid,
+          email:    email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+          provider: "See social profiles",
+          uid:      "See social profiles",
+          password: Devise.friendly_token[0,20]
+        )
+        user.skip_confirmation!
+        user.save!
+      end
+    end
+
+    # Associate the profile with the user if needed
+    if profile.user != user
+      profile.user = user
+      profile.save!
+    end
+    user
+  end
+
+  def email_verified?
+    self.email && self.email !~ TEMP_EMAIL_REGEX
+  end
 
   # Override
   # Run User.new based on session["devise.user_attributes"] when it exists.
@@ -92,10 +130,12 @@ class User < ActiveRecord::Base
   end
 
   # Override
-  def password_required?
-    # !persisted? || !password.nil? || !password_confirmation.nil?  # super
-    super && provider.blank?
-  end
+  # def password_required?
+  #   ap "password_required?: #{super && provider.blank?}"  #<== debugging
+
+  #   # !persisted? || !password.nil? || !password_confirmation.nil?  # super
+  #   super && provider.blank?
+  # end
 
   # Override
   # If user has no password, allow user to update info without requiring password.
@@ -107,17 +147,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  # ==> current user made available through User model
 
-  class << self
+  # Sets current user in Thread.
+  def self.current_user=(user)
+    Thread.current[:current_user] = user
+  end
 
-    # Sets current user in Thread.
-    def current_user=(user)
-      Thread.current[:current_user] = user
-    end
-
-    # Gets current user from Thread.
-    def current_user
-      Thread.current[:current_user]
-    end
+  # Gets current user from Thread.
+  def self.current_user
+    Thread.current[:current_user]
   end
 end

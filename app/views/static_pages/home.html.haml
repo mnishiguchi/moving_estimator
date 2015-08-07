@@ -11,17 +11,12 @@
         %i.lead.clearfix
           estimates the volume of your moving
 
-      .omniauth
-        = link_to fa_icon("fw facebook", text: "Sign up / Log in with Facebook"),
-          user_omniauth_authorize_path(:facebook),
-          class: "btn btn-default btn-block btn-lg"
-        = link_to fa_icon("fw twitter", text: "Sign up / Log in with Twitter"),
-          user_omniauth_authorize_path(:twitter),
-          class: "btn btn-info btn-block btn-lg"
+        .omniauth
+          = render "shared/omniauth_buttons"
 
-        .alert.alert-warning
-          New user?
-          = link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"
+          .alert.alert-warning
+            New user?
+            = link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"
 
     .col-md-5
       = render "login_form"

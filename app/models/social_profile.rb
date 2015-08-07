@@ -21,15 +21,20 @@
 
 class SocialProfile < ActiveRecord::Base
   belongs_to :user
-  store :other
+  store      :other
   validates_uniqueness_of :uid, scope: :provider
 
-  def set_omniauth_data(omniauth)
+  def self.find_for_oauth(auth)
+    profile = find_or_create_by(uid: auth.uid, provider: auth.provider)
+    profile.set_oauth_data(auth)
+  end
 
-    return if provider.to_s != omniauth['provider'].to_s || uid != omniauth['uid']
+  def set_oauth_data(auth)
 
-    credentials = omniauth['credentials']
-    info        = omniauth['info']
+    return if provider.to_s != auth['provider'].to_s || uid != auth['uid']
+
+    credentials = auth['credentials']
+    info        = auth['info']
 
     # self.access_token  = credentials['token']
     # self.access_secret = credentials['secret']
@@ -47,10 +52,13 @@ class SocialProfile < ActiveRecord::Base
       self.other[:website]  = info['urls']['Website']
     end
 
-    self.set_values_by_raw_info(omniauth['extra']['raw_info'])
+    self.set_raw_info(auth['extra']['raw_info'])
+
+    self.save!  # Finally save to database here
+    self        # Return this profile
   end
 
-  def set_values_by_raw_info(raw_info)
+  def set_raw_info(raw_info)
 
     case provider.to_s
     when 'twitter'
@@ -58,9 +66,6 @@ class SocialProfile < ActiveRecord::Base
       self.other[:friends_count]   = raw_info['friends_count']
       self.other[:statuses_count]  = raw_info['statuses_count']
     end
-
     self.raw_info = raw_info.to_json
-    self.save!  # Finally save to database here
-    self
   end
 end

@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources  :users, only: [:index, :destroy]
 
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
+
   get  'contact'   => 'contacts#new'
   post 'contact'   => 'contacts#create'
 
