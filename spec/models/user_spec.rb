@@ -24,6 +24,7 @@
 #  mover_url              :string
 #  provider               :string
 #  uid                    :string
+#  unconfirmed_email      :string
 #
 
 require 'rails_helper'

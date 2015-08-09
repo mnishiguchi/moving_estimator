@@ -24,6 +24,7 @@
 #  mover_url              :string
 #  provider               :string
 #  uid                    :string
+#  unconfirmed_email      :string
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

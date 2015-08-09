@@ -24,6 +24,7 @@
 #  mover_url              :string
 #  provider               :string
 #  uid                    :string
+#  unconfirmed_email      :string
 #
 
 class User < ActiveRecord::Base
