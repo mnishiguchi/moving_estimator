@@ -103,6 +103,7 @@ class User < ActiveRecord::Base
       end
     end
     user.associate_profile!(profile)
+    user
   end
 
   # Associate the profile with the user if needed
@@ -111,7 +112,6 @@ class User < ActiveRecord::Base
       profile.user = self
       profile.save!
     end
-    self
   end
 
   # Ensure that user's email is confirmed.
