@@ -28,8 +28,8 @@ gem 'bootstrap-will_paginate'
 gem 'font-awesome-rails'
 gem 'jquery-ui-rails'
 gem 'chart-js-rails'
-gem 'react-rails'
-gem 'sprockets-coffee-react'
+gem 'react-rails',             '~> 1.0.0'
+gem 'sprockets-coffee-react',  '~> 3.0.1'
 # Others
 gem 'jquery-turbolinks'
 gem 'devise', '~> 3.4.1'   # Authentication

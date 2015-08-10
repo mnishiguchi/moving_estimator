@@ -13,15 +13,16 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # The mailer.
+  # ==> Mailer
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # The location of the mailer previews directory (default: test/mailers/previews)
   config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
 
-  # React
+  # ==> React
   config.react.variant = :development
+  config.react.addons = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

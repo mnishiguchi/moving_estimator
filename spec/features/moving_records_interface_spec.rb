@@ -103,6 +103,9 @@ feature "Moving records interface", type: :feature do
                 fill_in "category", with: "local"
                 fill_in "room",     with: "living room"
                 click_button submit
+                expect(page).to have_content("Add new item")
+                expect(page).to have_selector("input[value='']")
+                click_link("All items")
                 expect(page).to have_content(item_name.downcase!)
                 expect(MovingItem.last.name).to eq item_name
               end
