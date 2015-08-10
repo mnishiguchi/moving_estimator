@@ -29,13 +29,11 @@ describe "Users edit", type: :feature do
       let(:new_name)  { "New Name" }
       let(:new_email) { "new@example.com" }
 
-      describe "only username" do
+      describe "other than new email" do
         before do
           fill_in "Username", with: new_name
           click_button "Update"
         end
-
-        # FIXME: fix a bug - new name is not updated after submission
 
         it { expect(page).to have_success_message "Your account has been updated successfully" }
         it { expect(page).to have_link(new_name) }
@@ -51,9 +49,9 @@ describe "Users edit", type: :feature do
         end
 
         it { expect(page).to have_success_message "we need to verify your new email address" }
-        it { expect(page).to have_link(user.username) }
+        it { expect(page).to have_link(new_name) }
 
-        specify { expect(user.reload.username).not_to eq new_name }
+        specify { expect(user.reload.username).to eq new_name }
         specify { expect(user.reload.email).not_to eq new_email }
       end
     end
