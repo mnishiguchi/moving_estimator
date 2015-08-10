@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_current_user
 
+  add_flash_types :success, :info, :warning, :danger
+
   private
 
     # Return true if current user is admin, else redirects to root.

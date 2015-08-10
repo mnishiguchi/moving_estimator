@@ -21,18 +21,18 @@
 
 FactoryGirl.define do
   factory :social_profile do
-    user nil
-provider "MyString"
-uid "MyString"
-name "MyString"
-nickname "MyString"
-email "MyString"
-url "MyString"
-image_url "MyString"
-description "MyString"
-other "MyText"
-credentials "MyText"
-raw_info "MyText"
+    provider    "twitter"
+    uid         "mock_uid_1234"
+    name        "Mock User"
+    nickname    "mock_nickname"
+    email       "mock_email@example.com"
+    url         "http://mock_url.com"
+    image_url   "http://mock_image_url.com"
+    description "mock_description"
+    other       "MyText"
+    credentials "MyText"
+    raw_info    "MyText"
+    user
   end
 
 end

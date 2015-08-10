@@ -63,6 +63,10 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   config.include ControllerMacros, type: :controller
 
+  # https://github.com/plataformatec/devise/wiki/How-To:-Test-with-Capybara
+  include Warden::Test::Helpers
+  Warden.test_mode!
+
   # Database cleaner
 
   config.before(:suite) do

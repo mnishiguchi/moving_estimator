@@ -54,21 +54,21 @@ class SocialProfile < ActiveRecord::Base
       self.nickname    = info['nickname']
       self.description = info['description'].try(:truncate, 255)
       self.image_url   = info['image']
-      case provider.to_s
-      when 'twitter'
-        self.url              = info['urls']['Twitter']
-        self.other[:location] = info['location']
-        self.other[:website]  = info['urls']['Website']
-      end
+      # case provider.to_s
+      # when 'twitter'
+      #   self.url              = info['urls']['Twitter']
+      #   self.other[:location] = info['location']
+      #   self.other[:website]  = info['urls']['Website']
+      # end
     end
 
     def set_raw_info(raw_info)
       self.raw_info = raw_info.to_json
-      case provider.to_s
-      when 'twitter'
-        self.other[:followers_count] = raw_info['followers_count']
-        self.other[:friends_count]   = raw_info['friends_count']
-        self.other[:statuses_count]  = raw_info['statuses_count']
-      end
+      # case provider.to_s
+      # when 'twitter'
+      #   self.other[:followers_count] = raw_info['followers_count']
+      #   self.other[:friends_count]   = raw_info['friends_count']
+      #   self.other[:statuses_count]  = raw_info['statuses_count']
+      # end
     end
 end

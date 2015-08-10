@@ -1,13 +1,11 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def callback_for_all_providers
-    ap request.env["omniauth.auth"]  #<== debugging
+    # ap request.env["omniauth.auth"]  #<== debugging
 
     @user = User.find_for_oauth(env["omniauth.auth"], current_user)
 
     if @user.persisted?  # Ensure that this user is saved to database.
-      ap "yes, user persisted"  #<== debugging
-
       # If user's email is already confirmed, then log in the user.
       # Otherwise enforce email confirmation
       if @user.email_verified?
@@ -19,7 +17,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to finish_signup_path(@user)
       end
     else  # 何らかの理由でデータベースに保存されていない。
-      ap "no, user NOT persisted"  #<== debugging
       flash[:denger] = "Something went wrong!"
       session["devise.user_attributes"] = user.attributes  # 認証データを覚えておく。
       redirect_to new_user_registration_url
@@ -29,15 +26,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   alias_method :facebook, :callback_for_all_providers
   alias_method :twitter,  :callback_for_all_providers
 
-  def after_sign_in_path_for(resource)
-
-    ap __method__.to_s + " was invoked"                #<== debugging
-    ap "email_verified?: #{resource.email_verified?}"  #<== debugging
-
-    if resource.email_verified?
-      super resource
-    else
-      finish_signup_path(resource)
-    end
-  end
+  # def after_sign_in_path_for(resource)
+  #   if resource.email_verified?
+  #     super resource
+  #   else
+  #     finish_signup_path(resource)
+  #   end
+  # end
 end

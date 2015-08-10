@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Users login", type: :feature do
+feature "Users login" do
 
   describe "login page" do
     before { visit new_user_session_path }

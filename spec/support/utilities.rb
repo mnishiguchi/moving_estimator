@@ -1,5 +1,3 @@
-# RSpec custom matchers
-
 # options: { no_capybara: true|false }
 def log_in_as(user, options={})
   # For controller specs
@@ -17,6 +15,8 @@ def log_in_as(user, options={})
     user
   end
 end
+
+# ==> RSpec custom matchers
 
 RSpec::Matchers.define :have_error_message do |message|
   match do |page|
