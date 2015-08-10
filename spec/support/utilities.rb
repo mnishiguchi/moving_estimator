@@ -2,11 +2,10 @@
 def log_in_as(user, options={})
   # For controller specs
   if options[:no_capybara]
-    role = if user.admin? then :admin else :user end
-    @request.env["devise.mapping"] = Devise.mappings[role]
+    @request.env["devise.mapping"] = Devise.mappings[:user]
     sign_in user
     user
-  # For integration specs
+  # For feature specs
   else
     visit new_user_session_path
     fill_in "Email",    with: user.email.upcase
@@ -21,6 +20,12 @@ end
 RSpec::Matchers.define :have_error_message do |message|
   match do |page|
     expect(page).to have_selector('div.alert.alert-danger', text: message)
+  end
+end
+
+RSpec::Matchers.define :have_warning_message do |message|
+  match do |page|
+    expect(page).to have_selector('div.alert.alert-warning', text: message)
   end
 end
 

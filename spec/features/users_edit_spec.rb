@@ -16,7 +16,11 @@ describe "Users edit", type: :feature do
     end
 
     describe "with invalid information" do
-      before { click_button "Update" }
+      before do
+        fill_in "Username",         with: ""
+        fill_in "Email",            with: "invalid_email..com.@"
+        click_button "Update"
+      end
 
       it { expect(page).to have_content('error') }
     end
@@ -24,19 +28,34 @@ describe "Users edit", type: :feature do
     describe "with valid information" do
       let(:new_name)  { "New Name" }
       let(:new_email) { "new@example.com" }
-      before do
-        fill_in "Username",         with: new_name
-        fill_in "Email",            with: new_email
-        fill_in "Current password", with: user.password
-        click_button "Update"
+
+      describe "only username" do
+        before do
+          fill_in "Username", with: new_name
+          click_button "Update"
+        end
+
+        # FIXME: fix a bug - new name is not updated after submission
+
+        it { expect(page).to have_success_message "Your account has been updated successfully" }
+        it { expect(page).to have_link(new_name) }
+
+        specify { expect(user.reload.username).to eq new_name }
       end
 
-      it { expect(page).to have_link(new_name) }
-      it { expect(page).to have_success_message }
-      it { expect(page).to have_link('Log out', href: destroy_user_session_path) }
+      describe "including new email" do
+        before do
+          fill_in "Username", with: new_name
+          fill_in "Email",    with: new_email
+          click_button "Update"
+        end
 
-      specify { expect(user.reload.username).to eq new_name }
-      specify { expect(user.reload.email).to eq new_email }
+        it { expect(page).to have_success_message "we need to verify your new email address" }
+        it { expect(page).to have_link(user.username) }
+
+        specify { expect(user.reload.username).not_to eq new_name }
+        specify { expect(user.reload.email).not_to eq new_email }
+      end
     end
   end
 end
