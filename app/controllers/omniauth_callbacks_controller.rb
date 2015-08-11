@@ -23,26 +23,26 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end
   end
-
   alias_method :facebook, :callback_for_all_providers
   alias_method :twitter,  :callback_for_all_providers
 
-
   def find_user_for_oauth(auth)
-
     # Get a profile for omniauth
     profile = SocialProfile.find_for_oauth(auth)
-
-    # First try to find current_user or profile.user
-    user = current_user ? current_user : profile.user
-
-    if user.nil?
+    # First try to find current user or profile user
+    user = current_or_profile_user(profile)
+    unless user
       # Query for user if verified email is provided
       user = User.where(email: email).first if verified_email_from_oauth(auth)
+      # If user was not found, create one based on oauth data
       user ||= find_or_create_new_user(auth)
     end
     associate_user_with_profile!(user, profile)
     user
+  end
+
+  def current_or_profile_user(profile)
+    if current_user then current_user else profile.user end
   end
 
   def find_or_create_new_user(auth)
@@ -56,8 +56,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       user = User.new(
         username: auth.extra.raw_info.name,
         email:    email ? email : temp_email,
-        provider: "See social profiles",
-        uid:      "See social profiles",
         password: Devise.friendly_token[0,20]
       )
       user.skip_confirmation!  # Temporarily disable confirmation
