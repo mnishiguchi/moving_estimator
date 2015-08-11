@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   # PATCH /users/:id/finish_signup - Update user data based on the form
   def finish_signup
     if request.patch? && @user.update(user_params)
-
       @user.send_confirmation_instructions unless @user.confirmed?
       flash[:info] = 'We sent you a confirmation email. Please find a confirmation link.'
       redirect_to root_url
@@ -26,6 +25,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+    # def valid_email_format?(email)
+    #   email !~ User::TEMP_EMAIL_REGEX
+    # end
 
     def set_user
       @user = User.find(params[:id])

@@ -3,7 +3,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def callback_for_all_providers
     # ap request.env["omniauth.auth"]  #<== debugging
 
-    @user = User.find_for_oauth(env["omniauth.auth"], current_user)
+    @user = find_user_for_omniauth(env["omniauth.auth"])
 
     if @user.persisted?  # Ensure that this user is saved to database.
       # If user's email is already confirmed, then log in the user.
@@ -26,11 +26,44 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   alias_method :facebook, :callback_for_all_providers
   alias_method :twitter,  :callback_for_all_providers
 
-  # def after_sign_in_path_for(resource)
-  #   if resource.email_verified?
-  #     super resource
-  #   else
-  #     finish_signup_path(resource)
-  #   end
-  # end
-end
+  private
+
+    def find_user_for_omniauth(auth)
+
+      # Get a profile for omniauth
+      profile = SocialProfile.find_for_omniauth(auth)
+
+      # First try to find current_user or profile.user
+      user = current_user ? current_user : profile.user
+
+      if user.nil?
+        # Query for user if verified email is provided
+        email = verified_email_from_omniauth(auth)
+        user = User.where(email: email).first if email
+
+        # Create a new user if it's a new registration
+        if user.nil?
+          user = User.new(
+            username: auth.extra.raw_info.name,
+            email:    email ? email : "#{User::TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+            provider: "See social profiles",
+            uid:      "See social profiles",
+            password: Devise.friendly_token[0,20]
+          )
+          user.skip_confirmation!  # Temporarily disable confirmation
+          user.save!
+        end
+      end
+      associate_user_with_profile!(user, profile)
+      user
+    end
+
+    def verified_email_from_omniauth(auth)
+      auth.info.email if auth.info.email && (auth.info.verified || auth.info.verified_email)
+    end
+
+    # Associate the profile with the user if needed
+    def associate_user_with_profile!(user, profile)
+      profile.update!(user_id: user.id) if profile.user != user
+    end
+  end

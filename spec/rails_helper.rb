@@ -25,7 +25,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
-# poltergeist
+# ==> poltergeist
 
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
@@ -34,6 +34,10 @@ options = { js_errors: false }
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, options)
 end
+
+# ==> OmniAuth
+
+OmniAuth.config.test_mode = true
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
