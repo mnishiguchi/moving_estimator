@@ -24,7 +24,7 @@ class SocialProfile < ActiveRecord::Base
   store      :other
   validates_uniqueness_of :uid, scope: :provider
 
-  def self.find_for_omniauth(auth)
+  def self.find_for_oauth(auth)
     profile = find_or_create_by(uid: auth.uid, provider: auth.provider)
     profile.save_oauth_data!(auth)
     profile
