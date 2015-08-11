@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
   has_many :moving_items, through: :movings, dependent: :destroy
   has_many :social_profiles, dependent: :destroy
 
-  # Include default devise modules.
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :omniauthable
@@ -45,10 +44,7 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_REGEX = /\Achange@me/
 
   # https://github.com/plataformatec/devise/wiki/How-to:-Use-a-custom-email-validator-with-Devise
-  validates :email, :presence => true, :email => true
-
-  # The username attribute was added via application controller.
-  # The admin attribute was added by migration.
+  validates :email, presence: true, email: true
 
   scope :sorted, ->{ order(username: :asc) }
   scope :search, ->(q) { where("username ilike ?", "%#{q}%") }
