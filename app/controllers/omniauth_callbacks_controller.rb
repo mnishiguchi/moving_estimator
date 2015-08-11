@@ -18,7 +18,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     else  # 何らかの理由でデータベースに保存されていない。
       flash[:denger] = "Something went wrong!"
-      session["devise.user_attributes"] = user.attributes  # 認証データを覚えておく。
+      puts "user is not persisted"  # <== DEBUG
+      session["devise.user_attributes"] = @user.attributes  # 認証データを覚えておく。
       redirect_to new_user_registration_url
     end
   end
@@ -51,11 +52,15 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
             password: Devise.friendly_token[0,20]
           )
           user.skip_confirmation!  # Temporarily disable confirmation
-          user.save!
+          user.save
         end
       end
       associate_user_with_profile!(user, profile)
       user
+    end
+
+    def create_new_user
+
     end
 
     def verified_email_from_omniauth(auth)

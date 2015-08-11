@@ -1,13 +1,9 @@
-class OmniAuthService
+class ProcessOmniAuthCallback
 
   # TODO: Implement OmniAuthService to refactor OmniAuth-related logic
 
-
   def initialize(auth)
-    @data =
-    @user = params[:card]
-    @profile = params[:amount]
-    @email = params[:email]
+    @auth = auth
   end
 
   def find_user_for_omniauth(auth)
@@ -39,6 +35,10 @@ class OmniAuthService
     associate_user_with_profile!(user, profile)
     user
   end
+
+  def create_new_user
+  end
+
 
   def verified_email_from_omniauth(auth)
     auth.info.email if auth.info.email && (auth.info.verified || auth.info.verified_email)

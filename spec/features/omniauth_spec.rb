@@ -2,8 +2,6 @@ require 'rails_helper'
 
 feature "OmniAuth interface" do
 
-  before { OmniAuth.config.mock_auth[:twitter] = nil }
-
   describe "new user or non-logged-in user who is not registered with Twitter" do
     let(:submit) { "Sign up / Log in with Twitter" }
 

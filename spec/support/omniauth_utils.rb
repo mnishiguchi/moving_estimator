@@ -1,6 +1,7 @@
 # https://github.com/intridea/omniauth/wiki/Integration-Testing
 
 def set_omniauth
+  OmniAuth.config.mock_auth[:twitter] = nil
   OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
     "provider" => "twitter",
     "uid"  => "mock_uid_1234",
@@ -22,5 +23,6 @@ def set_omniauth
 end
 
 def set_invalid_omniauth
+  OmniAuth.config.mock_auth[:twitter] = nil
   OmniAuth.config.mock_auth[:twitter] = :invalid_credentials
 end
