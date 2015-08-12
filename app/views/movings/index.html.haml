@@ -25,9 +25,11 @@
   #tab_movings{ class: "tab-pane fade active in" }
     = render "movings"
   #tab_todos{ class: "tab-pane fade" }
-    #todo_component{ style: "padding: 10px 5px;"}
+    .todos_wraper{ style: "padding: 10px 5px;"}
+      = render "shared/todo_app"
 
-:coffee
+:css
 
-  $(document).ready ->
-    React._initTodoApp("todo_component", todos: #{ Todo.getInitialData })
+  .todos_wraper {
+    style: "padding: 10px 5px;"
+  }

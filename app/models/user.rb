@@ -75,19 +75,19 @@ class User < ActiveRecord::Base
     self.update_column(:confirmed_at, nil)
   end
 
-  # Override
-  # Run User.new based on session["devise.user_attributes"] when it exists.
-  # Devise will clean up session with "devise." namespace.
-  def self.new_with_session(params, session)
-    if session["devise.user_attributes"]
-      new(session["devise.user_attributes"]) do |user|
-        user.attributes = params
-        user.valid?
-      end
-    else
-      super
-    end
-  end
+  # # Override
+  # # Run User.new based on session["devise.user_attributes"] when it exists.
+  # # Devise will clean up session with "devise." namespace.
+  # def self.new_with_session(params, session)
+  #   if session["devise.user_attributes"]
+  #     new(session["devise.user_attributes"]) do |user|
+  #       user.attributes = params
+  #       user.valid?
+  #     end
+  #   else
+  #     super
+  #   end
+  # end
 
   # ==> current user made available through User model
 

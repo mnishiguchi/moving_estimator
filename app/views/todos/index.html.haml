@@ -2,9 +2,4 @@
 
 %h1.page-header Todos
 
-#todo_component
-
-:coffee
-
-  $(document).ready ->
-    React._initTodoApp("todo_component", todos: #{ Todo.getInitialData })
+= render "shared/todo_app"

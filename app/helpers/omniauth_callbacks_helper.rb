@@ -30,7 +30,7 @@ module OmniauthCallbacksHelper
           email = verified_email_from_oauth(auth)
           user = User.where(email: email).first if email
 
-          # Create a new user if it's a new registration
+          # Create a new user if user not found
           if user.nil?
             temp_email = "#{User::TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com"
             user = User.new(

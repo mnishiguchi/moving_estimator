@@ -5,7 +5,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # ap request.env["omniauth.auth"]  #<== debugging
 
     unless env["omniauth.auth"].present?
-      flash[:danger] = "Authentication failed"
+      flash[:danger] = "Authentication data was not provided"
       redirect_to root_url and return
     end
 
@@ -22,9 +22,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user.reset_confirmation!
       flash[:warning] = "We need your email address before proceeding."
       redirect_to finish_signup_path(@user)
-
-      # session["devise.user_attributes"] = @user.attributes  # 認証データを覚えておく。
-      # redirect_to new_user_registration_url
     end
   end
   alias_method :facebook, :callback_for_all_providers
