@@ -23,4 +23,5 @@
       = f.button "Change my password", class: "submit btn btn-success",
         data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
 
-  = render "devise/shared/links"
+  .alert.alert-info
+    = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)

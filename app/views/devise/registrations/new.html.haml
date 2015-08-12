@@ -21,6 +21,7 @@
           .alert.alert-info
             Already have an account?
             = link_to "Log in", new_session_path(resource_name)
+            %br/
             = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
 
         .col-sm-6
