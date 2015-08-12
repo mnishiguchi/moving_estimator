@@ -2,13 +2,14 @@ require 'rails_helper'
 
 feature "OmniAuth interface" do
 
+  before { OmniAuth.config.mock_auth[:twitter] = nil }
+
   describe "new user or non-logged-in user who is not registered with Twitter" do
     let(:submit) { "Sign up / Log in with Twitter" }
 
     describe "authentication error" do
       before do
         visit root_path
-        expect(page).to have_content(submit)
         set_invalid_omniauth
         click_link(submit)
       end
@@ -19,7 +20,6 @@ feature "OmniAuth interface" do
     describe "authentication success" do
       before do
         visit root_path
-        expect(page).to have_content(submit)
         set_omniauth
         click_link(submit)
       end
@@ -31,10 +31,10 @@ feature "OmniAuth interface" do
       describe "filling out the form" do
         let(:continue) { "Continue" }
 
-        describe "with invalid information" do
+        describe "with temporary email" do
           before do
             find("#user_username").set "User Example"
-            find("#user_email").set ""
+            find("#user_email").set "change@me.temporary.com"
             click_button(continue)
           end
 
@@ -57,15 +57,14 @@ feature "OmniAuth interface" do
   describe "non-logged-in user who is registered with Twitter" do
     let(:submit) { "Sign up / Log in with Twitter" }
     let!(:user) do
-      user = FactoryGirl.create(:user)
-      user.social_profiles.create(FactoryGirl.attributes_for(:social_profile))
+      user = create(:user)
+      user.social_profiles.create(attributes_for(:social_profile))
       user.confirm!
       user
     end
 
     before do
       visit root_path
-      expect(page).to have_content(submit)
       set_omniauth
       click_link(submit)
     end
@@ -78,7 +77,7 @@ feature "OmniAuth interface" do
   end
 
   describe "logged-in user who is an omniauth first-timer" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
 
     before do
       log_in_as user
@@ -105,7 +104,6 @@ feature "OmniAuth interface" do
         before do
           logout :user
           visit root_path
-          expect(page).to have_content(submit)
           set_omniauth
           click_link(submit)
         end

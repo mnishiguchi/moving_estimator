@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, :type => :controller do
+RSpec.describe UsersController, type: :controller do
 
   describe "non-logged-in user" do
 
@@ -20,11 +20,10 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     describe 'DELETE #destroy' do
-      before { FactoryGirl.create(:user) }  # Creating a user in database.
-      let(:user) { User.first }             # Getting one from datatase as needed.
+      let!(:user) { create(:user) }
 
       it "redirects to root page" do
-        delete :destroy, id: FactoryGirl.create(:user)
+        delete :destroy, id: create(:user)
         expect(response).to redirect_to root_path
       end
 
@@ -37,7 +36,7 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "logged-in user" do
-    before { log_in_as FactoryGirl.create(:user), no_capybara: :true }
+    before { log_in_as create(:user), no_capybara: :true }
 
     describe 'GET #index' do
       it "redirects to root page" do
@@ -55,10 +54,10 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     describe 'DELETE #destroy' do
-      before { @user = FactoryGirl.create(:user) }
+      before { @user = create(:user) }
 
       it "redirects to root page" do
-        delete :destroy, id: FactoryGirl.create(:user)
+        delete :destroy, id: create(:user)
         expect(response).to redirect_to root_path
       end
       it "does not delete a user" do
@@ -70,11 +69,11 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "admin user" do
-    before { log_in_as FactoryGirl.create(:admin), no_capybara: :true }
+    before { log_in_as create(:admin), no_capybara: :true }
 
     describe 'GET #index' do
 
-      before(:all) { 10.times { FactoryGirl.create(:user) } }
+      before(:all) { 5.times { create(:user) } }
 
       it "renders the index page" do
         get :index

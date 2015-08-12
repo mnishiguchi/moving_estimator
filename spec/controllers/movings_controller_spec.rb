@@ -11,10 +11,10 @@ require 'rails_helper'
 
 RSpec.describe MovingsController, type: :controller do
 
-  let(:user)   { FactoryGirl.create(:user) }  # A current user
-  let(:moving) { user.movings.create(FactoryGirl.attributes_for(:moving)) }
+  let(:user)   { create(:user) }  # A current user
+  let(:moving) { user.movings.create(attributes_for(:moving)) }
 
-  let(:masa) { FactoryGirl.create(:user) }  # A random person
+  let(:masa) { create(:user) }  # A random person
 
   describe "non-logged-in user" do
     describe "GET #index" do
@@ -39,7 +39,7 @@ RSpec.describe MovingsController, type: :controller do
     end
 
     describe "POST #create" do
-      let(:moving_params) { FactoryGirl.attributes_for(:moving) }
+      let(:moving_params) { attributes_for(:moving) }
 
       it "does not change the Moving count, redirecting to the login page" do
         expect{
@@ -57,7 +57,7 @@ RSpec.describe MovingsController, type: :controller do
     end
 
     describe "PATCH #update" do
-      let(:moving_params) { FactoryGirl.attributes_for(:moving) }
+      let(:moving_params) { attributes_for(:moving) }
 
       it "redirects to the login page" do
         patch :update, id: moving.id, moving: moving_params
@@ -88,7 +88,7 @@ RSpec.describe MovingsController, type: :controller do
     describe "GET #show" do
       subject { get :show, id: id }
 
-      let(:random_moving) { masa.movings.create(FactoryGirl.attributes_for(:moving)) }
+      let(:random_moving) { masa.movings.create(attributes_for(:moving)) }
 
       describe "for another user's moving" do
         let(:id) { random_moving.id }
@@ -113,7 +113,7 @@ RSpec.describe MovingsController, type: :controller do
     describe "POST #create" do
       it "increments the Moving count, then redirects to the show page" do
         expect{
-          params = FactoryGirl.attributes_for(:moving)
+          params = attributes_for(:moving)
           post :create, moving: params.merge(rooms: ["", "1", "4"])
         }.to change(Moving, :count).by(1)
         expect(response).to redirect_to(assigns(:moving))
@@ -123,7 +123,7 @@ RSpec.describe MovingsController, type: :controller do
     describe "GET #edit" do
       subject { get :edit, id: id }
 
-      let(:random_moving) { masa.movings.create(FactoryGirl.attributes_for(:moving)) }
+      let(:random_moving) { masa.movings.create(attributes_for(:moving)) }
 
       describe "for another user's moving" do
         let(:id) { random_moving.id }
@@ -141,9 +141,9 @@ RSpec.describe MovingsController, type: :controller do
 
     describe "PATCH #update" do
 
-      let(:random_moving) { masa.movings.create(FactoryGirl.attributes_for(:moving)) }
+      let(:random_moving) { masa.movings.create(attributes_for(:moving)) }
       let(:new_params) do
-        hash = FactoryGirl.attributes_for(:moving).merge(rooms: ["", "3", "5"])
+        hash = attributes_for(:moving).merge(rooms: ["", "3", "5"])
         hash[:title] = "new title"
         hash[:description] = "new description"
         hash
@@ -171,7 +171,7 @@ RSpec.describe MovingsController, type: :controller do
 
     describe "DELETE #destroy" do
       describe "for another user's moving" do
-        let!(:random_moving) { masa.movings.create(FactoryGirl.attributes_for(:moving)) }
+        let!(:random_moving) { masa.movings.create(attributes_for(:moving)) }
 
         it "does not change the moving count, redirecting to the root url" do
           expect{
@@ -182,7 +182,7 @@ RSpec.describe MovingsController, type: :controller do
       end
 
       describe "for the current user's own moving" do
-        let!(:moving) { user.movings.create(FactoryGirl.attributes_for(:moving)) }
+        let!(:moving) { user.movings.create(attributes_for(:moving)) }
 
         it "decrements the moving count, then redirects to the movings page" do
           expect{

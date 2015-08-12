@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "Moving records interface", type: :feature do
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   before do
     log_in_as user
@@ -33,11 +33,9 @@ feature "Moving records interface", type: :feature do
 
   describe "visit a moving page", js: true, driver: :poltergeist do
 
-    let(:moving) do
-      moving = user.movings.create(FactoryGirl.attributes_for(:moving))
-        5.times do
-          moving.moving_items.create(FactoryGirl.attributes_for(:moving_item))
-        end
+    let!(:moving) do
+      moving = user.movings.create(attributes_for(:moving))
+      5.times { moving.moving_items.create(attributes_for(:moving_item)) }
       moving
     end
 

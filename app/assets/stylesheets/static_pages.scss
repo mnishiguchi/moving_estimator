@@ -1,0 +1,38 @@
+// Home page (Landing page)
+.center {
+  text-align: center;
+}
+.jumbotron {
+  h1 {
+    font-family: 'Tangerine', serif;
+    margin-bottom: 30px;
+  }
+  h2 {
+    font-size: 1.2em;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: normal;
+    color: $gray-light;
+  }
+}
+
+.landing_page {
+  padding: 4em 0 0 0;
+}
+
+.langing_header{
+  padding: 0 30px 30px 30px;
+}
+
+.landing_logo {
+  padding: 10px;
+}
+
+.omniauth_buttons {
+  margin-bottom: 20px;
+}
+
+.new_user {
+  margin-bottom: 10px;
+}

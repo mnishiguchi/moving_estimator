@@ -1,0 +1,54 @@
+// https://bootstrapbay.com/blog/bootstrap-button-styles/
+
+// ==> general set up
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+// ==> ".btn-fb"
+
+.btn-fb {
+    background: #627aac;
+    color: #ffffff;
+}
+
+.btn-fb:hover, .btn-fb:focus, .btn-fb:active,
+.btn-fb.active, .open > .dropdown-toggle.btn-fb {
+    background: #3b5998;
+    color: #ffffff;
+}
+
+.btn-fb:active, .btn-fb.active {
+    background: #007299;
+    box-shadow: none;
+}
+
+// ==> ".btn-outline-primary"
+
+.btn-outline-primary {
+    background: none;
+    padding: 12px 22px;
+    border: 2px solid #0099cc;
+    color: #0099cc;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active,
+.btn-outline-primary.active, .open > .dropdown-toggle.btn-outline-primary {
+    color: #33a6cc;
+    background: #f0f0ff;
+    border-color: #33a6cc;
+}
+.btn-outline-primary:active, .btn-outline-primary.active {
+    border-color: #007299;
+    color: #007299;
+    box-shadow: none;
+}

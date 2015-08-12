@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe MovingItemsController, type: :controller do
 
   # A current user
-  let(:user) { FactoryGirl.create(:user) }
-  let(:moving)             { user.movings.create FactoryGirl.attributes_for(:moving) }
+  let(:user) { create(:user) }
+  let(:moving)             { user.movings.create attributes_for(:moving) }
   let(:moving_item)        { moving.moving_items.create(moving_item_params) }
-  let(:moving_item_params) { FactoryGirl.attributes_for(:moving_item) }
+  let(:moving_item_params) { attributes_for(:moving_item) }
 
   # A random person
-  let(:masa) { FactoryGirl.create(:user) }
+  let(:masa) { create(:user) }
   let(:random_moving_item) do
-    m = masa.movings.create(FactoryGirl.attributes_for(:moving))
+    m = masa.movings.create(attributes_for(:moving))
     m.moving_items.create(moving_item_params)
   end
 
@@ -116,7 +116,7 @@ RSpec.describe MovingItemsController, type: :controller do
         remember_moving(moving)
 
         10.times do
-          attributes = FactoryGirl.attributes_for(:moving_item)
+          attributes = attributes_for(:moving_item)
           moving.moving_items.create(attributes)
         end
       end

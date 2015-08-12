@@ -48,37 +48,6 @@ tbody tr {
   margin-top: 15px;
 }
 
-// Home page (Landing page)
-.center {
-  text-align: center;
-}
-.jumbotron {
-  h1 {
-    font-family: 'Tangerine', serif;
-    margin-bottom: 30px;
-  }
-  h2 {
-    font-size: 1.2em;
-    letter-spacing: -1px;
-    margin-bottom: 30px;
-    text-align: center;
-    font-weight: normal;
-    color: $gray-light;
-  }
-}
-
-.landing_page {
-  padding: 80px 0;
-}
-
-.langing_header{
-  padding: 0 30px 30px 30px;
-}
-
-.omniauth {
-  padding: 0 20px;
-}
-
 /* Debug */
 
 .debug_dump {

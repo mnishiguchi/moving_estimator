@@ -13,12 +13,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = GetOAuthUser.call(env["omniauth.auth"])
 
     if @user.persisted? && @user.email_verified?
-      # Ensure that this user is saved to database.
-      # If user's email is already confirmed, then log in the user.
-      # Otherwise enforce email confirmation
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: provider.capitalize) if is_navigational_format?
-    else  # 何らかの理由でデータベースに保存されていない。
+    else
       @user.reset_confirmation!
       flash[:warning] = "We need your email address before proceeding."
       redirect_to finish_signup_path(@user)

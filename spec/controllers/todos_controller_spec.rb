@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe TodosController, type: :controller do
 
-  before { log_in_as FactoryGirl.create(:user), no_capybara: :true }
+  before { log_in_as create(:user), no_capybara: :true }
 
   describe "GET #index" do
     it "returns http success" do
@@ -26,10 +26,7 @@ RSpec.describe TodosController, type: :controller do
   end
 
   describe "destroying a todo with Ajax" do
-    let!(:todo) do
-      FactoryGirl.create(:todo)  # Creating a todo in database.
-      Todo.first                 # Getting one from datatase.
-    end
+    let!(:todo) { create(:todo) }
 
     it "decrements the todo count, then returns http success" do
       expect{

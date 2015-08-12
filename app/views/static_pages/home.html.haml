@@ -1,22 +1,27 @@
 / Home non-logged-in
 .landing_page
   .row
-    .col-md-7
-      .langing_header
-        = fa_icon "home 5x"
-        = fa_icon "truck 3x"
+    .col-md-6
+      .row.langing_header
+        .landing_logo.col-md-3
+          = fa_icon "home 5x"
+          = fa_icon "truck 3x"
 
-        %h1 Moving Estimator
+        .landing_message.col-md-9
+          %h1 Moving Estimator
+          %i.lead.clearfix
+            estimates the volume of your moving
 
-        %i.lead.clearfix
-          estimates the volume of your moving
+      .omniauth
+        %h5.new_user
+          New user?
+          &nbsp&nbsp
+          = link_to "Sign up now!", new_user_registration_path,
+            class: "btn btn-outline-primary"
+        = render "shared/omniauth_buttons"
 
-        .omniauth
-          = render "shared/omniauth_buttons"
-
-          .alert.alert-warning
-            New user?
-            = link_to "Sign up now!", new_user_registration_path, class: "btn btn-success"
+    .col-md-1
 
     .col-md-5
       = render "login_form"
+      = render "shared/fb_like_btn"
