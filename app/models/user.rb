@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_REGEX = /\Achange@me/
 
   # https://github.com/plataformatec/devise/wiki/How-to:-Use-a-custom-email-validator-with-Devise
-  # validates :email, presence: true, email: true
+  validates :email, presence: true, email: true
 
   scope :sorted, ->{ order(username: :asc) }
   scope :search, ->(q) { where("username ilike ?", "%#{q}%") }

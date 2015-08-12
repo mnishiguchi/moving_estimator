@@ -38,8 +38,8 @@ module OmniauthCallbacksHelper
               email:    email ? email : temp_email,
               password: Devise.friendly_token[0,20]
             )
-            user.skip_confirmation!  # Temporarily disable confirmation
-            user.save
+            user.skip_confirmation!     # Temporarily disable confirmation
+            user.save(validate: false)  # Temporarily disable validation
             user
           end
         end
