@@ -115,9 +115,6 @@ GEM
     font-awesome-rails (4.4.0.0)
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
-    gibbon (1.1.5)
-      httparty
-      multi_json (>= 1.9.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     growl (1.0.3)
@@ -149,9 +146,6 @@ GEM
       haml (~> 4.0.0)
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
-    httparty (0.13.5)
-      json (~> 1.8)
-      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -216,10 +210,6 @@ GEM
       omniauth-oauth (~> 1.1)
     orm_adapter (0.5.0)
     pg (0.17.1)
-    pg_search (1.0.4)
-      activerecord (>= 3.1)
-      activesupport (>= 3.1)
-      arel
     poltergeist (1.6.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -388,7 +378,6 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
-  gibbon (~> 1.1.5)
   growl
   guard-rspec
   haml-rails
@@ -402,7 +391,6 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-twitter
   pg (~> 0.17.1)
-  pg_search
   poltergeist
   puma (~> 2.11.2)
   quiet_assets

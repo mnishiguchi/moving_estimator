@@ -32,17 +32,15 @@ gem 'react-rails',             '~> 1.0.0'
 gem 'sprockets-coffee-react',  '~> 3.0.1'
 # Others
 gem 'jquery-turbolinks'
-gem 'devise', '~> 3.4.1'   # Authentication
-gem 'gibbon', '~> 1.1.5'   # A wrapper for MailChimp API 2.0 and Export API 1.0
-gem 'faker'
-gem 'growl'
-gem 'pg_search'
+gem 'devise', '~> 3.4.1'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'faker'
+gem 'growl'
 
 group :development do
-  gem 'rails-erd'    # Run bundle exec erd to print an entity-relationship diagram.
+  gem 'rails-erd'
 end
 
 group :development, :test do
