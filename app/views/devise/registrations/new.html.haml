@@ -2,7 +2,7 @@
 
 .sessions_new
   .row
-    .col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1
+    .col-lg-8.col-lg-offset-2
       .sessions_layout
         %h1.page-header
           Sign up
@@ -22,7 +22,8 @@
             Already have an account?
             = link_to "Log in", new_session_path(resource_name)
             %br/
-            = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
+            = link_to "Didn't receive confirmation instructions?",
+              new_confirmation_path(resource_name)
 
         .col-sm-6
           .well= render "signup_form"
