@@ -6,7 +6,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def callback_for_all_providers
     # ap request.env["omniauth.auth"]  #<== debugging
     provider = __callee__.to_s
-    @user = find_user_for_oauth(env["omniauth.auth"])
+    @user = GetOAuthUser.call(env["omniauth.auth"])
 
     if @user.persisted?  # Ensure that this user is saved to database.
       # If user's email is already confirmed, then log in the user.
