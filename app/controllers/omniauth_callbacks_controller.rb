@@ -1,5 +1,4 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  include OmniauthCallbacksHelper
 
   def callback_for_all_providers
     ap request.env["omniauth.auth"]  #<== debugging

@@ -20,8 +20,6 @@
 #
 
 class SocialProfile < ActiveRecord::Base
-  include OmniauthCallbacksHelper
-
   belongs_to :user
   store      :other
   validates_uniqueness_of :uid, scope: :provider
@@ -34,13 +32,11 @@ class SocialProfile < ActiveRecord::Base
 
   def save_oauth_data!(auth)
     return unless valid_oauth?(auth)
-    mod = "OmniauthCallbacksHelper::"
-    cls = "#{auth["provider"]}_o_auth_policy".classify
-    policy = (mod+cls).constantize.new(auth)
 
-    ap policy  #<== DEBUG
+    provider   = auth["provider"]
+    class_name = "#{provider}".classify
+    policy     = "OAuthPolicy::#{class_name}".constantize.new(auth)
 
-    provider    = policy.provider
     uid         = policy.uid
     name        = policy.name
     nickname    = policy.nickname
