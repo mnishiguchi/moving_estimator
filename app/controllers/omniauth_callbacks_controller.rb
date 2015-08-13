@@ -2,7 +2,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include OmniauthCallbacksHelper
 
   def callback_for_all_providers
-    # ap request.env["omniauth.auth"]  #<== debugging
+    ap request.env["omniauth.auth"]  #<== debugging
 
     unless env["omniauth.auth"].present?
       flash[:danger] = "Authentication data was not provided"
