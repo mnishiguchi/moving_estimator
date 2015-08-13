@@ -5,13 +5,7 @@
 .profile_header{ style: "margin-top: 20px;" }
   = render "profile_header"
 
--# Dump user data for debugging
-- if Rails.env.development?
-  %table
-    - current_user.attributes.each do |key, value|
-      %tr
-        %td= key
-        %td= value
+= render "shared/dump_resource_data", resource: current_user
 
 %ul.nav.nav-tabs{ role: 'tablist', style: "margin-top: 30px;" }
   %li.active

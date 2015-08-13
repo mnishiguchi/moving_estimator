@@ -1,0 +1,9 @@
+-# "resource" is required as a local variable
+
+-# Dump user data for debugging
+- if Rails.env.development? && resource
+  %table
+    - resource.attributes.each do |key, value|
+      %tr
+        %td= key
+        %td= value
