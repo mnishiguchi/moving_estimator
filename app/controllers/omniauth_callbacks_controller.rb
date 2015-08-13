@@ -1,5 +1,4 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  include OmniauthCallbacksHelper
 
   def callback_for_all_providers
     # ap request.env["omniauth.auth"]  #<== debugging
@@ -10,7 +9,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     provider = __callee__.to_s
-    @user = GetOAuthUser.call(env["omniauth.auth"])
+    @user = OAuthService::GetOAuthUser.call(env["omniauth.auth"])
 
     if @user.persisted? && @user.email_verified?
       sign_in_and_redirect @user, event: :authentication
