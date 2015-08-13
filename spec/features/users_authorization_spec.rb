@@ -9,7 +9,7 @@ describe "Users authorization", type: :feature do
     describe "protected links" do
       before { visit root_path }
       it { expect(page).not_to have_link "Admin" }
-      it { expect(page).not_to have_link user.username }
+      it { expect(page).not_to have_link user.email }
 
       describe "after logging in" do
         before do
@@ -18,7 +18,7 @@ describe "Users authorization", type: :feature do
         end
 
         it { expect(page).not_to have_link "Admin" }
-        it { expect(page).to have_link user.username }
+        it { expect(page).to have_link user.email }
       end
     end
 

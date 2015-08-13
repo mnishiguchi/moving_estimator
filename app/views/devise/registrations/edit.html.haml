@@ -10,32 +10,13 @@
 
     .field.form-group
       = f.label :username
-      = f.text_field :username, autofocus: false, class: 'form-control'
+      = f.text_field :username, autofocus: true, class: 'form-control'
 
     .field.form-group
       = f.label :email
-      = f.email_field :email, autofocus: false, class: 'form-control'
+      = f.email_field :email, autofocus: true, class: 'form-control'
 
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      .alert.alert-warning
-        Currently waiting confirmation for: #{resource.unconfirmed_email}
-
-      / - unless f.object.provider
-
-      /.field.form-group
-      /  = f.label :password
-      /  %i (Optional)
-      /  = f.password_field :password, autocomplete: "off", class: 'form-control'
-
-      /.field.form-group
-      /  = f.label :password_confirmation
-      /  %i (Optional)
-      /  = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
-
-      /.field.form-group
-      /  = f.label :current_password
-      /  %i (Required to confirm your changes)
-      /  = f.password_field :current_password, autocomplete: "off", class: 'form-control'
+    = render "devise/shared/pending_email_message"
 
     %p.actions
       = f.button "Update", class: "submit btn btn-success",

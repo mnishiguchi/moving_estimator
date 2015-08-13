@@ -40,7 +40,9 @@ feature "Users login" do
       it { expect(page).to_not have_link('Log in', href: new_user_session_path) }
 
       describe "navbar dropdown links" do
-        before { click_link user.username }
+        before do
+          within("nav.navbar") { click_link(user.email) }
+        end
 
         it { expect(page).to have_link("Movings",  href: root_path) }
         it { expect(page).to have_link("Settings", href: edit_user_registration_path) }
@@ -50,7 +52,7 @@ feature "Users login" do
 
       describe "followed by logout" do
         before do
-          click_link user.username
+          within("nav.navbar") { click_link(user.email) }
           click_link "Log out"
         end
 

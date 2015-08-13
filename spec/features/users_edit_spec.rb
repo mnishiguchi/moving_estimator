@@ -36,7 +36,7 @@ describe "Users edit", type: :feature do
         end
 
         it { expect(page).to have_success_message "Your account has been updated successfully" }
-        it { expect(page).to have_link(new_name) }
+        it { expect(page).to have_content(new_name) }
 
         specify { expect(user.reload.username).to eq new_name }
       end
@@ -49,7 +49,7 @@ describe "Users edit", type: :feature do
         end
 
         it { expect(page).to have_success_message "we need to verify your new email address" }
-        it { expect(page).to have_link(new_name) }
+        it { expect(page).to have_content(new_name) }
 
         specify { expect(user.reload.username).to eq new_name }
         specify { expect(user.reload.email).not_to eq new_email }

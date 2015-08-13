@@ -7,7 +7,7 @@
         = link_to "change", "http://gravatar.com/emails"
     .media-body
       %h2.media-heading
-        = current_user.email
+        = current_user.username
         = render "shared/social_icon", provider: :twitter
         = render "shared/social_icon", provider: :facebook
       %span.moving_count.badge

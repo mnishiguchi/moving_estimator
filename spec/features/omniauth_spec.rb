@@ -86,16 +86,18 @@ feature "OmniAuth interface" do
     end
 
     it "not registered with Twitter" do
-      expect(find("input#twitter-auth")).not_to be_disabled
+      expect(page).to have_css(".twitter-connect")
+      expect(page).not_to have_css(".twitter-icon")
       expect(user.social_profile(:twitter)).to be_nil
     end
 
     describe "clicking on Twitter button" do
-      before { find("input#twitter-auth").click }
+      before { find(".twitter-connect").click }
 
       it "connects with Twitter" do
         expect(page).to have_content("Successfully authenticated from Twitter account")
-        expect(find("input#twitter-auth")).to be_disabled
+        expect(page).not_to have_css(".twitter-connect")
+        expect(page).to have_css(".twitter-icon")
         expect(user.social_profile(:twitter)).not_to be_nil
       end
 

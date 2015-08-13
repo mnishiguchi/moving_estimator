@@ -1,7 +1,8 @@
 -# required variables: `provider`
+
 / If provided provider is NOT connected, display link to oauth
 - connected = current_user.try(:social_profile, provider)
 - if !connected
   = link_to "connect to #{provider}",
     user_omniauth_authorize_path(provider),
-    id: "#{provider}-auth", class: "social-connect btn btn-default"
+    class: "#{provider}-connect btn btn-default"

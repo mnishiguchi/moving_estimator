@@ -14,6 +14,10 @@ feature "Moving records interface", type: :feature do
 
     it { expect(page).to have_title(full_title("My movings")) }
 
+    it "has the username" do
+      expect(page).to have_content(user.username)
+    end
+
     it "has the user's email address" do
       expect(page).to have_content(user.email)
     end
