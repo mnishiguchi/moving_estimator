@@ -1,8 +1,0 @@
-- facebook_profile = current_user.try(:social_profile, "facebook")
-- twitter_profile = current_user.try(:social_profile, "twitter")
-- facebook_name = facebook_profile.nickname || facebook_profile.name if facebook_profile
-- twitter_name = twitter_profile.nickname || twitter_profile.name if twitter_profile
-
-%table.social-block-wrapper
-  = render 'shared/social_connect_btn', provider: :facebook, display_name: facebook_name
-  = render 'shared/social_connect_btn', provider: :twitter, display_name: twitter_name

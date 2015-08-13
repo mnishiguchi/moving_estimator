@@ -1,0 +1,6 @@
+-# `provider` is required as a local variable
+
+/ If provided provider is connected, display icon
+- connected = current_user.try(:social_profile, provider)
+= fa_icon("fw #{provider}-square") if connected
+
