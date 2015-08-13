@@ -3,5 +3,5 @@
 / If provided provider is connected, display icon
 - connected = current_user.try(:social_profile, provider)
 - if connected
-  %div{ class: "#{provider}-icon" }
+  %span{ class: "#{provider}-icon" }
     = fa_icon("fw #{provider}-square")
