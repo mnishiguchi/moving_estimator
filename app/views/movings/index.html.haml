@@ -2,12 +2,10 @@
 
 = render "devise/shared/pending_email_message"
 
-.profile_header{ style: "margin-top: 20px;" }
+.profile_header
   = render "profile_header"
 
-= render "shared/dump_resource_data", resource: current_user
-
-%ul.nav.nav-tabs{ role: 'tablist', style: "margin-top: 30px;" }
+%ul.nav.nav-tabs{ role: 'tablist' }
   %li.active
     %a{ href: "#tab_movings", role: "tab", data: { toggle: "tab" } }
       My movings
@@ -19,11 +17,10 @@
   #tab_movings{ class: "tab-pane fade active in" }
     = render "movings"
   #tab_todos{ class: "tab-pane fade" }
-    .todos_wraper{ style: "padding: 10px 5px;"}
+    .todos_wraper
       = render "shared/todo_app"
 
-:css
-
-  .todos_wraper {
-    style: "padding: 10px 5px;"
-  }
+%hr/
+.well= render "shared/dump_resource_data", resource: current_user
+.well= render "shared/dump_resource_data", resource: current_user.social_profile(:facebook)
+.well= render "shared/dump_resource_data", resource: current_user.social_profile(:twitter)

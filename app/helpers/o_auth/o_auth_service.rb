@@ -10,7 +10,7 @@ module OAuthService
         # Query for user if verified email is provided
         user = User.where(email: email).first if verified_email_from_oauth(auth)
         # If user was not found, create one based on oauth data
-        user ||= find_or_create_new_user(auth)
+        user ||= find_or_create_user(auth)
       end
       associate_user_with_profile!(user, profile)
       user
@@ -23,7 +23,7 @@ module OAuthService
           user = User.current_user.presence || profile.user
         end
 
-        def find_or_create_new_user(auth)
+        def find_or_create_user(auth)
           # Query for user if verified email is provided
           email = verified_email_from_oauth(auth)
           user = User.where(email: email).first if email

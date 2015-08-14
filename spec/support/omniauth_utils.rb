@@ -3,10 +3,14 @@
 def set_omniauth
   OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
     "provider" => "twitter",
-    "uid"  => "mock_uid_1234",
+    "uid"  => "mock_uid_1234567890",
     "info" => {
       "name"  => "Mock User",
-      "image" => "http://mock_image_url.com"
+      "image" => "http://mock_image_url.com",
+      "urls"  => {
+        "Website" => nil,
+        "Twitter" => "https://twitter.com/MNishiguchiDC"
+      }
     },
     "credentials" => {
        "token"  => "mock_credentials_token",
@@ -15,7 +19,7 @@ def set_omniauth
     "extra" => {
       "raw_info" => {
         "name" => "Mock User",
-        "id"   => "mock_uid_1234"
+        "id"   => "mock_uid_1234567890"
       }
     }
   })

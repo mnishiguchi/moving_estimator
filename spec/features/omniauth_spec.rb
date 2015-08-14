@@ -58,7 +58,9 @@ feature "OmniAuth interface" do
     let(:submit) { "Sign up / Log in with Twitter" }
     let!(:user) do
       user = create(:user)
-      user.social_profiles.create(attributes_for(:social_profile))
+      attrs = attributes_for(:social_profile)
+      attrs["uid"] = "mock_uid_1234567890"
+      user.social_profiles.create(attrs)
       user.confirm!
       user
     end
@@ -94,9 +96,9 @@ feature "OmniAuth interface" do
     describe "clicking on Twitter button" do
       before { find(".twitter-connect").click }
 
-      it "connects with Twitter" do
+      it "connects to Twitter" do
         expect(page).to have_content("Successfully authenticated from Twitter account")
-        expect(page).not_to have_css(".twitter-connect")
+        expect(page).to have_content("Disconnect")
         expect(page).to have_css(".twitter-icon")
         expect(user.social_profile(:twitter)).not_to be_nil
       end
@@ -114,6 +116,17 @@ feature "OmniAuth interface" do
           expect(current_path).to eq movings_path
           expect(page).to have_content(user.username)
           expect(page).to have_content(user.email)
+        end
+
+        describe "clicking on Twitter button" do
+          before { find(".twitter-connect").click }
+
+          it "disconnects from Twitter" do
+            expect(page).to have_content("Disconnected")
+            expect(page).to have_content("Connect")
+            expect(page).not_to have_css(".twitter-icon")
+            expect(user.social_profile(:twitter)).to be_nil
+          end
         end
       end
     end

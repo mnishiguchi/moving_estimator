@@ -1,0 +1,12 @@
+-# `provider` is required as a local variable
+
+- connected = current_user.try(:social_profile, provider)
+- if connected
+  = link_to fa_icon("fw #{provider}", text: "Disconnect"),
+    social_profile_path(current_user.social_profile(provider)), method: :delete,
+    data: { confirm: "Are you sure?" },
+    class: "#{provider}-connect"
+- else
+  = link_to fa_icon("fw #{provider}", text: "Connect"),
+    user_omniauth_authorize_path(provider),
+    class: "#{provider}-connect"

@@ -22,7 +22,7 @@
 FactoryGirl.define do
   factory :social_profile do
     provider    "twitter"
-    uid         "mock_uid_1234"
+    sequence(:uid) { |n| "mock_uid_#{n}" }
     name        "Mock User"
     nickname    "mock_nickname"
     email       "mock_email@example.com"
@@ -34,5 +34,4 @@ FactoryGirl.define do
     raw_info    "MyText"
     user
   end
-
 end

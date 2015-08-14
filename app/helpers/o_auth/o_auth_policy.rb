@@ -5,13 +5,13 @@ module OAuthPolicy
   end
 
   class Facebook < OAuthPolicy::Base
-    def initialize(auth = {})
+    def initialize(auth)
       @provider    = auth["provider"]
       @uid         = auth["uid"]
       @name        = auth["info"]["name"]
       @nickname    = ""
       @email       = ""
-      @url         = ""
+      @url         = "https://www.facebook.com/"
       @image_url   = auth["info"]["image"]
       @description = ""
       @credentials = auth["credentials"].to_json
@@ -21,13 +21,13 @@ module OAuthPolicy
   end
 
   class Twitter < OAuthPolicy::Base
-    def initialize(auth = {})
+    def initialize(auth)
       @provider    = auth["provider"]
       @uid         = auth["uid"]
       @name        = auth["info"]["name"]
-      @nickname    = ""
+      @nickname    = auth["info"]["nickname"]
       @email       = ""
-      @url         = ""
+      @url         = auth["info"]["urls"]["Twitter"]
       @image_url   = auth["info"]["image"]
       @description = auth["info"]["description"].try(:truncate, 255)
       @credentials = auth["credentials"].to_json
