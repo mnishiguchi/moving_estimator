@@ -2,8 +2,9 @@
 
 -# Dump user data for debugging
 - if Rails.env.development? && resource
-  %table
-    - resource.attributes.each do |key, value|
-      %tr
-        %td= key
-        %td= value
+  .well
+    %table
+      - resource.attributes.each do |key, value|
+        %tr
+          %td= key
+          %td= value
