@@ -5,7 +5,7 @@ module OAuthPolicy
   end
 
   class Facebook < OAuthPolicy::Base
-    def initialize(auth = {})
+    def initialize(auth)
       @provider    = auth["provider"]
       @uid         = auth["uid"]
       @name        = auth["info"]["name"]
@@ -21,7 +21,7 @@ module OAuthPolicy
   end
 
   class Twitter < OAuthPolicy::Base
-    def initialize(auth = {})
+    def initialize(auth)
       @provider    = auth["provider"]
       @uid         = auth["uid"]
       @name        = auth["info"]["name"]

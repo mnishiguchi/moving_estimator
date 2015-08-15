@@ -6,15 +6,20 @@
       %figcaption.text-center
         = link_to "change", "http://gravatar.com/emails"
     .media-body
-      %h2.media-heading
-        = current_user.username
-        = render "shared/social_icon", provider: :twitter
-        = render "shared/social_icon", provider: :facebook
-      %span.moving_count.badge
-        = pluralize(current_user.movings.count, "moving")
+      .row
+        .col-sm-7
+          %h2.media-heading
+            = current_user.username
+            = render "shared/social_icon", provider: :twitter
+            = render "shared/social_icon", provider: :facebook
+          %span.moving_count.badge
+            = pluralize(current_user.movings.count, "moving")
+        .col-sm-5
+          .pull-right.social_connect_buttons
+            = render "shared/social_connect", provider: :facebook
+            = render "shared/social_connect", provider: :twitter
+          .clearfix
+
       = link_to "New moving", new_moving_path, class: "btn btn-primary pull-right"
 
-.pull-right.social_links
-  = render "shared/social_link", provider: :facebook
-  = render "shared/social_link", provider: :twitter
-.clearfix
+
