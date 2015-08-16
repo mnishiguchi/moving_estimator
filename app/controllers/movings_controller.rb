@@ -15,6 +15,10 @@ class MovingsController < ApplicationController
     @moving_items = @moving.moving_items
     @moving_item = MovingItem.new  # For new form
     remember_moving @moving        # Remember moving id for later use.
+
+    @itemNameSuggestions = Hash[Ingredient.pluck(:name, :volume)],
+    @roomSuggestions     =  Room.all.pluck(:name),
+    @categorySuggestions = @moving.moving_items.select(:category).distinct.pluck(:category)
   end
 
   # Shows a form to create a new moving.

@@ -12,12 +12,6 @@
 .clearfix
 
 = react_component 'MovingRecordsApp', data: @moving_items,
-    itemNameSuggestions: Hash[Ingredient.pluck(:name, :volume)],
-    roomSuggestions:     Room.all.pluck(:name),
-    categorySuggestions: @moving.moving_items.select(:category).distinct.pluck(:category)
-
-:css
-
-  th:focus {
-      outline: 0 none;
-  }
+    itemNameSuggestions: @itemNameSuggestions,
+    roomSuggestions:     @roomSuggestions,
+    categorySuggestions: @categorySuggestions

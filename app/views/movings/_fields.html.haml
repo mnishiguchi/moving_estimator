@@ -60,6 +60,10 @@
       %h2 Moving from
 
       .form-group
+        = f.label :country_from, "Country", class: "h4"
+        = f.select :country_from, countries, { include_blank: "- Select one -" }, class: 'form-control'
+
+      .form-group
         = f.label :street_from, "Street", class: "h4"
         = f.text_field :street_from, class: "form-control"
 
@@ -68,19 +72,19 @@
         = f.text_field :city_from, class: "form-control"
 
       .form-group
-        = f.label :state_from, "* State", class: "h4"
+        = f.label :state_from, "* Province/State", class: "h4"
         = f.text_field :state_from, class: "state form-control"
 
       .form-group
-        = f.label :zip_from, "Zip", class: "h4"
+        = f.label :zip_from, "Postal/Zip code", class: "h4"
         = f.text_field :zip_from, class: "form-control"
-
-      .form-group
-        = f.label :country_from, "Country", class: "h4"
-        = f.select :country_from, countries, { include_blank: "- Select one -" }, class: 'form-control'
 
     .moving_to.col-sm-6
       %h2 Moving to
+
+      .form-group
+        = f.label :country_to, "Country", class: "h4"
+        = f.select :country_to, countries, { include_blank: "- Select one -" }, class: 'form-control'
 
       .form-group
         = f.label :street_to, "Street", class: "h4"
@@ -91,16 +95,13 @@
         = f.text_field :city_to, class: "form-control"
 
       .form-group
-        = f.label :state_to, "* State", class: "h4"
+        = f.label :state_to, "* Province/State", class: "h4"
         = f.text_field :state_to, class: "state form-control"
 
       .form-group
-        = f.label :zip_to, "Zip", class: "h4"
+        = f.label :zip_to, "Postal/Zip code", class: "h4"
         = f.text_field :zip_to, class: 'form-control'
 
-      .form-group
-        = f.label :country_to, "Country", class: "h4"
-        = f.select :country_to, countries, { include_blank: "- Select one -" }, class: 'form-control'
   .row
 
     .col-sm-12
@@ -108,11 +109,19 @@
       .form-group
         = f.text_area :description, class: 'form-control', cols: 20, rows: 3;
 
-:coffee
+  :coffee
 
-  jQuery ->
-    $('#moving_state_from').autocomplete
-      source: #{us_states}
+    jQuery ->
+      $from = $('#moving_country_from')
+      $from.change ->
+        switch $from.children("option").filter(":selected").text()
+          when "United States" then params = { source: #{us_states} }
+          else                      params = { source: [] }
+        $('#moving_state_from').autocomplete(params)
 
-    $('#moving_state_to').autocomplete
-      source: #{us_states}
+      $to = $('#moving_country_to')
+      $to.change ->
+        switch $to.children("option").filter(":selected").text()
+          when "United States" then params = { source: #{us_states} }
+          else                      params = { source: [] }
+        $('#moving_state_to').autocomplete(params)
