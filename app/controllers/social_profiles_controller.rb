@@ -4,7 +4,7 @@ class SocialProfilesController < ApplicationController
 
   def destroy
     @profile.destroy
-    flash[:success] = 'Disconnected'
+    flash[:success] = "Disconnected from #{@profile.provider.capitalize}"
     redirect_to root_url
   end
 
