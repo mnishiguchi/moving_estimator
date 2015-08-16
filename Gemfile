@@ -59,11 +59,13 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'capybara-email'
   gem 'selenium-webdriver'
   gem "poltergeist"
   gem 'database_cleaner'
   gem 'launchy'
   gem 'shoulda-matchers', require: false
+  gem 'email_spec'
   gem 'json_spec'
 end
 
