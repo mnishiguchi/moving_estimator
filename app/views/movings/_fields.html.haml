@@ -4,7 +4,7 @@
 
     .form-group.col-sm-6
       = f.label :title, "* Moving project name", class: "h4"
-      = f.text_field :title, class: 'form-control', placeholder: "Name this moving"
+      = f.text_field :title, class: 'form-control', placeholder: "Let's name your project!"
     .clearfix
 
   .row
@@ -26,9 +26,9 @@
       = f.select :dwelling_type, dwelling_types, { include_blank: "- Select one -" }, class: 'form-control'
 
     .form-group.col-sm-6
-      = f.label :dwelling_sqft, "* Square footage", class: "h4"
+      = f.label :dwelling_sqft, "Square footage", class: "h4"
       .input-group
-        = f.number_field :dwelling_sqft, min: 0, max: 99999, step: 50, class: 'form-control'
+        = f.number_field :dwelling_sqft, value: 0, min: 0, max: 99999, step: 50, class: 'form-control'
         .input-group-addon sq.ft
 
   .row
