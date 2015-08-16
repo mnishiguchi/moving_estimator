@@ -31,8 +31,8 @@ RSpec.describe Moving, type: :model do
 
   it { expect(moving).to be_valid }
 
-  it { is_expected.to validate_presence_of :title }
-  it { is_expected.not_to validate_presence_of :description }
+  # it { is_expected.to validate_presence_of :title }
+  # it { is_expected.not_to validate_presence_of :description }
 
   it { is_expected.to validate_length_of :title }
   it { is_expected.to validate_length_of :description }

@@ -30,7 +30,7 @@ feature "Moving records interface", type: :feature do
     it { expect(page).to have_selector('table') }
 
     describe "clicking on the link to the new moving page" do
-      before { click_link "New moving" }
+      before { first(:link, "New moving").click  }
       it { expect(page).to have_title(full_title("New moving")) }
     end
   end

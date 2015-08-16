@@ -34,17 +34,17 @@ class Moving < ActiveRecord::Base
 
   VALID_ZIP_REGEX = /\A[0-9]{5}(?:-[0-9]{4})?\z/
 
-  validates :title,       presence: true,  length: { maximum: 50 }
-  validates :move_type, presence: true
-  validates :move_date, presence: true
+  validates :title,     presence: false,  length: { maximum: 50 }
+  validates :move_type, presence: false
+  validates :move_date, presence: false
   validates :dwelling_sqft, length: { maximum: 5 }, numericality: { only_integer: true }
-  validates :dwelling_type, presence: true
+  validates :dwelling_type, presence: false
   validates :street_from , length: { maximum: 50 }
   validates :street_to,    length: { maximum: 50 }
-  validates :city_from,  presence: true, length: { maximum: 30 }
-  validates :city_to,    presence: true, length: { maximum: 30 }
-  validates :state_from, presence: true, length: { maximum: 30 }
-  validates :state_to,   presence: true, length: { maximum: 30 }
+  validates :city_from,  presence: false, length: { maximum: 30 }
+  validates :city_to,    presence: false, length: { maximum: 30 }
+  validates :state_from, presence: false, length: { maximum: 30 }
+  validates :state_to,   presence: false, length: { maximum: 30 }
   validates :zip_from, format: { with: VALID_ZIP_REGEX }, allow_blank: true
   validates :zip_to,   format: { with: VALID_ZIP_REGEX }, allow_blank: true
   validates :country_from , length: { maximum: 30 }

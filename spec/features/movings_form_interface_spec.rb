@@ -10,19 +10,20 @@ feature "Movings form interface", type: :feature do
   before do
     log_in_as user
     visit root_path
-    click_link "New moving"
+    first(:link, "New moving").click
   end
 
-  describe "with invalid information" do
-    it "should not create a moving" do
-      expect { click_button submit }.not_to change(Moving, :count)
-    end
+  # Currently validation is removed
+  # describe "with invalid information" do
+  #   it "should not create a moving" do
+  #     expect { click_button submit }.not_to change(Moving, :count)
+  #   end
 
-    describe "after submission" do
-      before { click_button submit }
-      it { expect(page).to have_content('error') }
-    end
-  end
+  #   describe "after submission" do
+  #     before { click_button submit }
+  #     it { expect(page).to have_content('error') }
+  #   end
+  # end
 
   describe "with valid information" do
     before do
