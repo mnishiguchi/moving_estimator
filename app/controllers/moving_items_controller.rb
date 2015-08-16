@@ -1,5 +1,4 @@
 class MovingItemsController < ApplicationController
-
   include MovingsHelper
 
   before_action :authenticate_user!  # all actions
