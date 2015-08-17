@@ -1,34 +1,29 @@
-.form-group.col-sm-6
-  = f.label :name,      class: "col-sm-4"
-  = f.text_field :name, class: "form-control col-sm-8"
+.form-inline
+  .form-group
+    = f.text_field :name, class: "form-control", placeholder: "Name"
 
-.form-group.col-sm-6
-  = f.label :category,      class: "col-sm-4"
-  = f.text_field :category, class: 'form-control col-sm-8'
+  .form-group
+    = f.text_field :category, class: 'form-control', placeholder: "Category"
 
+  .form-group
+    = f.text_field :room, class: 'form-control', placeholder: "Room"
 .clearfix
 
-.form-group.col-sm-6
-  = f.label :volume, class: "col-sm-4"
-  = f.number_field :volume, in: 0..200, step: 0.5, value: 3, class: "form-control"
-  = f.range_field :volume,  in: 0..200, step: 0.5, value: 3, class: "col-sm-offset-4", id: "volume_slider"
-
-.form-group.col-sm-6
-  = f.label :quantity,                             class: "col-sm-4"
-  = f.number_field :quantity, in: 0..999, step: 1, class: "form-control col-sm-8"
-
+.form-inline
+  .form-group
+    = f.label :volume
+    = f.number_field :volume, in: 0..200, step: 0.5, value: 3, class: "form-control"
+  .form-group
+    = f.range_field :volume, value: 3, id: "volume_slider"
+  .form-group
+    = f.label :quantity
+    = f.number_field :quantity, in: 0..999, step: 1, class: "form-control", value: 1
 .clearfix
 
-.form-group.col-sm-6
-  = f.label :room,      class: "col-sm-4"
-  = f.text_field :room, class: 'form-control col-sm-8'
-
-.form-group.col-sm-6
-  = f.label :description,     class: "col-sm-4"
-  = f.text_area :description, class: 'form-control col-sm-8',
-    placeholder: "Write description"
-
+.form-group
+  = f.text_area :description, class: 'form-control', placeholder: "Description"
 .clearfix
+
 
 :coffee
 
@@ -36,6 +31,9 @@
 
     setVolume = (volume)->
       $("#moving_item_volume").val(volume)
+
+    setSlider = (volume)->
+      $("#volume_slider").val(volume)
 
     # Slider
 
@@ -49,6 +47,7 @@
       select: (e, ui) =>
         itemVolume = $('#suggestions').data('items')[ui.item.value]
         setVolume(itemVolume)
+        setSlider(itemVolume)
 
     $('#moving_item_room').autocomplete
       source: $('#suggestions').data('rooms')

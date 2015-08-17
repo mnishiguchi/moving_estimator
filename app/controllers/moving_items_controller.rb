@@ -11,6 +11,11 @@ class MovingItemsController < ApplicationController
     @moving_items = @moving.moving_items
   end
 
+  def new
+    @moving_item = MovingItem.new  # For new form
+    @suggestions = @moving.autocomplete_suggestions  # For AutoComplete
+  end
+
   # Create the item to database via JSON
   def create
     @moving_item = MovingItem.new(moving_item_params.

@@ -13,10 +13,10 @@ class MovingsController < ApplicationController
   # Shows an individual item.
   def show
     @moving_items = @moving.moving_items
-    @moving_item = MovingItem.new  # For new form
     remember_moving @moving        # Remember moving id for later use.
 
-    @suggestions = @moving.autocomplete_suggestions  # For AutoComplete
+    # @moving_item = MovingItem.new  # For new form
+    # @suggestions = @moving.autocomplete_suggestions  # For AutoComplete
   end
 
   # Shows a form to create a new moving.

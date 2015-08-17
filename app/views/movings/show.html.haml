@@ -14,8 +14,8 @@
   = link_to "Email CSV", "#", class: "badge"
 .clearfix
 
-%hr/
-= render "moving_items/add_form"
+
+= link_to "Add new item", new_moving_item_path, class: "btn btn-outline-primary pull-right"
 
 %hr/
 = render "moving_items/records"

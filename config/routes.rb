@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :ingredients,  only: [:index, :new, :create, :edit, :update, :destroy]
   resources :movings  # ALL
-  resources :moving_items, only: [:index, :create, :edit, :update, :destroy]
+  resources :moving_items, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :rooms,        only: [:index, :new, :create, :update, :destroy]
   resources :social_profiles, only: :destroy
   resources :todos,        only: [:index, :create, :update, :destroy]
