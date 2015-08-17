@@ -56,6 +56,14 @@ class Moving < ActiveRecord::Base
     rememberRooms(reject_empty_options!(room_ids))
   end
 
+  def autocomplete_suggestions
+    {
+      items:      Hash[Ingredient.pluck(:name, :volume)],
+      rooms:      Room.select(:name).pluck(:name),
+      categories: self.moving_items.select(:category).distinct.pluck(:category)
+    }
+  end
+
   private
 
     # Return number of rooms if rooms are successfully saved; else false.

@@ -16,10 +16,7 @@ class MovingsController < ApplicationController
     @moving_item = MovingItem.new  # For new form
     remember_moving @moving        # Remember moving id for later use.
 
-    # AutoComplete
-    @itemNameSuggestions = Ingredient.select(:category).pluck(:name),
-    @roomSuggestions     = Room.select(:name).pluck(:name),
-    @categorySuggestions = @moving.moving_items.select(:category).distinct.pluck(:category)
+    @suggestions = @moving.autocomplete_suggestions  # For AutoComplete
   end
 
   # Shows a form to create a new moving.

@@ -17,10 +17,11 @@ class MovingItemsController < ApplicationController
                                   merge(moving_id: current_moving))
     if @moving_item.save
       flash[:success] = "Create #{@moving_item.name}"
+      redirect_to @moving
     else
-      flash[:danger] = "Couldn't create #{@moving_item.name}"
+      @suggestions = @moving.autocomplete_suggestions  # For AutoComplete
+      render "new"
     end
-    redirect_to @moving
   end
 
   def edit
@@ -29,10 +30,11 @@ class MovingItemsController < ApplicationController
   def update
     if @moving_item.update(moving_item_params)
       flash[:success] = "Updated #{@moving_item.name}"
+      redirect_to @moving
     else
-      flash[:danger] = "Couldn't update #{@moving_item.name}"
+      @suggestions = @moving.autocomplete_suggestions  # For AutoComplete
+      render "edit"
     end
-    redirect_to @moving
   end
 
   def destroy

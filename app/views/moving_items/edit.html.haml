@@ -1,5 +1,8 @@
 - provide(:title, "Edit item")
 
+/ data for autocomplete suggestions
+= content_tag :div, "", id: "suggestions", data: @suggestions
+
 %h1.page-header Edit item of "#{@moving.title}"
 
 %ol.breadcrumb

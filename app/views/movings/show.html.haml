@@ -1,8 +1,7 @@
 - provide(:title, @moving.title)
 
--# Pass autocomplete suggestions to JS
-= content_tag :div, "", id: "suggestions", data: { items: @itemNameSuggestions,
-  rooms: @roomSuggestions, categories: @categorySuggestions }
+/ data for autocomplete suggestions
+= content_tag :div, "", id: "suggestions", data: @suggestions
 
 %h1
   = @moving.title
@@ -15,6 +14,7 @@
   = link_to "Email CSV", "#", class: "badge"
 .clearfix
 
+%hr/
 = render "moving_items/add_form"
 
 %hr/

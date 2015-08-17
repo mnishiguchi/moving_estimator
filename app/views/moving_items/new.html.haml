@@ -1,5 +1,8 @@
 - provide(:title, "Add item")
 
+/ data for autocomplete suggestions
+= content_tag :div, "", id: "suggestions", data: @suggestions
+
 .row
   .col-md-offset-2.col-md-8
     %h1.page-header Add item to "#{@moving.title}"
