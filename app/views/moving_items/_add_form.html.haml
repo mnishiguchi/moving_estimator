@@ -1,9 +1,9 @@
-/ = form_for @moving_item, html: { id: "add_moving_item", class: "form-inline" } do |f|
+= form_for @moving_item, html: { id: "add_moving_item", class: "form-inline" } do |f|
 
-/   = render 'shared/error_messages', object: f.object
+  = render 'shared/error_messages', object: f.object
 
-/   = render 'moving_items/fields', f: f
+  = render 'moving_items/fields', f: f
 
-/   .form-group{ style: "width: 100%" }
-/     = f.button "Add item", class: "submit btn btn-success btn-lg btn-block",
-/       data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
+  .form-group
+    = f.button "Add item", class: "submit btn btn-success btn-lg",
+      data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }

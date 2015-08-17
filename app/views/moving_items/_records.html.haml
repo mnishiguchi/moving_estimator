@@ -1,0 +1,28 @@
+.moving_records.table-responsive
+  %h2 All items
+  %table.moving_records.table.table-hover
+    %thead
+      %tr
+        %th
+          Name
+        %th
+          Volume
+        %th
+          Quantity
+        %th
+          Subtotal
+        %th
+          Room
+        %th
+          Category
+        %th
+          Description
+        %th
+        %th
+    %tbody
+      = render @moving_items
+
+:coffee
+
+  $(document).ready ->
+    $("table.moving_records").tablesorter()

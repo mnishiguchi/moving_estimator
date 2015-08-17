@@ -1,0 +1,11 @@
+%tr
+  %td= moving_item.name
+  %td= moving_item.volume
+  %td= moving_item.quantity
+  %td= moving_item.volume * moving_item.quantity
+  %td= moving_item.room
+  %td= moving_item.category
+  %td= moving_item.description
+  %td= link_to fa_icon("pencil"), edit_moving_item_path(moving_item)
+  %td= link_to fa_icon("trash"), moving_item_path(moving_item),
+    method: :delete, data: { confirm: "Are you sure?" }

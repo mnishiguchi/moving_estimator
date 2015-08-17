@@ -11,33 +11,37 @@ class MovingItemsController < ApplicationController
     @moving_items = @moving.moving_items
   end
 
-  # Creates the item to database via JSON
+  # Create the item to database via JSON
   def create
     @moving_item = MovingItem.new(moving_item_params.
                                   merge(moving_id: current_moving))
     if @moving_item.save
-      render json: @moving_item
+      flash[:success] = "Create #{@moving_item.name}"
     else
-      render json: @moving_item.errors, status: :unprocessable_entity
+      flash[:danger] = "Couldn't create #{@moving_item.name}"
     end
+    redirect_to @moving
   end
 
-  # Updates the item to database via JSON
+  def edit
+  end
+
   def update
     if @moving_item.update(moving_item_params)
-      render json: @moving_item
+      flash[:success] = "Updated #{@moving_item.name}"
     else
-      render json: @moving_item.errors, status: :unprocessable_entity
+      flash[:danger] = "Couldn't update #{@moving_item.name}"
     end
+    redirect_to @moving
   end
 
-  # Delete the moving item record via JSON
   def destroy
     if @moving_item.destroy
-      render json: @moving_item
+      flash[:success] = "Deleted #{@moving_item.name}"
     else
-      render json: @moving_item.errors, status: :unprocessable_entity
+      flash[:danger] = "Couldn't delete #{@moving_item.name}"
     end
+    redirect_to @moving
   end
 
   private

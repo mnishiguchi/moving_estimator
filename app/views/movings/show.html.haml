@@ -11,7 +11,11 @@
   = link_to "Email CSV", "#", class: "badge"
 .clearfix
 
-= react_component 'MovingRecordsApp', data: @moving_items,
-    itemNameSuggestions: @itemNameSuggestions,
-    roomSuggestions:     @roomSuggestions,
-    categorySuggestions: @categorySuggestions
+= render "moving_items/add_form"
+
+%hr/
+= render "moving_items/records"
+/ = react_component 'MovingRecordsApp', data: @moving_items,
+/     itemNameSuggestions: @itemNameSuggestions,
+/     roomSuggestions:     @roomSuggestions,
+/     categorySuggestions: @categorySuggestions
