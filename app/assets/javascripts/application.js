@@ -12,4 +12,5 @@
 //= require Chart
 //= require components
 //= require utilities
+//= require moving_items
 //= requre_tree .

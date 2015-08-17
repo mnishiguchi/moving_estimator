@@ -1,5 +1,9 @@
 - provide(:title, @moving.title)
 
+-# Pass autocomplete suggestions to JS
+= content_tag :div, "", id: "suggestions", data: { items: @itemNameSuggestions,
+  rooms: @roomSuggestions, categories: @categorySuggestions }
+
 %h1
   = @moving.title
   = link_to "Edit", edit_moving_path(@moving), class: "btn btn-primary btn-sm pull-right"
@@ -15,7 +19,4 @@
 
 %hr/
 = render "moving_items/records"
-/ = react_component 'MovingRecordsApp', data: @moving_items,
-/     itemNameSuggestions: @itemNameSuggestions,
-/     roomSuggestions:     @roomSuggestions,
-/     categorySuggestions: @categorySuggestions
+

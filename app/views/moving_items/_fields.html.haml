@@ -29,21 +29,3 @@
     placeholder: "Write description"
 
 .clearfix
-
-/ $('#moving_item_name').autocomplete
-/     source: #{@itemNameSuggestions}
-/ $('#moving_item_room').autocomplete
-/     source: #{@roomSuggestions}
-/ $('#moving_item_category').autocomplete
-/     source: #{@categorySuggestions}
-
-:coffee
-
-  setSliderVal = ->
-    sliderVal = document.getElementById('slider').value
-    $("#slider_value").val(sliderVal)
-
-  jQuery ->
-    setSliderVal()
-    document.getElementById('slider').addEventListener 'change', ->
-      setSliderVal()
