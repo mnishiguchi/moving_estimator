@@ -1,5 +1,6 @@
 class MovingsController < ApplicationController
   include MovingsHelper
+  include ChartsHelper
 
   before_action :authenticate_user! # all actions
   before_action :correct_user!,     only: [:show, :edit, :update, :destroy]
@@ -13,10 +14,14 @@ class MovingsController < ApplicationController
   # Shows an individual item.
   def show
     @moving_items = @moving.moving_items
+    @total_volume = @moving_items.inject(0) { |total, item| total + (item.volume * item.quantity) }
     remember_moving @moving        # Remember moving id for later use.
 
     # @moving_item = MovingItem.new  # For new form
     # @suggestions = @moving.autocomplete_suggestions  # For AutoComplete
+
+    @dataForBarChart = data_for_bar_chart(@moving_items)
+    @dataForPieChart = data_for_pie_chart(@moving_items)
   end
 
   # Shows a form to create a new moving.

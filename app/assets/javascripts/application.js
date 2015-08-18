@@ -12,4 +12,5 @@
 //= require Chart
 //= require components
 //= require utilities
+//= require interactive_chart
 //= requre_tree .

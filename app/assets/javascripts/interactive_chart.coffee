@@ -1,8 +1,11 @@
 # Chart.js configuration
+
 Chart.defaults.global.tooltipEvents = ["mousemove", "touchstart", "touchmove"]
 Chart.defaults.global.scaleLabel    = "<%=value%>cu.ft"
 
-@ChartComponent = (chartType) ->
+# Factory
+
+ChartComponent = (chartType) ->
 
   React.createClass
     displayName: "#{chartType}Chart"
@@ -32,3 +35,8 @@ Chart.defaults.global.scaleLabel    = "<%=value%>cu.ft"
       ctx    = canvas.getContext("2d")
       chart  = new Chart(ctx)[chartType](@props.data)
       @setState.chartInstance = chart
+
+# Create actual chart components
+
+@BarChartComponent = ChartComponent("Bar")
+@PieChartComponent = ChartComponent("Pie")
