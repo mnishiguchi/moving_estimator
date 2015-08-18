@@ -46709,6 +46709,44 @@ Copyright 2015 Kevin Sylvestre
 
 }).call(this);
 (function() {
+  jQuery(function() {});
+
+}).call(this);
+(function() {
+  jQuery(function() {
+    var el, setSlider, setVolume;
+    setVolume = function(volume) {
+      return $("#moving_item_volume").val(volume);
+    };
+    setSlider = function(volume) {
+      return $("#volume_slider").val(volume);
+    };
+    if (el = document.getElementById('volume_slider')) {
+      el.addEventListener('change', function() {
+        return setVolume(document.getElementById('volume_slider').value);
+      });
+    }
+    $('#moving_item_name').autocomplete({
+      source: Object.keys($('#suggestions').data('items')),
+      select: (function(_this) {
+        return function(e, ui) {
+          var itemVolume;
+          itemVolume = $('#suggestions').data('items')[ui.item.value];
+          setVolume(itemVolume);
+          return setSlider(itemVolume);
+        };
+      })(this)
+    });
+    $('#moving_item_room').autocomplete({
+      source: $('#suggestions').data('rooms')
+    });
+    return $('#moving_item_category').autocomplete({
+      source: $('#suggestions').data('categories')
+    });
+  });
+
+}).call(this);
+(function() {
   var ChartComponent;
 
   Chart.defaults.global.tooltipEvents = ["mousemove", "touchstart", "touchmove"];
@@ -46777,4 +46815,5 @@ Copyright 2015 Kevin Sylvestre
 
 
 
-//= requre_tree .
+
+

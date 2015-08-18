@@ -2,28 +2,18 @@
 
 jQuery ->
 
-  setVolume = (volume)->
-    $("#moving_item_volume").val(volume)
+  # Countries
 
-  setSlider = (volume)->
-    $("#volume_slider").val(volume)
+  # $from = $('#moving_country_from')
+  # $from.on change ->
+  #   switch $from.children("option").filter(":selected").text()
+  #     when "United States" then params = { source: $('#suggestions').data('us_states') }
+  #     else                      params = { source: [] }
+  #   $('#moving_state_from').autocomplete(params)
 
-  # Slider
-
-  document.getElementById('volume_slider').addEventListener 'change', ->
-    setVolume(document.getElementById('volume_slider').value)
-
-  # AutoComplete
-
-  $('#moving_item_name').autocomplete
-    source: Object.keys( $('#suggestions').data('items') )
-    select: (e, ui) =>
-      itemVolume = $('#suggestions').data('items')[ui.item.value]
-      setVolume(itemVolume)
-      setSlider(itemVolume)
-
-  $('#moving_item_room').autocomplete
-    source: $('#suggestions').data('rooms')
-
-  $('#moving_item_category').autocomplete
-    source: $('#suggestions').data('categories')
+  # $to = $('#moving_country_to')
+  # $to.change ->
+  #   switch $to.children("option").filter(":selected").text()
+  #     when "United States" then params = { source: $('#suggestions').data('us_states') }
+  #     else                      params = { source: [] }
+  #   $('#moving_state_to').autocomplete(params)

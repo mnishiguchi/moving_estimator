@@ -1,3 +1,5 @@
+- nicknames = [ current_user.social_profile(:facebook).try(:name), current_user.social_profile(:twitter).try(:name) ].uniq
+
 %ul.media-list
   %li.media
     .media-left.pull-left
@@ -8,8 +10,12 @@
     .media-body
       %h2.media-heading
         = current_user.username
-        = render "shared/social_icon", provider: :twitter
         = render "shared/social_icon", provider: :facebook
+        = render "shared/social_icon", provider: :twitter
+        %br/
+        %small
+          %i= nicknames.join(", ")
+
       %span.moving_count.badge
         = pluralize(current_user.movings.count, "moving")
 

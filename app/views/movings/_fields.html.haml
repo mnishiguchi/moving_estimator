@@ -1,3 +1,6 @@
+/ data for autocomplete suggestions
+= content_tag :div, "", id: "suggestions", data: { us_states: us_states }
+
 #movings_fields
 
   .row
@@ -109,19 +112,19 @@
       .form-group
         = f.text_area :description, class: 'form-control', cols: 20, rows: 3;
 
-  :coffee
+  / :coffee
 
-    jQuery ->
-      $from = $('#moving_country_from')
-      $from.change ->
-        switch $from.children("option").filter(":selected").text()
-          when "United States" then params = { source: #{us_states} }
-          else                      params = { source: [] }
-        $('#moving_state_from').autocomplete(params)
+  /   jQuery ->
+  /     $from = $('#moving_country_from')
+  /     $from.change ->
+  /       switch $from.children("option").filter(":selected").text()
+  /         when "United States" then params = { source: #{us_states} }
+  /         else                      params = { source: [] }
+  /       $('#moving_state_from').autocomplete(params)
 
-      $to = $('#moving_country_to')
-      $to.change ->
-        switch $to.children("option").filter(":selected").text()
-          when "United States" then params = { source: #{us_states} }
-          else                      params = { source: [] }
-        $('#moving_state_to').autocomplete(params)
+  /     $to = $('#moving_country_to')
+  /     $to.change ->
+  /       switch $to.children("option").filter(":selected").text()
+  /         when "United States" then params = { source: #{us_states} }
+  /         else                      params = { source: [] }
+  /       $('#moving_state_to').autocomplete(params)
