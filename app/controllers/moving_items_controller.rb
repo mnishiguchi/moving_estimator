@@ -13,7 +13,7 @@ class MovingItemsController < ApplicationController
 
   def new
     @moving_item = MovingItem.new  # For new form
-    @suggestions = @moving.autocomplete_suggestions  # For AutoComplete
+    set_autocomplete_suggestions_and_render(:new)
   end
 
   # Create the item to database via JSON
@@ -24,12 +24,12 @@ class MovingItemsController < ApplicationController
       flash[:success] = "Create #{@moving_item.name}"
       redirect_to @moving
     else
-      @suggestions = @moving.autocomplete_suggestions  # For AutoComplete
-      render "new"
+      set_autocomplete_suggestions_and_render(:new)
     end
   end
 
   def edit
+    set_autocomplete_suggestions_and_render(:edit)
   end
 
   def update
@@ -37,8 +37,7 @@ class MovingItemsController < ApplicationController
       flash[:success] = "Updated #{@moving_item.name}"
       redirect_to @moving
     else
-      @suggestions = @moving.autocomplete_suggestions  # For AutoComplete
-      render "edit"
+      set_autocomplete_suggestions_and_render(:edit)
     end
   end
 
@@ -71,6 +70,11 @@ class MovingItemsController < ApplicationController
       id = params[:id]
       @moving_item = current_user.moving_items.try { find_by(id: id) }
       redirect_to root_url if @moving_item.nil?
+    end
+
+    def set_autocomplete_suggestions_and_render(template)
+      @suggestions = @moving.autocomplete_suggestions
+      render template
     end
 
     # Adds a room name to database if it is new.

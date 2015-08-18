@@ -1,56 +1,65 @@
-.form-inline
-  .form-group
-    = f.text_field :name, class: "form-control", placeholder: "Name"
+.row
+  .col-sm-6
+    .form-group
+      = f.label :name
+      = f.text_field :name, class: "form-control", placeholder: "Name"
 
-  .form-group
-    = f.text_field :category, class: 'form-control', placeholder: "Category"
+  .col-sm-3
+    .form-group
+      = f.label :room
+      = f.text_field :room, class: 'form-control', placeholder: "Room"
 
-  .form-group
-    = f.text_field :room, class: 'form-control', placeholder: "Room"
+  .col-sm-3
+    .form-group
+      = f.label :category
+      = f.text_field :category, class: 'form-control', placeholder: "Category"
 .clearfix
 
-.form-inline
-  .form-group
-    = f.label :volume
-    = f.number_field :volume, in: 0..200, step: 0.5, value: 3, class: "form-control"
-  .form-group
-    = f.range_field :volume, value: 3, id: "volume_slider"
-  .form-group
-    = f.label :quantity
-    = f.number_field :quantity, in: 0..999, step: 1, class: "form-control", value: 1
+.row
+  .col-sm-6
+    .form-group
+      = f.label :volume
+      = f.number_field :volume, in: 0..200, step: 0.5, value: 3, class: "form-control"
+    .form-group
+      = f.range_field :volume, value: 3, id: "volume_slider"
+  .col-sm-6
+    .form-group
+      = f.label :quantity
+      = f.number_field :quantity, in: 0..999, step: 1, class: "form-control", value: 1
 .clearfix
 
 .form-group
+  = f.label :description
   = f.text_area :description, class: 'form-control', placeholder: "Description"
 .clearfix
 
 
-:coffee
+/ :coffee
 
-  jQuery ->
+/   jQuery ->
 
-    setVolume = (volume)->
-      $("#moving_item_volume").val(volume)
+/     setVolume = (volume)->
+/       $("#moving_item_volume").val(volume)
 
-    setSlider = (volume)->
-      $("#volume_slider").val(volume)
+/     setSlider = (volume)->
+/       $("#volume_slider").val(volume)
 
-    # Slider
+/     # Slider
 
-    document.getElementById('volume_slider').addEventListener 'change', ->
-      setVolume(document.getElementById('volume_slider').value)
+/     document.getElementById('volume_slider').addEventListener 'change', ->
+/       setVolume(document.getElementById('volume_slider').value)
 
-    # AutoComplete
+/     # AutoComplete
 
-    $('#moving_item_name').autocomplete
-      source: Object.keys( $('#suggestions').data('items') )
-      select: (e, ui) =>
-        itemVolume = $('#suggestions').data('items')[ui.item.value]
-        setVolume(itemVolume)
-        setSlider(itemVolume)
+/     $('#moving_item_name').autocomplete
+/       source: Object.keys( $('#suggestions').data('items') )
+/       select: (e, ui) =>
+/         itemVolume = $('#suggestions').data('items')[ui.item.value]
+/         setVolume(itemVolume)
+/         setSlider(itemVolume)
 
-    $('#moving_item_room').autocomplete
-      source: $('#suggestions').data('rooms')
+/     $('#moving_item_room').autocomplete
+/       source: $('#suggestions').data('rooms')
 
-    $('#moving_item_category').autocomplete
-      source: $('#suggestions').data('categories')
+/     $('#moving_item_category').autocomplete
+/       source: $('#suggestions').data('categories')

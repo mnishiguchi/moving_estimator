@@ -2,18 +2,20 @@ module ChartsHelper
 
   def data_by_categories(items)
     initial_hash = Hash.new(0)  # key's default value is 0
-    result = items.inject(initial_hash) do |builder, item|
+    output = items.inject(initial_hash) do |builder, item|
       builder[item.category.downcase] += (item.volume * item.quantity)
       builder
     end
+    Hash[output.sort_by{ |_, v| -v }]
   end
 
   def data_by_rooms(items)
     initial_hash = Hash.new(0)  # key's default value is 0
-    result = items.inject(initial_hash) do |builder, item|
+    output = items.inject(initial_hash) do |builder, item|
       builder[item.room.downcase] += (item.volume * item.quantity)
       builder
     end
+    Hash[output.sort_by{ |_, v| -v }]
   end
 
   def data_for_bar_chart(items)
@@ -21,7 +23,7 @@ module ChartsHelper
     labels       = items_sorted.keys
     data         = []
     labels.each { |label| data << items_sorted[label] }
-    {
+    output = {
       labels: labels,
       datasets: [
         {
@@ -45,16 +47,15 @@ module ChartsHelper
 
     items_sorted = data_by_rooms(items)
     labels       = items_sorted.keys
-    data         = []
+    output       = []
     index        = 0
     for label in labels
-      data << { value:     items_sorted[label],
-                color:     colors[index],
-                highlight: colors[index],
-                label:     label
-               }
+      output << { value:     items_sorted[label],
+                  color:     colors[index],
+                  highlight: colors[index],
+                  label:     label }
       index += 1
     end
-    data
+    output
   end
 end
