@@ -113,9 +113,10 @@ RSpec.describe MovingItemsController, type: :controller do
 
     describe "after selecting a moving" do
       before do
-        remember_moving(moving)
+        # SessionsHelper::remember_moving(moving) did not work so this is an alternative.
+        session["devise.moving_id"] = moving.id
 
-        10.times do
+        5.times do
           attributes = attributes_for(:moving_item)
           moving.moving_items.create(attributes)
         end
@@ -190,7 +191,7 @@ RSpec.describe MovingItemsController, type: :controller do
                                                  description: new_description }
           end
 
-          it { expect(response).to have_http_status(:success) }
+          it { expect(response).to redirect_to moving }
 
           specify { expect(moving_item.reload.name).to eq new_name }
           specify { expect(moving_item.reload.description).to eq new_description }
@@ -211,13 +212,13 @@ RSpec.describe MovingItemsController, type: :controller do
         end
 
         describe "for the current user's own moving" do
-          it "decrements the MovingItem count" do
+          it "decrements the MovingItem count, redirecting to the moving page" do
             moving_item
             expect{
               delete :destroy, id: moving_item.id
             }.to change(MovingItem, :count).by(-1)
 
-            expect(response).to have_http_status(:success)
+            expect(response).to redirect_to moving
           end
         end
       end

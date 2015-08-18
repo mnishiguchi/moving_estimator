@@ -22,5 +22,7 @@
 require 'rails_helper'
 
 RSpec.describe SocialProfile, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:social_profile) { SocialProfile.new(attributes_for :social_profile) }
+
+  it { expect(social_profile).to be_valid }
 end
