@@ -1,5 +1,9 @@
 - provide(:title, "New moving")
 
+- content_for(:javascript) do
+  :coffeescript
+    jQuery -> Namespace.Movings()
+
 %h1.page-header New moving
 
 %ol.breadcrumb
@@ -15,3 +19,4 @@
   .form-group{ style: "width: 100%" }
     = f.button "Create moving", class: "submit btn btn-success btn-block",
       data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..." }
+

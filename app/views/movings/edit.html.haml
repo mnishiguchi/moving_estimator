@@ -1,5 +1,9 @@
 - provide(:title, "Edit moving")
 
+- content_for(:javascript) do
+  :coffeescript
+    jQuery -> Namespace.Movings()
+
 %h1.page-header Edit moving
 
 %ol.breadcrumb

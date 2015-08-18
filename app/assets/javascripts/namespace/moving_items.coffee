@@ -1,6 +1,6 @@
 # For new and edit forms of moving items
 
-jQuery ->
+Namespace.MovingItems = ->
 
   setVolume = (volume)->
     $("#moving_item_volume").val(volume)

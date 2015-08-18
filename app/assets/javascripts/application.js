@@ -10,8 +10,5 @@
 //= require fluxxor
 //= require growl
 //= require Chart
+//= require namespace
 //= require components
-//= require utilities
-//= require movings
-//= require moving_items
-//= require interactive_chart

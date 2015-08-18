@@ -38,5 +38,5 @@ ChartComponent = (chartType) ->
 
 # Create actual chart components
 
-@BarChartComponent = ChartComponent("Bar")
-@PieChartComponent = ChartComponent("Pie")
+Namespace.BarChartComponent = ChartComponent("Bar")
+Namespace.PieChartComponent = ChartComponent("Pie")
