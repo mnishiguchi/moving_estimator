@@ -1,32 +1,39 @@
 R = React.DOM
 
-@RoomsEditorApp = React.createClass
+class @Components.RoomsEditorApp
+  # console.log "Components.RoomsEditorApp was called"
 
-  getInitialState: ->
-    rooms: @props.data
+  constructor: ->
+    @RoomsEditorApp = React.createClass
 
-  getDefaultProps: ->
-    rooms: []
+      getInitialState: ->
+        rooms: @props.data
 
-  updateRecord: (room, newData) ->
-    index = @state.rooms.indexOf room
-    rooms = React.addons.update(@state.rooms, { $splice: [[index, 1, newData]] })
-    @replaceState rooms: rooms
+      getDefaultProps: ->
+        rooms: []
 
-  deleteRecord: (room) ->
-    index = @state.rooms.indexOf room
-    rooms = React.addons.update(@state.rooms, { $splice: [[index, 1]] })
-    @replaceState rooms: rooms
+      updateRecord: (room, newData) ->
+        index = @state.rooms.indexOf room
+        rooms = React.addons.update(@state.rooms, { $splice: [[index, 1, newData]] })
+        @replaceState rooms: rooms
 
-  render: ->
-    R.div
-      className: "app_wrapper"
+      deleteRecord: (room) ->
+        index = @state.rooms.indexOf room
+        rooms = React.addons.update(@state.rooms, { $splice: [[index, 1]] })
+        @replaceState rooms: rooms
 
-      # The rooms list
-      R.div null,
-        for room in @state.rooms
-          React.createElement Room,
-            key:  room.id,  # Use resource id instead of i
-            room: room
-            handleUpdateRecord: @updateRecord
-            handleDeleteRecord: @deleteRecord
+      render: ->
+        Room = new Components.Room()
+
+        R.div
+          className: "app_wrapper"
+
+          # The rooms list
+          R.div null,
+            for room in @state.rooms
+              React.createElement Room,
+                key:  room.id,  # Use resource id instead of i
+                room: room
+                handleUpdateRecord: @updateRecord
+                handleDeleteRecord: @deleteRecord
+    return @RoomsEditorApp

@@ -1,5 +1,10 @@
 - provide(:title, "Rooms editor")
 
+- content_for(:javascript) do
+  :coffeescript
+    jQuery ->
+      window.RoomsEditorApp = new Components.RoomsEditorApp()
+
 %h1.page-header
   Room editor
   = link_to "Add new", new_room_path(@moving), class: "btn btn-primary btn-sm pull-right"
