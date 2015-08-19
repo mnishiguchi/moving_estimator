@@ -1,5 +1,9 @@
 / data for autocomplete suggestions
-= content_tag :div, "", id: "moving_suggestions", data: { usstates: us_states }
+= content_tag :div, "", id: "moving_suggestions", data: { "us-states" => us_states }
+
+- content_for(:javascript) do
+  :coffeescript
+    jQuery -> new Namespace.Movings()
 
 #movings_fields
 
@@ -111,20 +115,3 @@
       %h2 Memo
       .form-group
         = f.text_area :description, class: 'form-control', cols: 20, rows: 3;
-
-  / :coffee
-
-  /   jQuery ->
-  /     $from = $('#moving_country_from')
-  /     $from.change ->
-  /       switch $from.children("option").filter(":selected").text()
-  /         when "United States" then params = { source: #{us_states} }
-  /         else                      params = { source: [] }
-  /       $('#moving_state_from').autocomplete(params)
-
-  /     $to = $('#moving_country_to')
-  /     $to.change ->
-  /       switch $to.children("option").filter(":selected").text()
-  /         when "United States" then params = { source: #{us_states} }
-  /         else                      params = { source: [] }
-  /       $('#moving_state_to').autocomplete(params)

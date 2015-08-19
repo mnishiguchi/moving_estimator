@@ -38,5 +38,7 @@ ChartComponent = (chartType) ->
 
 # Create actual chart components
 
-Namespace.BarChartComponent = ChartComponent("Bar")
-Namespace.PieChartComponent = ChartComponent("Pie")
+class @Namespace.Charts
+  console.log "Namespace.Charts was called"
+  window.BarChartComponent = ChartComponent("Bar")
+  window.PieChartComponent = ChartComponent("Pie")

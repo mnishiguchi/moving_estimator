@@ -1,13 +1,9 @@
 - provide(:title, "Edit moving")
 
-- content_for(:javascript) do
-  :coffeescript
-    jQuery -> Namespace.Movings()
-
 %h1.page-header Edit moving
 
 %ol.breadcrumb
-  %li= link_to "My movings", movings_path
+  %li= link_to "My movings", root_path
   %li= link_to @moving.title, moving_path(@moving)
   %li.active Edit moving
 
