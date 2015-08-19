@@ -3,7 +3,7 @@
 class @Namespace.Movings
 
   constructor: ->
-    console.log "Namespace.Movings was called"
+    # console.log "Namespace.Movings was called"
 
     # Countries suggestions
 

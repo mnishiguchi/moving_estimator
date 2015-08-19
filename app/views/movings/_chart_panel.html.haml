@@ -11,11 +11,13 @@
       .col-xs-9.text-right
         .huge= "Total: #{@total_volume}"
         cubic feet
-  .panel-body
-    .row.text-center
-      .col-sm-6
-        = react_component 'BarChartComponent', { name: "MovingBarChart",
-          data: @dataForBarChart, height: 200, width:  400 }
-      .col-sm-6
-        = react_component 'PieChartComponent', { name: "MovingPieieChart",
-          data: @dataForPieChart, height: 200, width:  200 }
+
+  - if @total_volume > 0
+    .panel-body
+      .row.text-center
+        .col-sm-6
+          = react_component 'BarChartComponent', { name: "MovingBarChart",
+            data: @dataForBarChart, height: 200, width:  400 }
+        .col-sm-6
+          = react_component 'PieChartComponent', { name: "MovingPieieChart",
+            data: @dataForPieChart, height: 200, width:  200 }

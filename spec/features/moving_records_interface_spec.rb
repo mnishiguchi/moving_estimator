@@ -35,7 +35,7 @@ feature "Moving records interface", type: :feature do
     end
   end
 
-  describe "visit a moving page", js: true, driver: :poltergeist do
+  describe "visit a moving page" do
 
     let!(:moving) do
       moving = user.movings.create(attributes_for(:moving))

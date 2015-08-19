@@ -3,7 +3,7 @@
 class @Namespace.MovingItems
 
   constructor: ->
-    console.log "Namespace.MovingItems was called"
+    # console.log "Namespace.MovingItems was called"
 
     setVolume = (volume) -> $("#moving_item_volume").val(volume)
     setSlider = (volume) -> $("#volume_slider").val(volume)
