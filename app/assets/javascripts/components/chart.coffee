@@ -3,13 +3,13 @@
 Chart.defaults.global.tooltipEvents = ["mousemove", "touchstart", "touchmove"]
 Chart.defaults.global.scaleLabel    = "<%=value%>cu.ft"
 
-class @Namespace.ChartComponent
-  # console.log "Namespace.Charts was called"
+class @Components.ChartComponent
+  # console.log "Components.Chart was called"
 
   constructor: (chartType)->
-    return @Component(chartType)
+    return @createClass(chartType)
 
-  Component: (chartType) ->
+  createClass: (chartType) ->
 
     React.createClass
       displayName: "#{chartType}Chart"
