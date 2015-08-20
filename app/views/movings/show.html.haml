@@ -1,8 +1,5 @@
 - provide(:title, @moving.title)
 
-/ data for autocomplete suggestions
-= content_tag :div, "", id: "suggestions", data: @suggestions
-
 %h1
   = @moving.title
   = link_to "Edit", edit_moving_path(@moving), class: "btn btn-primary btn-sm pull-right"

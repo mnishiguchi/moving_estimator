@@ -1,6 +1,6 @@
-- content_for(:javascript) do
-  :coffeescript
-    jQuery -> new Namespace.Charts()
+:coffee
+  window.BarChartComponent = new Namespace.ChartComponent("Bar")
+  window.PieChartComponent = new Namespace.ChartComponent("Pie")
 
 .panel.panel-blue
   .panel-heading

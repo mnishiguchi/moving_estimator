@@ -1,9 +1,8 @@
 / data for autocomplete suggestions
 = content_tag :div, "", id: "moving_suggestions", data: { "us-states" => us_states }
 
-- content_for(:javascript) do
-  :coffeescript
-    jQuery -> new Namespace.Movings()
+:coffee
+  jQuery -> new Namespace.Movings()
 
 #movings_fields
 

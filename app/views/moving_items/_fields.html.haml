@@ -1,9 +1,8 @@
 / data for autocomplete suggestions
 = content_tag :div, "", id: "suggestions", data: @suggestions
 
-- content_for(:javascript) do
-  :coffeescript
-    jQuery -> new Namespace.MovingItems()
+:coffee
+  jQuery -> new Namespace.MovingItems()
 
 .row
   .col-sm-6
