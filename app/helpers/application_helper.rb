@@ -19,4 +19,9 @@ module ApplicationHelper
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     image_tag(gravatar_url, alt: email, class: "gravatar img-thumbnail img-responsive center-block")
   end
+
+  def placehold_img_tag(options={})
+    opts = { dimension: "350x150", background_color: "ccc", text_color: "555", text: ""}.merge(options)
+    image_tag("https://placehold.it/#{opts[:dimension]}/#{opts[:background_color]}/#{opts[:text_color]}?text=#{opts[:text].tr(" ", "+")}")
+  end
 end
