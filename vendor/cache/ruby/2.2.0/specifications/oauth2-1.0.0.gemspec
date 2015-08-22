@@ -13,10 +13,10 @@ Gem::Specification.new do |s|
   s.email = ["michael@intridea.com", "sferik@gmail.com"]
   s.homepage = "http://github.com/intridea/oauth2"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.5"
+  s.rubygems_version = "2.4.5.1"
   s.summary = "A Ruby wrapper for the OAuth 2.0 protocol."
 
-  s.installed_by_version = "2.4.5" if s.respond_to? :installed_by_version
+  s.installed_by_version = "2.4.5.1" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4

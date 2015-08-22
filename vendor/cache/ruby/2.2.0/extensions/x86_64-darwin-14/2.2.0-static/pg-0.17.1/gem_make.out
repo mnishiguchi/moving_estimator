@@ -1,4 +1,4 @@
-/Users/masa/.rbenv/versions/2.2.1/bin/ruby -r ./siteconf20150717-66599-oopu2f.rb extconf.rb
+/Users/masa/.rbenv/versions/2.2.3/bin/ruby -r ./siteconf20150822-28042-1r7nfan.rb extconf.rb
 checking for pg_config... yes
 Using config values from /usr/local/bin/pg_config
 checking for libpq-fe.h... yes
@@ -51,4 +51,4 @@ compiling pg_result.c
 linking shared-object pg_ext.bundle
 
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 pg_ext.bundle ./.gem.20150717-66599-16a2knt
+/usr/bin/install -c -m 0755 pg_ext.bundle ./.gem.20150822-28042-ahmt2j

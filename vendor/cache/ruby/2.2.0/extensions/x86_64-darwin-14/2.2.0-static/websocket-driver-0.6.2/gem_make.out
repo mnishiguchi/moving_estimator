@@ -1,4 +1,4 @@
-/Users/masa/.rbenv/versions/2.2.1/bin/ruby -r ./siteconf20150722-71913-1glcbjk.rb extconf.rb
+/Users/masa/.rbenv/versions/2.2.3/bin/ruby -r ./siteconf20150822-28042-16kfc0n.rb extconf.rb
 creating Makefile
 
 make "DESTDIR=" clean
@@ -8,4 +8,4 @@ compiling websocket_mask.c
 linking shared-object websocket_mask.bundle
 
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20150722-71913-f96ds
+/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20150822-28042-v5ovaz

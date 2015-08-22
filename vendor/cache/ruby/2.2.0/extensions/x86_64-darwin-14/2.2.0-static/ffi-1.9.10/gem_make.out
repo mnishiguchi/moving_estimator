@@ -1,4 +1,4 @@
-/Users/masa/.rbenv/versions/2.2.1/bin/ruby -r ./siteconf20150717-66599-1ejtqpe.rb extconf.rb
+/Users/masa/.rbenv/versions/2.2.3/bin/ruby -r ./siteconf20150822-28042-tguau5.rb extconf.rb
 checking for ffi.h... no
 checking for ffi.h in /usr/local/include,/usr/include/ffi... yes
 checking for ffi_call() in -lffi... yes
@@ -53,4 +53,4 @@ compiling Variadic.c
 linking shared-object ffi_c.bundle
 
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20150717-66599-pqixfq
+/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20150822-28042-8tduxe

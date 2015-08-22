@@ -1,4 +1,4 @@
-/Users/masa/.rbenv/versions/2.2.1/bin/ruby -r ./siteconf20150717-66599-127qi5x.rb extconf.rb
+/Users/masa/.rbenv/versions/2.2.3/bin/ruby -r ./siteconf20150822-28042-1or0wx4.rb extconf.rb
 creating Makefile
 
 make "DESTDIR=" clean
@@ -12,4 +12,4 @@ compiling wrapper.c
 linking shared-object bcrypt_ext.bundle
 
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bcrypt_ext.bundle ./.gem.20150717-66599-45cyy0
+/usr/bin/install -c -m 0755 bcrypt_ext.bundle ./.gem.20150822-28042-1zv4sw

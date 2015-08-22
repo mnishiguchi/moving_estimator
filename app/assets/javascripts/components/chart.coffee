@@ -4,9 +4,9 @@ Chart.defaults.global.tooltipEvents = ["mousemove", "touchstart", "touchmove"]
 Chart.defaults.global.scaleLabel    = "<%=value%>cu.ft"
 
 class @Components.ChartComponent
-  # console.log "Components.Chart was called"
 
   constructor: (chartType)->
+    # console.log(arguments.callee.name.toString() + " was called")  #<== DEBUG
     return @createClass(chartType)
 
   createClass: (chartType) ->

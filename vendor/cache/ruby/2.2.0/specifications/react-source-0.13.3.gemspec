@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.email = ["paul@oshannessy.com"]
   s.homepage = "https://github.com/facebook/react"
   s.licenses = ["BSD-3-Clause"]
-  s.rubygems_version = "2.4.5"
+  s.rubygems_version = "2.4.5.1"
   s.summary = "Ruby bridge to JSX & the React JavaScript library."
 
-  s.installed_by_version = "2.4.5" if s.respond_to? :installed_by_version
+  s.installed_by_version = "2.4.5.1" if s.respond_to? :installed_by_version
 end

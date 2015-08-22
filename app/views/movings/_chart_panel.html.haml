@@ -1,6 +1,7 @@
-:coffee
-  window.BarChartComponent = new Components.ChartComponent("Bar")
-  window.PieChartComponent = new Components.ChartComponent("Pie")
+- if @total_volume > 0
+  :coffee
+    window.BarChartComponent ||= new Components.ChartComponent("Bar")
+    window.PieChartComponent ||= new Components.ChartComponent("Pie")
 
 .panel.panel-blue
   .panel-heading

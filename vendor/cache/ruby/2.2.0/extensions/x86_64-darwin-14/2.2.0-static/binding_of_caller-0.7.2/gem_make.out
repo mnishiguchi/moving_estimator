@@ -1,4 +1,4 @@
-/Users/masa/.rbenv/versions/2.2.1/bin/ruby -r ./siteconf20150717-66599-2nxy89.rb extconf.rb
+/Users/masa/.rbenv/versions/2.2.3/bin/ruby -r ./siteconf20150822-28042-f51xn4.rb extconf.rb
 
 make "DESTDIR=" clean
 make: *** No rule to make target `clean'.  Stop.
