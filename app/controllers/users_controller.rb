@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :ensure_admin!,      except: :finish_signup
   before_action :authenticate_user!, except: :finish_signup
 
+  include CsvHelper
+
   # A list of all users and csv export
   def index
     search_users
