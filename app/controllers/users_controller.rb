@@ -8,6 +8,11 @@ class UsersController < ApplicationController
   # A list of all users and csv export
   def index
     search_users
+
+    respond_to do |format|
+      format.html
+      format.csv { SendUsersCSV.new(@users, self) }
+    end
   end
 
   # GET   /users/:id/finish_signup - Add email form
